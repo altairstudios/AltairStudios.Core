@@ -1,0 +1,32 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="tests/Global.asax.cs">
+    <Files>
+      <File FileName="tests/.htaccess" Line="16" Column="28" />
+      <File FileName="tests/Controllers/HomeController.cs" Line="1" Column="1" />
+      <File FileName="tests/Controllers/SerializerController.cs" Line="1" Column="1" />
+      <File FileName="tests/Global.asax" Line="1" Column="1" />
+      <File FileName="tests/Global.asax.cs" Line="15" Column="1" />
+      <File FileName="AltairStudios.Core/Mvc/MvcApplication.cs" Line="9" Column="58" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True" selected="True">
+          <Node name="Core" expanded="True">
+            <Node name="Mvc" expanded="True" />
+            <Node name="Orm" expanded="True" />
+          </Node>
+          <Node name="Tests" expanded="True">
+            <Node name="Controllers" expanded="True" />
+            <Node name="Models" expanded="True" />
+            <Node name="Global.asax" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

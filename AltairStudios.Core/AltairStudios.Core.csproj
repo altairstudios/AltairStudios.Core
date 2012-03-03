@@ -34,12 +34,16 @@
     <Folder Include="Orm\" />
     <Folder Include="Mvc\" />
     <Folder Include="Mvc\Controllers\" />
+    <Folder Include="Util\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Orm\Model.cs" />
     <Compile Include="Mvc\MvcApplication.cs" />
     <Compile Include="Orm\ConnectionFactory.cs" />
     <Compile Include="Orm\Templatize.cs" />
+    <Compile Include="Mvc\Model.cs" />
+    <Compile Include="Mvc\Templatize.cs" />
+    <Compile Include="Util\StringConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />

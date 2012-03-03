@@ -2,10 +2,9 @@ using System;
 
 
 namespace AltairStudios.Core.Orm {
-	public class TemplatizeAttribute : Attribute {
+	public class TemplatizeAttribute : AltairStudios.Core.Mvc.TemplatizeAttribute {
 		protected bool isSubtable;
-		protected bool templatize;
-
+		
 		public bool IsSubtable {
 			get {
 				return this.isSubtable;
@@ -14,23 +13,9 @@ namespace AltairStudios.Core.Orm {
 				isSubtable = value;
 			}
 		}
-
-		public bool Templatize {
-			get {
-				return this.templatize;
-			}
-			set {
-				templatize = value;
-			}
-		}
 		
 		public TemplatizeAttribute() {
 			this.templatize = true;
-			this.isSubtable = false;
-		}
-		
-		public TemplatizeAttribute(bool templatize) {
-			this.templatize = templatize;
 			this.isSubtable = false;
 		}
 		

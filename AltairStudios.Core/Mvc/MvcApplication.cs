@@ -15,7 +15,7 @@ namespace AltairStudios.Core.Mvc {
 			get {
 				return MvcApplication.connectionString;
 			}
-		}		
+		}
 		
 		public static string DiskPath {
 			get {
@@ -27,12 +27,11 @@ namespace AltairStudios.Core.Mvc {
 			get {
 				return MvcApplication.path;
 			}
-		}		
+		}
 		
 		
 		public static void RegisterRoutes(RouteCollection routes) {
 			routes.IgnoreRoute ("{resource}.axd/{*pathInfo}");
-			//routes.MapRoute("Accounts", "Accounts/{action}/{id}", new { controller = "Accounts", action = "Index", id = "" });
 			routes.MapRoute("Default", "{controller}/{action}/{id}", new { controller = "Home", action = "Index", id = "" });
 		}
 		
@@ -44,8 +43,6 @@ namespace AltairStudios.Core.Mvc {
 			if(System.Web.HttpContext.Current.Request.ApplicationPath != "/") {
 				MvcApplication.path = System.Web.HttpContext.Current.Request.ApplicationPath;
 			}
-
-			MvcApplication.connectionString = ConfigurationManager.ConnectionStrings["MySqlServerConnection"].ConnectionString;
 		}
 	}
 }
