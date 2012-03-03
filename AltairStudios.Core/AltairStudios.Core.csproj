@@ -35,6 +35,8 @@
     <Folder Include="Mvc\" />
     <Folder Include="Mvc\Controllers\" />
     <Folder Include="Util\" />
+    <Folder Include="Resources\" />
+    <Folder Include="Resources\Javascript\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Orm\Model.cs" />
@@ -55,5 +57,8 @@
     <Reference Include="MySql.Data, Version=6.4.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d">
       <HintPath>bin\mysql.data.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Javascript\Ext.js" />
   </ItemGroup>
 </Project>
