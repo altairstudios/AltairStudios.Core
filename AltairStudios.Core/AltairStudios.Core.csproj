@@ -44,6 +44,7 @@
     <Compile Include="Mvc\Model.cs" />
     <Compile Include="Mvc\Templatize.cs" />
     <Compile Include="Util\StringConverter.cs" />
+    <Compile Include="Mvc\Controllers\AdminController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
