@@ -32,6 +32,11 @@ namespace AltairStudios.Core.Mvc {
 		
 		public static void RegisterRoutes(RouteCollection routes) {
 			routes.IgnoreRoute ("{resource}.axd/{*pathInfo}");
+			
+			routes.MapRoute("AdminDesktopJavascript", "Admin/Resources/Javascript/Desktop/{path}", new { controller = "Admin", action = "JavascriptDesktop", path = "" });
+			routes.MapRoute("AdminUxJavascript", "Admin/Resources/Javascript/Ux/{path}", new { controller = "Admin", action = "JavascriptUx", path = "" });
+			routes.MapRoute("AdminResources", "Admin/Resources/{action}/{path}", new { controller = "Admin", action = "Index", path = "" });
+			
 			routes.MapRoute("Default", "{controller}/{action}/{id}", new { controller = "Home", action = "Index", id = "" });
 		}
 		

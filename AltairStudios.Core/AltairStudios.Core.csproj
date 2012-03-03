@@ -37,6 +37,7 @@
     <Folder Include="Util\" />
     <Folder Include="Resources\" />
     <Folder Include="Resources\Javascript\" />
+    <Folder Include="Resources\Javascript\Desktop\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Orm\Model.cs" />
@@ -60,5 +61,28 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Javascript\Ext.js" />
+    <EmbeddedResource Include="Resources\Javascript\Desktop\App.js" />
+    <EmbeddedResource Include="Resources\Javascript\Ux\App.js" />
+    <EmbeddedResource Include="Resources\Javascript\Ux\Desktop.js" />
+    <EmbeddedResource Include="Resources\Javascript\Ux\FitAllLayout.js" />
+    <EmbeddedResource Include="Resources\Javascript\Ux\Module.js" />
+    <EmbeddedResource Include="Resources\Javascript\Ux\ShortcutModel.js" />
+    <EmbeddedResource Include="Resources\Javascript\Ux\StartMenu.js" />
+    <EmbeddedResource Include="Resources\Javascript\Ux\TaskBar.js" />
+    <EmbeddedResource Include="Resources\Javascript\Ux\Video.js" />
+    <EmbeddedResource Include="Resources\Javascript\Ux\Wallpaper.js" />
+    <EmbeddedResource Include="Resources\Javascript\Desktop\AccordionWindow.js" />
+    <EmbeddedResource Include="Resources\Javascript\Desktop\BogusMenuModule.js" />
+    <EmbeddedResource Include="Resources\Javascript\Desktop\BogusModule.js" />
+    <EmbeddedResource Include="Resources\Javascript\Desktop\GridWindow.js" />
+    <EmbeddedResource Include="Resources\Javascript\Desktop\Notepad.js" />
+    <EmbeddedResource Include="Resources\Javascript\Desktop\Settings.js" />
+    <EmbeddedResource Include="Resources\Javascript\Desktop\SystemStatus.js" />
+    <EmbeddedResource Include="Resources\Javascript\Desktop\TabWindow.js" />
+    <EmbeddedResource Include="Resources\Javascript\Desktop\VideoWindow.js" />
+    <EmbeddedResource Include="Resources\Javascript\Desktop\WallpaperModel.js" />
+    <EmbeddedResource Include="Resources\Css\Desktop.css" />
+    <EmbeddedResource Include="Resources\Css\Ext.css" />
+    <EmbeddedResource Include="Resources\Javascript\Ext-debug.js" />
   </ItemGroup>
 </Project>

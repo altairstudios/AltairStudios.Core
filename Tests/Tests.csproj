@@ -80,8 +80,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="tests\.htaccess" />
-    <None Include="tests\mono-admin-server\.htaccess" />
     <None Include=".htaccess" />
     <None Include="mono-admin-server\.htaccess" />
   </ItemGroup>
