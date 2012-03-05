@@ -10,15 +10,16 @@ namespace AltairStudios.Core.Mvc.Controllers {
 	public class AdminController : Controller {
 		public string Index() {
 			StringBuilder html = new StringBuilder();
+			string path = MvcApplication.Path;
 			
 			html.Append("<!DOCTYPE html>\n");
 			html.Append("<html lang='en'>");
 			html.Append("<head>");
 			html.Append("<meta charset='utf-8' />");
 			html.Append("<title>AltairStudios.Core - Admin</title>");
-			html.Append("<link rel='stylesheet' type='text/css' href='Admin/Resources/Css/Ext.css' />");
-			html.Append("<link rel='stylesheet' type='text/css' href='Admin/Resources/Css/Desktop.css' />");
-			html.Append("<script src='Admin/Resources/Javascript/Ext.js'></script>");
+			html.Append("<link rel='stylesheet' type='text/css' href='" + path + "/Bin/resources/css/Ext.css' />");
+			html.Append("<link rel='stylesheet' type='text/css' href='" + path + "/Bin/resources/css/Desktop.css' />");
+			html.Append("<script src='" + path + "/Bin/resources/javascript/Ext.js'></script>");
 			//html.Append("<script src='Admin/Resources/Javascript/Desktop/App.js'></script>");
 			html.Append("<script type='text/javascript'>");
 			/*html.Append("Ext.application({");
@@ -32,15 +33,15 @@ namespace AltairStudios.Core.Mvc.Controllers {
 			
 			html.Append("Ext.Loader.setConfig({enabled:true});");
 	        html.Append("Ext.Loader.setPath({");
-	        html.Append("'Ext.ux.desktop': 'Admin/Resources/Javascript/Ux',");
-	        html.Append("'AdminDesktop': 'Admin/Resources/Javascript/Desktop'");
+	        html.Append("'Ext.ux.desktop': '" + path + "/Bin/resources/javascript/Ux',");
+	        html.Append("'AdminDesktop': '" + path + "/Bin/resources/javascript/Desktop'");
 	        html.Append("});");
 	
 	        html.Append("Ext.require('AdminDesktop.App');");
 	
 	        html.Append("var adminDesktop = null;");
 	        html.Append("Ext.onReady(function () {");
-	        html.Append("alert('adsf');");
+	        //html.Append("alert('adsf');");
 			html.Append("adminDesktop = new AdminDesktop.App();");
 			html.Append("});");
 			
@@ -95,12 +96,74 @@ namespace AltairStudios.Core.Mvc.Controllers {
 		public string Css(string path) {
 			 Assembly assembly = Assembly.GetExecutingAssembly();
 			 TextReader textStreamReader = new StreamReader(assembly.GetManifestResourceStream("AltairStudios.Core.Resources.Css." + path));
-			 string javascript = textStreamReader.ReadToEnd();
+			 string css = textStreamReader.ReadToEnd();
 			 textStreamReader.Close();
 			 
 			 Response.ContentType = "text/css";
 			 
-			 return javascript;
+			 return css;
+		}
+		
+		public string Image(string path) {
+			 Assembly assembly = Assembly.GetExecutingAssembly();
+			 TextReader textStreamReader = new StreamReader(assembly.GetManifestResourceStream("AltairStudios.Core.Resources.Images." + path));
+			 string image = textStreamReader.ReadToEnd();
+			 textStreamReader.Close();
+			 
+			 //Response.ContentType = "text/css";
+			 
+			 return image;
+		}
+		
+		public string ImageDesktop(string path) {
+			 Assembly assembly = Assembly.GetExecutingAssembly();
+			 TextReader textStreamReader = new StreamReader(assembly.GetManifestResourceStream("AltairStudios.Core.Resources.Images.Desktop." + path));
+			 string image = textStreamReader.ReadToEnd();
+			 textStreamReader.Close();
+			 
+			 //Response.ContentType = "text/css";
+			 
+			 return image;
+		}
+		
+		
+		public string ThemeImage(string theme, string pack, string image) {
+			 Assembly assembly = Assembly.GetExecutingAssembly();
+			 TextReader textStreamReader = new StreamReader(assembly.GetManifestResourceStream("AltairStudios.Core.Resources.Images.Theme." + theme + "." + pack + "." + image));
+			 string imageSrc = textStreamReader.ReadToEnd();
+			 textStreamReader.Close();
+			 
+			 this.setImageContentType(image);
+			 
+			 //Response.ContentType = "text/css";
+			 
+			 return imageSrc;
+		}
+		
+		
+		public string ThemeImageSublevel(string theme, string pack, string image) {
+			 Assembly assembly = Assembly.GetExecutingAssembly();
+			 TextReader textStreamReader = new StreamReader(assembly.GetManifestResourceStream("AltairStudios.Core.Resources.Images.Theme." + theme + "." + pack + "." + image));
+			 string imageSrc = textStreamReader.ReadToEnd();
+			 textStreamReader.Close();
+			 
+			 this.setImageContentType(image);
+			 //Response.ContentType = "text/css";
+			 
+			 return imageSrc;
+		}
+		
+		
+		protected void setImageContentType(string file) {
+			string extension = file.Substring(file.Length - 3, 3);
+			return;
+			if(extension == "gif") {
+				Response.ContentType = "image/gif";
+			} else if(extension == "jpg") {
+				Response.ContentType = "image/jpeg";
+			} else if(extension == "png") {
+				Response.ContentType = "image/png";
+			}
 		}
 	}
 }
