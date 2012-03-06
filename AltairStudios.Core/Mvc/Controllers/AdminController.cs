@@ -12,7 +12,7 @@ using AltairStudios.Core.Orm.Models;
 namespace AltairStudios.Core.Mvc.Controllers {
 	public class AdminController : Controller {
 		[Authorize()]
-		public string Index() {
+		public ActionResult Index() {
 			StringBuilder html = new StringBuilder();
 			string path = MvcApplication.Path;
 			
@@ -43,11 +43,15 @@ namespace AltairStudios.Core.Mvc.Controllers {
 			html.Append("</body>");
 			html.Append("</html>");
 
-			return html.ToString();
+			return Content(html.ToString());
 		}
 		
 		
-		public string Login() {
+		public ActionResult Login() {
+			/*if(MvcApplication.ConnectionString == "") {
+				return RedirectToAction("Install");
+			}*/
+
 			StringBuilder html = new StringBuilder();
 			string path = MvcApplication.Path;
 			
@@ -80,7 +84,7 @@ namespace AltairStudios.Core.Mvc.Controllers {
 			html.Append("</body>");
 			html.Append("</html>");
 			
-			return html.ToString();
+			return Content(html.ToString());
 		}
 		
 			
@@ -102,6 +106,44 @@ namespace AltairStudios.Core.Mvc.Controllers {
 		public ActionResult Logout() {
 			FormsAuthentication.SignOut();
 			return RedirectToAction("Login");
+		}
+		
+		
+		
+		public ActionResult Install() {
+			StringBuilder html = new StringBuilder();
+			string path = MvcApplication.Path;
+			
+			html.Append("<!DOCTYPE html>\n");
+			html.Append("<html lang='es'>");
+			html.Append("<head>");
+			html.Append("<meta charset='utf-8' />");
+			html.Append("<title>AltairStudios.Core - Admin</title>");
+			html.Append("<link rel='stylesheet' type='text/css' href='" + path + "/Bin/resources/css/Ext.css' />");
+			html.Append("<link rel='stylesheet' type='text/css' href='" + path + "/Bin/resources/css/Desktop.css' />");
+			html.Append("<script src='" + path + "/Bin/resources/javascript/Ext.js'></script>");
+			
+			html.Append("<script type='text/javascript'>");			
+			html.Append("Ext.Loader.setConfig({enabled:true});");
+			
+			html.Append("Ext.Loader.setPath({");
+	        html.Append("'AdminDesktop.Login': '" + path + "/Bin/resources/javascript/Login'");
+	        html.Append("});");
+			
+	        html.Append("Ext.require('AdminDesktop.Login.App');");
+	        html.Append("var adminDesktopLogin = null;");
+	        html.Append("Ext.onReady(function () {");
+			html.Append("adminDesktopLogin = new AdminDesktop.Login.App();");
+			html.Append("adminDesktopLogin.show();");
+			html.Append("});");
+			
+			html.Append("</script>");
+			html.Append("</head>");
+			html.Append("<body>");
+			html.Append("</body>");
+			html.Append("</html>");
+			
+			return Content(html.ToString());
 		}
 	}
 }

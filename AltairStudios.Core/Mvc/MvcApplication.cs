@@ -51,6 +51,10 @@ namespace AltairStudios.Core.Mvc {
 			if(System.Web.HttpContext.Current.Request.ApplicationPath != "/") {
 				MvcApplication.path = System.Web.HttpContext.Current.Request.ApplicationPath;
 			}
+			
+			if(ConfigurationManager.ConnectionStrings["SqlServerConnection"] != null) {
+				MvcApplication.connectionString = ConfigurationManager.ConnectionStrings["SqlServerConnection"].ConnectionString;
+			}
 		}
 	}
 }
