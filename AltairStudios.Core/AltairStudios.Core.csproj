@@ -42,6 +42,9 @@
     <Folder Include="resources\images\Desktop\" />
     <Folder Include="resources\themes\images\" />
     <Folder Include="resources\themes\images\default\" />
+    <Folder Include="resources\javascript\Login\" />
+    <Folder Include="Mvc\Models\" />
+    <Folder Include="Orm\Models\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Orm\Model.cs" />
@@ -52,6 +55,7 @@
     <Compile Include="Mvc\Templatize.cs" />
     <Compile Include="Util\StringConverter.cs" />
     <Compile Include="Mvc\Controllers\AdminController.cs" />
+    <Compile Include="Orm\Models\User.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
@@ -1328,6 +1332,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\themes\images\default\window-header\window-header-default-top-sides.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\javascript\Login\App.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

@@ -6,15 +6,15 @@ using MySql.Data.MySqlClient;
 
 
 namespace AltairStudios.Core.Orm {
-	public class Model {
+	public class Model : AltairStudios.Core.Mvc.Model {
 		public List<T> getBy<T>() {
 			Type type = this.GetType();
 			PropertyInfo[] properties = this.GetType().GetProperties();
 			StringBuilder sql = new StringBuilder();
 			List<PropertyInfo> parameters = new List<PropertyInfo>();
-			string fields = this.getFields(properties);
+			List<string> fields = this.getFields(properties);
 			
-			sql.Append("SELECT " + fields + " FROM " + type.Name + " WHERE ");
+			sql.Append("SELECT " + string.Join(",", fields.ToArray()) + " FROM " + type.Name + " WHERE ");
 			
 			for(int i = 0; i < properties.Length; i++) {
 				if(properties[i].GetValue(this, null) != null && properties[i].PropertyType.ToString() == "System.String") {
@@ -94,26 +94,6 @@ namespace AltairStudios.Core.Orm {
 			
 			//MySqlDataReader reader = command.ExecuteReader();
 			return sql.ToString();
-		}
-		
-		
-		
-		protected string getFields(PropertyInfo[] properties) {
-			StringBuilder fields = new StringBuilder();
-			
-			for(int i = 0; i < properties.Length; i++) {	
-				TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
-				if(attributes[0].Templatize) {
-					fields.Append(properties[i].Name + ", ");
-				}
-			}
-			
-			return fields.ToString().Substring(0, fields.Length - 2);
-		}
-		
-				
-		public T cast<T>(object o) {
-			return (T)o;
 		}
 	}
 }

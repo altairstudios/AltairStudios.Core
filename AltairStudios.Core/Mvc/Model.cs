@@ -12,7 +12,7 @@ namespace AltairStudios.Core.Mvc {
 			
 			for(int i = 0; i < properties.Length; i++) {	
 				TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
-				if(attributes[0].Templatize) {
+				if(attributes.Length > 0 && attributes[0].Templatize) {
 					fields.Add(properties[i].Name);
 				}
 			}
