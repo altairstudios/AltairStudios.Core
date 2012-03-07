@@ -22,9 +22,23 @@ Ext.define('AdminDesktop.App', {
 
     init: function() {
         // custom logic before getXYZ methods get called...
-
-        this.callParent();
+		
+		this.callParent();
+        
         // now ready...
+		Ext.Ajax.request({
+			url: 'Admin/GetUser',
+			success: function (response) {
+				json = Ext.decode( response.responseText );
+				
+				var menu = adminDesktop.getDesktop().taskbar.startMenu;
+				if (menu.rendered) {
+	                menu.setTitle(json.Name + " " + json.Surname);
+	            } else {
+	                menu.title = json.Name + " " + json.Surname;
+	            }
+			}
+		});
     },
 
     getModules : function(){
@@ -61,7 +75,7 @@ Ext.define('AdminDesktop.App', {
                 ]
             }),
 
-            wallpaper: 'Content/wallpapers/Blue-Sencha.jpg',
+            wallpaper: 'Bin/wallpapers/Blue-Sencha.jpg',
             wallpaperStretch: false
         });
     },

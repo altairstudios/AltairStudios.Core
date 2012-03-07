@@ -154,7 +154,7 @@ Ext.define('AdminDesktop.Settings', {
         var me = this;
 
         if (record.data.img) {
-            me.selected = 'Content/wallpapers/' + record.data.img;
+            me.selected = 'Bin/wallpapers/' + record.data.img;
         } else {
             me.selected = Ext.BLANK_IMAGE_URL;
         }
@@ -165,7 +165,7 @@ Ext.define('AdminDesktop.Settings', {
     setInitialSelection: function () {
         var s = this.desktop.getWallpaper();
         if (s) {
-            var path = 'Content/wallpapers/' + this.getTextOfWallpaper(s);
+            var path = 'Bin/wallpapers/' + this.getTextOfWallpaper(s);
             this.tree.selectPath(path, 'text');
         }
     }

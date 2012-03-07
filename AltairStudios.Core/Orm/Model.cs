@@ -21,7 +21,7 @@ namespace AltairStudios.Core.Orm {
 					//sql.Append(properties[i].Name + " = '" + properties[i].GetValue(this, null) + "' AND " );
 					
 					TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
-					if(attributes[0].Templatize) {
+					if(attributes.Length > 0 && attributes[0].Templatize) {
 						sql.Append(properties[i].Name + " = @" + properties[i].Name + " AND " );
 						parameters.Add(properties[i]);
 					}
@@ -48,7 +48,7 @@ namespace AltairStudios.Core.Orm {
 				counter = 0;
 				for(int i = 0; i < properties.Length; i++) {	
 					TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
-					if(attributes[0].Templatize) {
+					if(attributes.Length > 0 && attributes[0].Templatize) {
 						type.GetProperty(properties[i].Name).SetValue(instance, reader[counter], null);
 						counter++;
 					}

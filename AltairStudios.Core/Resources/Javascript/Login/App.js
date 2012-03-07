@@ -50,15 +50,19 @@ Ext.define('AdminDesktop.Login.App', {
 					Ext.Ajax.request({
 					   url: 'Authorize',
 					   success: function (response) {
-							x = Ext.decode( response.responseText );
-							alert(x);
-							document.location = "Desktop";
+							json = Ext.decode( response.responseText );
+							
+							if(json.error != null) {
+								return;
+							} else {
+								document.location = "../Admin";
+							}
 						},
 					   failure: function () { console.log('failure');},
 					   headers: {
 					       'my-header': 'foo'
 					   },
-					   params: { Name: Ext.getCmp('user').getValue(), Password: Ext.getCmp('password').getValue() }
+					   params: { Email: Ext.getCmp('user').getValue(), Password: Ext.getCmp('password').getValue() }
 					});
 		        }
 		    }]

@@ -87,7 +87,7 @@ namespace AltairStudios.Core.Mvc.Controllers {
 			return Content(html.ToString());
 		}
 		
-			
+		
 		public ActionResult Authorize(User user){
 			List<User> users = user.getBy<User>();
 			
@@ -96,9 +96,10 @@ namespace AltairStudios.Core.Mvc.Controllers {
 				FormsAuthenticationTicket fat = new FormsAuthenticationTicket(user.Email, user.Remember, 30);
 				Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, FormsAuthentication.Encrypt(fat)));
 				Session["admin_user"] = users[0];
+				return Content(users[0].ToJson());
+			} else {
+				return Content("{error:true}");
 			}
-			
-			return RedirectToAction("Index");
 		}
 			
 		
@@ -144,6 +145,12 @@ namespace AltairStudios.Core.Mvc.Controllers {
 			html.Append("</html>");
 			
 			return Content(html.ToString());
+		}
+		
+		
+		[Authorize()]
+		public ActionResult GetUser() {
+			return Content(((User)Session["admin_user"]).ToJson());
 		}
 	}
 }
