@@ -25,13 +25,13 @@ Ext.define('AdminDesktop.BogusModule', {
     extend: 'Ext.ux.desktop.Module',
 
     init : function(){
-        this.launcher = {
+        /*this.launcher = {
             text: 'Window '+(++windowIndex),
             iconCls:'bogus',
             handler : this.createWindow,
             scope: this,
             windowId:windowIndex
-        }
+        }*/
     },
 
     createWindow : function(src){

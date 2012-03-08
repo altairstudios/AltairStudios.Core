@@ -32,12 +32,12 @@ Ext.define('AdminDesktop.GridWindow', {
     id:'grid-win',
 
     init : function(){
-        this.launcher = {
+        /*this.launcher = {
             text: 'Grid Window',
             iconCls:'icon-grid',
             handler : this.createWindow,
             scope: this
-        };
+        };*/
     },
 
     createWindow : function(){

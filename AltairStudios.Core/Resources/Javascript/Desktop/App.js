@@ -68,10 +68,10 @@ Ext.define('AdminDesktop.App', {
             shortcuts: Ext.create('Ext.data.Store', {
                 model: 'Ext.ux.desktop.ShortcutModel',
                 data: [
-                    { name: 'Grid Window', iconCls: 'grid-shortcut', module: 'grid-win' },
+                   /* { name: 'Grid Window', iconCls: 'grid-shortcut', module: 'grid-win' },
                     { name: 'Accordion Window', iconCls: 'accordion-shortcut', module: 'acc-win' },
                     { name: 'Notepad', iconCls: 'notepad-shortcut', module: 'notepad' },
-                    { name: 'System Status', iconCls: 'cpu-shortcut', module: 'systemstatus'}
+                    { name: 'System Status', iconCls: 'cpu-shortcut', module: 'systemstatus'}*/
                 ]
             }),
 
@@ -85,21 +85,21 @@ Ext.define('AdminDesktop.App', {
         var me = this, ret = me.callParent();
 
         return Ext.apply(ret, {
-            title: 'Don Griffin 2',
+            title: 'Name',
             iconCls: 'user',
             height: 300,
             toolConfig: {
-                width: 100,
+                width: 150,
                 items: [
                     {
-                        text:'Settings',
+                        text:'Configuración',
                         iconCls:'settings',
                         handler: me.onSettings,
                         scope: me
                     },
                     '-',
                     {
-                        text:'Logout',
+                        text:'Salir',
                         iconCls:'logout',
                         handler: me.onLogout,
                         scope: me
@@ -114,8 +114,8 @@ Ext.define('AdminDesktop.App', {
 
         return Ext.apply(ret, {
             quickStart: [
-                { name: 'Accordion Window', iconCls: 'accordion', module: 'acc-win' },
-                { name: 'Grid Window', iconCls: 'icon-grid', module: 'grid-win' }
+                //{ name: 'Accordion Window', iconCls: 'accordion', module: 'acc-win' },
+                //{ name: 'Grid Window', iconCls: 'icon-grid', module: 'grid-win' }
             ],
             trayItems: [
                 { xtype: 'trayclock', flex: 1 }
@@ -124,7 +124,7 @@ Ext.define('AdminDesktop.App', {
     },
 
     onLogout: function () {
-        Ext.Msg.confirm('Logout', 'Are you sure you want to logout?');
+        Ext.Msg.confirm('Salir', '¿Está seguro que desea salir de la aplicación?');
     },
 
     onSettings: function () {

@@ -30,12 +30,12 @@ Ext.define('AdminDesktop.Notepad', {
     id:'notepad',
 
     init : function(){
-        this.launcher = {
+        /*this.launcher = {
             text: 'Notepad',
             iconCls:'notepad',
             handler : this.createWindow,
             scope: this
-        }
+        }*/
     },
 
     createWindow : function(){

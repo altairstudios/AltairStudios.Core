@@ -1,63 +1,45 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="AltairStudios.Core/Mvc/Controllers/AdminController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Tests/Web.config">
     <Files>
-      <File FileName="tests/.htaccess" Line="16" Column="28" />
-      <File FileName="tests/Controllers/HomeController.cs" Line="1" Column="1" />
-      <File FileName="tests/Controllers/SerializerController.cs" Line="1" Column="1" />
-      <File FileName="tests/Global.asax" Line="1" Column="1" />
-      <File FileName="tests/Global.asax.cs" Line="1" Column="1" />
-      <File FileName="AltairStudios.Core/Mvc/MvcApplication.cs" Line="1" Column="1" />
-      <File FileName="AltairStudios.Core/Mvc/Controllers/AdminController.cs" Line="25" Column="39" />
+      <File FileName="Tests/Web.config" Line="53" Column="55" />
+      <File FileName="AltairStudios.Core/Orm/ConnectionFactory.cs" Line="1" Column="1" />
+      <File FileName="AltairStudios.Core/Mvc/MvcApplication.cs" Line="55" Column="70" />
+      <File FileName="AltairStudios.Core/Mvc/Controllers/AdminController.cs" Line="152" Column="30" />
+      <File FileName="AltairStudios.Core/resources/javascript/Desktop/App.js" Line="34" Column="41" />
+      <File FileName="AltairStudios.Core/resources/javascript/Ux/App.js" Line="90" Column="40" />
+      <File FileName="AltairStudios.Core/resources/javascript/Ux/StartMenu.js" Line="22" Column="37" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="AltairStudios.Core" expanded="True">
+            <Node name="References" expanded="True" />
             <Node name="Mvc" expanded="True">
               <Node name="Controllers" expanded="True" />
             </Node>
+            <Node name="Orm" expanded="True">
+              <Node name="Models" expanded="True" />
+            </Node>
             <Node name="resources" expanded="True">
-              <Node name="themes" expanded="True">
-                <Node name="images" expanded="True">
-                  <Node name="default" expanded="True">
-                    <Node name="boundlist" expanded="True" />
-                    <Node name="box" expanded="True" />
-                    <Node name="btn" expanded="True" />
-                    <Node name="btn-group" expanded="True" />
-                    <Node name="button" expanded="True" />
-                    <Node name="datepicker" expanded="True" />
-                    <Node name="dd" expanded="True" />
-                    <Node name="editor" expanded="True" />
-                    <Node name="form" expanded="True" />
-                    <Node name="form-invalid-tip" expanded="True" />
-                    <Node name="grid" expanded="True" />
-                    <Node name="layout" expanded="True" />
-                    <Node name="menu" expanded="True" />
-                    <Node name="panel" expanded="True" />
-                    <Node name="panel-header" expanded="True" />
-                    <Node name="progress" expanded="True" />
-                    <Node name="shared" expanded="True" />
-                    <Node name="sizer" expanded="True" />
-                    <Node name="slider" expanded="True" />
-                    <Node name="tab" expanded="True" />
-                    <Node name="tab-bar" expanded="True" />
-                    <Node name="tip" expanded="True" />
-                    <Node name="toolbar" expanded="True" />
-                    <Node name="tools" expanded="True" />
-                    <Node name="tree" expanded="True" />
-                    <Node name="util" expanded="True">
-                      <Node name="splitter" expanded="True" />
-                    </Node>
-                    <Node name="window" expanded="True" />
-                    <Node name="window-header" expanded="True" />
-                  </Node>
-                </Node>
+              <Node name="javascript" expanded="True">
+                <Node name="Desktop" expanded="True" />
+                <Node name="Login" expanded="True" />
+                <Node name="Ux" expanded="True" />
+              </Node>
+            </Node>
+            <Node name="shared" expanded="True">
+              <Node name="icons" expanded="True">
+                <Node name="fam" expanded="True" />
               </Node>
             </Node>
             <Node name="Util" expanded="True" />
+            <Node name="wallpapers" expanded="True" />
           </Node>
-          <Node name="Tests" expanded="True" />
+          <Node name="Tests" expanded="True">
+            <Node name="Controllers" expanded="True" />
+            <Node name="Web.config" selected="True" />
+          </Node>
         </State>
       </Pad>
     </Pads>

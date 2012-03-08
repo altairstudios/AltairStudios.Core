@@ -24,7 +24,7 @@ Ext.define('AdminDesktop.BogusMenuModule', {
 
     init : function() {
 
-        this.launcher = {
+        /*this.launcher = {
             text: 'More items',
             iconCls: 'bogus',
             handler: function() {
@@ -34,8 +34,8 @@ Ext.define('AdminDesktop.BogusMenuModule', {
                 items: []
             }
         };
-
-        for (var i = 0; i < 5; ++i) {
+*/
+        /*for (var i = 0; i < 5; ++i) {
             this.launcher.menu.items.push({
                 text: 'Window '+(++windowIndex),
                 iconCls:'bogus',
@@ -43,6 +43,6 @@ Ext.define('AdminDesktop.BogusMenuModule', {
                 scope: this,
                 windowId: windowIndex
             });
-        }
+        }*/
     }
 });

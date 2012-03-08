@@ -35,12 +35,12 @@ Ext.define('AdminDesktop.VideoWindow', {
     tipHeight: 96,
 
     init : function(){
-        this.launcher = {
+        /*this.launcher = {
             text: 'About Ext JS',
             iconCls:'video',
             handler : this.createWindow,
             scope: this
-        }
+        }*/
     },
 
     createWindow : function(){

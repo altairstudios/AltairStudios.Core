@@ -32,12 +32,12 @@ Ext.define('AdminDesktop.AccordionWindow', {
     id:'acc-win',
 
     init : function(){
-        this.launcher = {
+        /*this.launcher = {
             text: 'Accordion Window',
             iconCls:'accordion',
             handler : this.createWindow,
             scope: this
-        };
+        };*/
     },
 
     createTree : function(){

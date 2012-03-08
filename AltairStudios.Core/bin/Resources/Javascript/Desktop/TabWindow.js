@@ -29,12 +29,12 @@ Ext.define('AdminDesktop.TabWindow', {
     id:'tab-win',
 
     init : function(){
-        this.launcher = {
+        /*this.launcher = {
             text: 'Tab Window',
             iconCls:'tabs',
             handler : this.createWindow,
             scope: this
-        }
+        }*/
     },
 
     createWindow : function(){

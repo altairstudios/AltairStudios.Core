@@ -35,7 +35,7 @@ Ext.define('AdminDesktop.Settings', {
     ],
 
     layout: 'anchor',
-    title: 'Change Settings',
+    title: 'Cambiar configuración',
     modal: true,
     width: 640,
     height: 480,
@@ -52,8 +52,8 @@ Ext.define('AdminDesktop.Settings', {
         me.tree = me.createTree();
 
         me.buttons = [
-            { text: 'OK', handler: me.onOK, scope: me },
-            { text: 'Cancel', handler: me.close, scope: me }
+            { text: 'Guardar', handler: me.onOK, scope: me },
+            { text: 'Cancelar', handler: me.close, scope: me }
         ];
 
         me.items = [
@@ -74,7 +74,7 @@ Ext.define('AdminDesktop.Settings', {
             },
             {
                 xtype: 'checkbox',
-                boxLabel: 'Stretch to fit',
+                boxLabel: 'Ajustar a la pantalla',
                 checked: me.stretch,
                 listeners: {
                     change: function (comp) {
@@ -95,7 +95,7 @@ Ext.define('AdminDesktop.Settings', {
         }
 
         var tree = new Ext.tree.Panel({
-            title: 'Desktop Background',
+            title: 'Fondo de escritorio',
             rootVisible: false,
             lines: false,
             autoScroll: true,
@@ -111,7 +111,7 @@ Ext.define('AdminDesktop.Settings', {
             store: new Ext.data.TreeStore({
                 model: 'AdminDesktop.WallpaperModel',
                 root: {
-                    text:'Wallpaper',
+                    text:'Fondo de escritorio',
                     expanded: true,
                     children:[
                         { text: "None", iconCls: '', leaf: true },
