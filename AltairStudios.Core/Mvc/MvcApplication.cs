@@ -11,6 +11,7 @@ namespace AltairStudios.Core.Mvc {
 		protected static string diskPath = "";
 		protected static string connectionString = "";
 
+
 		public static string ConnectionString {
 			get {
 				return MvcApplication.connectionString;
@@ -30,8 +31,12 @@ namespace AltairStudios.Core.Mvc {
 		}
 		
 		
+		
+		
 		public static void RegisterRoutes(RouteCollection routes) {
 			routes.IgnoreRoute ("{resource}.axd/{*pathInfo}");
+			
+			routes.MapRoute("Admin", "Admin/{action}", new { controller = "Admin", action = "Index", id = "" });
 			
 			/*routes.MapRoute("AdminDesktopJavascript", "Admin/Resources/Javascript/Desktop/{path}", new { controller = "Admin", action = "JavascriptDesktop", path = "" });
 			routes.MapRoute("AdminUxJavascript", "Admin/Resources/Javascript/Ux/{path}", new { controller = "Admin", action = "JavascriptUx", path = "" });
@@ -46,6 +51,7 @@ namespace AltairStudios.Core.Mvc {
 
 		protected void Application_Start() {
 			RegisterRoutes(RouteTable.Routes);
+			
 			
 			MvcApplication.diskPath = HttpContext.Current.Server.MapPath("~");
 			if(System.Web.HttpContext.Current.Request.ApplicationPath != "/") {

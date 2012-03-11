@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>/Users/juan/Sites/altairstudios-core/AltairStudios.Core/bin/AltairStudios.Core</name>
+    </assembly>
+    <members>
+        <member name="T:AltairStudios.Core.Mvc.Controllers.AdminController">
+            <summary>
+            Admin controller to load automatic administration page.
+            </summary>
+        </member>
+        <member name="M:AltairStudios.Core.Mvc.Controllers.AdminController.Index">
+            <summary>
+            Administration page
+            </summary>
+        </member>
+        <member name="M:AltairStudios.Core.Mvc.Controllers.AdminController.Login">
+            <summary>
+            Login administration page
+            </summary>
+        </member>
+        <member name="M:AltairStudios.Core.Mvc.Controllers.AdminController.Authorize(AltairStudios.Core.Orm.Models.User)">
+            <summary>
+            Authorize the specified user.
+            </summary>
+            <param name="user">
+            User to access admin page.
+            </param>
+        </member>
+        <member name="M:AltairStudios.Core.Mvc.Controllers.AdminController.Logout">
+            <summary>
+            Logout current user for admin session.
+            </summary>
+        </member>
+        <member name="M:AltairStudios.Core.Mvc.Controllers.AdminController.getUrl(System.String)">
+            <summary>
+            Gets the URL.
+            </summary>
+            <returns>
+            The URL.
+            </returns>
+            <param name="url">
+            Base URL to format link.
+            </param>
+        </member>
+        <member name="M:AltairStudios.Core.Mvc.Controllers.AdminController.GetUser">
+            <summary>
+            Gets the user information.
+            </summary>
+            <returns>
+            The user.
+            </returns>
+        </member>
+    </members>
+</doc>

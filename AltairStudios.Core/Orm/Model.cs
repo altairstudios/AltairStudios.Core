@@ -1,8 +1,8 @@
 using System;
-using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 using MySql.Data.MySqlClient;
+using AltairStudios.Core.Orm.Models;
 
 
 namespace AltairStudios.Core.Orm {
