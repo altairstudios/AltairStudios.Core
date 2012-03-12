@@ -29,4 +29,14 @@ AltairStudios.Core.Admin.Renderer = function() {
 		
 		this.content.html(html);
 	}
+	
+	
+	this.renderHome = function renderHome() {
+		var html = "";
+		
+		html += "<div class='hero-unit'><h1>Bienvenido!</h1><p>Te damos la bienvenida a nuestro administrador. Puedes realizar cualquier operación de una forma sencilla desde cualquier parte del menú. Si quieres saber mas, puedes contactar con nosotros mediante soporte o visitar nuestra web.</p><p><a href='http://www.altairstudios.es' class='btn btn-primary btn-large'>Visitanos »</a></p></div>";
+		html += "<div class='row-fluid'><div class='span4'><h2>Heading</h2><p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p><p><a class='btn' href='#'>View details »</a></p></div><!--/span--><div class='span4'><h2>Heading</h2><p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p><p><a class='btn' href='#'>View details »</a></p></div><!--/span--><div class='span4'><h2>Heading</h2><p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p><p><a class='btn' href='#'>View details »</a></p></div><!--/span--></div><!--/row--><div class='row-fluid'><div class='span4'><h2>Heading</h2><p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p><p><a class='btn' href='#'>View details »</a></p></div><!--/span--><div class='span4'><h2>Heading</h2><p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p><p><a class='btn' href='#'>View details »</a></p></div><!--/span--><div class='span4'><h2>Heading</h2><p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p><p><a class='btn' href='#'>View details »</a></p></div><!--/span--></div><!--/row-->";
+		
+		this.content.html(html);
+	}
 }

@@ -86,7 +86,7 @@ namespace AltairStudios.Core.Mvc.Controllers {
 			html.Append("</div><!--/.well -->");
 			html.Append("</div><!--/span-->");
 			html.Append("<div class='span9' id='content'>");
-			html.Append("<div class='hero-unit'>");
+			/*html.Append("<div class='hero-unit'>");
 			html.Append("<h1>Bienvenido!</h1>");
 			html.Append("<p>Te damos la bienvenida a nuestro administrador. Puedes realizar cualquier operación de una forma sencilla desde cualquier parte del menú. Si quieres saber mas, puedes contactar con nosotros mediante soporte o visitar nuestra web.</p>");
 			html.Append("<p><a href='http://www.altairstudios.es' class='btn btn-primary btn-large'>Visitanos »</a></p>");
@@ -124,7 +124,7 @@ namespace AltairStudios.Core.Mvc.Controllers {
 			html.Append("<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>");
 			html.Append("<p><a class='btn' href='#'>View details »</a></p>");
 			html.Append("</div><!--/span-->");
-			html.Append("</div><!--/row-->");
+			html.Append("</div><!--/row-->");*/
 			html.Append("</div><!--/span-->");
 			html.Append("</div><!--/row-->");
 			
@@ -136,7 +136,7 @@ namespace AltairStudios.Core.Mvc.Controllers {
 
 			html.Append("</div>");
 			
-			html.Append("<script type='text/javascript'>var coreProcess = null;var AltairStudios = { Core: { Admin: { Plugins: {} } } }</script>");
+			html.Append("<script type='text/javascript'>var coreProcess = null;var AltairStudios = { Core: { Admin: { Plugins: {} } } }; var path = '" + path + "';</script>");
 			
 			html.Append("<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery" + min + ".js'></script>");
 			html.Append("<script type='text/javascript' src='" + path + "/Bin/resources/js/bootstrap" + min + ".js'></script>");
@@ -300,6 +300,14 @@ namespace AltairStudios.Core.Mvc.Controllers {
 		
 		[Authorize()]
 		public ActionResult GetUsers() {
+			User user = new User();
+			AltairStudios.Core.Orm.Models.List<User> users = user.getBy<User>();
+			return Content(users.ToJson());
+		}
+		
+		
+		[Authorize()]
+		public ActionResult Home() {
 			User user = new User();
 			AltairStudios.Core.Orm.Models.List<User> users = user.getBy<User>();
 			return Content(users.ToJson());
