@@ -20,6 +20,16 @@ namespace AltairStudios.Core.Mvc.Controllers {
 		/// </summary>
 		[Authorize()]
 		public ActionResult Index() {
+			return RedirectToAction("Desktop");
+		}
+		
+		
+		
+		/// <summary>
+		/// Administration page
+		/// </summary>
+		[Authorize()]
+		public ActionResult Desktop() {
 			StringBuilder html = new StringBuilder();
 			string path = MvcApplication.Path;
 			string min = "";
@@ -278,7 +288,7 @@ namespace AltairStudios.Core.Mvc.Controllers {
 		/// Base URL to format link.
 		/// </param>
 		protected string getUrl(string url) {
-			return MvcApplication.Path + "/Admin/#!/" + url;
+			return MvcApplication.Path + "/Admin/Desktop#!/" + url;
 		}
 		#endregion
 		

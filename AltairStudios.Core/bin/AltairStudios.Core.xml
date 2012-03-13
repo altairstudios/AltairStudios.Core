@@ -14,6 +14,11 @@
             Administration page
             </summary>
         </member>
+        <member name="M:AltairStudios.Core.Mvc.Controllers.AdminController.Desktop">
+            <summary>
+            Administration page
+            </summary>
+        </member>
         <member name="M:AltairStudios.Core.Mvc.Controllers.AdminController.Login">
             <summary>
             Login administration page

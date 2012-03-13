@@ -13,25 +13,29 @@ AltairStudios.Core.Admin.Renderer = function() {
 	
 	
 	
-	this.renderGetUsers = function renderGetUsers() {
+	this.renderGetUsers = function renderGetUsers(data) {
 		var html = "";
+		var i = 0;
 		
 		html += "<table class='table table-bordered table-striped'>";
 		html += "<tr>";
 		html += "<th>Email</th>";
 		html += "<th>Nombre</th>";
 		html += "</tr>";
-		html += "<tr>";
-		html += "<td>juan@gmail.com</td>";
-		html += "<td>Juan Benavides Romero</td>";
-		html += "</tr>";
+		
+		for(i = 0; i < data.length; i++) {
+			html += "<tr>";
+			html += "<td>" + data[i].Email + "</td>";
+			html += "<td>" + data[i].Name + " " + data[i].Surname + "</td>";
+			html += "</tr>";
+		}
 		html += "</table>";
 		
 		this.content.html(html);
 	}
 	
 	
-	this.renderHome = function renderHome() {
+	this.renderHome = function renderHome(data) {
 		var html = "";
 		
 		html += "<div class='hero-unit'><h1>Bienvenido!</h1><p>Te damos la bienvenida a nuestro administrador. Puedes realizar cualquier operación de una forma sencilla desde cualquier parte del menú. Si quieres saber mas, puedes contactar con nosotros mediante soporte o visitar nuestra web.</p><p><a href='http://www.altairstudios.es' class='btn btn-primary btn-large'>Visitanos »</a></p></div>";

@@ -11,7 +11,7 @@ namespace AltairStudios.Core.Util {
 			string converted = "";
 			switch(type.Name) {
 				case "Int32": converted = this.convert((int)val); break;
-				case "String": converted = "'" + this.convert((string)val) + "'"; break;
+				case "String": converted = "\"" + this.convert((string)val) + "\""; break;
 				case "Double": converted = this.convert((double)val); break;
 				case "Boolean": converted = this.convert((bool)val); break;
 			}
@@ -40,10 +40,12 @@ namespace AltairStudios.Core.Util {
 		}
 		
 		public string convert(string val) {
-			return this.convert(val, false);
+			val = val.Replace("\"", "\\\"");
+			//return this.convert(val, false);
+			return val;
 		}
 		
-		public string convert(string val, bool doubleEscape) {
+		/*public string convert(string val, bool doubleEscape) {
 			if(doubleEscape) {
 				val = val.Replace("\"", "'");
 			} else {
@@ -51,7 +53,7 @@ namespace AltairStudios.Core.Util {
 			}
 			
 			return val;
-		}
+		}*/
 		
 		public T cast<T>(object o) {
 			return (T)o;

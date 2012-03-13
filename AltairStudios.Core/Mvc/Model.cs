@@ -38,7 +38,7 @@ namespace AltairStudios.Core.Mvc {
 				if(properties[i].GetValue(this, null) != null) {
 					TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
 					if(attributes.Length > 0 && attributes[0].Templatize) {
-						jsonProperties.Add(properties[i].Name + ":" + converter.convert(properties[i].GetValue(this, null), properties[i].PropertyType));
+						jsonProperties.Add("\"" + properties[i].Name + "\"" + ":" + converter.convert(properties[i].GetValue(this, null), properties[i].PropertyType));
 					}
 				}
 			}
