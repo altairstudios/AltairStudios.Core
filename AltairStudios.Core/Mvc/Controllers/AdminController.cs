@@ -1,5 +1,5 @@
 using System;
-using System.Collections.Generic;
+//using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using AltairStudios.Core.Orm.Models;
+using AltairStudios.Core.Orm.Models.Admin;
 
 
 namespace AltairStudios.Core.Mvc.Controllers {
@@ -250,7 +251,7 @@ namespace AltairStudios.Core.Mvc.Controllers {
 		/// User to access admin page.
 		/// </param>
 		public ActionResult Authorize(User user){
-			AltairStudios.Core.Orm.Models.List<User> users = user.getBy<User>();
+			ModelList<User> users = user.getBy<User>();
 			
 			if (users.Count > 0) {
 				FormsAuthentication.Initialize();
@@ -311,7 +312,7 @@ namespace AltairStudios.Core.Mvc.Controllers {
 		[Authorize()]
 		public ActionResult GetUsers() {
 			User user = new User();
-			AltairStudios.Core.Orm.Models.List<User> users = user.getBy<User>();
+			ModelList<User> users = user.getBy<User>();
 			return Content(users.ToJson());
 		}
 		
@@ -319,8 +320,19 @@ namespace AltairStudios.Core.Mvc.Controllers {
 		[Authorize()]
 		public ActionResult Home() {
 			User user = new User();
-			AltairStudios.Core.Orm.Models.List<User> users = user.getBy<User>();
-			return Content(users.ToJson());
+			ModelList<User> users = user.getBy<User>();
+			
+			AdminJsonResult<ModelList<User>> result = new AdminJsonResult<ModelList<User>>();
+			result.Content = users;
+			
+			Link noticeLink = new Link();
+			noticeLink.Name = "¡Visitanos! &raquo;";
+			noticeLink.Title = "Visitanos";
+			noticeLink.Anchor = "http://www.altairstudios.es";
+			
+			result.createNotice("¡Bienvenido!", "Te damos la bienvenida a nuestro administrador. Puedes realizar cualquier operación de una forma sencilla desde cualquier parte del menú. Si quieres saber mas, puedes contactar con nosotros mediante soporte o visitar nuestra web.", noticeLink);
+			
+			return Content(result.ToJson());
 		}
 		#endregion
 	}

@@ -17,9 +17,5 @@ namespace AltairStudios.Core.Mvc {
 		public TemplatizeAttribute() {
 			this.templatize = true;
 		}
-		
-		public TemplatizeAttribute(bool templatize) {
-			this.templatize = templatize;
-		}
 	}
 }

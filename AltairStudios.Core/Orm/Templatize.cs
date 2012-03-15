@@ -3,7 +3,17 @@ using System;
 
 namespace AltairStudios.Core.Orm {
 	public class TemplatizeAttribute : AltairStudios.Core.Mvc.TemplatizeAttribute {
-		protected bool isSubtable;
+		protected bool isSubtable = false;
+		protected bool isList = false;
+
+		public bool IsList {
+			get {
+				return this.isList;
+			}
+			set {
+				isList = value;
+			}
+		}
 		
 		public bool IsSubtable {
 			get {
@@ -16,13 +26,17 @@ namespace AltairStudios.Core.Orm {
 		
 		public TemplatizeAttribute() {
 			this.templatize = true;
-			this.isSubtable = false;
 		}
 		
-		public TemplatizeAttribute(bool templatize, bool isSubtable) {
-			this.templatize = templatize;
+		public TemplatizeAttribute(bool isSubtable) {
+			this.templatize = true;
 			this.isSubtable = isSubtable;
+		}
+		
+		public TemplatizeAttribute(bool isSubtable, bool isList) {
+			this.templatize = true;
+			this.isSubtable = isSubtable;
+			this.isList = isList;
 		}
 	}
 }
-

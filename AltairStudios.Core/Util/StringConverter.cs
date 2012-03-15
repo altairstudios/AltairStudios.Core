@@ -14,6 +14,8 @@ namespace AltairStudios.Core.Util {
 				case "String": converted = "\"" + this.convert((string)val) + "\""; break;
 				case "Double": converted = this.convert((double)val); break;
 				case "Boolean": converted = this.convert((bool)val); break;
+				case "Model": converted = "null"; break;
+				default: converted = "\"\""; break;
 			}
 			
 			return converted;

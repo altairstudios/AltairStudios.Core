@@ -2,10 +2,10 @@ using System;
 using System.Text;
 
 
-namespace AltairStudios.Core.Orm.Models {
-	public class List<T> : System.Collections.Generic.List<T> {
+namespace AltairStudios.Core.Mvc {
+	public class ModelList<T> : System.Collections.Generic.List<T> {
 		public string ToJson() {
-			List<string> jsonProperties = new List<string>();
+			ModelList<string> jsonProperties = new ModelList<string>();
 			StringBuilder json = new StringBuilder();
 			
 			for(int i = 0; i < this.Count; i++) {
