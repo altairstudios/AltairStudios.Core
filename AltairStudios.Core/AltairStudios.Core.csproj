@@ -39,6 +39,7 @@
     <Folder Include="resources\" />
     <Folder Include="Orm\Models\" />
     <Folder Include="resources\js\admin\" />
+    <Folder Include="Orm\Models\Admin\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Orm\Model.cs" />
@@ -50,7 +51,13 @@
     <Compile Include="Util\StringConverter.cs" />
     <Compile Include="Mvc\Controllers\AdminController.cs" />
     <Compile Include="Orm\Models\User.cs" />
-    <Compile Include="Orm\Models\List.cs" />
+    <Compile Include="Orm\Models\Admin\Menu.cs" />
+    <Compile Include="Orm\Models\Admin\Notice.cs" />
+    <Compile Include="Orm\Models\Admin\NoticeType.cs" />
+    <Compile Include="Orm\Models\Admin\AdminJsonResult.cs" />
+    <Compile Include="Orm\Models\Admin\Link.cs" />
+    <Compile Include="Mvc\ModelList.cs" />
+    <Compile Include="Orm\ModelList.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />

@@ -56,5 +56,18 @@
             The user.
             </returns>
         </member>
+        <member name="M:AltairStudios.Core.Mvc.Controllers.AdminController.GetUsers">
+            <summary>
+            Gets list of the users.
+            </summary>
+            <returns>
+            The users.
+            </returns>
+        </member>
+        <member name="M:AltairStudios.Core.Mvc.Controllers.AdminController.Home">
+            <summary>
+            Get home information.
+            </summary>
+        </member>
     </members>
 </doc>

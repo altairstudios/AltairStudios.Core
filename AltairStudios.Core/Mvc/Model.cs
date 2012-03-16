@@ -1,14 +1,15 @@
 using System;
 using System.Reflection;
 using System.Text;
+using AltairStudios.Core.Orm;
 using AltairStudios.Core.Orm.Models;
 using AltairStudios.Core.Util;
 
 
 namespace AltairStudios.Core.Mvc {
 	public class Model {
-		protected List<string> getFields(PropertyInfo[] properties) {
-			List<string> fields = new List<string>();
+		protected ModelList<string> getFields(PropertyInfo[] properties) {
+			ModelList<string> fields = new ModelList<string>();
 			
 			for(int i = 0; i < properties.Length; i++) {	
 				TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
@@ -26,10 +27,21 @@ namespace AltairStudios.Core.Mvc {
 		}
 		
 		
+		public ModelList<T> castList<T>(object o) {
+			System.Collections.IList io = this.cast<System.Collections.IList>(o);
+			ModelList<T> modelList = new ModelList<T>();
+			
+			foreach(object item in io) {
+				modelList.Add(this.cast<T>(item));
+			}
+			return modelList;
+		}
+		
+		
 		public string ToJson() {
 			PropertyInfo[] properties = this.GetType().GetProperties();
 			StringBuilder json = new StringBuilder();
-			List<string> jsonProperties = new List<string>();
+			ModelList<string> jsonProperties = new ModelList<string>();
 			StringConverter converter = new StringConverter();
 			
 			json.Append("{");

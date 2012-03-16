@@ -1,5 +1,5 @@
 using System;
-using System.Collections.Generic;
+//using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using AltairStudios.Core.Orm.Models;
+using AltairStudios.Core.Orm.Models.Admin;
 
 
 namespace AltairStudios.Core.Mvc.Controllers {
@@ -85,57 +86,8 @@ namespace AltairStudios.Core.Mvc.Controllers {
 			html.Append("</div>");
 		
 			html.Append("<div class='container-fluid'>");
-			html.Append("<div class='row-fluid'>");
-			html.Append("<div class='span3' id='sidebar'>");
-			html.Append("<div class='well sidebar-nav'>");
-			html.Append("<ul class='nav nav-list'>");
-			html.Append("<li class='nav-header'>Menú</li>");
-			html.Append("<li class='active'><a href='" + this.getUrl("home") + "'>Home</a></li>");
-			html.Append("<li><a href='" + this.getUrl("get-users") + "'>Usuarios</a></li>");
-			html.Append("</ul>");
-			html.Append("</div><!--/.well -->");
-			html.Append("</div><!--/span-->");
-			html.Append("<div class='span9' id='content'>");
-			/*html.Append("<div class='hero-unit'>");
-			html.Append("<h1>Bienvenido!</h1>");
-			html.Append("<p>Te damos la bienvenida a nuestro administrador. Puedes realizar cualquier operación de una forma sencilla desde cualquier parte del menú. Si quieres saber mas, puedes contactar con nosotros mediante soporte o visitar nuestra web.</p>");
-			html.Append("<p><a href='http://www.altairstudios.es' class='btn btn-primary btn-large'>Visitanos »</a></p>");
-			html.Append("</div>");
-			html.Append("<div class='row-fluid'>");
-			html.Append("<div class='span4'>");
-			html.Append("<h2>Heading</h2>");
-			html.Append("<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>");
-			html.Append("<p><a class='btn' href='#'>View details »</a></p>");
-			html.Append("</div><!--/span-->");
-			html.Append("<div class='span4'>");
-			html.Append("<h2>Heading</h2>");
-			html.Append("<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>");
-			html.Append("<p><a class='btn' href='#'>View details »</a></p>");
-			html.Append("</div><!--/span-->");
-			html.Append("<div class='span4'>");
-			html.Append("<h2>Heading</h2>");
-			html.Append("<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>");
-			html.Append("<p><a class='btn' href='#'>View details »</a></p>");
-			html.Append("</div><!--/span-->");
-			html.Append("</div><!--/row-->");
-			html.Append("<div class='row-fluid'>");
-			html.Append("<div class='span4'>");
-			html.Append("<h2>Heading</h2>");
-			html.Append("<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>");
-			html.Append("<p><a class='btn' href='#'>View details »</a></p>");
-			html.Append("</div><!--/span-->");
-			html.Append("<div class='span4'>");
-			html.Append("<h2>Heading</h2>");
-			html.Append("<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>");
-			html.Append("<p><a class='btn' href='#'>View details »</a></p>");
-			html.Append("</div><!--/span-->");
-			html.Append("<div class='span4'>");
-			html.Append("<h2>Heading</h2>");
-			html.Append("<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>");
-			html.Append("<p><a class='btn' href='#'>View details »</a></p>");
-			html.Append("</div><!--/span-->");
-			html.Append("</div><!--/row-->");*/
-			html.Append("</div><!--/span-->");
+			html.Append("<div class='row-fluid' id='content'>");
+			
 			html.Append("</div><!--/row-->");
 			
 			html.Append("<hr>");
@@ -215,8 +167,8 @@ namespace AltairStudios.Core.Mvc.Controllers {
 			html.Append("<div class='span4'>&nbsp;</div><div class='span4'>");
 			html.Append("<form><fieldset><legend>Acceder</legend>");
 			
-			html.Append("<div class='control-group'><label class='control-label' for='loginUser'>Usuario:</label><div class='controls'><input name='Email' class='input-xlarge focused' id='loginUser' type='text' placeholder='Email'></div></div>");
-			html.Append("<div class='control-group'><label class='control-label' for='loginPassword'>Contraseña:</label><div class='controls'><input name='Password' class='input-xlarge focused' id='loginPassword' type='text' placeholder='Contraseña'></div></div>");
+			html.Append("<div class='control-group'><label class='control-label' for='loginUser'>Usuario:</label><div class='controls'><input name='Email' class='input-xlarge focused' id='loginUser' type='text' placeholder='Email' autocomplete='off'></div></div>");
+			html.Append("<div class='control-group'><label class='control-label' for='loginPassword'>Contraseña:</label><div class='controls'><input name='Password' class='input-xlarge focused' id='loginPassword' type='password' placeholder='Contraseña' autocomplete='off'></div></div>");
 			html.Append("<div class='control-group form-inline'><label class='control-label' for='loginRemember'>Recordar: <input name='Remember' class='input-small' id='loginRemember' type='checkbox' /></label></div>");
 			html.Append("<div class='control-group'><a id='loginButton' class='btn btn-primary' href='#'><i class='icon-off icon-white'></i> Acceder</a></div>");
 						
@@ -250,7 +202,7 @@ namespace AltairStudios.Core.Mvc.Controllers {
 		/// User to access admin page.
 		/// </param>
 		public ActionResult Authorize(User user){
-			AltairStudios.Core.Orm.Models.List<User> users = user.getBy<User>();
+			ModelList<User> users = user.getBy<User>();
 			
 			if (users.Count > 0) {
 				FormsAuthentication.Initialize();
@@ -308,19 +260,40 @@ namespace AltairStudios.Core.Mvc.Controllers {
 		
 		
 		
+		/// <summary>
+		/// Gets list of the users.
+		/// </summary>
+		/// <returns>
+		/// The users.
+		/// </returns>
 		[Authorize()]
 		public ActionResult GetUsers() {
 			User user = new User();
-			AltairStudios.Core.Orm.Models.List<User> users = user.getBy<User>();
+			ModelList<User> users = user.getBy<User>();
 			return Content(users.ToJson());
 		}
 		
 		
+		
+		/// <summary>
+		/// Get home information.
+		/// </summary>
 		[Authorize()]
 		public ActionResult Home() {
 			User user = new User();
-			AltairStudios.Core.Orm.Models.List<User> users = user.getBy<User>();
-			return Content(users.ToJson());
+			ModelList<User> users = user.getBy<User>();
+			
+			AdminJsonResult<ModelList<User>> result = new AdminJsonResult<ModelList<User>>();
+			result.Content = users;
+			
+			Link noticeLink = new Link();
+			noticeLink.Name = "¡Visitanos! &raquo;";
+			noticeLink.Title = "Visitanos";
+			noticeLink.Anchor = "http://www.altairstudios.es";
+			
+			result.createNotice("¡Bienvenido!", "Te damos la bienvenida a nuestro administrador. Puedes realizar cualquier operación de una forma sencilla desde cualquier parte del menú. Si quieres saber mas, puedes contactar con nosotros mediante soporte o visitar nuestra web.", noticeLink);
+			
+			return Content(result.ToJson());
 		}
 		#endregion
 	}

@@ -10,26 +10,28 @@ AltairStudios.Core.Admin.Process = function() {
 			currentAnchor = document.location.hash;
 			
 			if (!currentAnchor) {
-				alert("cargar home");
+				currentAnchor = "#!/home";
+				document.location = path + "/Admin/Desktop" + currentAnchor;
+			}
+			
+			var splits = currentAnchor.split("#!/");
+			var section = splits[1];
+			var i = 0;
+			
+			sectionSplit = section.split("-");
+			section = "";
+			
+			for(i = 0; i < sectionSplit.length; i++) {
+				section += sectionSplit[i].substring(0,1).toUpperCase() + sectionSplit[i].substring(1);
+			}
+			
+			if(section == "Logout") {
+				document.location = path + "/Admin/Logout";
 			} else {
-				var splits = currentAnchor.split('#!/');
-				var section = splits[1];
-				var i = 0;
-				
-				sectionSplit = section.split("-");
-				section = "";
-				
-				for(i = 0; i < sectionSplit.length; i++) {
-					section += sectionSplit[i].substring(0,1).toUpperCase() + sectionSplit[i].substring(1);
-				}
-				
-				if(section == "Logout") {
-					document.location = "../Admin/Logout";
-				} else {
-					$.get("../Admin/" + section, function(data) {
-						eval("me.renderer.render" + section + "();");
-					});
-				}
+				$.getJSON(path + "/Admin/" + section, function(data) {
+					//data = $.parseJSON(data);
+					eval("me.renderer.render" + section + "(data);");
+				});
 			}
 		}
 	}
