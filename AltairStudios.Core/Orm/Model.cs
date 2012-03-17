@@ -8,7 +8,19 @@ using AltairStudios.Core.Util;
 
 
 namespace AltairStudios.Core.Orm {
+	/// <summary>
+	/// Model.
+	/// </summary>
 	public class Model : AltairStudios.Core.Mvc.Model {
+		/// <summary>
+		/// Gets the by.
+		/// </summary>
+		/// <returns>
+		/// The by.
+		/// </returns>
+		/// <typeparam name='T'>
+		/// The 1st type parameter.
+		/// </typeparam>
 		public ModelList<T> getBy<T>() {
 			Type type = this.GetType();
 			PropertyInfo[] properties = this.GetType().GetProperties();
@@ -66,6 +78,10 @@ namespace AltairStudios.Core.Orm {
 		}
 		
 		
+		
+		/// <summary>
+		/// Save this instance.
+		/// </summary>
 		public string save() {
 			Type type = this.GetType();
 			PropertyInfo[] properties = this.GetType().GetProperties();
@@ -99,6 +115,13 @@ namespace AltairStudios.Core.Orm {
 		}
 		
 		
+		
+		/// <summary>
+		///  Tos the json. 
+		/// </summary>
+		/// <returns>
+		///  The json. 
+		/// </returns>
 		public string ToJson() {
 			PropertyInfo[] properties = this.GetType().GetProperties();
 			StringBuilder json = new StringBuilder();
@@ -112,18 +135,6 @@ namespace AltairStudios.Core.Orm {
 					TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
 					if(attributes.Length > 0 && attributes[0].Templatize) {
 						if(attributes[0].IsSubtable && attributes[0].IsList) {
-							//Type listType = properties[i].PropertyType;
-							//listType.MakeGenericType
-							//properties[i].PropertyType
-							//ModelList<Model> model = ((ModelList<Model>)this.cast<System.Collections.Generic.IList>()).ToJson()
-							//jsonProperties.Add("\"" + properties[i].Name + "\"" + ":" + ((ModelList<Model>)this.cast<System.Collections.Generic.IList>(properties[i].GetValue(this, null))).ToJson());
-							
-							//ModelList<string> model = new ModelList<string>();
-							//model.ConvertAll<Model>(x => x.ToJson());
-							//((System.Collections.Generic.IList)this.cast<System.Collections.Generic.IList>(properties[i].GetValue(this, null))).ConvertAll()
-							//((System.Collections.Generic.IList<Model>)properties[i].GetValue(this, null)).ConvertAll<Model>(x => x.ToJson());
-							 //jsonProperties.Add((this.castList<Model>(properties[i].GetValue(this, null))).ToJson());
-							//jsonProperties.Add("\"" + properties[i].Name + "\"" + ":" + ((ModelList<Model>)this.castList<Model>(properties[i].GetValue(this, null))).ToJson());
 							jsonProperties.Add("\"" + properties[i].Name + "\"" + ":" + (this.castList<Model>(properties[i].GetValue(this, null))).ToJson());
 						} else if(attributes[0].IsSubtable && !attributes[0].IsList) {
 							jsonProperties.Add("\"" + properties[i].Name + "\"" + ":" + this.cast<Model>(properties[i].GetValue(this, null)).ToJson());

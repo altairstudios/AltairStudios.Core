@@ -4,6 +4,35 @@
         <name>/Users/juan/Sites/altairstudios-core/AltairStudios.Core/bin/AltairStudios.Core</name>
     </assembly>
     <members>
+        <member name="T:AltairStudios.Core.Orm.Model">
+            <summary>
+            Model.
+            </summary>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.Model.getBy``1">
+            <summary>
+            Gets the by.
+            </summary>
+            <returns>
+            The by.
+            </returns>
+            <typeparam name="T">
+            The 1st type parameter.
+            </typeparam>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.Model.save">
+            <summary>
+            Save this instance.
+            </summary>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.Model.ToJson">
+            <summary>
+            Tos the json.
+            </summary>
+            <returns>
+            The json.
+            </returns>
+        </member>
         <member name="T:AltairStudios.Core.Mvc.MvcApplication">
             <summary>
             Mvc application.
@@ -60,6 +89,165 @@
             <summary>
             Application_s the start.
             </summary>
+        </member>
+        <member name="T:AltairStudios.Core.Orm.ConnectionFactory">
+            <summary>
+            Connection factory.
+            </summary>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.ConnectionFactory.createConnection">
+            <summary>
+            Creates the connection.
+            </summary>
+            <returns>
+            The connection.
+            </returns>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.ConnectionFactory.createCommand">
+            <summary>
+            Creates the command.
+            </summary>
+            <returns>
+            The command.
+            </returns>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.ConnectionFactory.resolveType(System.Type)">
+            <summary>
+            Resolves the type.
+            </summary>
+            <returns>
+            The type.
+            </returns>
+            <param name="type">
+            Type.
+            </param>
+        </member>
+        <member name="T:AltairStudios.Core.Orm.TemplatizeAttribute">
+            <summary>
+            Templatize attribute.
+            </summary>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.TemplatizeAttribute.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:AltairStudios.Core.Orm.TemplatizeAttribute" /> class.
+            </summary>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.TemplatizeAttribute.#ctor(System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AltairStudios.Core.Orm.TemplatizeAttribute" /> class.
+            </summary>
+            <param name="isSubtable">
+            Is subtable.
+            </param>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.TemplatizeAttribute.#ctor(System.Boolean,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AltairStudios.Core.Orm.TemplatizeAttribute" /> class.
+            </summary>
+            <param name="isSubtable">
+            Is subtable.
+            </param>
+            <param name="isList">
+            Is list.
+            </param>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.TemplatizeAttribute.isSubtable">
+            <summary>
+            The is subtable.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.TemplatizeAttribute.isList">
+            <summary>
+            The is list.
+            </summary>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.TemplatizeAttribute.IsList">
+            <summary>
+            Gets or sets a value indicating whether this instance is list.
+            </summary>
+            <value>
+                <c>true</c> if this instance is list; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.TemplatizeAttribute.IsSubtable">
+            <summary>
+            Gets or sets a value indicating whether this instance is subtable.
+            </summary>
+            <value>
+                <c>true</c> if this instance is subtable; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:AltairStudios.Core.Mvc.Model">
+            <summary>
+            Model.
+            </summary>
+        </member>
+        <member name="M:AltairStudios.Core.Mvc.Model.getFields(System.Reflection.PropertyInfo[])">
+            <summary>
+            Gets the fields.
+            </summary>
+            <returns>
+            The fields.
+            </returns>
+            <param name="properties">
+            Properties.
+            </param>
+        </member>
+        <member name="M:AltairStudios.Core.Mvc.Model.cast``1(System.Object)">
+            <summary>
+            Cast the specified o.
+            </summary>
+            <param name="o">
+            O.
+            </param>
+            <typeparam name="T">
+            The 1st type parameter.
+            </typeparam>
+        </member>
+        <member name="M:AltairStudios.Core.Mvc.Model.castList``1(System.Object)">
+            <summary>
+            Casts the list.
+            </summary>
+            <returns>
+            The list.
+            </returns>
+            <param name="o">
+            O.
+            </param>
+            <typeparam name="T">
+            The 1st type parameter.
+            </typeparam>
+        </member>
+        <member name="M:AltairStudios.Core.Mvc.Model.ToJson">
+            <summary>
+            Tos the json.
+            </summary>
+            <returns>
+            The json.
+            </returns>
+        </member>
+        <member name="T:AltairStudios.Core.Mvc.TemplatizeAttribute">
+            <summary>
+            Templatize attribute.
+            </summary>
+        </member>
+        <member name="M:AltairStudios.Core.Mvc.TemplatizeAttribute.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:AltairStudios.Core.Mvc.TemplatizeAttribute" /> class.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Mvc.TemplatizeAttribute.templatize">
+            <summary>
+            The templatize.
+            </summary>
+        </member>
+        <member name="P:AltairStudios.Core.Mvc.TemplatizeAttribute.Templatize">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:AltairStudios.Core.Mvc.TemplatizeAttribute" /> is templatize.
+            </summary>
+            <value>
+                <c>true</c> if templatize; otherwise, <c>false</c>.
+            </value>
         </member>
         <member name="T:AltairStudios.Core.Mvc.Controllers.AdminController">
             <summary>
@@ -124,6 +312,353 @@
         <member name="M:AltairStudios.Core.Mvc.Controllers.AdminController.Home">
             <summary>
             Get home information.
+            </summary>
+        </member>
+        <member name="T:AltairStudios.Core.Orm.Models.User">
+            <summary>
+            User.
+            </summary>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.Models.User.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:AltairStudios.Core.Orm.Models.User" /> class.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.User.id">
+            <summary>
+            The identifier.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.User.email">
+            <summary>
+            The email.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.User.password">
+            <summary>
+            The password.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.User.remember">
+            <summary>
+            The remember.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.User.name">
+            <summary>
+            The name.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.User.surname">
+            <summary>
+            The surname.
+            </summary>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.User.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>
+            The name.
+            </value>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.User.Surname">
+            <summary>
+            Gets or sets the surname.
+            </summary>
+            <value>
+            The surname.
+            </value>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.User.Remember">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:AltairStudios.Core.Orm.Models.User" /> is remember.
+            </summary>
+            <value>
+                <c>true</c> if remember; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.User.Email">
+            <summary>
+            Gets or sets the email.
+            </summary>
+            <value>
+            The email.
+            </value>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.User.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.User.Password">
+            <summary>
+            Gets or sets the password.
+            </summary>
+            <value>
+            The password.
+            </value>
+        </member>
+        <member name="T:AltairStudios.Core.Orm.Models.Admin.Menu">
+            <summary>
+            Menu.
+            </summary>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.Models.Admin.Menu.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:AltairStudios.Core.Orm.Models.Admin.Menu" /> class.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.Admin.Menu.link">
+            <summary>
+            The link.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.Admin.Menu.submenus">
+            <summary>
+            The submenus.
+            </summary>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.Admin.Menu.Link">
+            <summary>
+            Gets or sets the link.
+            </summary>
+            <value>
+            The link.
+            </value>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.Admin.Menu.Submenus">
+            <summary>
+            Gets or sets the submenus.
+            </summary>
+            <value>
+            The submenus.
+            </value>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.Models.Admin.Menu.addMenu(AltairStudios.Core.Orm.Models.Admin.Menu)">
+            <summary>
+            Adds the menu.
+            </summary>
+            <param name="menu">
+            Menu.
+            </param>
+        </member>
+        <member name="T:AltairStudios.Core.Orm.Models.Admin.Notice">
+            <summary>
+            Notice.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.Admin.Notice.title">
+            <summary>
+            The title.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.Admin.Notice.text">
+            <summary>
+            The text.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.Admin.Notice.link">
+            <summary>
+            The link.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.Admin.Notice.type">
+            <summary>
+            The type.
+            </summary>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.Admin.Notice.Link">
+            <summary>
+            Gets or sets the link.
+            </summary>
+            <value>
+            The link.
+            </value>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.Admin.Notice.Text">
+            <summary>
+            Gets or sets the text.
+            </summary>
+            <value>
+            The text.
+            </value>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.Admin.Notice.Title">
+            <summary>
+            Gets or sets the title.
+            </summary>
+            <value>
+            The title.
+            </value>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.Admin.Notice.Type">
+            <summary>
+            Gets or sets the type.
+            </summary>
+            <value>
+            The type.
+            </value>
+        </member>
+        <member name="T:AltairStudios.Core.Orm.Models.Admin.NoticeType">
+            <summary>
+            Notice type.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.Admin.NoticeType.Information">
+            <summary>
+            Constant information.
+            </summary>
+        </member>
+        <member name="T:AltairStudios.Core.Orm.Models.Admin.AdminJsonResult`1">
+            <summary>
+            Admin json result.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.Admin.AdminJsonResult`1.content">
+            <summary>
+            The content.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.Admin.AdminJsonResult`1.sidebar">
+            <summary>
+            The sidebar.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.Admin.AdminJsonResult`1.notice">
+            <summary>
+            The notice.
+            </summary>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.Admin.AdminJsonResult`1.Notice">
+            <summary>
+            Gets or sets the notice.
+            </summary>
+            <value>
+            The notice.
+            </value>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.Admin.AdminJsonResult`1.Content">
+            <summary>
+            Gets or sets the content.
+            </summary>
+            <value>
+            The content.
+            </value>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.Admin.AdminJsonResult`1.Sidebar">
+            <summary>
+            Gets or sets the sidebar.
+            </summary>
+            <value>
+            The sidebar.
+            </value>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.Models.Admin.AdminJsonResult`1.createNotice(System.String,System.String,AltairStudios.Core.Orm.Models.Admin.Link)">
+            <summary>
+            Creates the notice.
+            </summary>
+            <param name="title">
+            Title.
+            </param>
+            <param name="text">
+            Text.
+            </param>
+            <param name="link">
+            Link.
+            </param>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.Models.Admin.AdminJsonResult`1.createNotice(System.String,System.String,AltairStudios.Core.Orm.Models.Admin.Link,AltairStudios.Core.Orm.Models.Admin.NoticeType)">
+            <summary>
+            Creates the notice.
+            </summary>
+            <param name="title">
+            Title.
+            </param>
+            <param name="text">
+            Text.
+            </param>
+            <param name="link">
+            Link.
+            </param>
+            <param name="type">
+            Type.
+            </param>
+        </member>
+        <member name="T:AltairStudios.Core.Orm.Models.Admin.Link">
+            <summary>
+            Link.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.Admin.Link.name">
+            <summary>
+            The name.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.Admin.Link.title">
+            <summary>
+            The title.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.Admin.Link.anchor">
+            <summary>
+            The anchor.
+            </summary>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.Admin.Link.Anchor">
+            <summary>
+            Gets or sets the anchor.
+            </summary>
+            <value>
+            The anchor.
+            </value>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.Admin.Link.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>
+            The name.
+            </value>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.Admin.Link.Title">
+            <summary>
+            Gets or sets the title.
+            </summary>
+            <value>
+            The title.
+            </value>
+        </member>
+        <member name="T:AltairStudios.Core.Mvc.ModelList`1">
+            <summary>
+            Model list.
+            </summary>
+        </member>
+        <member name="M:AltairStudios.Core.Mvc.ModelList`1.ToJson">
+            <summary>
+            Tos the json.
+            </summary>
+            <returns>
+            The json.
+            </returns>
+        </member>
+        <member name="M:AltairStudios.Core.Mvc.ModelList`1.cast``1(System.Object)">
+            <summary>
+            Cast the specified o.
+            </summary>
+            <param name="o">
+            O.
+            </param>
+            <typeparam name="T">
+            The 1st type parameter.
+            </typeparam>
+        </member>
+        <member name="T:AltairStudios.Core.Orm.ModelList`1">
+            <summary>
+            Model list.
             </summary>
         </member>
     </members>

@@ -5,11 +5,31 @@ using System.Reflection;
 
 
 namespace AltairStudios.Core.Orm.Models.Admin {
+	/// <summary>
+	/// Admin json result.
+	/// </summary>
 	public class AdminJsonResult<T> : Model {
+		/// <summary>
+		/// The content.
+		/// </summary>
 		T content;
+		/// <summary>
+		/// The sidebar.
+		/// </summary>
 		Menu sidebar;
+		/// <summary>
+		/// The notice.
+		/// </summary>
 		Notice notice;
 		
+		
+		
+		/// <summary>
+		/// Gets or sets the notice.
+		/// </summary>
+		/// <value>
+		/// The notice.
+		/// </value>
 		[Templatize(true)]
 		public Notice Notice {
 			get {
@@ -20,6 +40,14 @@ namespace AltairStudios.Core.Orm.Models.Admin {
 			}
 		}
 		
+		
+		
+		/// <summary>
+		/// Gets or sets the content.
+		/// </summary>
+		/// <value>
+		/// The content.
+		/// </value>
 		[Templatize(true, true)]
 		public T Content {
 			get {
@@ -29,7 +57,15 @@ namespace AltairStudios.Core.Orm.Models.Admin {
 				content = value;
 			}
 		}
-
+		
+		
+		
+		/// <summary>
+		/// Gets or sets the sidebar.
+		/// </summary>
+		/// <value>
+		/// The sidebar.
+		/// </value>
 		[Templatize(true)]
 		public Menu Sidebar {
 			get {
@@ -41,11 +77,40 @@ namespace AltairStudios.Core.Orm.Models.Admin {
 		}
 		
 		
+		
+		/// <summary>
+		/// Creates the notice.
+		/// </summary>
+		/// <param name='title'>
+		/// Title.
+		/// </param>
+		/// <param name='text'>
+		/// Text.
+		/// </param>
+		/// <param name='link'>
+		/// Link.
+		/// </param>
 		public void createNotice(string title, string text, Link link) {
 			this.createNotice(title, text, link, NoticeType.Information);
 		}
 		
 		
+		
+		/// <summary>
+		/// Creates the notice.
+		/// </summary>
+		/// <param name='title'>
+		/// Title.
+		/// </param>
+		/// <param name='text'>
+		/// Text.
+		/// </param>
+		/// <param name='link'>
+		/// Link.
+		/// </param>
+		/// <param name='type'>
+		/// Type.
+		/// </param>
 		public void createNotice(string title, string text, Link link, NoticeType type) {
 			this.notice = new Notice();
 			

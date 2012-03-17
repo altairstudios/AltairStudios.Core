@@ -7,7 +7,19 @@ using AltairStudios.Core.Util;
 
 
 namespace AltairStudios.Core.Mvc {
+	/// <summary>
+	/// Model.
+	/// </summary>
 	public class Model {
+		/// <summary>
+		/// Gets the fields.
+		/// </summary>
+		/// <returns>
+		/// The fields.
+		/// </returns>
+		/// <param name='properties'>
+		/// Properties.
+		/// </param>
 		protected ModelList<string> getFields(PropertyInfo[] properties) {
 			ModelList<string> fields = new ModelList<string>();
 			
@@ -22,11 +34,34 @@ namespace AltairStudios.Core.Mvc {
 		}
 		
 				
+				
+		/// <summary>
+		/// Cast the specified o.
+		/// </summary>
+		/// <param name='o'>
+		/// O.
+		/// </param>
+		/// <typeparam name='T'>
+		/// The 1st type parameter.
+		/// </typeparam>
 		public T cast<T>(object o) {
 			return (T)o;
 		}
 		
 		
+		
+		/// <summary>
+		/// Casts the list.
+		/// </summary>
+		/// <returns>
+		/// The list.
+		/// </returns>
+		/// <param name='o'>
+		/// O.
+		/// </param>
+		/// <typeparam name='T'>
+		/// The 1st type parameter.
+		/// </typeparam>
 		public ModelList<T> castList<T>(object o) {
 			System.Collections.IList io = this.cast<System.Collections.IList>(o);
 			ModelList<T> modelList = new ModelList<T>();
@@ -38,6 +73,13 @@ namespace AltairStudios.Core.Mvc {
 		}
 		
 		
+		
+		/// <summary>
+		/// Tos the json.
+		/// </summary>
+		/// <returns>
+		/// The json.
+		/// </returns>
 		public string ToJson() {
 			PropertyInfo[] properties = this.GetType().GetProperties();
 			StringBuilder json = new StringBuilder();

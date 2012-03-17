@@ -3,7 +3,16 @@ using System.Text;
 
 
 namespace AltairStudios.Core.Mvc {
+	/// <summary>
+	/// Model list.
+	/// </summary>
 	public class ModelList<T> : System.Collections.Generic.List<T> {
+		/// <summary>
+		/// Tos the json.
+		/// </summary>
+		/// <returns>
+		/// The json.
+		/// </returns>
 		public string ToJson() {
 			ModelList<string> jsonProperties = new ModelList<string>();
 			StringBuilder json = new StringBuilder();
@@ -22,6 +31,16 @@ namespace AltairStudios.Core.Mvc {
 		}
 		
 		
+		
+		/// <summary>
+		/// Cast the specified o.
+		/// </summary>
+		/// <param name='o'>
+		/// O.
+		/// </param>
+		/// <typeparam name='T'>
+		/// The 1st type parameter.
+		/// </typeparam>
 		public T cast<T>(object o) {
 			return (T)o;
 		}
