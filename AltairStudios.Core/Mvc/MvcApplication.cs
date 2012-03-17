@@ -6,24 +6,59 @@ using System.Web.Routing;
 
 
 namespace AltairStudios.Core.Mvc {
+	/// <summary>
+	/// Mvc application.
+	/// </summary>
 	public class MvcApplication : System.Web.HttpApplication {
+		/// <summary>
+		/// The path.
+		/// </summary>
 		protected static string path = "";
+		/// <summary>
+		/// The disk path.
+		/// </summary>
 		protected static string diskPath = "";
+		/// <summary>
+		/// The connection string.
+		/// </summary>
 		protected static string connectionString = "";
 
-
+		
+		
+		/// <summary>
+		/// Gets the connection string.
+		/// </summary>
+		/// <value>
+		/// The connection string.
+		/// </value>
 		public static string ConnectionString {
 			get {
 				return MvcApplication.connectionString;
 			}
 		}
 		
+		
+		
+		/// <summary>
+		/// Gets the disk path.
+		/// </summary>
+		/// <value>
+		/// The disk path.
+		/// </value>
 		public static string DiskPath {
 			get {
 				return MvcApplication.diskPath;
 			}
 		}
-
+		
+		
+		
+		/// <summary>
+		/// Gets the path.
+		/// </summary>
+		/// <value>
+		/// The path.
+		/// </value>
 		public static string Path {
 			get {
 				return MvcApplication.path;
@@ -32,23 +67,24 @@ namespace AltairStudios.Core.Mvc {
 		
 		
 		
-		
+		/// <summary>
+		/// Registers the routes.
+		/// </summary>
+		/// <param name='routes'>
+		/// Routes.
+		/// </param>
 		public static void RegisterRoutes(RouteCollection routes) {
 			routes.IgnoreRoute ("{resource}.axd/{*pathInfo}");
-			
+
 			routes.MapRoute("Admin", "Admin/{action}", new { controller = "Admin", action = "Index", id = "" });
-			
-			/*routes.MapRoute("AdminDesktopJavascript", "Admin/Resources/Javascript/Desktop/{path}", new { controller = "Admin", action = "JavascriptDesktop", path = "" });
-			routes.MapRoute("AdminUxJavascript", "Admin/Resources/Javascript/Ux/{path}", new { controller = "Admin", action = "JavascriptUx", path = "" });
-			routes.MapRoute("AdminImageDesktop", "Admin/Resources/Images/Desktop/{path}", new { controller = "Admin", action = "ImageDesktop", path = "" });
-			routes.MapRoute("AdminThemes", "Admin/resources/themes/images/{theme}/{pack}/{image}", new { controller = "Admin", action = "ThemeImage", theme = "", pack = "", image = "" });
-			routes.MapRoute("AdminThemesSublevel", "Admin/resources/themes/images/{theme}/{pack}/{sublevel}/{image}", new { controller = "Admin", action = "ThemeImageSublevel", theme = "", pack = "", sublevel = "", image = "" });*/
-			//routes.MapRoute("AdminResources", "Admin/Resources/{action}/{path}", new { controller = "Admin", action = "Index", path = "" });
-			
 			routes.MapRoute("Default", "{controller}/{action}/{id}", new { controller = "Home", action = "Index", id = "" });
 		}
 
-
+		
+		
+		/// <summary>
+		/// Application_s the start.
+		/// </summary>
 		protected void Application_Start() {
 			RegisterRoutes(RouteTable.Routes);
 			

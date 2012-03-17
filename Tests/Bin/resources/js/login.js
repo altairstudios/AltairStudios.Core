@@ -3,10 +3,13 @@ $(document).ready(function() {
 	var password = $("#loginPassword");
 	
 	$("#loginButton").click(function() {
-		$.post("Authorize", {
+		$.getJSON("Authorize", {
 			Email:email.val(),
 			Password: password.val()
 		}, function(data) {
+			if(data.error) {
+				return;
+			}
 			document.location = "../Admin";
 		})
 	});

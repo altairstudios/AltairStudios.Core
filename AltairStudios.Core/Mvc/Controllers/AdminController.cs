@@ -32,9 +32,12 @@ namespace AltairStudios.Core.Mvc.Controllers {
 		[Authorize()]
 		public ActionResult Desktop() {
 			StringBuilder html = new StringBuilder();
-			string path = MvcApplication.Path;
+			string path;
 			string min = "";
-			User user = ((User)Session["admin_user"]);
+			User user;
+
+			user = ((User)Session["admin_user"]);
+			path = MvcApplication.Path;
 			
 			html.Append("<!DOCTYPE html>\n");
 			html.Append("<html lang='es'>");
@@ -79,7 +82,9 @@ namespace AltairStudios.Core.Mvc.Controllers {
 			html.Append("<li class='active'><a href='" + this.getUrl("home") + "'>Home</a></li>");
 			html.Append("<li><a href='" + this.getUrl("get-users") + "'>Usuarios</a></li>");
 			html.Append("</ul>");
+			
 			html.Append("<p class='navbar-text pull-right'>Loggeado como <a href='" + this.getUrl("logout") + "'>" + user.Name + " " + user.Surname + "</a></p>");
+			
 			html.Append("</div><!--/.nav-collapse -->");
 	        html.Append("</div>");
 			html.Append("</div>");
@@ -106,6 +111,7 @@ namespace AltairStudios.Core.Mvc.Controllers {
 			html.Append("<script type='text/javascript' src='" + path + "/Bin/resources/js/admin/renderer.js'></script>");
 			html.Append("<script type='text/javascript' src='" + path + "/Bin/resources/js/admin/core.js'></script>");
 			
+			
 			html.Append("<script type='text/javascript'>");
 			html.Append("var uvOptions = {};");
 			html.Append("(function() {");
@@ -114,6 +120,7 @@ namespace AltairStudios.Core.Mvc.Controllers {
 			html.Append("var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);");
 			html.Append("})();");
 			html.Append("</script>");
+			
 			
 			html.Append("</body>");
 			html.Append("</html>");
@@ -280,11 +287,11 @@ namespace AltairStudios.Core.Mvc.Controllers {
 		/// </summary>
 		[Authorize()]
 		public ActionResult Home() {
-			User user = new User();
-			ModelList<User> users = user.getBy<User>();
+			/*User user = new User();
+			ModelList<User> users = user.getBy<User>();*/
 			
 			AdminJsonResult<ModelList<User>> result = new AdminJsonResult<ModelList<User>>();
-			result.Content = users;
+			//result.Content = users;
 			
 			Link noticeLink = new Link();
 			noticeLink.Name = "¡Visitanos! &raquo;";

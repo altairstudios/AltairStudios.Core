@@ -54,7 +54,7 @@ AltairStudios.Core.Admin.Renderer = function() {
 		}
 		
 		html += "</div><!--/span-->";
-		
+
 		this.content.html(html);
 	}
 	

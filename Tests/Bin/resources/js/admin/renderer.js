@@ -38,9 +38,41 @@ AltairStudios.Core.Admin.Renderer = function() {
 	this.renderHome = function renderHome(data) {
 		var html = "";
 		
-		html += "<div class='hero-unit'><h1>Bienvenido!</h1><p>Te damos la bienvenida a nuestro administrador. Puedes realizar cualquier operación de una forma sencilla desde cualquier parte del menú. Si quieres saber mas, puedes contactar con nosotros mediante soporte o visitar nuestra web.</p><p><a href='http://www.altairstudios.es' class='btn btn-primary btn-large'>Visitanos »</a></p></div>";
-		html += "<div class='row-fluid'><div class='span4'><h2>Heading</h2><p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p><p><a class='btn' href='#'>View details »</a></p></div><!--/span--><div class='span4'><h2>Heading</h2><p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p><p><a class='btn' href='#'>View details »</a></p></div><!--/span--><div class='span4'><h2>Heading</h2><p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p><p><a class='btn' href='#'>View details »</a></p></div><!--/span--></div><!--/row--><div class='row-fluid'><div class='span4'><h2>Heading</h2><p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p><p><a class='btn' href='#'>View details »</a></p></div><!--/span--><div class='span4'><h2>Heading</h2><p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p><p><a class='btn' href='#'>View details »</a></p></div><!--/span--><div class='span4'><h2>Heading</h2><p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p><p><a class='btn' href='#'>View details »</a></p></div><!--/span--></div><!--/row-->";
+		if(data.Sidebar) {
+			html += this.elementRenderSidebar(data.Sidebar);
+			html += "<div class='span9'>";
+		} else {
+			html += "<div>";
+		}
 		
+		if(data.Notice) {
+			html += this.elementRenderNotice(data.Notice)
+		}
+	
+		if(data.Content) {
+			html += "<div class='row-fluid'><div class='span4'><h2>Heading</h2><p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p><p><a class='btn' href='#'>View details »</a></p></div><!--/span--><div class='span4'><h2>Heading</h2><p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p><p><a class='btn' href='#'>View details »</a></p></div><!--/span--><div class='span4'><h2>Heading</h2><p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p><p><a class='btn' href='#'>View details »</a></p></div><!--/span--></div><!--/row--><div class='row-fluid'><div class='span4'><h2>Heading</h2><p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p><p><a class='btn' href='#'>View details »</a></p></div><!--/span--><div class='span4'><h2>Heading</h2><p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p><p><a class='btn' href='#'>View details »</a></p></div><!--/span--><div class='span4'><h2>Heading</h2><p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p><p><a class='btn' href='#'>View details »</a></p></div><!--/span--></div><!--/row-->";
+		}
+		
+		html += "</div><!--/span-->";
+
 		this.content.html(html);
+	}
+	
+	
+	this.elementRenderNotice = function elementRenderNotice(data) {
+		var html = "";
+		
+		html += "<div class='hero-unit'><h1>" + data.Title + "</h1><p>" + data.Text + "</p><p><a href='" + data.Link.Anchor + "' class='btn btn-primary btn-large' title='" + data.Link.Title + "'>" + data.Link.Name + "</a></p></div>";
+		
+		return html;
+	}
+	
+	
+	this.elementRenderSidebar = function renderElementSidebar(data) {
+		var html = "";
+		
+		html += "<div class='span3' id='sidebar'><div class='well sidebar-nav'><ul class='nav nav-list'><li class='nav-header'>Menú</li><li class='active'><a href='#'>Home</a></li><li><a href='#'>Usuarios</a></li></ul></div><!--/.well --></div><!--/span-->";
+		
+		return html;
 	}
 }

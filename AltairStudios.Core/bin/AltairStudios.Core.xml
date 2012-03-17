@@ -4,6 +4,63 @@
         <name>/Users/juan/Sites/altairstudios-core/AltairStudios.Core/bin/AltairStudios.Core</name>
     </assembly>
     <members>
+        <member name="T:AltairStudios.Core.Mvc.MvcApplication">
+            <summary>
+            Mvc application.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Mvc.MvcApplication.path">
+            <summary>
+            The path.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Mvc.MvcApplication.diskPath">
+            <summary>
+            The disk path.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Mvc.MvcApplication.connectionString">
+            <summary>
+            The connection string.
+            </summary>
+        </member>
+        <member name="P:AltairStudios.Core.Mvc.MvcApplication.ConnectionString">
+            <summary>
+            Gets the connection string.
+            </summary>
+            <value>
+            The connection string.
+            </value>
+        </member>
+        <member name="P:AltairStudios.Core.Mvc.MvcApplication.DiskPath">
+            <summary>
+            Gets the disk path.
+            </summary>
+            <value>
+            The disk path.
+            </value>
+        </member>
+        <member name="P:AltairStudios.Core.Mvc.MvcApplication.Path">
+            <summary>
+            Gets the path.
+            </summary>
+            <value>
+            The path.
+            </value>
+        </member>
+        <member name="M:AltairStudios.Core.Mvc.MvcApplication.RegisterRoutes(System.Web.Routing.RouteCollection)">
+            <summary>
+            Registers the routes.
+            </summary>
+            <param name="routes">
+            Routes.
+            </param>
+        </member>
+        <member name="M:AltairStudios.Core.Mvc.MvcApplication.Application_Start">
+            <summary>
+            Application_s the start.
+            </summary>
+        </member>
         <member name="T:AltairStudios.Core.Mvc.Controllers.AdminController">
             <summary>
             Admin controller to load automatic administration page.
