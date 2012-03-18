@@ -22,6 +22,10 @@ namespace AltairStudios.Core.Mvc {
 		/// The connection string.
 		/// </summary>
 		protected static string connectionString = "";
+		/// <summary>
+		/// The configurated.
+		/// </summary>
+		protected static bool configurated = false;
 
 		
 		
@@ -68,6 +72,23 @@ namespace AltairStudios.Core.Mvc {
 		
 		
 		/// <summary>
+		/// Gets or sets a value indicating whether this <see cref="AltairStudios.Core.Mvc.MvcApplication"/> is configurated.
+		/// </summary>
+		/// <value>
+		/// <c>true</c> if configurated; otherwise, <c>false</c>.
+		/// </value>
+		public static bool Configurated {
+			get {
+				return MvcApplication.configurated;
+			}
+			set {
+				configurated = value;
+			}
+		}		
+		
+		
+		
+		/// <summary>
 		/// Registers the routes.
 		/// </summary>
 		/// <param name='routes'>
@@ -88,13 +109,13 @@ namespace AltairStudios.Core.Mvc {
 		protected void Application_Start() {
 			RegisterRoutes(RouteTable.Routes);
 			
-			
 			MvcApplication.diskPath = HttpContext.Current.Server.MapPath("~");
 			if(System.Web.HttpContext.Current.Request.ApplicationPath != "/") {
 				MvcApplication.path = System.Web.HttpContext.Current.Request.ApplicationPath;
 			}
 			
 			if(ConfigurationManager.ConnectionStrings["SqlServerConnection"] != null) {
+				MvcApplication.configurated = true;
 				MvcApplication.connectionString = ConfigurationManager.ConnectionStrings["SqlServerConnection"].ConnectionString;
 			}
 		}

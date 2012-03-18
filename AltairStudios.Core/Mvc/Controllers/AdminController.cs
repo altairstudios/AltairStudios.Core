@@ -134,6 +134,10 @@ namespace AltairStudios.Core.Mvc.Controllers {
 		/// Login administration page
 		/// </summary>
 		public ActionResult Login() {
+			if(MvcApplication.Configurated == false) {
+				return RedirectToAction("Install");
+			}
+		
 			StringBuilder html = new StringBuilder();
 			string path = MvcApplication.Path;
 			string min = "";
@@ -194,7 +198,71 @@ namespace AltairStudios.Core.Mvc.Controllers {
 			html.Append("</body>");
 			html.Append("</html>");
 			
-			//return this.View()
+			return Content(html.ToString());
+		}
+		
+		
+		
+		/// <summary>
+		/// Install this instance.
+		/// </summary>
+		public ActionResult Install() {
+			StringBuilder html = new StringBuilder();
+			string path = MvcApplication.Path;
+			string min = "";
+			
+			html.Append("<!DOCTYPE html>\n");
+			html.Append("<html lang='es'>");
+			html.Append("<head>");
+			html.Append("<meta charset='utf-8' />");
+			html.Append("<title>Instalador</title>");
+			html.Append("<meta name='viewport' content='width=device-width, initial-scale=1.0' />");
+			html.Append("<meta name='description' content='AltairStudios.Core - Administration module' />");
+			html.Append("<meta name='author' content='Altair Studios' />");
+			
+			html.Append("<link rel='stylesheet' type='text/css' href='" + path + "/Bin/resources/css/bootstrap" + min + ".css' />");
+			html.Append("<link rel='stylesheet' type='text/css' href='" + path + "/Bin/resources/css/bootstrap-responsive" + min + ".css' />");
+			
+			html.Append("<style type='text/css'>");
+			html.Append("body {");
+			html.Append("padding-top: 60px;");
+			html.Append("padding-bottom: 40px;");
+			html.Append("}");
+			html.Append(".sidebar-nav {");
+			html.Append(" padding: 9px 0;");
+			html.Append("}");
+			html.Append("</style>");
+			
+			html.Append("<!--[if lt IE 9]>");
+			html.Append("<script src='http://html5shim.googlecode.com/svn/trunk/html5.js'></script>");
+			html.Append("<![endif]-->");
+			
+			html.Append("</head>");
+			html.Append("<body>");
+			
+			html.Append("<div class='container-fluid'>");
+			html.Append("<section>");
+			
+			html.Append("<div class='row-fluid'>");
+			html.Append("<div class='span4'>&nbsp;</div><div class='span4'>");
+			html.Append("<form><fieldset><legend>Instalar</legend>");
+			
+			html.Append("<div class='control-group'><label class='control-label' for='loginUser'>Añade la siguiente linea al webconfig:</label><label class='control-label' for='loginUser'>&lt;add name=\"SqlServerConnection\" connectionString=\"Datasource=[server];Database=[database];uid=[user];pwd=[password];Pooling=true;Min Pool Size=0;Max Pool Size=100;\" providerName=\"MySql.Data.MySqlClient\"/&gt;</label></div>");
+			
+			html.Append("</fieldset></form>");
+			
+			html.Append(" </div><div class='span4'>&nbsp;</div>");
+			html.Append("</div>");  
+  
+			html.Append("</section>");
+			html.Append("</div>");
+
+			html.Append("<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery" + min + ".js'></script>");
+			html.Append("<script type='text/javascript' src='" + path + "/Bin/resources/js/bootstrap" + min + ".js'></script>");
+			
+			html.Append("</body>");
+			html.Append("</html>");
+			
 			return Content(html.ToString());
 		}
 		#endregion

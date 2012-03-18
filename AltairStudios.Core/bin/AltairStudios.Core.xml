@@ -53,6 +53,11 @@
             The connection string.
             </summary>
         </member>
+        <member name="F:AltairStudios.Core.Mvc.MvcApplication.configurated">
+            <summary>
+            The configurated.
+            </summary>
+        </member>
         <member name="P:AltairStudios.Core.Mvc.MvcApplication.ConnectionString">
             <summary>
             Gets the connection string.
@@ -75,6 +80,14 @@
             </summary>
             <value>
             The path.
+            </value>
+        </member>
+        <member name="P:AltairStudios.Core.Mvc.MvcApplication.Configurated">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:AltairStudios.Core.Mvc.MvcApplication" /> is configurated.
+            </summary>
+            <value>
+                <c>true</c> if configurated; otherwise, <c>false</c>.
             </value>
         </member>
         <member name="M:AltairStudios.Core.Mvc.MvcApplication.RegisterRoutes(System.Web.Routing.RouteCollection)">
@@ -267,6 +280,11 @@
         <member name="M:AltairStudios.Core.Mvc.Controllers.AdminController.Login">
             <summary>
             Login administration page
+            </summary>
+        </member>
+        <member name="M:AltairStudios.Core.Mvc.Controllers.AdminController.Install">
+            <summary>
+            Install this instance.
             </summary>
         </member>
         <member name="M:AltairStudios.Core.Mvc.Controllers.AdminController.Authorize(AltairStudios.Core.Orm.Models.User)">
