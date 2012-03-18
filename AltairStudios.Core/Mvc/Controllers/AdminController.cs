@@ -207,6 +207,7 @@ namespace AltairStudios.Core.Mvc.Controllers {
 		/// Install this instance.
 		/// </summary>
 		public ActionResult Install() {
+			MvcApplication.loadConfiguration();
 			StringBuilder html = new StringBuilder();
 			string path = MvcApplication.Path;
 			string min = "";
@@ -247,7 +248,7 @@ namespace AltairStudios.Core.Mvc.Controllers {
 			html.Append("<div class='span4'>&nbsp;</div><div class='span4'>");
 			html.Append("<form><fieldset><legend>Instalar</legend>");
 			
-			html.Append("<div class='control-group'><label class='control-label' for='loginUser'>Añade la siguiente linea al webconfig:</label><label class='control-label' for='loginUser'>&lt;add name=\"SqlServerConnection\" connectionString=\"Datasource=[server];Database=[database];uid=[user];pwd=[password];Pooling=true;Min Pool Size=0;Max Pool Size=100;\" providerName=\"MySql.Data.MySqlClient\"/&gt;</label></div>");
+			html.Append("<div class='control-group'><label class='control-label' for='loginUser'>Añade la siguiente linea al webconfig:</label><label class='control-label' for='loginUser'>&lt;connectionStrings&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;add name=\"SqlServerConnection\" connectionString=\"Datasource=[server];Database=[database];uid=[user];pwd=[password];Pooling=true;Min Pool Size=0;Max Pool Size=100;\" providerName=\"MySql.Data.MySqlClient\"/&gt;<br/>&lt;/connectionStrings&gt;</label></div>");
 			
 			html.Append("</fieldset></form>");
 			

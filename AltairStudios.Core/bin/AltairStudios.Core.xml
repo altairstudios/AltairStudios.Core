@@ -103,6 +103,11 @@
             Application_s the start.
             </summary>
         </member>
+        <member name="M:AltairStudios.Core.Mvc.MvcApplication.loadConfiguration">
+            <summary>
+            Loads the configuration.
+            </summary>
+        </member>
         <member name="T:AltairStudios.Core.Orm.ConnectionFactory">
             <summary>
             Connection factory.

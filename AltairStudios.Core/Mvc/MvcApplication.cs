@@ -119,5 +119,17 @@ namespace AltairStudios.Core.Mvc {
 				MvcApplication.connectionString = ConfigurationManager.ConnectionStrings["SqlServerConnection"].ConnectionString;
 			}
 		}
+		
+		
+		
+		/// <summary>
+		/// Loads the configuration.
+		/// </summary>
+		public static void loadConfiguration() {
+			if(ConfigurationManager.ConnectionStrings["SqlServerConnection"] != null) {
+				MvcApplication.configurated = true;
+				MvcApplication.connectionString = ConfigurationManager.ConnectionStrings["SqlServerConnection"].ConnectionString;
+			}
+		}
 	}
 }
