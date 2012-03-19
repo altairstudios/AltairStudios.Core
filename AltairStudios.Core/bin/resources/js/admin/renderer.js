@@ -35,6 +35,34 @@ AltairStudios.Core.Admin.Renderer = function() {
 	}
 	
 	
+	
+	this.renderDatabaseViewer = function renderDatabaseViewer(data) {
+		var html = "";
+		var i = 0;
+		var j = 0;
+		var keys = coreProcess.getKeys(data.Content[0]);
+		
+		html += "<h2>" + data.extraParams[1] + "</h2>";
+		html += "<table class='table table-bordered table-striped'>";
+		html += "<tr>";
+		for(i = 0; i < keys.length; i++) {
+			html += "<th>" + keys[i] + "</th>";
+		}
+		html += "</tr>";
+		
+		for(i = 0; i < data.Content.length; i++) {
+			html += "<tr>";
+			for(j = 0; j < keys.length; j++) {
+				html += "<td>" + data.Content[i][keys[j]] + "</td>";
+			}
+			html += "</tr>";
+		}
+		html += "</table>";
+		
+		this.content.html(html);
+	}
+	
+	
 	this.renderHome = function renderHome(data) {
 		var html = "";
 		

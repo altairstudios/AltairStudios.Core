@@ -34,11 +34,22 @@ AltairStudios.Core.Admin.Process = function() {
 				document.location = path + "/Admin/Logout";
 			} else {
 				$.getJSON(path + "/Admin/" + section, function(data) {
-					//data = $.parseJSON(data);
-					eval("me.renderer.render" + section + "(data);");
+					var subsections = section.split("/");
+					data.extraParams = subsections;
+					eval("me.renderer.render" + subsections[0] + "(data);");
 				});
 			}
 		}
+	}
+	
+	
+	
+	this.getKeys = function getKeys(obj) {
+		var keys = [];
+		for(var key in obj){
+			keys.push(key);
+		}
+		return keys;
 	}
 		
 	
@@ -51,7 +62,7 @@ AltairStudios.Core.Admin.Process = function() {
 		$(".nav > li", "#navbar").click(function() {
 			$(".nav > li", "#navbar").removeClass("active");
 			$(this).addClass("active");
-		})
+		});
 	}
 }
 

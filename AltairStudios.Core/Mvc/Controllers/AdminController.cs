@@ -87,7 +87,7 @@ namespace AltairStudios.Core.Mvc.Controllers {
 			html.Append("<ul class='dropdown-menu'>");
 			
 			for(int i = 0; i < models.Count; i++) {
-				html.Append("<li><a href='#'>" + models[i].ToString() + "</a></li>");
+				html.Append("<li><a href='" + this.getUrl("database-viewer/" + models[i].ToString()) + "'>" + models[i].ToString() + "</a></li>");
 			}
 			
 			html.Append("</ul>");
@@ -368,11 +368,7 @@ namespace AltairStudios.Core.Mvc.Controllers {
 		/// </summary>
 		[Authorize()]
 		public ActionResult Home() {
-			/*User user = new User();
-			ModelList<User> users = user.getBy<User>();*/
-			
 			AdminJsonResult<ModelList<User>> result = new AdminJsonResult<ModelList<User>>();
-			//result.Content = users;
 			
 			Link noticeLink = new Link();
 			noticeLink.Name = "¡Visitanos! &raquo;";
@@ -380,6 +376,19 @@ namespace AltairStudios.Core.Mvc.Controllers {
 			noticeLink.Anchor = "http://www.altairstudios.es";
 			
 			result.createNotice("¡Bienvenido!", "Te damos la bienvenida a nuestro administrador. Puedes realizar cualquier operación de una forma sencilla desde cualquier parte del menú. Si quieres saber mas, puedes contactar con nosotros mediante soporte o visitar nuestra web.", noticeLink);
+			
+			return Content(result.ToJson());
+		}
+		
+		
+		[Authorize()]
+		public ActionResult DatabaseViewer(string id) {
+			Orm.Model model = Reflection.Instance.getModelFromString(id);
+			Orm.ModelList<Orm.Model> models = model.getBy<Orm.Model>();
+
+			AdminJsonResult<Orm.ModelList<Orm.Model>> result = new AdminJsonResult<Orm.ModelList<Orm.Model>>();
+			
+			result.Content = models;
 			
 			return Content(result.ToJson());
 		}

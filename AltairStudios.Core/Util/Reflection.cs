@@ -79,5 +79,19 @@ namespace AltairStudios.Core.Util {
 			
 			return models;
 		}
+		
+		
+		
+		public Model getModelFromString(string modelName) {
+			ModelList<Model> models = this.getTemplatizeModels();
+			
+			for(int i = 0; i < models.Count; i++) {
+				if(models[i].ToString() == modelName) {
+					return models[i];
+				}
+			}
+			
+			return null;
+		}
 	}
 }
