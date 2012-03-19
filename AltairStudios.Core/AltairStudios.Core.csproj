@@ -58,6 +58,7 @@
     <Compile Include="Orm\Models\Admin\Link.cs" />
     <Compile Include="Mvc\ModelList.cs" />
     <Compile Include="Orm\ModelList.cs" />
+    <Compile Include="Util\Reflection.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
@@ -103,5 +104,10 @@
     <Content Include="resources\js\admin\renderer.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\js\bootstrap-dropdown.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

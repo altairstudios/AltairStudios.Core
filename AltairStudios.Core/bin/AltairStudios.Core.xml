@@ -267,6 +267,78 @@
                 <c>true</c> if templatize; otherwise, <c>false</c>.
             </value>
         </member>
+        <member name="T:AltairStudios.Core.Util.StringConverter">
+            <summary>
+            String converter.
+            </summary>
+        </member>
+        <member name="M:AltairStudios.Core.Util.StringConverter.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:AltairStudios.Core.Util.StringConverter" /> class.
+            </summary>
+        </member>
+        <member name="M:AltairStudios.Core.Util.StringConverter.convert(System.Object,System.Type)">
+            <summary>
+            Convert the specified val and type.
+            </summary>
+            <param name="val">
+            Value.
+            </param>
+            <param name="type">
+            Type.
+            </param>
+        </member>
+        <member name="M:AltairStudios.Core.Util.StringConverter.convert(System.Object)">
+            <summary>
+            Convert the specified val.
+            </summary>
+            <param name="val">
+            Value.
+            </param>
+        </member>
+        <member name="M:AltairStudios.Core.Util.StringConverter.convert(System.Boolean)">
+            <summary>
+            Convert the specified val.
+            </summary>
+            <param name="val">
+            Value.
+            </param>
+        </member>
+        <member name="M:AltairStudios.Core.Util.StringConverter.convert(System.Int32)">
+            <summary>
+            Convert the specified val.
+            </summary>
+            <param name="val">
+            Value.
+            </param>
+        </member>
+        <member name="M:AltairStudios.Core.Util.StringConverter.convert(System.Double)">
+            <summary>
+            Convert the specified val.
+            </summary>
+            <param name="val">
+            Value.
+            </param>
+        </member>
+        <member name="M:AltairStudios.Core.Util.StringConverter.convert(System.String)">
+            <summary>
+            Convert the specified val.
+            </summary>
+            <param name="val">
+            Value.
+            </param>
+        </member>
+        <member name="M:AltairStudios.Core.Util.StringConverter.cast``1(System.Object)">
+            <summary>
+            Cast the specified o.
+            </summary>
+            <param name="o">
+            O.
+            </param>
+            <typeparam name="T">
+            The 1st type parameter.
+            </typeparam>
+        </member>
         <member name="T:AltairStudios.Core.Mvc.Controllers.AdminController">
             <summary>
             Admin controller to load automatic administration page.
@@ -683,6 +755,45 @@
             <summary>
             Model list.
             </summary>
+        </member>
+        <member name="T:AltairStudios.Core.Util.Reflection">
+            <summary>
+            Reflection.
+            </summary>
+        </member>
+        <member name="M:AltairStudios.Core.Util.Reflection.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:AltairStudios.Core.Util.Reflection" /> class.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Util.Reflection.instance">
+            <summary>
+            The instance.
+            </summary>
+        </member>
+        <member name="P:AltairStudios.Core.Util.Reflection.Instance">
+            <summary>
+            Gets the instance.
+            </summary>
+            <value>
+            The instance.
+            </value>
+        </member>
+        <member name="M:AltairStudios.Core.Util.Reflection.getAssemblies">
+            <summary>
+            Gets the assemblies.
+            </summary>
+            <returns>
+            The assemblies.
+            </returns>
+        </member>
+        <member name="M:AltairStudios.Core.Util.Reflection.getTemplatizeModels">
+            <summary>
+            Gets the templatize models.
+            </summary>
+            <returns>
+            The templatize models.
+            </returns>
         </member>
     </members>
 </doc>

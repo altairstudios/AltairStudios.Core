@@ -1,13 +1,14 @@
 using System;
-//using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using AltairStudios.Core.Orm;
 using AltairStudios.Core.Orm.Models;
 using AltairStudios.Core.Orm.Models.Admin;
+using AltairStudios.Core.Util;
 
 
 namespace AltairStudios.Core.Mvc.Controllers {
@@ -35,6 +36,7 @@ namespace AltairStudios.Core.Mvc.Controllers {
 			string path;
 			string min = "";
 			User user;
+			ModelList<Orm.Model> models = Reflection.Instance.getTemplatizeModels();
 
 			user = ((User)Session["admin_user"]);
 			path = MvcApplication.Path;
@@ -81,6 +83,15 @@ namespace AltairStudios.Core.Mvc.Controllers {
 			html.Append("<ul class='nav'>");
 			html.Append("<li class='active'><a href='" + this.getUrl("home") + "'>Home</a></li>");
 			html.Append("<li><a href='" + this.getUrl("get-users") + "'>Usuarios</a></li>");
+			html.Append("<li class='dropdown' id='menuDatabase'><a class='dropdown-toggle' data-toggle='dropdown' href='#menuDatabase'>Database<strong class='caret'></strong></a>");
+			html.Append("<ul class='dropdown-menu'>");
+			
+			for(int i = 0; i < models.Count; i++) {
+				html.Append("<li><a href='#'>" + models[i].ToString() + "</a></li>");
+			}
+			
+			html.Append("</ul>");
+			html.Append("</li>");
 			html.Append("</ul>");
 			
 			html.Append("<p class='navbar-text pull-right'>Loggeado como <a href='" + this.getUrl("logout") + "'>" + user.Name + " " + user.Surname + "</a></p>");
@@ -107,6 +118,7 @@ namespace AltairStudios.Core.Mvc.Controllers {
 			
 			html.Append("<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery" + min + ".js'></script>");
 			html.Append("<script type='text/javascript' src='" + path + "/Bin/resources/js/bootstrap" + min + ".js'></script>");
+			html.Append("<script type='text/javascript' src='" + path + "/Bin/resources/js/bootstrap-dropdown.js'></script>");
 			
 			html.Append("<script type='text/javascript' src='" + path + "/Bin/resources/js/admin/renderer.js'></script>");
 			html.Append("<script type='text/javascript' src='" + path + "/Bin/resources/js/admin/core.js'></script>");

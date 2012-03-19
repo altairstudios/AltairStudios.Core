@@ -15,6 +15,11 @@ AltairStudios.Core.Admin.Process = function() {
 			}
 			
 			var splits = currentAnchor.split("#!/");
+			
+			if(splits.length < 2) {
+				return;
+			}
+			
 			var section = splits[1];
 			var i = 0;
 			
@@ -42,6 +47,11 @@ AltairStudios.Core.Admin.Process = function() {
 		this.renderer = new AltairStudios.Core.Admin.Renderer();
 		this.renderer.configure();
 		setInterval("coreProcess.checkAnchor()", 300);
+		$('.dropdown-toggle').dropdown();
+		$(".nav > li", "#navbar").click(function() {
+			$(".nav > li", "#navbar").removeClass("active");
+			$(this).addClass("active");
+		})
 	}
 }
 
