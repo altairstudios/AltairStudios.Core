@@ -1,4 +1,5 @@
 using System;
+using System.Configuration;
 using System.IO;
 using System.Reflection;
 using System.Text;
@@ -123,15 +124,16 @@ namespace AltairStudios.Core.Mvc.Controllers {
 			html.Append("<script type='text/javascript' src='" + path + "/Bin/resources/js/admin/renderer.js'></script>");
 			html.Append("<script type='text/javascript' src='" + path + "/Bin/resources/js/admin/core.js'></script>");
 			
-			
-			html.Append("<script type='text/javascript'>");
-			html.Append("var uvOptions = {};");
-			html.Append("(function() {");
-			html.Append("var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;");
-			html.Append("uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/G4Ce3YuUFULbfnRobWXGQ.js';");
-			html.Append("var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);");
-			html.Append("})();");
-			html.Append("</script>");
+			if(ConfigurationManager.AppSettings["altairstudios.core.feedback.disable"] != "true") {
+				html.Append("<script type='text/javascript'>");
+				html.Append("var uvOptions = {};");
+				html.Append("(function() {");
+				html.Append("var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;");
+				html.Append("uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/G4Ce3YuUFULbfnRobWXGQ.js';");
+				html.Append("var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);");
+				html.Append("})();");
+				html.Append("</script>");
+			}
 			
 			
 			html.Append("</body>");
