@@ -175,6 +175,12 @@ namespace AltairStudios.Core.Orm {
 		
 		
 		
+		public string query(string sql) {
+			return sql;
+		}
+		
+		
+		
 		/// <summary>
 		///  Tos the json. 
 		/// </summary>
