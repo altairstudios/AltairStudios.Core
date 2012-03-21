@@ -116,6 +116,65 @@ namespace AltairStudios.Core.Orm {
 		
 		
 		
+		public string createTable() {
+			Type type = this.GetType();
+			PropertyInfo[] properties = this.GetType().GetProperties();
+			StringBuilder sql = new StringBuilder();
+			ModelList<PropertyInfo> parameters = new ModelList<PropertyInfo>();
+			AltairStudios.Core.Mvc.ModelList<string> fields = this.getFields(properties);
+			
+			sql.Append("CREATE TABLE IF NOT EXISTS `" + type.Name + "` (");
+			
+			for(int i = 0; i < properties.Length; i++) {
+				string sqlType = "varchar(255)";
+				
+				switch(properties[i].PropertyType.ToString()) {
+					case "System.Int32": sqlType = "int(11)"; break;
+				}
+				
+				sql.Append("`" + properties[i].Name + "` " + sqlType + " NOT NULL,");
+			}
+			
+			//sql.Append(" PRIMARY KEY (`" + properties[0].Name + "`) ");
+			sql.Append(") ENGINE=InnoDB DEFAULT CHARSET=utf8");
+			
+			return sql.ToString();
+			
+			/*sql.Append("1 = 1");
+			
+			MySqlCommand command = ConnectionFactory.createCommand();
+			command.CommandText = sql.ToString();
+			
+			for(int i = 0; i < parameters.Count; i++) {
+				command.Parameters.Add(parameters[i].Name, ConnectionFactory.resolveType(properties[i].PropertyType)).Value = parameters[i].GetValue(this, null);
+			}
+			
+			MySqlDataReader reader = command.ExecuteReader();
+			ModelList<T> models = new ModelList<T>();
+			ConstructorInfo constructor = type.GetConstructor(new Type[0]);
+			int counter = 0;
+			
+			while(reader.Read()) {
+				object instance = constructor.Invoke(new Object[0]);
+				
+				counter = 0;
+				for(int i = 0; i < properties.Length; i++) {	
+					TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
+					if(attributes.Length > 0 && attributes[0].Templatize) {
+						type.GetProperty(properties[i].Name).SetValue(instance, reader[counter], null);
+						counter++;
+					}
+				}
+				
+				models.Add(this.cast<T>(instance));
+			}
+			
+			reader.Close();
+			command.Connection.Close();*/
+		}
+		
+		
+		
 		/// <summary>
 		///  Tos the json. 
 		/// </summary>

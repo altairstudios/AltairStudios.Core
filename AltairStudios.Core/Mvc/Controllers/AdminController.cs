@@ -225,6 +225,7 @@ namespace AltairStudios.Core.Mvc.Controllers {
 			StringBuilder html = new StringBuilder();
 			string path = MvcApplication.Path;
 			string min = "";
+			ModelList<Orm.Model> models = Reflection.Instance.getTemplatizeModels();
 			
 			html.Append("<!DOCTYPE html>\n");
 			html.Append("<html lang='es'>");
@@ -266,7 +267,14 @@ namespace AltairStudios.Core.Mvc.Controllers {
 			
 			html.Append("</fieldset></form>");
 			
-			html.Append(" </div><div class='span4'>&nbsp;</div>");
+			
+			html.Append(" </div><div class='span4'>");
+			for(int i = 0; i < models.Count; i++) {
+				html.Append("<code>" + models[i].createTable() + "</code>");
+			}
+			html.Append("</div>");
+			
+			
 			html.Append("</div>");  
   
 			html.Append("</section>");
