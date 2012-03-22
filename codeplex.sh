@@ -1,37 +1,40 @@
 #!/bin/bash
-rm ./*.zip
+mkdir build
+cd build
 
-mkdir -p tmp/Application
-cp -r AltairStudios.Core/bin tmp/Application
-zip -r AltairStudios.Core.Application.zip tmp/Application
-rm -rf tmp/Application
+echo "----------------------------- APLICATION -----------------------------" 
+mkdir -p Application
+cp -r ../AltairStudios.Core/bin Application
+zip -r AltairStudios.Core.Application.zip Application
+rm -rf Application
 
-mkdir -p tmp/Source/AltairStudios.Core
-cp -r AltairStudios.Core tmp/Source/AltairStudios.Core
-cp AltairStudios.Core.Source.sln tmp/Source
-zip -r AltairStudios.Core.Source.zip tmp/Source
-rm -rf tmp/Source
-
-
-mkdir -p tmp/Tests/AltairStudios.Core
-cp -r Tests tmp/Tests/AltairStudios.Core
-cp AltairStudios.Core.Tests.sln tmp/Tests
-zip -r AltairStudios.Core.Tests.zip tmp/Tests
-rm -rf tmp/Tests
+echo "----------------------------- SOURCE -----------------------------"
+mkdir -p Source/AltairStudios.Core
+cp -r ../AltairStudios.Core Source/AltairStudios.Core
+cp ../AltairStudios.Core.Source.sln Source
+zip -r AltairStudios.Core.Source.zip Source
+rm -rf Source
 
 
-mkdir -p tmp/Doc
-cp AltairStudios.Core/bin/AltairStudios.Core.xml tmp/Doc
-zip -r AltairStudios.Core.Doc.zip tmp/Doc
-rm -rf tmp/Doc
+echo "----------------------------- TESTS -----------------------------"
+mkdir -p Tests/AltairStudios.Core
+cp -r ../Tests Tests/AltairStudios.Core
+cp ../AltairStudios.Core.Tests.sln Tests
+zip -r AltairStudios.Core.Tests.zip Tests
+rm -rf Tests
 
 
-mkdir -p tmp/Release
-cp -r AltairStudios.Core tmp/Release
-cp -r Tests tmp/Release tmp/Release
-cp AltairStudios.Core.sln tmp/Release
-zip -r AltairStudios.Core.zip tmp/Release
-rm -rf tmp/Release
+echo "----------------------------- DOC -----------------------------" 
+mkdir -p Doc
+cp ../AltairStudios.Core/bin/AltairStudios.Core.xml Doc
+zip -r AltairStudios.Core.Doc.zip Doc
+rm -rf Doc
 
 
-rm -rf tmp
+echo "----------------------------- RELEASE -----------------------------"
+mkdir -p Release
+cp -r ../AltairStudios.Core Release
+cp -r ../Tests Release
+cp ../AltairStudios.Core.sln Release
+zip -r AltairStudios.Core.zip Release
+rm -rf Release
