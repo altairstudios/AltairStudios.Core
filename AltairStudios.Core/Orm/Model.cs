@@ -110,18 +110,22 @@ namespace AltairStudios.Core.Orm {
 				command.Parameters.Add(parameters[i].Name, ConnectionFactory.resolveType(properties[i].PropertyType)).Value = parameters[i].GetValue(this, null);
 			}
 			
-			//MySqlDataReader reader = command.ExecuteReader();
 			return sql.ToString();
 		}
 		
 		
 		
+		/// <summary>
+		/// Creates the table.
+		/// </summary>
+		/// <returns>
+		/// The table.
+		/// </returns>
 		public string createTable() {
 			Type type = this.GetType();
 			PropertyInfo[] properties = this.GetType().GetProperties();
 			StringBuilder sql = new StringBuilder();
-			ModelList<PropertyInfo> parameters = new ModelList<PropertyInfo>();
-			AltairStudios.Core.Mvc.ModelList<string> fields = this.getFields(properties);
+			ModelList<string> sqlFields = new ModelList<string>();
 			
 			sql.Append("CREATE TABLE IF NOT EXISTS `" + type.Name + "` (");
 			
@@ -132,49 +136,23 @@ namespace AltairStudios.Core.Orm {
 					case "System.Int32": sqlType = "int(11)"; break;
 				}
 				
-				sql.Append("`" + properties[i].Name + "` " + sqlType + " NOT NULL,");
+				sqlFields.Add("`" + properties[i].Name + "` " + sqlType + " NOT NULL");
 			}
 			
-			//sql.Append(" PRIMARY KEY (`" + properties[0].Name + "`) ");
+			sql.Append(string.Join(",", sqlFields.ToArray()));
 			sql.Append(") ENGINE=InnoDB DEFAULT CHARSET=utf8");
 			
 			return sql.ToString();
-			
-			/*sql.Append("1 = 1");
-			
-			MySqlCommand command = ConnectionFactory.createCommand();
-			command.CommandText = sql.ToString();
-			
-			for(int i = 0; i < parameters.Count; i++) {
-				command.Parameters.Add(parameters[i].Name, ConnectionFactory.resolveType(properties[i].PropertyType)).Value = parameters[i].GetValue(this, null);
-			}
-			
-			MySqlDataReader reader = command.ExecuteReader();
-			ModelList<T> models = new ModelList<T>();
-			ConstructorInfo constructor = type.GetConstructor(new Type[0]);
-			int counter = 0;
-			
-			while(reader.Read()) {
-				object instance = constructor.Invoke(new Object[0]);
-				
-				counter = 0;
-				for(int i = 0; i < properties.Length; i++) {	
-					TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
-					if(attributes.Length > 0 && attributes[0].Templatize) {
-						type.GetProperty(properties[i].Name).SetValue(instance, reader[counter], null);
-						counter++;
-					}
-				}
-				
-				models.Add(this.cast<T>(instance));
-			}
-			
-			reader.Close();
-			command.Connection.Close();*/
 		}
 		
 		
 		
+		/// <summary>
+		/// Query the specified sql.
+		/// </summary>
+		/// <param name='sql'>
+		/// Sql.
+		/// </param>
 		public string query(string sql) {
 			return sql;
 		}
