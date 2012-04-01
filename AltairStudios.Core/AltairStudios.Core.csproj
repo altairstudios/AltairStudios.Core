@@ -59,6 +59,7 @@
     <Compile Include="Mvc\ModelList.cs" />
     <Compile Include="Orm\ModelList.cs" />
     <Compile Include="Util\Reflection.cs" />
+    <Compile Include="Mvc\Controllers\ResourceController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
@@ -71,43 +72,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="resources\css\bootstrap-responsive.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\css\bootstrap-responsive.min.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\css\bootstrap.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\css\bootstrap.min.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\img\glyphicons-halflings-white.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\img\glyphicons-halflings.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\js\bootstrap.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\js\bootstrap.min.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\js\login.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\js\admin\core.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\js\admin\renderer.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="resources\js\bootstrap-dropdown.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <EmbeddedResource Include="resources\js\bootstrap.min.js" />
+    <EmbeddedResource Include="resources\css\bootstrap-responsive.css" />
+    <EmbeddedResource Include="resources\css\bootstrap-responsive.min.css" />
+    <EmbeddedResource Include="resources\css\bootstrap.css" />
+    <EmbeddedResource Include="resources\css\bootstrap.min.css" />
+    <EmbeddedResource Include="resources\img\glyphicons-halflings-white.png" />
+    <EmbeddedResource Include="resources\img\glyphicons-halflings.png" />
+    <EmbeddedResource Include="resources\js\bootstrap.js" />
+    <EmbeddedResource Include="resources\js\login.js" />
+    <EmbeddedResource Include="resources\js\bootstrap-dropdown.js" />
+    <EmbeddedResource Include="resources\js\admin\core.js" />
+    <EmbeddedResource Include="resources\js\admin\renderer.js" />
   </ItemGroup>
 </Project>

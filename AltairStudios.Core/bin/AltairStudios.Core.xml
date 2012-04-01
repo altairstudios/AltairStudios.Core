@@ -795,5 +795,72 @@
             The templatize models.
             </returns>
         </member>
+        <member name="T:AltairStudios.Core.Mvc.Controllers.ResourceController">
+            <summary>
+            Resource controller.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Mvc.Controllers.ResourceController.creationTime">
+            <summary>
+            The creation time.
+            </summary>
+        </member>
+        <member name="M:AltairStudios.Core.Mvc.Controllers.ResourceController.Index">
+            <summary>
+            Index this instance.
+            </summary>
+        </member>
+        <member name="M:AltairStudios.Core.Mvc.Controllers.ResourceController.load(System.String)">
+            <summary>
+            Load the specified resource.
+            </summary>
+            <param name="resource">
+            Resource.
+            </param>
+            <exception cref="T:System.Web.HttpException">
+            Is thrown when the http exception.
+            </exception>
+        </member>
+        <member name="M:AltairStudios.Core.Mvc.Controllers.ResourceController.resolveContextType(System.String)">
+            <summary>
+            Resolves the type of the context.
+            </summary>
+            <returns>
+            The context type.
+            </returns>
+            <param name="extension">
+            Extension.
+            </param>
+        </member>
+        <member name="M:AltairStudios.Core.Mvc.Controllers.ResourceController.getResourcesCreationTime">
+            <summary>
+            Gets the resources creation time.
+            </summary>
+            <returns>
+            The resources creation time.
+            </returns>
+        </member>
+        <member name="M:AltairStudios.Core.Mvc.Controllers.ResourceController.readStream(System.IO.Stream)">
+            <summary>
+            Reads the stream.
+            </summary>
+            <returns>
+            The stream.
+            </returns>
+            <param name="stream">
+            Stream.
+            </param>
+        </member>
+        <member name="M:AltairStudios.Core.Mvc.Controllers.ResourceController.readResource(System.String,System.String)">
+            <summary>
+            Reads the resource.
+            </summary>
+            <returns>
+            The resource.
+            </returns>
+            <param name="resource">
+            Resource.
+            </param>
+        </member>
     </members>
 </doc>

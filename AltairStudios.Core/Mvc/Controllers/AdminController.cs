@@ -51,8 +51,8 @@ namespace AltairStudios.Core.Mvc.Controllers {
 			html.Append("<meta name='description' content='AltairStudios.Core - Administration' />");
 			html.Append("<meta name='author' content='Altair Studios' />");
 			
-			html.Append("<link rel='stylesheet' type='text/css' href='" + path + "/Bin/resources/css/bootstrap" + min + ".css' />");
-			html.Append("<link rel='stylesheet' type='text/css' href='" + path + "/Bin/resources/css/bootstrap-responsive" + min + ".css' />");
+			html.Append("<link rel='stylesheet' type='text/css' href='" + path + "/Resource/load/AltairStudios.Core.resources.css.bootstrap" + min + ".css' />");
+			html.Append("<link rel='stylesheet' type='text/css' href='" + path + "/Resource/load/AltairStudios.Core.resources.css.bootstrap-responsive" + min + ".css' />");
 			
 			html.Append("<style type='text/css'>");
 			html.Append("body {");
@@ -118,11 +118,11 @@ namespace AltairStudios.Core.Mvc.Controllers {
 			html.Append("<script type='text/javascript'>var coreProcess = null;var AltairStudios = { Core: { Admin: { Plugins: {} } } }; var path = '" + path + "';</script>");
 			
 			html.Append("<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery" + min + ".js'></script>");
-			html.Append("<script type='text/javascript' src='" + path + "/Bin/resources/js/bootstrap" + min + ".js'></script>");
-			html.Append("<script type='text/javascript' src='" + path + "/Bin/resources/js/bootstrap-dropdown.js'></script>");
+			html.Append("<script type='text/javascript' src='" + path + "/Resource/load/AltairStudios.Core.resources.js.bootstrap" + min + ".js'></script>");
+			html.Append("<script type='text/javascript' src='" + path + "/Resource/load/AltairStudios.Core.resources.js.bootstrap-dropdown.js'></script>");
 			
-			html.Append("<script type='text/javascript' src='" + path + "/Bin/resources/js/admin/renderer.js'></script>");
-			html.Append("<script type='text/javascript' src='" + path + "/Bin/resources/js/admin/core.js'></script>");
+			html.Append("<script type='text/javascript' src='" + path + "/Resource/load/AltairStudios.Core.resources.js.admin.renderer.js'></script>");
+			html.Append("<script type='text/javascript' src='" + path + "/Resource/load/AltairStudios.Core.resources.js.admin.core.js'></script>");
 			
 			if(ConfigurationManager.AppSettings["altairstudios.core.feedback.disable"] != "true") {
 				html.Append("<script type='text/javascript'>");
@@ -165,8 +165,8 @@ namespace AltairStudios.Core.Mvc.Controllers {
 			html.Append("<meta name='description' content='AltairStudios.Core - Administration module' />");
 			html.Append("<meta name='author' content='Altair Studios' />");
 			
-			html.Append("<link rel='stylesheet' type='text/css' href='" + path + "/Bin/resources/css/bootstrap" + min + ".css' />");
-			html.Append("<link rel='stylesheet' type='text/css' href='" + path + "/Bin/resources/css/bootstrap-responsive" + min + ".css' />");
+			html.Append("<link rel='stylesheet' type='text/css' href='" + path + "/Resource/load/AltairStudios.Core.resources.css.bootstrap" + min + ".css' />");
+			html.Append("<link rel='stylesheet' type='text/css' href='" + path + "/Resource/load/AltairStudios.Core.resources.css.bootstrap-responsive" + min + ".css' />");
 			
 			html.Append("<style type='text/css'>");
 			html.Append("body {");
@@ -206,8 +206,8 @@ namespace AltairStudios.Core.Mvc.Controllers {
 			html.Append("</div>");
 
 			html.Append("<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery" + min + ".js'></script>");
-			html.Append("<script type='text/javascript' src='" + path + "/Bin/resources/js/bootstrap" + min + ".js'></script>");
-			html.Append("<script type='text/javascript' src='" + path + "/Bin/resources/js/login.js'></script>");
+			html.Append("<script type='text/javascript' src='" + path + "/Resource/load/AltairStudios.Core.resources.js.bootstrap" + min + ".js'></script>");
+			html.Append("<script type='text/javascript' src='" + path + "/Resource/load/AltairStudios.Core.resources.js.login.js'></script>");
 			
 			html.Append("</body>");
 			html.Append("</html>");
@@ -236,8 +236,8 @@ namespace AltairStudios.Core.Mvc.Controllers {
 			html.Append("<meta name='description' content='AltairStudios.Core - Administration module' />");
 			html.Append("<meta name='author' content='Altair Studios' />");
 			
-			html.Append("<link rel='stylesheet' type='text/css' href='" + path + "/Bin/resources/css/bootstrap" + min + ".css' />");
-			html.Append("<link rel='stylesheet' type='text/css' href='" + path + "/Bin/resources/css/bootstrap-responsive" + min + ".css' />");
+			html.Append("<link rel='stylesheet' type='text/css' href='" + path + "/Resource/load/AltairStudios.Core.resources.css.bootstrap" + min + ".css' />");
+			html.Append("<link rel='stylesheet' type='text/css' href='" + path + "/Resource/load/AltairStudios.Core.resources.css.bootstrap-responsive" + min + ".css' />");
 			
 			html.Append("<style type='text/css'>");
 			html.Append("body {");
@@ -281,7 +281,7 @@ namespace AltairStudios.Core.Mvc.Controllers {
 			html.Append("</div>");
 
 			html.Append("<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery" + min + ".js'></script>");
-			html.Append("<script type='text/javascript' src='" + path + "/Bin/resources/js/bootstrap" + min + ".js'></script>");
+			html.Append("<script type='text/javascript' src='" + path + "/Resource/load/AltairStudios.Core.resources.js.bootstrap" + min + ".js'></script>");
 			
 			html.Append("</body>");
 			html.Append("</html>");
