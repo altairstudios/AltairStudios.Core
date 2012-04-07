@@ -91,5 +91,7 @@
     <EmbeddedResource Include="resources\js\admin\core.js" />
     <EmbeddedResource Include="resources\js\admin\renderer.js" />
     <EmbeddedResource Include="Views\Admin\Install.aspx" />
+    <EmbeddedResource Include="Views\Admin\Login.aspx" />
+    <EmbeddedResource Include="Views\Admin\Desktop.aspx" />
   </ItemGroup>
 </Project>
