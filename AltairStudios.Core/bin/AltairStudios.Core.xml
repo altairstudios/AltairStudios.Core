@@ -25,6 +25,22 @@
             Save this instance.
             </summary>
         </member>
+        <member name="M:AltairStudios.Core.Orm.Model.createTable">
+            <summary>
+            Creates the table.
+            </summary>
+            <returns>
+            The table.
+            </returns>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.Model.query(System.String)">
+            <summary>
+            Query the specified sql.
+            </summary>
+            <param name="sql">
+            Sql.
+            </param>
+        </member>
         <member name="M:AltairStudios.Core.Orm.Model.ToJson">
             <summary>
             Tos the json.
@@ -408,6 +424,17 @@
             <summary>
             Get home information.
             </summary>
+        </member>
+        <member name="M:AltairStudios.Core.Mvc.Controllers.AdminController.DatabaseViewer(System.String)">
+            <summary>
+            Databases the viewer.
+            </summary>
+            <returns>
+            The viewer.
+            </returns>
+            <param name="id">
+            Identifier.
+            </param>
         </member>
         <member name="T:AltairStudios.Core.Orm.Models.User">
             <summary>
@@ -860,6 +887,99 @@
             </returns>
             <param name="resource">
             Resource.
+            </param>
+        </member>
+        <member name="T:AltairStudios.Core.Mvc.VirtualProvider.AssemblyVirtualFile">
+            <summary>
+            Assembly virtual file.
+            </summary>
+        </member>
+        <member name="M:AltairStudios.Core.Mvc.VirtualProvider.AssemblyVirtualFile.#ctor(System.String,AltairStudios.Core.Mvc.VirtualProvider.AssemblyPathProvider)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AltairStudios.Core.Mvc.VirtualProvider.AssemblyVirtualFile" /> class.
+            </summary>
+            <param name="virtualPath">
+            Virtual path.
+            </param>
+            <param name="provider">
+            Provider.
+            </param>
+        </member>
+        <member name="F:AltairStudios.Core.Mvc.VirtualProvider.AssemblyVirtualFile.fileExists">
+            <summary>
+            The file exists.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Mvc.VirtualProvider.AssemblyVirtualFile.virtualName">
+            <summary>
+            The name of the virtual.
+            </summary>
+        </member>
+        <member name="P:AltairStudios.Core.Mvc.VirtualProvider.AssemblyVirtualFile.Exists">
+            <summary>
+            Gets a value indicating whether this <see cref="T:AltairStudios.Core.Mvc.VirtualProvider.AssemblyVirtualFile" /> is exists.
+            </summary>
+            <value>
+                <c>true</c> if exists; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:AltairStudios.Core.Mvc.VirtualProvider.AssemblyVirtualFile.Open">
+            <summary>
+            Open this instance.
+            </summary>
+        </member>
+        <member name="T:AltairStudios.Core.Mvc.VirtualProvider.AssemblyPathProvider">
+            <summary>
+            Assembly path provider.
+            </summary>
+        </member>
+        <member name="M:AltairStudios.Core.Mvc.VirtualProvider.AssemblyPathProvider.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:AltairStudios.Core.Mvc.VirtualProvider.AssemblyPathProvider" /> class.
+            </summary>
+        </member>
+        <member name="M:AltairStudios.Core.Mvc.VirtualProvider.AssemblyPathProvider.IsPathVirtual(System.String)">
+            <summary>
+            Determines whether this instance is path virtual the specified virtualPath.
+            </summary>
+            <returns>
+                <c>true</c> if this instance is path virtual the specified virtualPath; otherwise, <c>false</c>.
+            </returns>
+            <param name="virtualPath">
+            If set to <c>true</c> virtual path.
+            </param>
+        </member>
+        <member name="M:AltairStudios.Core.Mvc.VirtualProvider.AssemblyPathProvider.FileExists(System.String)">
+            <summary>
+            Files the exists.
+            </summary>
+            <returns>
+            The exists.
+            </returns>
+            <param name="virtualPath">
+            If set to <c>true</c> virtual path.
+            </param>
+        </member>
+        <member name="M:AltairStudios.Core.Mvc.VirtualProvider.AssemblyPathProvider.OpenFile(System.String)">
+            <summary>
+            Opens the file.
+            </summary>
+            <returns>
+            The file.
+            </returns>
+            <param name="virtualPath">
+            Virtual path.
+            </param>
+        </member>
+        <member name="M:AltairStudios.Core.Mvc.VirtualProvider.AssemblyPathProvider.GetFile(System.String)">
+            <summary>
+            Gets the file.
+            </summary>
+            <returns>
+            The file.
+            </returns>
+            <param name="virtualPath">
+            Virtual path.
             </param>
         </member>
     </members>

@@ -40,6 +40,9 @@
     <Folder Include="Orm\Models\" />
     <Folder Include="resources\js\admin\" />
     <Folder Include="Orm\Models\Admin\" />
+    <Folder Include="Views\" />
+    <Folder Include="Views\Admin\" />
+    <Folder Include="Mvc\VirtualProvider\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Orm\Model.cs" />
@@ -60,6 +63,8 @@
     <Compile Include="Orm\ModelList.cs" />
     <Compile Include="Util\Reflection.cs" />
     <Compile Include="Mvc\Controllers\ResourceController.cs" />
+    <Compile Include="Mvc\VirtualProvider\AssemblyVirtualFile.cs" />
+    <Compile Include="Mvc\VirtualProvider\AssemblyPathProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
@@ -70,6 +75,7 @@
     <Reference Include="MySql.Data, Version=6.4.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d">
       <HintPath>bin\mysql.data.dll</HintPath>
     </Reference>
+    <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="resources\js\bootstrap.min.js" />
@@ -84,5 +90,6 @@
     <EmbeddedResource Include="resources\js\bootstrap-dropdown.js" />
     <EmbeddedResource Include="resources\js\admin\core.js" />
     <EmbeddedResource Include="resources\js\admin\renderer.js" />
+    <EmbeddedResource Include="Views\Admin\Install.aspx" />
   </ItemGroup>
 </Project>
