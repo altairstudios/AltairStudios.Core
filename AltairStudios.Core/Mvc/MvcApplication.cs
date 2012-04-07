@@ -110,6 +110,8 @@ namespace AltairStudios.Core.Mvc {
 		protected void Application_Start() {
 			RegisterRoutes(RouteTable.Routes);
 			
+			System.Web.Hosting.HostingEnvironment.RegisterVirtualPathProvider(new VirtualProvider.AssemblyPathProvider());
+			
 			MvcApplication.diskPath = HttpContext.Current.Server.MapPath("~");
 			if(System.Web.HttpContext.Current.Request.ApplicationPath != "/") {
 				MvcApplication.path = System.Web.HttpContext.Current.Request.ApplicationPath;
