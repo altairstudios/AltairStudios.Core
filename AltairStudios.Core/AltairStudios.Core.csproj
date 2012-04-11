@@ -43,6 +43,7 @@
     <Folder Include="Views\" />
     <Folder Include="Views\Admin\" />
     <Folder Include="Mvc\VirtualProvider\" />
+    <Folder Include="Orm\Providers\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Orm\Model.cs" />
@@ -65,6 +66,9 @@
     <Compile Include="Mvc\Controllers\ResourceController.cs" />
     <Compile Include="Mvc\VirtualProvider\AssemblyVirtualFile.cs" />
     <Compile Include="Mvc\VirtualProvider\AssemblyPathProvider.cs" />
+    <Compile Include="Orm\Providers\MySqlProvider.cs" />
+    <Compile Include="Orm\Providers\SqlServerProvider.cs" />
+    <Compile Include="Orm\Providers\SqlProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />

@@ -20,12 +20,10 @@
             The 1st type parameter.
             </typeparam>
         </member>
-        <member name="M:AltairStudios.Core.Orm.Model.save">
+        <member name="M:AltairStudios.Core.Orm.Model.createTable">
             <summary>
             Save this instance.
             </summary>
-        </member>
-        <member name="M:AltairStudios.Core.Orm.Model.createTable">
             <summary>
             Creates the table.
             </summary>
@@ -981,6 +979,147 @@
             <param name="virtualPath">
             Virtual path.
             </param>
+        </member>
+        <member name="T:AltairStudios.Core.Orm.Providers.SqlProvider">
+            <summary>
+            Sql provider.
+            </summary>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.Providers.SqlProvider.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:AltairStudios.Core.Orm.Providers.SqlProvider" /> class.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Providers.SqlProvider.provider">
+            <summary>
+            The provider.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Providers.SqlProvider.connectionString">
+            <summary>
+            The connection string.
+            </summary>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.Providers.SqlProvider.getProvider">
+            <summary>
+            Gets the provider.
+            </summary>
+            <returns>
+            The provider.
+            </returns>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.Providers.SqlProvider.createConnection">
+            <summary>
+            Creates the connection.
+            </summary>
+            <returns>
+            The connection.
+            </returns>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.Providers.SqlProvider.createCommand">
+            <summary>
+            Creates the command.
+            </summary>
+            <returns>
+            The command.
+            </returns>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.Providers.SqlProvider.createParameter">
+            <summary>
+            Creates the parameter.
+            </summary>
+            <returns>
+            The parameter.
+            </returns>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.Providers.SqlProvider.sqlCreateTable(System.Type)">
+            <summary>
+            Sqls the create table.
+            </summary>
+            <returns>
+            The create table.
+            </returns>
+            <param name="type">
+            Type.
+            </param>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.Providers.SqlProvider.sqlString(AltairStudios.Core.Orm.Model,System.Type,System.Collections.Generic.List{System.String},System.Reflection.PropertyInfo[])">
+            <summary>
+            Sqls the string.
+            </summary>
+            <returns>
+            The string.
+            </returns>
+            <param name="model">
+            Model.
+            </param>
+            <param name="type">
+            Type.
+            </param>
+            <param name="fields">
+            Fields.
+            </param>
+            <param name="properties">
+            Properties.
+            </param>
+        </member>
+        <member name="T:AltairStudios.Core.Orm.Providers.MySqlProvider">
+            <summary>
+            MySql provider.
+            </summary>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.Providers.MySqlProvider.createConnection">
+            <summary>
+            Creates the connection.
+            </summary>
+            <returns>
+            The connection.
+            </returns>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.Providers.MySqlProvider.createCommand">
+            <summary>
+            Creates the command.
+            </summary>
+            <returns>
+            The command.
+            </returns>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.Providers.MySqlProvider.createParameter">
+            <summary>
+            Creates the parameter.
+            </summary>
+            <returns>
+            The parameter.
+            </returns>
+        </member>
+        <member name="T:AltairStudios.Core.Orm.Providers.SqlServerProvider">
+            <summary>
+            SqlServer provider.
+            </summary>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.Providers.SqlServerProvider.createConnection">
+            <summary>
+            Creates the connection.
+            </summary>
+            <returns>
+            The connection.
+            </returns>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.Providers.SqlServerProvider.createCommand">
+            <summary>
+            Creates the command.
+            </summary>
+            <returns>
+            The command.
+            </returns>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.Providers.SqlServerProvider.createParameter">
+            <summary>
+            Creates the parameter.
+            </summary>
+            <returns>
+            The parameter.
+            </returns>
         </member>
     </members>
 </doc>

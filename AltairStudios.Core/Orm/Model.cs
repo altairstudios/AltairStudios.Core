@@ -1,9 +1,11 @@
 using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Reflection;
 using System.Text;
-using MySql.Data.MySqlClient;
 using AltairStudios.Core.Mvc;
 using AltairStudios.Core.Orm.Models;
+using AltairStudios.Core.Orm.Providers;
 using AltairStudios.Core.Util;
 
 
@@ -26,32 +28,29 @@ namespace AltairStudios.Core.Orm {
 			PropertyInfo[] properties = this.GetType().GetProperties();
 			StringBuilder sql = new StringBuilder();
 			ModelList<PropertyInfo> parameters = new ModelList<PropertyInfo>();
-			AltairStudios.Core.Mvc.ModelList<string> fields = this.getFields(properties);
-			
-			sql.Append("SELECT " + string.Join(",", fields.ToArray()) + " FROM " + type.Name + " WHERE ");
+			List<string> fields = this.getFields(properties);
 			
 			for(int i = 0; i < properties.Length; i++) {
 				if(properties[i].GetValue(this, null) != null && properties[i].PropertyType.ToString() == "System.String") {
-					//sql.Append(properties[i].Name + " = '" + properties[i].GetValue(this, null) + "' AND " );
-					
 					TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
 					if(attributes.Length > 0 && attributes[0].Templatize) {
-						sql.Append(properties[i].Name + " = @" + properties[i].Name + " AND " );
 						parameters.Add(properties[i]);
 					}
 				}
 			}
 			
-			sql.Append("1 = 1");
-			
-			MySqlCommand command = ConnectionFactory.createCommand();
-			command.CommandText = sql.ToString();
+			IDbCommand command = ConnectionFactory.createCommand();
+			command.CommandText = SqlProvider.getProvider().sqlString(this, type, fields, properties);
 			
 			for(int i = 0; i < parameters.Count; i++) {
-				command.Parameters.Add(parameters[i].Name, ConnectionFactory.resolveType(properties[i].PropertyType)).Value = parameters[i].GetValue(this, null);
+				IDbDataParameter parameter = SqlProvider.getProvider().createParameter();
+				parameter.ParameterName = parameters[i].Name;
+				parameter.Value = parameters[i].GetValue(this, null);
+				
+				command.Parameters.Add(parameter);
 			}
 			
-			MySqlDataReader reader = command.ExecuteReader();
+			IDataReader reader = command.ExecuteReader();
 			ModelList<T> models = new ModelList<T>();
 			ConstructorInfo constructor = type.GetConstructor(new Type[0]);
 			int counter = 0;
@@ -82,7 +81,7 @@ namespace AltairStudios.Core.Orm {
 		/// <summary>
 		/// Save this instance.
 		/// </summary>
-		public string save() {
+		/*public string save() {
 			Type type = this.GetType();
 			PropertyInfo[] properties = this.GetType().GetProperties();
 			StringBuilder sql = new StringBuilder();
@@ -111,7 +110,7 @@ namespace AltairStudios.Core.Orm {
 			}
 			
 			return sql.ToString();
-		}
+		}*/
 		
 		
 		
@@ -122,27 +121,7 @@ namespace AltairStudios.Core.Orm {
 		/// The table.
 		/// </returns>
 		public string createTable() {
-			Type type = this.GetType();
-			PropertyInfo[] properties = this.GetType().GetProperties();
-			StringBuilder sql = new StringBuilder();
-			ModelList<string> sqlFields = new ModelList<string>();
-			
-			sql.Append("CREATE TABLE IF NOT EXISTS `" + type.Name + "` (");
-			
-			for(int i = 0; i < properties.Length; i++) {
-				string sqlType = "varchar(255)";
-				
-				switch(properties[i].PropertyType.ToString()) {
-					case "System.Int32": sqlType = "int(11)"; break;
-				}
-				
-				sqlFields.Add("`" + properties[i].Name + "` " + sqlType + " NOT NULL");
-			}
-			
-			sql.Append(string.Join(",", sqlFields.ToArray()));
-			sql.Append(") ENGINE=InnoDB DEFAULT CHARSET=utf8");
-			
-			return sql.ToString();
+			return SqlProvider.getProvider().sqlCreateTable(this.GetType());
 		}
 		
 		

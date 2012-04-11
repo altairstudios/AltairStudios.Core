@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 using AltairStudios.Core.Orm;
@@ -20,7 +21,7 @@ namespace AltairStudios.Core.Mvc {
 		/// <param name='properties'>
 		/// Properties.
 		/// </param>
-		protected ModelList<string> getFields(PropertyInfo[] properties) {
+		protected List<string> getFields(PropertyInfo[] properties) {
 			ModelList<string> fields = new ModelList<string>();
 			
 			for(int i = 0; i < properties.Length; i++) {	
