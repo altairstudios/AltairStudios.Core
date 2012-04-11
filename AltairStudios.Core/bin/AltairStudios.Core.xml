@@ -122,12 +122,12 @@
             Loads the configuration.
             </summary>
         </member>
-        <member name="T:AltairStudios.Core.Orm.ConnectionFactory">
+        <member name="T:AltairStudios.Core.Orm.ConnectionFactory2">
             <summary>
             Connection factory.
             </summary>
         </member>
-        <member name="M:AltairStudios.Core.Orm.ConnectionFactory.createConnection">
+        <member name="M:AltairStudios.Core.Orm.ConnectionFactory2.createConnection">
             <summary>
             Creates the connection.
             </summary>
@@ -135,15 +135,13 @@
             The connection.
             </returns>
         </member>
-        <member name="M:AltairStudios.Core.Orm.ConnectionFactory.createCommand">
+        <member name="M:AltairStudios.Core.Orm.ConnectionFactory2.resolveType(System.Type)">
             <summary>
             Creates the command.
             </summary>
             <returns>
             The command.
             </returns>
-        </member>
-        <member name="M:AltairStudios.Core.Orm.ConnectionFactory.resolveType(System.Type)">
             <summary>
             Resolves the type.
             </summary>

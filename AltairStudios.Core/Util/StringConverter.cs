@@ -30,6 +30,7 @@ namespace AltairStudios.Core.Util {
 				case "Int32": converted = this.convert((int)val); break;
 				case "String": converted = "\"" + this.convert((string)val) + "\""; break;
 				case "Double": converted = this.convert((double)val); break;
+				case "Decimal": converted = this.convert((decimal)val); break;
 				case "Boolean": converted = this.convert((bool)val); break;
 				case "Model": converted = "null"; break;
 				default: converted = "\"\""; break;
@@ -87,6 +88,12 @@ namespace AltairStudios.Core.Util {
 		/// Value.
 		/// </param>
 		public string convert(double val) {
+			return val.ToString(CultureInfo.InvariantCulture.NumberFormat);
+		}
+		
+		
+		
+		public string convert(decimal val) {
 			return val.ToString(CultureInfo.InvariantCulture.NumberFormat);
 		}
 		

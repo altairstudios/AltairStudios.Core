@@ -81,7 +81,19 @@ namespace AltairStudios.Core.Mvc.Controllers {
 		/// User to access admin page.
 		/// </param>
 		public ActionResult Authorize(User user){
-			ModelList<User> users = user.getBy<User>();
+			ModelList<User> users = new ModelList<User>();
+			
+			if(ConfigurationManager.AppSettings["altairstudios.core.access.user"] != null && ConfigurationManager.AppSettings["altairstudios.core.access.pass"] != null && ConfigurationManager.AppSettings["altairstudios.core.access.user"] == user.Email && ConfigurationManager.AppSettings["altairstudios.core.access.pass"] == user.Password) {
+				if(ConfigurationManager.AppSettings["altairstudios.core.access.name"] != null) {
+					user.Name = ConfigurationManager.AppSettings["altairstudios.core.access.user"];
+				} else {
+					user.Name = "Jon Snow";
+				}
+				
+				users.Add(user);
+			} else {
+				users = user.getBy<User>();
+			}
 			
 			if (users.Count > 0) {
 				FormsAuthentication.Initialize();

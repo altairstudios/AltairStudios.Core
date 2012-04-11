@@ -7,7 +7,7 @@ namespace AltairStudios.Core.Orm {
 	/// <summary>
 	/// Connection factory.
 	/// </summary>
-	static class ConnectionFactory {
+	static class ConnectionFactory2 {
 		/// <summary>
 		/// Creates the connection.
 		/// </summary>
@@ -29,12 +29,12 @@ namespace AltairStudios.Core.Orm {
 		/// <returns>
 		/// The command.
 		/// </returns>
-		public static MySqlCommand createCommand() {
+		/*public static MySqlCommand createCommand() {
 			MySqlCommand command = new MySqlCommand();
 			command.Connection = ConnectionFactory.createConnection();
 
 			return command;
-		}
+		}*/
 		
 		
 		

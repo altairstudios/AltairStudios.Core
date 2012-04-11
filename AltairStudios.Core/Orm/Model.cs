@@ -39,7 +39,7 @@ namespace AltairStudios.Core.Orm {
 				}
 			}
 			
-			IDbCommand command = ConnectionFactory.createCommand();
+			IDbCommand command = SqlProvider.getProvider().createCommand();
 			command.CommandText = SqlProvider.getProvider().sqlString(this, type, fields, properties);
 			
 			for(int i = 0; i < parameters.Count; i++) {
@@ -62,7 +62,9 @@ namespace AltairStudios.Core.Orm {
 				for(int i = 0; i < properties.Length; i++) {	
 					TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
 					if(attributes.Length > 0 && attributes[0].Templatize) {
-						type.GetProperty(properties[i].Name).SetValue(instance, reader[counter], null);
+						if(reader[counter] != DBNull.Value) {
+							type.GetProperty(properties[i].Name).SetValue(instance, reader[counter], null);
+						}
 						counter++;
 					}
 				}

@@ -71,7 +71,7 @@ namespace AltairStudios.Core.Util {
 			for(int i = 0; i < assemblies.Length; i++) {
 				Type[] types = assemblies[i].GetTypes();
 				for(int j = 0; j < types.Length; j++) {
-					if(types[j].Namespace == "AltairStudios.Core.Orm.Models") {
+					if(types[j].Namespace != null && (types[j].Namespace == "AltairStudios.Core.Orm.Models" || types[j].Namespace.EndsWith(".Model"))) {
 						models.Add(auxModel.cast<Model>(Activator.CreateInstance(types[j])));
 					}
 				}
