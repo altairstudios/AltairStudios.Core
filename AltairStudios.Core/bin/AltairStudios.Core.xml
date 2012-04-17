@@ -978,6 +978,64 @@
             Virtual path.
             </param>
         </member>
+        <member name="T:AltairStudios.Core.Orm.Providers.MySqlProvider">
+            <summary>
+            MySql provider.
+            </summary>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.Providers.MySqlProvider.createConnection">
+            <summary>
+            Creates the connection.
+            </summary>
+            <returns>
+            The connection.
+            </returns>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.Providers.MySqlProvider.createCommand">
+            <summary>
+            Creates the command.
+            </summary>
+            <returns>
+            The command.
+            </returns>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.Providers.MySqlProvider.createParameter">
+            <summary>
+            Creates the parameter.
+            </summary>
+            <returns>
+            The parameter.
+            </returns>
+        </member>
+        <member name="T:AltairStudios.Core.Orm.Providers.SqlServerProvider">
+            <summary>
+            SqlServer provider.
+            </summary>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.Providers.SqlServerProvider.createConnection">
+            <summary>
+            Creates the connection.
+            </summary>
+            <returns>
+            The connection.
+            </returns>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.Providers.SqlServerProvider.createCommand">
+            <summary>
+            Creates the command.
+            </summary>
+            <returns>
+            The command.
+            </returns>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.Providers.SqlServerProvider.createParameter">
+            <summary>
+            Creates the parameter.
+            </summary>
+            <returns>
+            The parameter.
+            </returns>
+        </member>
         <member name="T:AltairStudios.Core.Orm.Providers.SqlProvider">
             <summary>
             Sql provider.
@@ -1060,64 +1118,6 @@
             <param name="properties">
             Properties.
             </param>
-        </member>
-        <member name="T:AltairStudios.Core.Orm.Providers.MySqlProvider">
-            <summary>
-            MySql provider.
-            </summary>
-        </member>
-        <member name="M:AltairStudios.Core.Orm.Providers.MySqlProvider.createConnection">
-            <summary>
-            Creates the connection.
-            </summary>
-            <returns>
-            The connection.
-            </returns>
-        </member>
-        <member name="M:AltairStudios.Core.Orm.Providers.MySqlProvider.createCommand">
-            <summary>
-            Creates the command.
-            </summary>
-            <returns>
-            The command.
-            </returns>
-        </member>
-        <member name="M:AltairStudios.Core.Orm.Providers.MySqlProvider.createParameter">
-            <summary>
-            Creates the parameter.
-            </summary>
-            <returns>
-            The parameter.
-            </returns>
-        </member>
-        <member name="T:AltairStudios.Core.Orm.Providers.SqlServerProvider">
-            <summary>
-            SqlServer provider.
-            </summary>
-        </member>
-        <member name="M:AltairStudios.Core.Orm.Providers.SqlServerProvider.createConnection">
-            <summary>
-            Creates the connection.
-            </summary>
-            <returns>
-            The connection.
-            </returns>
-        </member>
-        <member name="M:AltairStudios.Core.Orm.Providers.SqlServerProvider.createCommand">
-            <summary>
-            Creates the command.
-            </summary>
-            <returns>
-            The command.
-            </returns>
-        </member>
-        <member name="M:AltairStudios.Core.Orm.Providers.SqlServerProvider.createParameter">
-            <summary>
-            Creates the parameter.
-            </summary>
-            <returns>
-            The parameter.
-            </returns>
         </member>
     </members>
 </doc>

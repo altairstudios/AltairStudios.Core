@@ -97,5 +97,6 @@
     <EmbeddedResource Include="Views\Admin\Install.aspx" />
     <EmbeddedResource Include="Views\Admin\Login.aspx" />
     <EmbeddedResource Include="Views\Admin\Desktop.aspx" />
+    <EmbeddedResource Include="resources\js\jquery.js" />
   </ItemGroup>
 </Project>

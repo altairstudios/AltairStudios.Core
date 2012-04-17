@@ -73,7 +73,7 @@
 	
 		<script type="text/javascript">var coreProcess = null;var AltairStudios = { Core: { Admin: { Plugins: {} } } }; var path = "<%=MvcApplication.Path%>";</script>
 
-		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"> </script>
+		<script type="text/javascript" src="<%=MvcApplication.Path%>/Resource/load/AltairStudios.Core.resources.js.jquery.js"> </script>
 		<script type="text/javascript" src="<%=MvcApplication.Path%>/Resource/load/AltairStudios.Core.resources.js.bootstrap.js"> </script>
 		<script type="text/javascript" src="<%=MvcApplication.Path%>/Resource/load/AltairStudios.Core.resources.js.bootstrap-dropdown.js"></script>
 			
