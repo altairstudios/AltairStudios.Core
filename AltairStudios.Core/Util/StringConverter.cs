@@ -1,5 +1,6 @@
 using System;
 using System.Globalization;
+using AltairStudios.Core.Mvc;
 
 
 namespace AltairStudios.Core.Util {
@@ -32,11 +33,24 @@ namespace AltairStudios.Core.Util {
 				case "Double": converted = this.convert((double)val); break;
 				case "Decimal": converted = this.convert((decimal)val); break;
 				case "Boolean": converted = this.convert((bool)val); break;
-				case "Model": converted = "null"; break;
+				case "Model": converted = this.convert((Model)val); break;
+				case "ModelList": converted = this.convert((ModelList<Model>)val); break;
 				default: converted = "\"\""; break;
 			}
 			
 			return converted;
+		}
+		
+		
+		
+		public string convert(Model val) {
+			return val.ToJson();
+		}
+		
+		
+		
+		public string convert<T>(ModelList<T> val) {
+			return val.ToJson();
 		}
 		
 		
