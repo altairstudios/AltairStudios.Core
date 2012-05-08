@@ -94,7 +94,7 @@ namespace AltairStudios.Core.Mvc {
 		/// <param name='routes'>
 		/// Routes.
 		/// </param>
-		public static void RegisterRoutes(RouteCollection routes) {
+		public virtual void RegisterRoutes(RouteCollection routes) {
 			routes.IgnoreRoute ("{resource}.axd/{*pathInfo}");
 
 			routes.MapRoute("Admin", "Admin/{action}", new { controller = "Admin", action = "Index", id = "" });
@@ -108,7 +108,7 @@ namespace AltairStudios.Core.Mvc {
 		/// Application_s the start.
 		/// </summary>
 		protected void Application_Start() {
-			RegisterRoutes(RouteTable.Routes);
+			this.RegisterRoutes(RouteTable.Routes);
 			
 			System.Web.Hosting.HostingEnvironment.RegisterVirtualPathProvider(new VirtualProvider.AssemblyPathProvider());
 			
