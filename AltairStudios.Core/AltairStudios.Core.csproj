@@ -48,7 +48,6 @@
   <ItemGroup>
     <Compile Include="Orm\Model.cs" />
     <Compile Include="Mvc\MvcApplication.cs" />
-    <Compile Include="Orm\ConnectionFactory.cs" />
     <Compile Include="Orm\Templatize.cs" />
     <Compile Include="Mvc\Model.cs" />
     <Compile Include="Mvc\Templatize.cs" />
@@ -69,6 +68,12 @@
     <Compile Include="Orm\Providers\MySqlProvider.cs" />
     <Compile Include="Orm\Providers\SqlServerProvider.cs" />
     <Compile Include="Orm\Providers\SqlProvider.cs" />
+    <Compile Include="Orm\Models\Address.cs" />
+    <Compile Include="Orm\Models\City.cs" />
+    <Compile Include="Orm\Models\Country.cs" />
+    <Compile Include="Orm\Models\Phone.cs" />
+    <Compile Include="Orm\Models\Province.cs" />
+    <Compile Include="Orm\Models\Region.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />

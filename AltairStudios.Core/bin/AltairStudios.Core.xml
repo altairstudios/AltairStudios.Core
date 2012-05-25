@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>/Users/juan/Sites/altairstudios-core/AltairStudios.Core/bin/AltairStudios.Core</name>
+        <name>/home/juan/Sites/altairstudios-core/AltairStudios.Core/bin/AltairStudios.Core</name>
     </assembly>
     <members>
         <member name="T:AltairStudios.Core.Orm.Model">
@@ -121,36 +121,6 @@
             <summary>
             Loads the configuration.
             </summary>
-        </member>
-        <member name="T:AltairStudios.Core.Orm.ConnectionFactory2">
-            <summary>
-            Connection factory.
-            </summary>
-        </member>
-        <member name="M:AltairStudios.Core.Orm.ConnectionFactory2.createConnection">
-            <summary>
-            Creates the connection.
-            </summary>
-            <returns>
-            The connection.
-            </returns>
-        </member>
-        <member name="M:AltairStudios.Core.Orm.ConnectionFactory2.resolveType(System.Type)">
-            <summary>
-            Creates the command.
-            </summary>
-            <returns>
-            The command.
-            </returns>
-            <summary>
-            Resolves the type.
-            </summary>
-            <returns>
-            The type.
-            </returns>
-            <param name="type">
-            Type.
-            </param>
         </member>
         <member name="T:AltairStudios.Core.Orm.TemplatizeAttribute">
             <summary>
@@ -1118,6 +1088,361 @@
             <param name="properties">
             Properties.
             </param>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.Models.Address.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:AltairStudios.Core.Orm.Models.Address" /> class.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.Address.id">
+            <summary>
+            The identifier.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.Address.type">
+            <summary>
+            The type.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.Address.street">
+            <summary>
+            The street.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.Address.number">
+            <summary>
+            The number.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.Address.block">
+            <summary>
+            The block.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.Address.floor">
+            <summary>
+            The floor.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.Address.stair">
+            <summary>
+            The stair.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.Address.zip">
+            <summary>
+            The zip.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.Address.city">
+            <summary>
+            The city.
+            </summary>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.Address.Block">
+            <summary>
+            Gets or sets the block.
+            </summary>
+            <value>
+            The block.
+            </value>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.Address.City">
+            <summary>
+            Gets or sets the city.
+            </summary>
+            <value>
+            The city.
+            </value>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.Address.Floor">
+            <summary>
+            Gets or sets the floor.
+            </summary>
+            <value>
+            The floor.
+            </value>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.Address.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.Address.Number">
+            <summary>
+            Gets or sets the number.
+            </summary>
+            <value>
+            The number.
+            </value>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.Address.Stair">
+            <summary>
+            Gets or sets the stair.
+            </summary>
+            <value>
+            The stair.
+            </value>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.Address.Street">
+            <summary>
+            Gets or sets the street.
+            </summary>
+            <value>
+            The street.
+            </value>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.Address.Type">
+            <summary>
+            Gets or sets the type.
+            </summary>
+            <value>
+            The type.
+            </value>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.Address.Zip">
+            <summary>
+            Gets or sets the zip.
+            </summary>
+            <value>
+            The zip.
+            </value>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.Models.City.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:AltairStudios.Core.Orm.Models.City" /> class.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.City.id">
+            <summary>
+            The identifier.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.City.name">
+            <summary>
+            The name.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.City.province">
+            <summary>
+            The province.
+            </summary>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.City.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.City.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>
+            The name.
+            </value>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.City.Province">
+            <summary>
+            Gets or sets the province.
+            </summary>
+            <value>
+            The province.
+            </value>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.Models.Country.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:AltairStudios.Core.Orm.Models.Country" /> class.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.Country.id">
+            <summary>
+            The identifier.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.Country.code">
+            <summary>
+            The code.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.Country.name">
+            <summary>
+            The name.
+            </summary>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.Country.Code">
+            <summary>
+            Gets or sets the code.
+            </summary>
+            <value>
+            The code.
+            </value>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.Country.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.Country.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>
+            The name.
+            </value>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.Models.Phone.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:AltairStudios.Core.Orm.Models.Phone" /> class.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.Phone.id">
+            <summary>
+            The identifier.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.Phone.prefix">
+            <summary>
+            The prefix.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.Phone.number">
+            <summary>
+            The number.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.Phone.extension">
+            <summary>
+            The extension.
+            </summary>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.Phone.Extension">
+            <summary>
+            Gets or sets the extension.
+            </summary>
+            <value>
+            The extension.
+            </value>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.Phone.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.Phone.Number">
+            <summary>
+            Gets or sets the number.
+            </summary>
+            <value>
+            The number.
+            </value>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.Phone.Prefix">
+            <summary>
+            Gets or sets the prefix.
+            </summary>
+            <value>
+            The prefix.
+            </value>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.Models.Province.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:AltairStudios.Core.Orm.Models.Province" /> class.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.Province.id">
+            <summary>
+            The identifier.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.Province.name">
+            <summary>
+            The name.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.Province.region">
+            <summary>
+            The region.
+            </summary>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.Province.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.Province.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>
+            The name.
+            </value>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.Province.Region">
+            <summary>
+            Gets or sets the region.
+            </summary>
+            <value>
+            The region.
+            </value>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.Models.Region.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:AltairStudios.Core.Orm.Models.Region" /> class.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.Region.id">
+            <summary>
+            The identifier.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.Region.name">
+            <summary>
+            The name.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.Region.country">
+            <summary>
+            The country.
+            </summary>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.Region.Country">
+            <summary>
+            Gets or sets the country.
+            </summary>
+            <value>
+            The country.
+            </value>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.Region.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.Region.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>
+            The name.
+            </value>
         </member>
     </members>
 </doc>
