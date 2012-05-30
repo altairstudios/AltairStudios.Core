@@ -122,36 +122,6 @@
             Loads the configuration.
             </summary>
         </member>
-        <member name="T:AltairStudios.Core.Orm.ConnectionFactory2">
-            <summary>
-            Connection factory.
-            </summary>
-        </member>
-        <member name="M:AltairStudios.Core.Orm.ConnectionFactory2.createConnection">
-            <summary>
-            Creates the connection.
-            </summary>
-            <returns>
-            The connection.
-            </returns>
-        </member>
-        <member name="M:AltairStudios.Core.Orm.ConnectionFactory2.resolveType(System.Type)">
-            <summary>
-            Creates the command.
-            </summary>
-            <returns>
-            The command.
-            </returns>
-            <summary>
-            Resolves the type.
-            </summary>
-            <returns>
-            The type.
-            </returns>
-            <param name="type">
-            Type.
-            </param>
-        </member>
         <member name="T:AltairStudios.Core.Orm.TemplatizeAttribute">
             <summary>
             Templatize attribute.
@@ -1118,6 +1088,105 @@
             <param name="properties">
             Properties.
             </param>
+        </member>
+        <member name="T:AltairStudios.Core.Plugin.iPlugin">
+            <summary>
+            Interface for plugins.
+            </summary>
+        </member>
+        <member name="P:AltairStudios.Core.Plugin.iPlugin.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>
+            The name.
+            </value>
+        </member>
+        <member name="P:AltairStudios.Core.Plugin.iPlugin.Version">
+            <summary>
+            Gets or sets the version.
+            </summary>
+            <value>
+            The version.
+            </value>
+        </member>
+        <member name="P:AltairStudios.Core.Plugin.iPlugin.Description">
+            <summary>
+            Gets or sets the description.
+            </summary>
+            <value>
+            The description.
+            </value>
+        </member>
+        <member name="P:AltairStudios.Core.Plugin.iPlugin.Menu">
+            <summary>
+            Gets or sets the menu.
+            </summary>
+            <value>
+            The menu.
+            </value>
+        </member>
+        <member name="T:AltairStudios.Core.Plugin.PluginBase">
+            <summary>
+            Plugin base.
+            </summary>
+        </member>
+        <member name="M:AltairStudios.Core.Plugin.PluginBase.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:AltairStudios.Core.Plugin.PluginBase" /> class.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Plugin.PluginBase.name">
+            <summary>
+            The name.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Plugin.PluginBase.version">
+            <summary>
+            The version.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Plugin.PluginBase.description">
+            <summary>
+            The description.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Plugin.PluginBase.menu">
+            <summary>
+            The menu.
+            </summary>
+        </member>
+        <member name="P:AltairStudios.Core.Plugin.PluginBase.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>
+            The name.
+            </value>
+        </member>
+        <member name="P:AltairStudios.Core.Plugin.PluginBase.Version">
+            <summary>
+            Gets or sets the version.
+            </summary>
+            <value>
+            The version.
+            </value>
+        </member>
+        <member name="P:AltairStudios.Core.Plugin.PluginBase.Description">
+            <summary>
+            Gets or sets the description.
+            </summary>
+            <value>
+            The description.
+            </value>
+        </member>
+        <member name="P:AltairStudios.Core.Plugin.PluginBase.Menu">
+            <summary>
+            Gets or sets the menu.
+            </summary>
+            <value>
+            The menu.
+            </value>
         </member>
     </members>
 </doc>
