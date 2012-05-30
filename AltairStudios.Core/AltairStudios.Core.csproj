@@ -44,11 +44,11 @@
     <Folder Include="Views\Admin\" />
     <Folder Include="Mvc\VirtualProvider\" />
     <Folder Include="Orm\Providers\" />
+    <Folder Include="Plugin\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Orm\Model.cs" />
     <Compile Include="Mvc\MvcApplication.cs" />
-    <Compile Include="Orm\ConnectionFactory.cs" />
     <Compile Include="Orm\Templatize.cs" />
     <Compile Include="Mvc\Model.cs" />
     <Compile Include="Mvc\Templatize.cs" />
@@ -69,6 +69,8 @@
     <Compile Include="Orm\Providers\MySqlProvider.cs" />
     <Compile Include="Orm\Providers\SqlServerProvider.cs" />
     <Compile Include="Orm\Providers\SqlProvider.cs" />
+    <Compile Include="Plugin\iPlugin.cs" />
+    <Compile Include="Plugin\PluginBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
@@ -98,5 +100,16 @@
     <EmbeddedResource Include="Views\Admin\Login.aspx" />
     <EmbeddedResource Include="Views\Admin\Desktop.aspx" />
     <EmbeddedResource Include="resources\js\jquery.js" />
+    <EmbeddedResource Include="resources\js\bootstrap-alert.js" />
+    <EmbeddedResource Include="resources\js\bootstrap-button.js" />
+    <EmbeddedResource Include="resources\js\bootstrap-carousel.js" />
+    <EmbeddedResource Include="resources\js\bootstrap-collapse.js" />
+    <EmbeddedResource Include="resources\js\bootstrap-modal.js" />
+    <EmbeddedResource Include="resources\js\bootstrap-popover.js" />
+    <EmbeddedResource Include="resources\js\bootstrap-scrollspy.js" />
+    <EmbeddedResource Include="resources\js\bootstrap-tab.js" />
+    <EmbeddedResource Include="resources\js\bootstrap-tooltip.js" />
+    <EmbeddedResource Include="resources\js\bootstrap-transition.js" />
+    <EmbeddedResource Include="resources\js\bootstrap-typeahead.js" />
   </ItemGroup>
 </Project>
