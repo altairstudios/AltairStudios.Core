@@ -7,6 +7,7 @@ namespace AltairStudios.Core.Orm.Models {
 	/// User.
 	/// </summary>
 	public class User : Model {
+		#region Attributes
 		/// <summary>
 		/// The identifier.
 		/// </summary>
@@ -31,9 +32,13 @@ namespace AltairStudios.Core.Orm.Models {
 		/// The surname.
 		/// </summary>
 		protected string surname;
+		#endregion
 		
 		
 		
+		
+		
+		#region Properties
 		/// <summary>
 		/// Gets or sets the name.
 		/// </summary>
@@ -138,13 +143,17 @@ namespace AltairStudios.Core.Orm.Models {
 				password = value;
 			}
 		}
+		#endregion
 		
 		
 		
+		
+		#region Constructors
 		/// <summary>
 		/// Initializes a new instance of the <see cref="AltairStudios.Core.Orm.Models.User"/> class.
 		/// </summary>
 		public User() {
 		}
+		#endregion
 	}
 }
