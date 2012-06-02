@@ -1,6 +1,7 @@
 using System;
 using System.Configuration;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Mvc;
 using System.Web.Routing;
 
@@ -110,11 +111,15 @@ namespace AltairStudios.Core.Mvc {
 		protected void Application_Start() {
 			this.RegisterRoutes(RouteTable.Routes);
 			
+			AuthenticationSection authSection = (AuthenticationSection)WebConfigurationManager.GetSection("system.web/authentication");
+			authSection.Mode = AuthenticationMode.Forms;
+			authSection.Forms.LoginUrl = "~/Authorize/Login";
+			
 			System.Web.Hosting.HostingEnvironment.RegisterVirtualPathProvider(new VirtualProvider.AssemblyPathProvider());
 			
 			MvcApplication.diskPath = HttpContext.Current.Server.MapPath("~");
-			if(System.Web.HttpContext.Current.Request.ApplicationPath != "/") {
-				MvcApplication.path = System.Web.HttpContext.Current.Request.ApplicationPath;
+			if(HttpContext.Current.Request.ApplicationPath != "/") {
+				MvcApplication.path = HttpContext.Current.Request.ApplicationPath;
 			}
 			
 			if(ConfigurationManager.ConnectionStrings["SqlServerConnection"] != null) {

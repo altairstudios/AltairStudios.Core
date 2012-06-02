@@ -1,4 +1,5 @@
 using System;
+using AltairStudios.Core.Orm.Models.Admin;
 
 
 namespace AltairStudios.Core.Plugin {
@@ -39,6 +40,19 @@ namespace AltairStudios.Core.Plugin {
 		/// The description.
 		/// </value>
 		string Description {
+			get;
+			set;
+		}
+		
+		
+		
+		/// <summary>
+		/// Gets or sets the menu.
+		/// </summary>
+		/// <value>
+		/// The menu.
+		/// </value>
+		Menu Menu {
 			get;
 			set;
 		}

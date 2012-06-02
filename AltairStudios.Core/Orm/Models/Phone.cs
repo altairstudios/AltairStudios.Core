@@ -3,7 +3,7 @@ using AltairStudios.Core.Orm;
 
 
 namespace AltairStudios.Core.Orm.Models {
-	public class Phone {
+	public class Phone : Model {
 		#region Attributes
 		/// <summary>
 		/// The identifier.

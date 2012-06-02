@@ -1,6 +1,7 @@
 using System;
 using System.Reflection;
 using AltairStudios.Core.Orm;
+using AltairStudios.Core.Plugin;
 
 
 namespace AltairStudios.Core.Util {
@@ -92,6 +93,25 @@ namespace AltairStudios.Core.Util {
 			}
 			
 			return null;
+		}
+		
+		
+		
+		public ModelList<PluginBase> getCorePlugins() {
+			Assembly[] assemblies = this.getAssemblies();
+			ModelList<PluginBase> plugins = new ModelList<PluginBase>();
+			Model auxModel = new Model();
+			
+			for(int i = 0; i < assemblies.Length; i++) {
+				Type[] types = assemblies[i].GetTypes();
+				for(int j = 0; j < types.Length; j++) {
+					if(types[j].Namespace != null && types[j].Namespace.Contains("Plugin.") && types[j].GetInterface("iPlugin") != null) {
+						plugins.Add(auxModel.cast<PluginBase>(Activator.CreateInstance(types[j])));
+					}
+				}
+			}
+			
+			return plugins;
 		}
 	}
 }

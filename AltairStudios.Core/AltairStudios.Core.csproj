@@ -77,6 +77,7 @@
     <Compile Include="Orm\Models\Phone.cs" />
     <Compile Include="Orm\Models\Province.cs" />
     <Compile Include="Orm\Models\Region.cs" />
+    <Compile Include="Mvc\Controllers\AuthorizeController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />

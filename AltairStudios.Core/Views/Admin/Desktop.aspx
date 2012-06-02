@@ -51,6 +51,19 @@
 								%>
 								</ul>
 							</li>
+							<li class="dropdown" id="menuPlugins">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#menuPlugins">Plugins<strong class="caret"></strong></a>
+								<ul class="dropdown-menu">
+								<%
+									AltairStudios.Core.Orm.ModelList<AltairStudios.Core.Plugin.PluginBase> plugins = (AltairStudios.Core.Orm.ModelList<AltairStudios.Core.Plugin.PluginBase>)ViewData["plugins"];
+									for(int i = 0; i < plugins.Count; i++) {
+								%>
+										<li><a href="<%=MvcApplication.Path%>/Admin/Desktop#!/plugin-config/<%=plugins[i].ToString()%>"><%=plugins[i].ToString()%></a></li>
+								<%
+									}
+								%>
+								</ul>
+							</li>
 						</ul>
 						<%
 							User user = (User)ViewData["user"];

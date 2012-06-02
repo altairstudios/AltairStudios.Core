@@ -35,25 +35,14 @@ namespace AltairStudios.Core.Mvc.Controllers {
 		public ActionResult Desktop() {
 			User user;
 			ModelList<Orm.Model> models = Reflection.Instance.getTemplatizeModels();
+			ModelList<Plugin.PluginBase> plugins = Reflection.Instance.getCorePlugins();
 			user = ((User)Session["admin_user"]);
 			
 			ViewData["models"] = models;
+			ViewData["plugins"] = plugins;
 			ViewData["user"] = user;
 			
 			return View("~/resources/AltairStudios.Core.Views.Admin.Desktop.aspx");
-		}
-		
-		
-		
-		/// <summary>
-		/// Login administration page
-		/// </summary>
-		public ActionResult Login() {
-			if(MvcApplication.Configurated == false) {
-				return RedirectToAction("Install");
-			}
-			
-			return View("~/resources/AltairStudios.Core.Views.Admin.Login.aspx");
 		}
 		
 		
@@ -68,53 +57,6 @@ namespace AltairStudios.Core.Mvc.Controllers {
 			ViewData["models"] = models;
 			
 			return View("~/resources/AltairStudios.Core.Views.Admin.Install.aspx");
-		}
-		#endregion
-		
-		
-		
-		#region Authentification process
-		/// <summary>
-		/// Authorize the specified user.
-		/// </summary>
-		/// <param name='user'>
-		/// User to access admin page.
-		/// </param>
-		public ActionResult Authorize(User user){
-			ModelList<User> users = new ModelList<User>();
-			
-			if(ConfigurationManager.AppSettings["altairstudios.core.access.user"] != null && ConfigurationManager.AppSettings["altairstudios.core.access.pass"] != null && ConfigurationManager.AppSettings["altairstudios.core.access.user"] == user.Email && ConfigurationManager.AppSettings["altairstudios.core.access.pass"] == user.Password) {
-				if(ConfigurationManager.AppSettings["altairstudios.core.access.name"] != null) {
-					user.Name = ConfigurationManager.AppSettings["altairstudios.core.access.user"];
-				} else {
-					user.Name = "Jon Snow";
-				}
-				
-				users.Add(user);
-			} else {
-				users = user.getBy<User>();
-			}
-			
-			if (users.Count > 0) {
-				FormsAuthentication.Initialize();
-				FormsAuthenticationTicket fat = new FormsAuthenticationTicket(user.Email, user.Remember, 30);
-				Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, FormsAuthentication.Encrypt(fat)));
-				Session["admin_user"] = users[0];
-				return Content(users[0].ToJson());
-			} else {
-				return Content("{error:true}");
-			}
-		}
-			
-		
-		
-		/// <summary>
-		/// Logout current user for admin session.
-		/// </summary>
-		[Authorize()]
-		public ActionResult Logout() {
-			FormsAuthentication.SignOut();
-			return RedirectToAction("Login");
 		}
 		#endregion
 		
@@ -202,8 +144,16 @@ namespace AltairStudios.Core.Mvc.Controllers {
 			AdminJsonResult<Orm.ModelList<Orm.Model>> result = new AdminJsonResult<Orm.ModelList<Orm.Model>>();
 			
 			result.Content = models;
-			
 			return Content(result.ToJson());
+		}
+				
+
+
+		[Authorize()]
+		public ActionResult DatabaseUpdateData(string id) {
+			Model model = Reflection.Instance.getModelFromString(id);
+			
+			return Content(model.ToJson());
 		}
 		#endregion
 	}
