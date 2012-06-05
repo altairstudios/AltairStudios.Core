@@ -9,6 +9,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>AltairStudios.Core</RootNamespace>
     <AssemblyName>AltairStudios.Core</AssemblyName>
+    <ReleaseVersion>0.3</ReleaseVersion>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -45,6 +46,11 @@
     <Folder Include="Mvc\VirtualProvider\" />
     <Folder Include="Orm\Providers\" />
     <Folder Include="Plugin\" />
+    <Folder Include="Views\Install\" />
+    <Folder Include="Views\Authorize\" />
+    <Folder Include="I18n\" />
+    <Folder Include="Orm\Models\I18n\" />
+    <Folder Include="resources\locales\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Orm\Model.cs" />
@@ -78,9 +84,11 @@
     <Compile Include="Orm\Models\Province.cs" />
     <Compile Include="Orm\Models\Region.cs" />
     <Compile Include="Mvc\Controllers\AuthorizeController.cs" />
+    <Compile Include="Mvc\Controllers\InstallController.cs" />
+    <Compile Include="I18n\Translate.cs" />
+    <Compile Include="Orm\Models\I18n\TranslateItem.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Configuration" />
@@ -89,6 +97,14 @@
       <HintPath>bin\mysql.data.dll</HintPath>
     </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Web.Mvc">
+      <HintPath>bin\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>bin\Newtonsoft.Json.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="resources\js\bootstrap.min.js" />
@@ -103,8 +119,6 @@
     <EmbeddedResource Include="resources\js\bootstrap-dropdown.js" />
     <EmbeddedResource Include="resources\js\admin\core.js" />
     <EmbeddedResource Include="resources\js\admin\renderer.js" />
-    <EmbeddedResource Include="Views\Admin\Install.aspx" />
-    <EmbeddedResource Include="Views\Admin\Login.aspx" />
     <EmbeddedResource Include="Views\Admin\Desktop.aspx" />
     <EmbeddedResource Include="resources\js\jquery.js" />
     <EmbeddedResource Include="resources\js\bootstrap-alert.js" />
@@ -118,5 +132,10 @@
     <EmbeddedResource Include="resources\js\bootstrap-tooltip.js" />
     <EmbeddedResource Include="resources\js\bootstrap-transition.js" />
     <EmbeddedResource Include="resources\js\bootstrap-typeahead.js" />
+    <EmbeddedResource Include="Views\Authorize\Login.aspx" />
+    <EmbeddedResource Include="Views\Install\Language.aspx" />
+    <EmbeddedResource Include="Views\Install\Install.master" />
+    <EmbeddedResource Include="resources\locales\es-Es.json" />
+    <EmbeddedResource Include="resources\locales\en-EN.json" />
   </ItemGroup>
 </Project>

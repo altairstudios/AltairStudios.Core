@@ -98,6 +98,7 @@ namespace AltairStudios.Core.Mvc {
 		public virtual void RegisterRoutes(RouteCollection routes) {
 			routes.IgnoreRoute ("{resource}.axd/{*pathInfo}");
 
+			routes.MapRoute("Install", "Admin/Install/{action}", new { controller = "Install", action = "Index", id = "" });
 			routes.MapRoute("Admin", "Admin/{action}", new { controller = "Admin", action = "Index", id = "" });
 			routes.MapRoute("Resource", "Resource/{action}/{resource}", new { controller = "Resource", action = "Index", resource = "" });
 			routes.MapRoute("Default", "{controller}/{action}/{id}", new { controller = "Home", action = "Index", id = "" });
@@ -126,6 +127,10 @@ namespace AltairStudios.Core.Mvc {
 				MvcApplication.configurated = true;
 				MvcApplication.connectionString = ConfigurationManager.ConnectionStrings["SqlServerConnection"].ConnectionString;
 			}
+			
+			AltairStudios.Core.I18n.Translate.Instance.clear();
+			AltairStudios.Core.I18n.Translate.Instance.loadFile("AltairStudios.Core.resources.locales.es-Es.json", "es-ES");
+			AltairStudios.Core.I18n.Translate.Instance.loadFile("AltairStudios.Core.resources.locales.en-EN.json", "en-EN");
 		}
 		
 		

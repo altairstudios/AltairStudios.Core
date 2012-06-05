@@ -1,15 +1,14 @@
-<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage" %>
+<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
 <%@ Import Namespace="AltairStudios.Core.Mvc" %>
-<%@ Import Namespace="AltairStudios.Core.Orm" %>
+<%@ Import Namespace="AltairStudios.Core.I18n" %>
 <!DOCTYPE html>
 <html lang='es'>
 	<head>
 		<meta charset='utf-8' />
-		<title>Instalador</title>
+		<title><%=Translate.t("install_title")%></title>
 		<meta name='viewport' content='width=device-width, initial-scale=1.0' />
 		<meta name='description' content='AltairStudios.Core - Administration module' />
 		<meta name='author' content='Altair Studios' />
-		
 		<link rel='stylesheet' type='text/css' href='<%=MvcApplication.Path%>/Resource/load/AltairStudios.Core.resources.css.bootstrap.css' />
 		<link rel='stylesheet' type='text/css' href='<%=MvcApplication.Path%>/Resource/load/AltairStudios.Core.resources.css.bootstrap-responsive.css' />
 		
@@ -29,33 +28,17 @@
 				<div class='row-fluid'>
 					<div class='span4'>&nbsp;</div>
 					<div class='span4'>
-						<form>
-							<fieldset>
-								<legend>Instalar</legend>
-								<div class='control-group'>
-									<label class='control-label' for='loginUser'>Añade la siguiente linea al webconfig:</label>
-									<label class='control-label' for='loginUser'>
-										&lt;connectionStrings&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;add name="SqlServerConnection" connectionString="Datasource=[server];Database=[database];uid=[user];pwd=[password];Pooling=true;Min Pool Size=0;Max Pool Size=100;" providerName="MySql.Data.MySqlClient"/&gt;<br/>&lt;/connectionStrings&gt;
-									</label>
-								</div>
-							</fieldset>
-						</form>
+						<asp:ContentPlaceHolder ID="mainContent" runat="server" />
 					</div>
-				<div class='span4'>
-				<%
-					AltairStudios.Core.Orm.ModelList<AltairStudios.Core.Orm.Model> models = (AltairStudios.Core.Orm.ModelList<AltairStudios.Core.Orm.Model>)ViewData["models"];
-					for(int i = 0; i < models.Count; i++) {
-				%>
-						<code><%=models[i].createTable()%></code>
-				<%
-					}
-				%>
-				</div>
 			</section>
 		</div>
-
 		<script type="text/javascript" src="<%=MvcApplication.Path%>/Resource/load/AltairStudios.Core.resources.js.jquery.js"> </script>
 		<script type='text/javascript' src='<%=MvcApplication.Path%>/Resource/load/AltairStudios.Core.resources.js.bootstrap.js'> </script>
-			
+		
+		<script type="text/javascript">
+			$(document).on("ready", function() {
+				<asp:ContentPlaceHolder ID="scriptContent" runat="server" />
+			});
+		</script>
 	</body>
 </html>

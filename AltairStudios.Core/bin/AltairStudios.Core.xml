@@ -1527,7 +1527,7 @@
         </member>
         <member name="T:AltairStudios.Core.Mvc.Controllers.AuthorizeController">
             <summary>
-            Admin controller to load automatic administration page.
+            Authorize controller.
             </summary>
         </member>
         <member name="M:AltairStudios.Core.Mvc.Controllers.AuthorizeController.Index">
@@ -1551,6 +1551,21 @@
         <member name="M:AltairStudios.Core.Mvc.Controllers.AuthorizeController.Logout">
             <summary>
             Logout current user for admin session.
+            </summary>
+        </member>
+        <member name="T:AltairStudios.Core.Mvc.Controllers.InstallController">
+            <summary>
+            Install controller.
+            </summary>
+        </member>
+        <member name="M:AltairStudios.Core.Mvc.Controllers.InstallController.Index">
+            <summary>
+            Administration page
+            </summary>
+        </member>
+        <member name="M:AltairStudios.Core.Mvc.Controllers.InstallController.Install">
+            <summary>
+            Install this instance.
             </summary>
         </member>
     </members>

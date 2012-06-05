@@ -14,14 +14,13 @@ using AltairStudios.Core.Util;
 
 namespace AltairStudios.Core.Mvc.Controllers {
 	/// <summary>
-	/// Admin controller to load automatic administration page.
+	/// Authorize controller.
 	/// </summary>
 	public class AuthorizeController : Controller {
 		#region Html pages
 		/// <summary>
 		/// Administration page
 		/// </summary>
-		
 		public ActionResult Index() {
 			return RedirectToAction("Login");
 		}
@@ -36,7 +35,7 @@ namespace AltairStudios.Core.Mvc.Controllers {
 				return RedirectToAction("Install");
 			}
 			
-			return View("~/resources/AltairStudios.Core.Views.Admin.Login.aspx");
+			return View("~/resources/AltairStudios.Core.Views.Authorize.Login.aspx");
 		}
 		#endregion
 		
