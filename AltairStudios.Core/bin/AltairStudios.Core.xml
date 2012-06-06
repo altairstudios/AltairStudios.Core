@@ -1563,10 +1563,5 @@
             Administration page
             </summary>
         </member>
-        <member name="M:AltairStudios.Core.Mvc.Controllers.InstallController.Install">
-            <summary>
-            Install this instance.
-            </summary>
-        </member>
     </members>
 </doc>

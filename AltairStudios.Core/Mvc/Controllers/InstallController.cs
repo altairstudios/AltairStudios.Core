@@ -31,22 +31,21 @@ namespace AltairStudios.Core.Mvc.Controllers {
 		public ActionResult Language(string language) {
 			if(!string.IsNullOrEmpty(language)) {
 				Session["language"] = language;
+			} else if(string.IsNullOrEmpty(language) && Session["language"] == null) {
+				Session["language"] = "en";
+				language = "";
 			}
+			
+			ViewData["language"] = language;
+			System.Globalization.CultureInfo cul = System.Globalization.CultureInfo.GetCultureInfo(Session["language"].ToString());
+			ViewData["language_name"] = cul.TextInfo.ToTitleCase(cul.NativeName);
+			
 			return View("~/resources/AltairStudios.Core.Views.Install.Language.aspx");
 		}
 		
 		
-		
-		/// <summary>
-		/// Install this instance.
-		/// </summary>
-		public ActionResult Install() {
-			MvcApplication.loadConfiguration();
-			ModelList<Orm.Model> models = Reflection.Instance.getTemplatizeModels();
-			
-			ViewData["models"] = models;
-			
-			return View("~/resources/AltairStudios.Core.Views.Admin.Install.aspx");
+		public ActionResult Database() {
+			return View("~/resources/AltairStudios.Core.Views.Install.Database.aspx");
 		}
 		#endregion		
 	}

@@ -1,0 +1,7 @@
+[
+	{"Code":"install_title","Domain":"","Text":"Instalación","PluralText":"Instalaciones"},
+	{"Code":"install","Domain":"","Text":"Instalar","PluralText":""},
+	{"Code":"language","Domain":"","Text":"Idioma","PluralText":"Idiomas"},
+	{"Code":"select_language","Domain":"","Text":"Seleccionar idioma","PluralText":"Seleccionar idiomas"},
+	{"Code":"save_continue","Domain":"","Text":"Guardar y continuar","PluralText":""}
+]

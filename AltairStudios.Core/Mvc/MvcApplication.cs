@@ -129,8 +129,8 @@ namespace AltairStudios.Core.Mvc {
 			}
 			
 			AltairStudios.Core.I18n.Translate.Instance.clear();
-			AltairStudios.Core.I18n.Translate.Instance.loadFile("AltairStudios.Core.resources.locales.es-Es.json", "es-ES");
-			AltairStudios.Core.I18n.Translate.Instance.loadFile("AltairStudios.Core.resources.locales.en-EN.json", "en-EN");
+			AltairStudios.Core.I18n.Translate.Instance.loadFile("AltairStudios.Core.resources.locales.es.json", "es");
+			AltairStudios.Core.I18n.Translate.Instance.loadFile("AltairStudios.Core.resources.locales.en.json", "en");
 		}
 		
 		

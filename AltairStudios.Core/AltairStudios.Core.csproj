@@ -135,7 +135,8 @@
     <EmbeddedResource Include="Views\Authorize\Login.aspx" />
     <EmbeddedResource Include="Views\Install\Language.aspx" />
     <EmbeddedResource Include="Views\Install\Install.master" />
-    <EmbeddedResource Include="resources\locales\es-Es.json" />
-    <EmbeddedResource Include="resources\locales\en-EN.json" />
+    <EmbeddedResource Include="resources\locales\es.json" />
+    <EmbeddedResource Include="resources\locales\en.json" />
+    <EmbeddedResource Include="Views\Install\Database.aspx" />
   </ItemGroup>
 </Project>
