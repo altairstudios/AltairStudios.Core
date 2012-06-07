@@ -3,5 +3,10 @@
 	{"Code":"install","Domain":"","Text":"Instalar","PluralText":""},
 	{"Code":"language","Domain":"","Text":"Idioma","PluralText":"Idiomas"},
 	{"Code":"select_language","Domain":"","Text":"Seleccionar idioma","PluralText":"Seleccionar idiomas"},
-	{"Code":"save_continue","Domain":"","Text":"Guardar y continuar","PluralText":""}
+	{"Code":"save_continue","Domain":"","Text":"Guardar y continuar","PluralText":""},
+	{"Code":"install_select_database","Domain":"","Text":"Configurar la base de datos","PluralText":"Configurar las base de datos"},
+	{"Code":"server","Domain":"","Text":"Servidor","PluralText":"Servidores"},
+	{"Code":"database","Domain":"","Text":"Base de datos","PluralText":"Bases de datos"},
+	{"Code":"user","Domain":"","Text":"Usuario","PluralText":"Usuarios"},
+	{"Code":"password","Domain":"","Text":"Contraseña","PluralText":"Contraseñas"}
 ]

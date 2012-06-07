@@ -51,6 +51,7 @@
     <Folder Include="I18n\" />
     <Folder Include="Orm\Models\I18n\" />
     <Folder Include="resources\locales\" />
+    <Folder Include="resources\img\sql\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Orm\Model.cs" />
@@ -138,5 +139,8 @@
     <EmbeddedResource Include="resources\locales\es.json" />
     <EmbeddedResource Include="resources\locales\en.json" />
     <EmbeddedResource Include="Views\Install\Database.aspx" />
+    <EmbeddedResource Include="resources\img\sql\mysql.png" />
+    <EmbeddedResource Include="resources\img\sql\sqlserver.png" />
+    <EmbeddedResource Include="Views\Install\Admin.aspx" />
   </ItemGroup>
 </Project>

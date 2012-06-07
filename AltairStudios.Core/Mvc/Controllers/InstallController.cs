@@ -44,8 +44,31 @@ namespace AltairStudios.Core.Mvc.Controllers {
 		}
 		
 		
-		public ActionResult Database() {
+		public ActionResult Database(string dbtype, string server, string database, string user, string password) {
+			string connection = "";
+			string provider = "";
+			
+			if(!string.IsNullOrEmpty(dbtype)) {
+				if(dbtype == "sqlserver") {
+					provider = "System.Data.SqlClient";
+					connection = "data source=" + server + ";initial catalog=" + database + ";user id=" + user + ";pwd=" + password + ";Pooling=true;Min Pool Size=0;Max Pool Size=100;";
+				} else if(dbtype == "mysql") {
+					provider = "MySql.Data.MySqlClient";
+					connection = "Datasource=" + server + ";Database=" + database + ";uid=" + user + ";pwd=" + password + ";Pooling=true;Min Pool Size=0;Max Pool Size=100;";
+				}
+				
+				Session["install-config-provider"] = provider;
+				Session["install-config-connection"] = connection;
+				
+				return RedirectToAction("Admin");
+			}
+			
 			return View("~/resources/AltairStudios.Core.Views.Install.Database.aspx");
+		}
+		
+		
+		public ActionResult Admin() {
+			return View("~/resources/AltairStudios.Core.Views.Install.Admin.aspx");
 		}
 		#endregion		
 	}

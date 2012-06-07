@@ -3,5 +3,10 @@
 	{"Code":"install","Domain":"","Text":"Install","PluralText":""},
 	{"Code":"language","Domain":"","Text":"Language","PluralText":""},
 	{"Code":"select_language","Domain":"","Text":"Select language","PluralText":""},
-	{"Code":"save_continue","Domain":"","Text":"Save and continue","PluralText":""}
+	{"Code":"save_continue","Domain":"","Text":"Save and continue","PluralText":""},
+	{"Code":"install_select_database","Domain":"","Text":"Database config","PluralText":""},
+	{"Code":"server","Domain":"","Text":"Server","PluralText":"Servers"},
+	{"Code":"database","Domain":"","Text":"Database","PluralText":"Databases"},
+	{"Code":"user","Domain":"","Text":"User","PluralText":"Users"},
+	{"Code":"password","Domain":"","Text":"Password","PluralText":"Passwords"}
 ]
