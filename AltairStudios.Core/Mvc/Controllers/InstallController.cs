@@ -67,8 +67,31 @@ namespace AltairStudios.Core.Mvc.Controllers {
 		}
 		
 		
-		public ActionResult Admin() {
+		public ActionResult Admin(string user, string password) {
+			if(!string.IsNullOrEmpty(user) && !string.IsNullOrEmpty(password)) {
+				Session["install-config-admin-user"] = user;
+				Session["install-config-admin-password"] = password;
+				
+				return RedirectToAction("Finish");
+			}
+			
 			return View("~/resources/AltairStudios.Core.Views.Install.Admin.aspx");
+		}
+		
+		
+		
+		public ActionResult Finish() {   
+			string user = Session["install-config-admin-user"].ToString();
+			string password = Session["install-config-admin-password"].ToString();
+			string provider = Session["install-config-provider"].ToString();
+			string connection = Session["install-config-connection"].ToString();
+			
+			ViewData["admin-user"] = "&lt;add key=\"altairstudios.core.access.user\" value=\"" + user + "\" /&gt;";
+			ViewData["admin-password"] = "&lt;add key=\"altairstudios.core.access.pass\" value=\"" + password + "\" /&gt;";
+			ViewData["admin-name"] = "&lt;add key=\"altairstudios.core.access.name\" value=\"John Snow\" /&gt;";
+			ViewData["admin-connectionstring"] = "&lt;add name=\"SqlServerConnection\" connectionString=\"" + connection + "\" providerName=\"" + provider + "\" /&gt;";
+			
+			return View("~/resources/AltairStudios.Core.Views.Install.Finish.aspx");
 		}
 		#endregion		
 	}
