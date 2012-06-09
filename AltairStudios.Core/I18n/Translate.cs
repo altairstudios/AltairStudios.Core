@@ -34,7 +34,12 @@ namespace AltairStudios.Core.I18n {
 			}
 			
 			if(string.IsNullOrEmpty(language)) {
-				language = "en-EN";
+				string currentLanguage = this.simplyfyLanguage(System.Web.HttpContext.Current.Request.UserLanguages[0]);
+				if(this.translates.ContainsKey(currentLanguage)) {
+					language = System.Web.HttpContext.Current.Request.UserLanguages[0];
+				} else {
+					language = "en";
+				}
 			}
 			
 			return language;
@@ -92,6 +97,12 @@ namespace AltairStudios.Core.I18n {
  		
  		public void clear() {
 			this.translates.Clear();
+ 		}
+ 		
+ 		public string simplyfyLanguage(string language) {
+			language = language.Substring(0, 2);
+			
+			return language;
  		}
 	}
 }
