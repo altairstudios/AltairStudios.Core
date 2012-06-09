@@ -4,17 +4,20 @@
 	<p>
 		<%=Translate.t("install_configure_webconfig")%>
 		<pre>&lt;configuration&gt;
-	&lt;appSettings&gt;
-		<%=ViewData["admin-user"]%>
-		<%=ViewData["admin-password"]%>
-		<%=ViewData["admin-name"]%>
-	&lt;/appSettings&gt;
+  &lt;appSettings&gt;
+    <%=ViewData["admin-user"]%>
+    <%=ViewData["admin-password"]%>
+    <%=ViewData["admin-name"]%>
+  &lt;/appSettings&gt;
 &lt;/configuration&gt;</pre>
 
 		<pre>&lt;/configuration&gt;
-	&lt;/connectionStrings&gt;
-		<%=ViewData["admin-connectionstring"]%>
-	&lt;/connectionStrings&gt;
+  &lt;/connectionStrings&gt;
+    <%=ViewData["admin-connectionstring"]%>
+  &lt;/connectionStrings&gt;
 &lt;/configuration&gt;</pre>
+	</p>
+	<p>
+		<a href="<%=this.Url.Action("Index", "Admin")%>" class="btn btn-success"><%=Translate.t("go_to_admin")%></a>
 	</p>
 </asp:Content>

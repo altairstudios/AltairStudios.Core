@@ -44,20 +44,6 @@ namespace AltairStudios.Core.Mvc.Controllers {
 			
 			return View("~/resources/AltairStudios.Core.Views.Admin.Desktop.aspx");
 		}
-		
-		
-		
-		/// <summary>
-		/// Install this instance.
-		/// </summary>
-		public ActionResult Install() {
-			MvcApplication.loadConfiguration();
-			ModelList<Orm.Model> models = Reflection.Instance.getTemplatizeModels();
-			
-			ViewData["models"] = models;
-			
-			return View("~/resources/AltairStudios.Core.Views.Admin.Install.aspx");
-		}
 		#endregion
 		
 		

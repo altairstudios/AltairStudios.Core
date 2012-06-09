@@ -8,5 +8,7 @@
 	{"Code":"server","Domain":"","Text":"Servidor","PluralText":"Servidores"},
 	{"Code":"database","Domain":"","Text":"Base de datos","PluralText":"Bases de datos"},
 	{"Code":"user","Domain":"","Text":"Usuario","PluralText":"Usuarios"},
-	{"Code":"password","Domain":"","Text":"Contraseña","PluralText":"Contraseñas"}
+	{"Code":"password","Domain":"","Text":"Contraseña","PluralText":"Contraseñas"},
+	{"Code":"install_configure_webconfig","Domain":"","Text":"Copia las siguientes lineas de web.config para establecer la conexión por defecto a la base de datos y el acceso del administrador maestro.","PluralText":""},
+	{"Code":"go_to_admin","Domain":"","Text":"Ir al administrador","PluralText":""}
 ]

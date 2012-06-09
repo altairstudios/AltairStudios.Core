@@ -32,7 +32,7 @@ namespace AltairStudios.Core.Mvc.Controllers {
 		/// </summary>
 		public ActionResult Login() {
 			if(MvcApplication.Configurated == false) {
-				return RedirectToAction("Install");
+				return RedirectToAction("Index", "Install");
 			}
 			
 			return View("~/resources/AltairStudios.Core.Views.Authorize.Login.aspx");

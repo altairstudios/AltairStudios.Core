@@ -336,11 +336,6 @@
             Administration page
             </summary>
         </member>
-        <member name="M:AltairStudios.Core.Mvc.Controllers.AdminController.Install">
-            <summary>
-            Install this instance.
-            </summary>
-        </member>
         <member name="M:AltairStudios.Core.Mvc.Controllers.AdminController.getUrl(System.String)">
             <summary>
             Gets the URL.
