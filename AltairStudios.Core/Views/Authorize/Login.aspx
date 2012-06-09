@@ -1,6 +1,6 @@
 <%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage" %>
 <%@ Import Namespace="AltairStudios.Core.Mvc" %>
-<%@ Import Namespace="AltairStudios.Core.Orm" %>
+<%@ Import Namespace="AltairStudios.Core.I18n" %>
 <!DOCTYPE html>
 <html lang="es">
 	<head>
@@ -10,7 +10,7 @@
 		<meta name="description" content="AltairStudios.Core - Administration module" />
 		<meta name="author" content="Altair Studios" />
 		
-		<link rel="stylesheet" type="text/css" href="<%=MvcApplication.Path%>/Resource/load/AltairStudios.Core.resources.css.bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="<%=Url.Content("~/Resource/load/AltairStudios.Core.resources.css.bootstrap.css")%>" />
 		<link rel="stylesheet" type="text/css" href="<%=MvcApplication.Path%>/Resource/load/AltairStudios.Core.resources.css.bootstrap-responsive.css" />
 		
 		<style type="text/css">
@@ -31,24 +31,24 @@
 					<div class="span4">
 						<form>
 							<fieldset>
-								<legend>Acceder</legend>
+								<legend><%=Translate.t("access")%></legend>
 								<div class="control-group">
-									<label class="control-label" for="loginUser">Usuario:</label>
+									<label class="control-label" for="loginUser"><%=Translate.t("user")%>:</label>
 									<div class="controls">
 										<input name="Email" class="input-xlarge focused" id="loginUser" type="text" placeholder="Email" autocomplete="off" />
 									</div>
 								</div>
 								<div class="control-group">
-									<label class="control-label" for="loginPassword">Contraseña:</label>
+									<label class="control-label" for="loginPassword"><%=Translate.t("password")%>:</label>
 									<div class="controls">
-										<input name="Password" class="input-xlarge focused" id="loginPassword" type="password" placeholder="Contraseña" autocomplete="off" />
+										<input name="Password" class="input-xlarge focused" id="loginPassword" type="password" placeholder="**********" autocomplete="off" />
 									</div>
 								</div>
 								<div class="control-group form-inline">
-									<label class="control-label" for="loginRemember">Recordar: <input name="Remember" class="input-small" id="loginRemember" type="checkbox" /></label>
+									<label class="control-label" for="loginRemember"><%=Translate.t("remember")%>: <input name="Remember" class="input-small" id="loginRemember" type="checkbox" /></label>
 								</div>
 								<div class="control-group">
-									<a id="loginButton" class="btn btn-primary" href="#"><i class="icon-off icon-white"></i> Acceder</a>
+									<a id="loginButton" class="btn btn-primary" href="#"><i class="icon-off icon-white"></i> <%=Translate.t("access")%></a>
 								</div>
 							</fieldset>
 						</form>
