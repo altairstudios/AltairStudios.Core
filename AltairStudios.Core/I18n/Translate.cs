@@ -34,10 +34,8 @@ namespace AltairStudios.Core.I18n {
 			}
 			
 			if(string.IsNullOrEmpty(language)) {
-				string currentLanguage = this.simplyfyLanguage(System.Web.HttpContext.Current.Request.UserLanguages[0]);
-				if(this.translates.ContainsKey(currentLanguage)) {
-					language = System.Web.HttpContext.Current.Request.UserLanguages[0];
-				} else {
+				language = this.simplyfyLanguage(System.Web.HttpContext.Current.Request.UserLanguages[0]);
+				if(!this.translates.ContainsKey(language)) {
 					language = "en";
 				}
 			}
