@@ -38,11 +38,25 @@ namespace AltairStudios.Core.Mvc.Controllers {
 			ModelList<Plugin.PluginBase> plugins = Reflection.Instance.getCorePlugins();
 			user = ((User)Session["admin_user"]);
 			
+			if(user == null) {
+				return RedirectToAction("Logout", "Authorize");
+			}
+			
 			ViewData["models"] = models;
 			ViewData["plugins"] = plugins;
 			ViewData["user"] = user;
 			
 			return View("~/resources/AltairStudios.Core.Views.Admin.Desktop.aspx");
+		}
+		
+		
+		[Authorize()]
+		public ActionResult DatabaseSynchronize() {
+			ModelList<Orm.Model> models = Reflection.Instance.getTemplatizeModels();
+			
+			ViewData["models"] = models;
+			
+			return View("~/resources/AltairStudios.Core.Views.Admin.Synchronize.aspx");
 		}
 		#endregion
 		
@@ -66,6 +80,14 @@ namespace AltairStudios.Core.Mvc.Controllers {
 		
 		
 		#region Json methods
+		[Authorize()]
+		public ActionResult SynchronizeModel(string id) {
+			Orm.Model model = Reflection.Instance.getModelFromString(id);
+			model.query(model.createTable());
+			return Content("{'result':true}");
+		}
+		
+		
 		/// <summary>
 		/// Gets the user information.
 		/// </summary>

@@ -13,6 +13,12 @@ AltairStudios.Core.Admin.Renderer = function() {
 	
 	
 	
+	this.renderHtml = function renderHtml(html) {
+		this.content.html(html);
+	}
+	
+	
+	
 	this.renderGetUsers = function renderGetUsers(data) {
 		var html = "";
 		var i = 0;
@@ -48,18 +54,31 @@ AltairStudios.Core.Admin.Renderer = function() {
 		for(i = 0; i < keys.length; i++) {
 			html += "<th>" + keys[i] + "</th>";
 		}
+		html += "<th></th>";
 		html += "</tr>";
 		
 		for(i = 0; i < data.Content.length; i++) {
 			html += "<tr>";
 			for(j = 0; j < keys.length; j++) {
-				html += "<td>" + data.Content[i][keys[j]] + "</td>";
+				html += "<td class='dataviewer-content' db-viewer-key='" + keys[j] + "'>" + data.Content[i][keys[j]] + "</td>";
 			}
+			
+			html += "<td><a href='#' class='coreProcess-editDatabaseViewer'>Editar</a></td>";
 			html += "</tr>";
 		}
 		html += "</table>";
 		
 		this.content.html(html);
+		
+		$(".coreProcess-editDatabaseViewer").click(function() {
+			return coreProcess.editDatabaseViewer($(this).parent().parent());
+		});
+	}
+	
+	
+	this.renderDatabaseViewerInput = function renderDatabaseViewerInput(target) {
+		var html = "<input type='text' name='" + target.attr("db-viewer-key") + "' value='" + target.html() + "' />";
+		target.html(html);
 	}
 	
 	

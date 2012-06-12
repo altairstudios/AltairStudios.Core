@@ -31,14 +31,6 @@
             The table.
             </returns>
         </member>
-        <member name="M:AltairStudios.Core.Orm.Model.query(System.String)">
-            <summary>
-            Query the specified sql.
-            </summary>
-            <param name="sql">
-            Sql.
-            </param>
-        </member>
         <member name="M:AltairStudios.Core.Orm.Model.ToJson">
             <summary>
             Tos the json.

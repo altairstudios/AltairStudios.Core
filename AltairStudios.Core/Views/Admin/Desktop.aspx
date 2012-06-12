@@ -1,4 +1,5 @@
 <%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage" %>
+<%@ Import Namespace="AltairStudios.Core.I18n" %>
 <%@ Import Namespace="AltairStudios.Core.Mvc" %>
 <%@ Import Namespace="AltairStudios.Core.Orm.Models" %>
 <!DOCTYPE html>
@@ -41,6 +42,8 @@
 							<li class="dropdown" id="menuDatabase">
 								<a class="dropdown-toggle" data-toggle="dropdown" href="#menuDatabase">Database<strong class="caret"></strong></a>
 								<ul class="dropdown-menu">
+									<li><a href="#!/web/database-synchronize"><%=Translate.t("synchronize")%></a></li>
+									<li class="divider"></li>
 								<%
 									AltairStudios.Core.Orm.ModelList<AltairStudios.Core.Orm.Model> models = (AltairStudios.Core.Orm.ModelList<AltairStudios.Core.Orm.Model>)ViewData["models"];
 									for(int i = 0; i < models.Count; i++) {

@@ -128,14 +128,12 @@ namespace AltairStudios.Core.Orm {
 		
 		
 		
-		/// <summary>
-		/// Query the specified sql.
-		/// </summary>
-		/// <param name='sql'>
-		/// Sql.
-		/// </param>
-		public string query(string sql) {
-			return sql;
+		public void query(string sql) {
+			IDbCommand command = SqlProvider.getProvider().createCommand();
+			command.CommandText = sql;
+			command.ExecuteNonQuery();
+			
+			return;
 		}
 		
 		

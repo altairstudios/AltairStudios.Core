@@ -143,5 +143,6 @@
     <EmbeddedResource Include="resources\img\sql\sqlserver.png" />
     <EmbeddedResource Include="Views\Install\Admin.aspx" />
     <EmbeddedResource Include="Views\Install\Finish.aspx" />
+    <EmbeddedResource Include="Views\Admin\Synchronize.aspx" />
   </ItemGroup>
 </Project>

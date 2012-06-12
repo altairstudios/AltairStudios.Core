@@ -81,6 +81,7 @@ namespace AltairStudios.Core.Mvc.Controllers {
 		/// </summary>
 		[Authorize()]
 		public ActionResult Logout() {
+			Response.Cookies.Remove(FormsAuthentication.FormsCookieName);
 			FormsAuthentication.SignOut();
 			Session.Clear();
 			return RedirectToAction("Login");
