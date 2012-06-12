@@ -81,7 +81,7 @@ namespace AltairStudios.Core.Mvc {
 		/// <returns>
 		/// The json.
 		/// </returns>
-		public string ToJson() {
+		public virtual string ToJson() {
 			PropertyInfo[] properties = this.GetType().GetProperties();
 			StringBuilder json = new StringBuilder();
 			ModelList<string> jsonProperties = new ModelList<string>();

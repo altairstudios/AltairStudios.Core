@@ -7,11 +7,40 @@ using Newtonsoft.Json;
 
 
 namespace AltairStudios.Core.I18n {
+	/// <summary>
+	/// Translate.
+	/// </summary>
 	public class Translate {
+		#region Attributes
+		/// <summary>
+		/// The instance.
+		/// </summary>
 		protected static Translate instance;
+		
+		
+		
+		/// <summary>
+		/// The translates.
+		/// </summary>
 		protected Dictionary<string, ModelList<TranslateItem>> translates;
+		
+		
+		
+		/// <summary>
+		/// The debug.
+		/// </summary>
 		protected string debug;
-
+		#endregion
+		
+		
+		
+		#region Properties
+		/// <summary>
+		/// Gets the instance.
+		/// </summary>
+		/// <value>
+		/// The instance.
+		/// </value>
 		public static Translate Instance {
 			get {
 				if(instance == null) {
@@ -20,12 +49,28 @@ namespace AltairStudios.Core.I18n {
 				return instance;
 			}
 		}
+		#endregion
 		
+		
+		
+		#region Constructors
+		/// <summary>
+		/// Initializes a new instance of the <see cref="AltairStudios.Core.I18n.Translate"/> class.
+		/// </summary>
 		protected Translate() {
 			this.translates = new Dictionary<string, ModelList<TranslateItem>>();
 		}
+		#endregion
 		
 		
+		
+		#region Translation methods
+		/// <summary>
+		/// Gets the language.
+		/// </summary>
+		/// <returns>
+		/// The language.
+		/// </returns>
 		public string getLanguage() {
 			string language = "";
 			
@@ -44,10 +89,28 @@ namespace AltairStudios.Core.I18n {
 		}
 		
 		
+		
+		/// <summary>
+		/// Translate the specified code.
+		/// </summary>
+		/// <param name='code'>
+		/// Code.
+		/// </param>
 		public static string t(string code) {
 			return t(code, instance.getLanguage());
 		}
 		
+		
+		
+		/// <summary>
+		/// Translate the specified code and language.
+		/// </summary>
+		/// <param name='code'>
+		/// Code.
+		/// </param>
+		/// <param name='language'>
+		/// Language.
+		/// </param>
 		public static string t(string code, string language) {			
 			if(instance.translates.ContainsKey(language)) {
 				for(int i = 0; i < instance.translates[language].Count; i++) {
@@ -61,10 +124,29 @@ namespace AltairStudios.Core.I18n {
 			}
 		}
 		
+		
+		
+		/// <summary>
+		/// Tanslate to plural the specified code.
+		/// </summary>
+		/// <param name='code'>
+		/// Code.
+		/// </param>
 		public static string ts(string code) {
 			return ts(code, instance.getLanguage());
 		}
 		
+		
+		
+		/// <summary>
+		/// Tanslate to plural the specified code and language.
+		/// </summary>
+		/// <param name='code'>
+		/// Code.
+		/// </param>
+		/// <param name='language'>
+		/// Language.
+		/// </param>
 		public static string ts(string code, string language) {
 			if(instance.translates.ContainsKey(language)) {
 				for(int i = 0; i < instance.translates[language].Count; i++) {
@@ -78,6 +160,17 @@ namespace AltairStudios.Core.I18n {
 			}
 		}
 		
+		
+		
+		/// <summary>
+		/// Loads the file.
+		/// </summary>
+		/// <param name='file'>
+		/// File.
+		/// </param>
+		/// <param name='language'>
+		/// Language.
+		/// </param>
 		public void loadFile(string file, string language) {
 			StreamReader reader = new StreamReader(System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream(file));
 			
@@ -92,15 +185,34 @@ namespace AltairStudios.Core.I18n {
 				this.translates.Add(language, tar);
 			}
  		}
- 		
+ 		#endregion
+		
+		
+		
+		#region Utilities methods
+		/// <summary>
+		/// Clear this instance.
+		/// </summary>
  		public void clear() {
 			this.translates.Clear();
  		}
  		
+		
+		
+		/// <summary>
+		/// Simplyfies the language.
+		/// </summary>
+		/// <returns>
+		/// The language.
+		/// </returns>
+		/// <param name='language'>
+		/// Language.
+		/// </param>
  		public string simplyfyLanguage(string language) {
 			language = language.Substring(0, 2);
 			
 			return language;
  		}
+		#endregion
 	}
 }

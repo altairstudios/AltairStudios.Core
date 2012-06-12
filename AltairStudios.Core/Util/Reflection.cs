@@ -83,6 +83,15 @@ namespace AltairStudios.Core.Util {
 		
 		
 		
+		/// <summary>
+		/// Gets the model from string.
+		/// </summary>
+		/// <returns>
+		/// The model from string.
+		/// </returns>
+		/// <param name='modelName'>
+		/// Model name.
+		/// </param>
 		public Model getModelFromString(string modelName) {
 			ModelList<Model> models = this.getTemplatizeModels();
 			
@@ -97,6 +106,12 @@ namespace AltairStudios.Core.Util {
 		
 		
 		
+		/// <summary>
+		/// Gets the core plugins.
+		/// </summary>
+		/// <returns>
+		/// The core plugins.
+		/// </returns>
 		public ModelList<PluginBase> getCorePlugins() {
 			Assembly[] assemblies = this.getAssemblies();
 			ModelList<PluginBase> plugins = new ModelList<PluginBase>();

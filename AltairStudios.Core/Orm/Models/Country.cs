@@ -3,6 +3,9 @@ using AltairStudios.Core.Orm;
 
 
 namespace AltairStudios.Core.Orm.Models {
+	/// <summary>
+	/// Country.
+	/// </summary>
 	public class Country : Model {
 		#region Attributes
 		/// <summary>

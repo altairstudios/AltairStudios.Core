@@ -31,6 +31,14 @@
             The table.
             </returns>
         </member>
+        <member name="M:AltairStudios.Core.Orm.Model.query(System.String)">
+            <summary>
+            Query the specified sql.
+            </summary>
+            <param name="sql">
+            Sql.
+            </param>
+        </member>
         <member name="M:AltairStudios.Core.Orm.Model.ToJson">
             <summary>
             Tos the json.
@@ -262,6 +270,25 @@
             Type.
             </param>
         </member>
+        <member name="M:AltairStudios.Core.Util.StringConverter.convert(AltairStudios.Core.Mvc.Model)">
+            <summary>
+            Convert the specified val.
+            </summary>
+            <param name="val">
+            Value.
+            </param>
+        </member>
+        <member name="M:AltairStudios.Core.Util.StringConverter.convert``1(AltairStudios.Core.Mvc.ModelList{``0})">
+            <summary>
+            Convert the specified val.
+            </summary>
+            <param name="val">
+            Value.
+            </param>
+            <typeparam name="T">
+            The 1st type parameter.
+            </typeparam>
+        </member>
         <member name="M:AltairStudios.Core.Util.StringConverter.convert(System.Object)">
             <summary>
             Convert the specified val.
@@ -287,6 +314,14 @@
             </param>
         </member>
         <member name="M:AltairStudios.Core.Util.StringConverter.convert(System.Double)">
+            <summary>
+            Convert the specified val.
+            </summary>
+            <param name="val">
+            Value.
+            </param>
+        </member>
+        <member name="M:AltairStudios.Core.Util.StringConverter.convert(System.Decimal)">
             <summary>
             Convert the specified val.
             </summary>
@@ -787,6 +822,25 @@
             The templatize models.
             </returns>
         </member>
+        <member name="M:AltairStudios.Core.Util.Reflection.getModelFromString(System.String)">
+            <summary>
+            Gets the model from string.
+            </summary>
+            <returns>
+            The model from string.
+            </returns>
+            <param name="modelName">
+            Model name.
+            </param>
+        </member>
+        <member name="M:AltairStudios.Core.Util.Reflection.getCorePlugins">
+            <summary>
+            Gets the core plugins.
+            </summary>
+            <returns>
+            The core plugins.
+            </returns>
+        </member>
         <member name="T:AltairStudios.Core.Mvc.Controllers.ResourceController">
             <summary>
             Resource controller.
@@ -853,6 +907,12 @@
             <param name="resource">
             Resource.
             </param>
+            <param name="extension">
+            Extension.
+            </param>
+            <exception cref="T:System.IO.FileNotFoundException">
+            Is thrown when a file path argument specifies a file that does not exist.
+            </exception>
         </member>
         <member name="T:AltairStudios.Core.Mvc.VirtualProvider.AssemblyVirtualFile">
             <summary>
@@ -1187,6 +1247,11 @@
             The menu.
             </value>
         </member>
+        <member name="T:AltairStudios.Core.Orm.Models.Address">
+            <summary>
+            Address.
+            </summary>
+        </member>
         <member name="M:AltairStudios.Core.Orm.Models.Address.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:AltairStudios.Core.Orm.Models.Address" /> class.
@@ -1309,6 +1374,11 @@
             The zip.
             </value>
         </member>
+        <member name="T:AltairStudios.Core.Orm.Models.City">
+            <summary>
+            City.
+            </summary>
+        </member>
         <member name="M:AltairStudios.Core.Orm.Models.City.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:AltairStudios.Core.Orm.Models.City" /> class.
@@ -1353,6 +1423,11 @@
             The province.
             </value>
         </member>
+        <member name="T:AltairStudios.Core.Orm.Models.Country">
+            <summary>
+            Country.
+            </summary>
+        </member>
         <member name="M:AltairStudios.Core.Orm.Models.Country.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:AltairStudios.Core.Orm.Models.Country" /> class.
@@ -1396,6 +1471,11 @@
             <value>
             The name.
             </value>
+        </member>
+        <member name="T:AltairStudios.Core.Orm.Models.Phone">
+            <summary>
+            Phone.
+            </summary>
         </member>
         <member name="M:AltairStudios.Core.Orm.Models.Phone.#ctor">
             <summary>
@@ -1454,6 +1534,11 @@
             The prefix.
             </value>
         </member>
+        <member name="T:AltairStudios.Core.Orm.Models.Province">
+            <summary>
+            Province.
+            </summary>
+        </member>
         <member name="M:AltairStudios.Core.Orm.Models.Province.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:AltairStudios.Core.Orm.Models.Province" /> class.
@@ -1497,6 +1582,11 @@
             <value>
             The region.
             </value>
+        </member>
+        <member name="T:AltairStudios.Core.Orm.Models.Region">
+            <summary>
+            Region.
+            </summary>
         </member>
         <member name="M:AltairStudios.Core.Orm.Models.Region.#ctor">
             <summary>
@@ -1614,8 +1704,220 @@
         </member>
         <member name="M:AltairStudios.Core.Mvc.Controllers.InstallController.Index">
             <summary>
-            Administration page
+            Redirection page
             </summary>
+        </member>
+        <member name="M:AltairStudios.Core.Mvc.Controllers.InstallController.Language(System.String)">
+            <summary>
+            Selection the install specified language.
+            </summary>
+            <param name="language">
+            Language.
+            </param>
+        </member>
+        <member name="M:AltairStudios.Core.Mvc.Controllers.InstallController.Database(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Database install selection the specified dbtype, server, database, user and password.
+            </summary>
+            <param name="dbtype">
+            Dbtype.
+            </param>
+            <param name="server">
+            Server.
+            </param>
+            <param name="database">
+            Database.
+            </param>
+            <param name="user">
+            User.
+            </param>
+            <param name="password">
+            Password.
+            </param>
+        </member>
+        <member name="M:AltairStudios.Core.Mvc.Controllers.InstallController.Admin(System.String,System.String)">
+            <summary>
+            Set generic admin the specified user and password.
+            </summary>
+            <param name="user">
+            User.
+            </param>
+            <param name="password">
+            Password.
+            </param>
+        </member>
+        <member name="M:AltairStudios.Core.Mvc.Controllers.InstallController.Finish">
+            <summary>
+            Finish this installation.
+            </summary>
+        </member>
+        <member name="T:AltairStudios.Core.I18n.Translate">
+            <summary>
+            Translate.
+            </summary>
+        </member>
+        <member name="M:AltairStudios.Core.I18n.Translate.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:AltairStudios.Core.I18n.Translate" /> class.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.I18n.Translate.instance">
+            <summary>
+            The instance.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.I18n.Translate.translates">
+            <summary>
+            The translates.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.I18n.Translate.debug">
+            <summary>
+            The debug.
+            </summary>
+        </member>
+        <member name="P:AltairStudios.Core.I18n.Translate.Instance">
+            <summary>
+            Gets the instance.
+            </summary>
+            <value>
+            The instance.
+            </value>
+        </member>
+        <member name="M:AltairStudios.Core.I18n.Translate.getLanguage">
+            <summary>
+            Gets the language.
+            </summary>
+            <returns>
+            The language.
+            </returns>
+        </member>
+        <member name="M:AltairStudios.Core.I18n.Translate.t(System.String)">
+            <summary>
+            Translate the specified code.
+            </summary>
+            <param name="code">
+            Code.
+            </param>
+        </member>
+        <member name="M:AltairStudios.Core.I18n.Translate.t(System.String,System.String)">
+            <summary>
+            Translate the specified code and language.
+            </summary>
+            <param name="code">
+            Code.
+            </param>
+            <param name="language">
+            Language.
+            </param>
+        </member>
+        <member name="M:AltairStudios.Core.I18n.Translate.ts(System.String)">
+            <summary>
+            Tanslate to plural the specified code.
+            </summary>
+            <param name="code">
+            Code.
+            </param>
+        </member>
+        <member name="M:AltairStudios.Core.I18n.Translate.ts(System.String,System.String)">
+            <summary>
+            Tanslate to plural the specified code and language.
+            </summary>
+            <param name="code">
+            Code.
+            </param>
+            <param name="language">
+            Language.
+            </param>
+        </member>
+        <member name="M:AltairStudios.Core.I18n.Translate.loadFile(System.String,System.String)">
+            <summary>
+            Loads the file.
+            </summary>
+            <param name="file">
+            File.
+            </param>
+            <param name="language">
+            Language.
+            </param>
+        </member>
+        <member name="M:AltairStudios.Core.I18n.Translate.clear">
+            <summary>
+            Clear this instance.
+            </summary>
+        </member>
+        <member name="M:AltairStudios.Core.I18n.Translate.simplyfyLanguage(System.String)">
+            <summary>
+            Simplyfies the language.
+            </summary>
+            <returns>
+            The language.
+            </returns>
+            <param name="language">
+            Language.
+            </param>
+        </member>
+        <member name="T:AltairStudios.Core.Orm.Models.I18n.TranslateItem">
+            <summary>
+            Translate item.
+            </summary>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.Models.I18n.TranslateItem.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:AltairStudios.Core.Orm.Models.I18n.TranslateItem" /> class.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.I18n.TranslateItem.code">
+            <summary>
+            The code.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.I18n.TranslateItem.domain">
+            <summary>
+            The domain.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.I18n.TranslateItem.text">
+            <summary>
+            The text.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.Models.I18n.TranslateItem.pluralText">
+            <summary>
+            The plural text.
+            </summary>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.I18n.TranslateItem.Code">
+            <summary>
+            Gets or sets the code.
+            </summary>
+            <value>
+            The code.
+            </value>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.I18n.TranslateItem.Text">
+            <summary>
+            Gets or sets the text.
+            </summary>
+            <value>
+            The text.
+            </value>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.I18n.TranslateItem.PluralText">
+            <summary>
+            Gets or sets the plural text.
+            </summary>
+            <value>
+            The plural text.
+            </value>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.I18n.TranslateItem.Domain">
+            <summary>
+            Gets or sets the domain.
+            </summary>
+            <value>
+            The domain.
+            </value>
         </member>
     </members>
 </doc>

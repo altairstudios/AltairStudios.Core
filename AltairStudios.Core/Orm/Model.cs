@@ -26,7 +26,6 @@ namespace AltairStudios.Core.Orm {
 		public ModelList<T> getBy<T>() {
 			Type type = this.GetType();
 			PropertyInfo[] properties = this.GetType().GetProperties();
-			StringBuilder sql = new StringBuilder();
 			ModelList<PropertyInfo> parameters = new ModelList<PropertyInfo>();
 			List<string> fields = this.getFields(properties);
 			
@@ -128,6 +127,12 @@ namespace AltairStudios.Core.Orm {
 		
 		
 		
+		/// <summary>
+		/// Query the specified sql.
+		/// </summary>
+		/// <param name='sql'>
+		/// Sql.
+		/// </param>
 		public void query(string sql) {
 			IDbCommand command = SqlProvider.getProvider().createCommand();
 			command.CommandText = sql;
@@ -144,7 +149,7 @@ namespace AltairStudios.Core.Orm {
 		/// <returns>
 		///  The json. 
 		/// </returns>
-		public string ToJson() {
+		public override string ToJson() {
 			PropertyInfo[] properties = this.GetType().GetProperties();
 			StringBuilder json = new StringBuilder();
 			ModelList<string> jsonProperties = new ModelList<string>();

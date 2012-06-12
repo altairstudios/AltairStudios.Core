@@ -43,12 +43,27 @@ namespace AltairStudios.Core.Util {
 		
 		
 		
+		/// <summary>
+		/// Convert the specified val.
+		/// </summary>
+		/// <param name='val'>
+		/// Value.
+		/// </param>
 		public string convert(Model val) {
 			return val.ToJson();
 		}
 		
 		
 		
+		/// <summary>
+		/// Convert the specified val.
+		/// </summary>
+		/// <param name='val'>
+		/// Value.
+		/// </param>
+		/// <typeparam name='T'>
+		/// The 1st type parameter.
+		/// </typeparam>
 		public string convert<T>(ModelList<T> val) {
 			return val.ToJson();
 		}
@@ -107,6 +122,12 @@ namespace AltairStudios.Core.Util {
 		
 		
 		
+		/// <summary>
+		/// Convert the specified val.
+		/// </summary>
+		/// <param name='val'>
+		/// Value.
+		/// </param>
 		public string convert(decimal val) {
 			return val.ToString(CultureInfo.InvariantCulture.NumberFormat);
 		}

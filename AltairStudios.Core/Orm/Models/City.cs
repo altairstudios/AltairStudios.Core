@@ -3,6 +3,9 @@ using AltairStudios.Core.Orm;
 
 
 namespace AltairStudios.Core.Orm.Models {
+	/// <summary>
+	/// City.
+	/// </summary>
 	public class City : Model {
 		#region Attributes
 		/// <summary>

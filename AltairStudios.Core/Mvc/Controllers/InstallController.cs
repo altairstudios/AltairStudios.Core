@@ -19,15 +19,20 @@ namespace AltairStudios.Core.Mvc.Controllers {
 	public class InstallController : Controller {
 		#region Html pages
 		/// <summary>
-		/// Administration page
+		/// Redirection page
 		/// </summary>
-		
 		public ActionResult Index() {
 			return RedirectToAction("Language");
 		}
 		
 		
 		
+		/// <summary>
+		/// Selection the install specified language.
+		/// </summary>
+		/// <param name='language'>
+		/// Language.
+		/// </param>
 		public ActionResult Language(string language) {
 			if(!string.IsNullOrEmpty(language)) {
 				Session["language"] = language;
@@ -44,6 +49,25 @@ namespace AltairStudios.Core.Mvc.Controllers {
 		}
 		
 		
+		
+		/// <summary>
+		/// Database install selection the specified dbtype, server, database, user and password.
+		/// </summary>
+		/// <param name='dbtype'>
+		/// Dbtype.
+		/// </param>
+		/// <param name='server'>
+		/// Server.
+		/// </param>
+		/// <param name='database'>
+		/// Database.
+		/// </param>
+		/// <param name='user'>
+		/// User.
+		/// </param>
+		/// <param name='password'>
+		/// Password.
+		/// </param>
 		public ActionResult Database(string dbtype, string server, string database, string user, string password) {
 			string connection = "";
 			string provider = "";
@@ -67,6 +91,16 @@ namespace AltairStudios.Core.Mvc.Controllers {
 		}
 		
 		
+		
+		/// <summary>
+		/// Set generic admin the specified user and password.
+		/// </summary>
+		/// <param name='user'>
+		/// User.
+		/// </param>
+		/// <param name='password'>
+		/// Password.
+		/// </param>
 		public ActionResult Admin(string user, string password) {
 			if(!string.IsNullOrEmpty(user) && !string.IsNullOrEmpty(password)) {
 				Session["install-config-admin-user"] = user;
@@ -80,6 +114,9 @@ namespace AltairStudios.Core.Mvc.Controllers {
 		
 		
 		
+		/// <summary>
+		/// Finish this installation.
+		/// </summary>
 		public ActionResult Finish() {   
 			string user = Session["install-config-admin-user"].ToString();
 			string password = Session["install-config-admin-password"].ToString();

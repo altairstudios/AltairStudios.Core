@@ -148,6 +148,12 @@ namespace AltairStudios.Core.Mvc.Controllers {
 		/// <param name='resource'>
 		/// Resource.
 		/// </param>
+		/// <param name='extension'>
+		/// Extension.
+		/// </param>
+		/// <exception cref='FileNotFoundException'>
+		/// Is thrown when a file path argument specifies a file that does not exist.
+		/// </exception>
 		protected byte[] readResource(string resource, string extension) {
 			Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resource);
 			

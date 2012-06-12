@@ -61,7 +61,7 @@ namespace AltairStudios.Core.Mvc.VirtualProvider {
 		/// <param name='virtualPath'>
 		/// Virtual path.
 		/// </param>
-		public  System.IO.Stream OpenFile(string virtualPath) {
+		public System.IO.Stream OpenFile(string virtualPath) {
 			VirtualFile vf = this.GetFile(virtualPath);
 			return vf.Open();
 		}
