@@ -37,9 +37,9 @@ namespace AltairStudios.Core.Mvc.Controllers {
 		/// <summary>
 		/// Initializes a new instance of the <see cref="AltairStudios.Core.Mvc.Controllers.AuthorizeController"/> class.
 		/// </summary>
-		public AuthorizeController() : base() {
-			this.accessPath = Url.Action("Desktop", "Admin");
-			this.adminPath = Url.Action("Desktop", "Admin");
+		public AuthorizeController() {
+			this.accessPath = MvcApplication.Path + "/Admin/Desktop";
+			this.adminPath = MvcApplication.Path + "/Admin/Desktop";
 		}
 		#endregion
 		
