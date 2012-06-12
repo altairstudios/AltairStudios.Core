@@ -21,7 +21,6 @@ namespace AltairStudios.Core.Mvc.Controllers {
 		/// <summary>
 		/// Administration page
 		/// </summary>
-		
 		public ActionResult Index() {
 			return RedirectToAction("Desktop");
 		}
@@ -50,6 +49,13 @@ namespace AltairStudios.Core.Mvc.Controllers {
 		}
 		
 		
+		
+		/// <summary>
+		/// Databases the synchronize.
+		/// </summary>
+		/// <returns>
+		/// The synchronize.
+		/// </returns>
 		[Authorize()]
 		public ActionResult DatabaseSynchronize() {
 			ModelList<Orm.Model> models = Reflection.Instance.getTemplatizeModels();
@@ -80,12 +86,22 @@ namespace AltairStudios.Core.Mvc.Controllers {
 		
 		
 		#region Json methods
+		/// <summary>
+		/// Synchronizes the model.
+		/// </summary>
+		/// <returns>
+		/// The model.
+		/// </returns>
+		/// <param name='id'>
+		/// Identifier.
+		/// </param>
 		[Authorize()]
 		public ActionResult SynchronizeModel(string id) {
 			Orm.Model model = Reflection.Instance.getModelFromString(id);
 			model.query(model.createTable());
 			return Content("{'result':true}");
 		}
+		
 		
 		
 		/// <summary>
@@ -156,7 +172,16 @@ namespace AltairStudios.Core.Mvc.Controllers {
 		}
 				
 
-
+		
+		/// <summary>
+		/// Databases the update data.
+		/// </summary>
+		/// <returns>
+		/// The update data.
+		/// </returns>
+		/// <param name='id'>
+		/// Identifier.
+		/// </param>
 		[Authorize()]
 		public ActionResult DatabaseUpdateData(string id) {
 			Model model = Reflection.Instance.getModelFromString(id);

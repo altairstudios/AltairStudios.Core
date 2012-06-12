@@ -17,6 +17,34 @@ namespace AltairStudios.Core.Mvc.Controllers {
 	/// Authorize controller.
 	/// </summary>
 	public class AuthorizeController : Controller {
+		#region Attributes
+		/// <summary>
+		/// The access path.
+		/// </summary>
+		protected string accessPath;
+		
+		
+		
+		/// <summary>
+		/// The admin path.
+		/// </summary>
+		protected string adminPath;
+		#endregion
+		
+		
+		
+		#region Constructors
+		/// <summary>
+		/// Initializes a new instance of the <see cref="AltairStudios.Core.Mvc.Controllers.AuthorizeController"/> class.
+		/// </summary>
+		public AuthorizeController() : base() {
+			this.accessPath = Url.Action("Desktop", "Admin");
+			this.adminPath = Url.Action("Desktop", "Admin");
+		}
+		#endregion
+		
+		
+		
 		#region Html pages
 		/// <summary>
 		/// Administration page
@@ -30,7 +58,7 @@ namespace AltairStudios.Core.Mvc.Controllers {
 		/// <summary>
 		/// Login administration page
 		/// </summary>
-		public ActionResult Login() {
+		public virtual ActionResult Login() {
 			if(MvcApplication.Configurated == false) {
 				return RedirectToAction("Index", "Install");
 			}
@@ -49,8 +77,58 @@ namespace AltairStudios.Core.Mvc.Controllers {
 		/// User to access admin page.
 		/// </param>
 		public ActionResult Authorize(User user){
-			ModelList<User> users = new ModelList<User>();
+			User authUser;
 			
+			authUser = this.userAuthentify(user);
+			if(authUser == null) {
+				authUser = this.genericAuthentify(user);	
+			}
+			
+			if(authUser != null) {
+				FormsAuthentication.Initialize();
+				FormsAuthenticationTicket fat = new FormsAuthenticationTicket(user.Email, user.Remember, 30);
+				Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, FormsAuthentication.Encrypt(fat)));
+				Session["admin_user"] = authUser;
+				return Content(authUser.ToJson());
+			} else {
+				return Content("{error:true}");
+			}
+		}
+
+		
+		
+		/// <summary>
+		/// Users the authentify.
+		/// </summary>
+		/// <returns>
+		/// The authentify.
+		/// </returns>
+		/// <param name='user'>
+		/// User.
+		/// </param>
+		protected virtual User userAuthentify(User user) {
+			ModelList<User> users = new ModelList<User>();
+			users = user.getBy<User>();
+			
+			if(users.Count > 0) {
+				return users[0];
+			} else {
+				return null;
+			}
+		}
+		
+		
+		
+		/// <summary>
+		/// Generics the authentify.
+		/// </summary>
+		/// <returns>
+		/// The authentify.
+		/// </returns>
+		/// <param name='user'>
+		/// User.
+		/// </param>
+		protected virtual User genericAuthentify(User user) {
 			if(ConfigurationManager.AppSettings["altairstudios.core.access.user"] != null && ConfigurationManager.AppSettings["altairstudios.core.access.pass"] != null && ConfigurationManager.AppSettings["altairstudios.core.access.user"] == user.Email && ConfigurationManager.AppSettings["altairstudios.core.access.pass"] == user.Password) {
 				if(ConfigurationManager.AppSettings["altairstudios.core.access.name"] != null) {
 					user.Name = ConfigurationManager.AppSettings["altairstudios.core.access.user"];
@@ -58,19 +136,9 @@ namespace AltairStudios.Core.Mvc.Controllers {
 					user.Name = "Jon Snow";
 				}
 				
-				users.Add(user);
+				return user;
 			} else {
-				users = user.getBy<User>();
-			}
-			
-			if (users.Count > 0) {
-				FormsAuthentication.Initialize();
-				FormsAuthenticationTicket fat = new FormsAuthenticationTicket(user.Email, user.Remember, 30);
-				Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, FormsAuthentication.Encrypt(fat)));
-				Session["admin_user"] = users[0];
-				return Content(users[0].ToJson());
-			} else {
-				return Content("{error:true}");
+				return null;
 			}
 		}
 			

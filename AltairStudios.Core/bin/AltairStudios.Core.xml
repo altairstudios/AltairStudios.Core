@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>/Users/juan/Sites/altairstudios-core/AltairStudios.Core/bin/AltairStudios.Core</name>
+        <name>/home/juan/Sites/altairstudios-core/AltairStudios.Core/bin/AltairStudios.Core</name>
     </assembly>
     <members>
         <member name="T:AltairStudios.Core.Orm.Model">
@@ -328,6 +328,14 @@
             Administration page
             </summary>
         </member>
+        <member name="M:AltairStudios.Core.Mvc.Controllers.AdminController.DatabaseSynchronize">
+            <summary>
+            Databases the synchronize.
+            </summary>
+            <returns>
+            The synchronize.
+            </returns>
+        </member>
         <member name="M:AltairStudios.Core.Mvc.Controllers.AdminController.getUrl(System.String)">
             <summary>
             Gets the URL.
@@ -337,6 +345,17 @@
             </returns>
             <param name="url">
             Base URL to format link.
+            </param>
+        </member>
+        <member name="M:AltairStudios.Core.Mvc.Controllers.AdminController.SynchronizeModel(System.String)">
+            <summary>
+            Synchronizes the model.
+            </summary>
+            <returns>
+            The model.
+            </returns>
+            <param name="id">
+            Identifier.
             </param>
         </member>
         <member name="M:AltairStudios.Core.Mvc.Controllers.AdminController.GetUser">
@@ -366,6 +385,17 @@
             </summary>
             <returns>
             The viewer.
+            </returns>
+            <param name="id">
+            Identifier.
+            </param>
+        </member>
+        <member name="M:AltairStudios.Core.Mvc.Controllers.AdminController.DatabaseUpdateData(System.String)">
+            <summary>
+            Databases the update data.
+            </summary>
+            <returns>
+            The update data.
             </returns>
             <param name="id">
             Identifier.
@@ -1517,6 +1547,21 @@
             Authorize controller.
             </summary>
         </member>
+        <member name="M:AltairStudios.Core.Mvc.Controllers.AuthorizeController.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:AltairStudios.Core.Mvc.Controllers.AuthorizeController" /> class.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Mvc.Controllers.AuthorizeController.accessPath">
+            <summary>
+            The access path.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Mvc.Controllers.AuthorizeController.adminPath">
+            <summary>
+            The admin path.
+            </summary>
+        </member>
         <member name="M:AltairStudios.Core.Mvc.Controllers.AuthorizeController.Index">
             <summary>
             Administration page
@@ -1533,6 +1578,28 @@
             </summary>
             <param name="user">
             User to access admin page.
+            </param>
+        </member>
+        <member name="M:AltairStudios.Core.Mvc.Controllers.AuthorizeController.userAuthentify(AltairStudios.Core.Orm.Models.User)">
+            <summary>
+            Users the authentify.
+            </summary>
+            <returns>
+            The authentify.
+            </returns>
+            <param name="user">
+            User.
+            </param>
+        </member>
+        <member name="M:AltairStudios.Core.Mvc.Controllers.AuthorizeController.genericAuthentify(AltairStudios.Core.Orm.Models.User)">
+            <summary>
+            Generics the authentify.
+            </summary>
+            <returns>
+            The authentify.
+            </returns>
+            <param name="user">
+            User.
             </param>
         </member>
         <member name="M:AltairStudios.Core.Mvc.Controllers.AuthorizeController.Logout">
