@@ -77,11 +77,17 @@ namespace AltairStudios.Core.Mvc.Controllers {
 		/// User to access admin page.
 		/// </param>
 		public ActionResult Authorize(User user){
-			User authUser;
+			User authUser = null;
+			string url = this.accessPath;
 			
-			authUser = this.userAuthentify(user);
+			try {
+				authUser = this.userAuthentify(user);
+			} catch(Exception ex) {
+			}
+			
 			if(authUser == null) {
 				authUser = this.genericAuthentify(user);	
+				url = this.adminPath;
 			}
 			
 			if(authUser != null) {
@@ -89,9 +95,9 @@ namespace AltairStudios.Core.Mvc.Controllers {
 				FormsAuthenticationTicket fat = new FormsAuthenticationTicket(user.Email, user.Remember, 30);
 				Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, FormsAuthentication.Encrypt(fat)));
 				Session["admin_user"] = authUser;
-				return Content(authUser.ToJson());
+				return Content("{\"error\":false,\"url\":\"" + url + "\"}");
 			} else {
-				return Content("{error:true}");
+				return Content("{\"error\":true}");
 			}
 		}
 

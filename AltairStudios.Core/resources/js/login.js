@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).on("ready", function() {
 	var email = $("#loginUser");
 	var password = $("#loginPassword");
 	
@@ -10,7 +10,8 @@ $(document).ready(function() {
 			if(data.error) {
 				return;
 			}
-			document.location = "../Admin";
-		})
+			
+			document.location = data.url;
+		});
 	});
 });
