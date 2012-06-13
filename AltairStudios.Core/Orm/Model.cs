@@ -168,12 +168,27 @@ namespace AltairStudios.Core.Orm {
 		/// <param name='sql'>
 		/// Sql.
 		/// </param>
-		public void query(string sql) {
+		public List<Dictionary<string, string>> query(string sql) {
 			IDbCommand command = SqlProvider.getProvider().createCommand();
 			command.CommandText = sql;
-			command.ExecuteNonQuery();
+			IDataReader reader = command.ExecuteReader();
 			
-			return;
+			List<Dictionary<string, string>> result = new List<Dictionary<string, string>>();
+			
+			while(reader.Read()) {
+				Dictionary<string, string> row = new Dictionary<string, string>();
+				
+				for(int i = 0; i < reader.FieldCount; i++) {
+					row.Add(reader.GetName(i), reader[i].ToString());
+				}
+				
+				result.Add(row);
+			}
+			
+			reader.Close();
+			command.Connection.Close();
+			
+			return result;
 		}
 		
 		
