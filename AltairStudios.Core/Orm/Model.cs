@@ -79,6 +79,41 @@ namespace AltairStudios.Core.Orm {
 		
 		
 		
+		public void insert() {
+			Type type = this.GetType();
+			PropertyInfo[] properties = this.GetType().GetProperties();
+			ModelList<PropertyInfo> parameters = new ModelList<PropertyInfo>();
+			List<string> fields = this.getFields(properties);
+			
+			for(int i = 0; i < properties.Length; i++) {
+				if(properties[i].GetValue(this, null) != null && properties[i].PropertyType.ToString() == "System.String") {
+					TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
+					if(attributes.Length > 0 && attributes[0].Templatize) {
+						parameters.Add(properties[i]);
+					}
+				}
+			}
+			
+			IDbCommand command = SqlProvider.getProvider().createCommand();
+			command.CommandText = SqlProvider.getProvider().sqlInsert(this.GetType());
+			
+			for(int i = 0; i < parameters.Count; i++) {
+				IDbDataParameter parameter = SqlProvider.getProvider().createParameter();
+				parameter.ParameterName = parameters[i].Name;
+				parameter.Value = parameters[i].GetValue(this, null);
+				
+				command.Parameters.Add(parameter);
+			}
+		}
+		
+		
+		/*public void save() {
+			Type type = this.GetType();
+			PropertyInfo[] properties = this.GetType().GetProperties();
+		}*/
+		
+		
+		
 		/// <summary>
 		/// Save this instance.
 		/// </summary>

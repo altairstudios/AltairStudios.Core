@@ -101,16 +101,19 @@ namespace AltairStudios.Core.Orm.Providers {
 			PropertyInfo[] properties = type.GetProperties();
 			ModelList<string> sqlFields = new ModelList<string>();
 			
-			sql.Append("CREATE TABLE IF NOT EXISTS `" + type.Name + "` (");
+			sql.Append("CREATE TABLE IF NOT EXISTS " + type.Name + " (");
 			
 			for(int i = 0; i < properties.Length; i++) {
-				string sqlType = "varchar(255)";
-				
-				switch(properties[i].PropertyType.ToString()) {
-					case "System.Int32": sqlType = "int(11)"; break;
+				TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
+				if(attributes.Length > 0 && attributes[0].Templatize) {
+					string sqlType = "varchar(255)";
+					
+					switch(properties[i].PropertyType.ToString()) {
+						case "System.Int32": sqlType = "int(11)"; break;
+					}
+					
+					sqlFields.Add(properties[i].Name + " " + sqlType + " NOT NULL");
 				}
-				
-				sqlFields.Add("`" + properties[i].Name + "` " + sqlType + " NOT NULL");
 			}
 			
 			sql.Append(string.Join(",", sqlFields.ToArray()));
@@ -119,6 +122,55 @@ namespace AltairStudios.Core.Orm.Providers {
 			return sql.ToString();
 		}
 		
+		
+		
+		public string sqlInsert(Type type) {
+			StringBuilder sql = new StringBuilder();
+			PropertyInfo[] properties = type.GetProperties();
+			ModelList<string> sqlFields = new ModelList<string>();
+			ModelList<string> sqlNames = new ModelList<string>();
+			
+			sql.Append("INSERT INTO " + type.Name);
+			
+			for(int i = 0; i < properties.Length; i++) {
+				TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
+				if(attributes.Length > 0 && attributes[0].Templatize) {
+					sqlNames.Add(properties[i].Name);
+					sqlFields.Add("@" + properties[i].Name);
+				}
+			}
+			
+			sql.Append("(" + string.Join(",", sqlNames.ToArray()) + ")");
+			sql.Append(" VALUES ");
+			sql.Append("(" + string.Join(",", sqlFields.ToArray()) + ")");
+			
+			return sql.ToString();
+		}
+		
+		/*
+		public string sqlUpdate(Type type) {
+			StringBuilder sql = new StringBuilder();
+			PropertyInfo[] properties = type.GetProperties();
+			ModelList<string> sqlFields = new ModelList<string>();
+			ModelList<string> sqlNames = new ModelList<string>();
+			
+			sql.Append("UPDATE " + type.Name);
+			
+			for(int i = 0; i < properties.Length; i++) {
+				TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
+				if(attributes.Length > 0 && attributes[0].Templatize) {
+					sqlNames.Add(properties[i].Name);
+					sqlFields.Add(properties[i].Name + " = @" + properties[i].Name);
+				}
+			}
+			
+			sql.Append("SET " + string.Join(",", sqlFields) + "");
+			sql.Append(" WHERE ");
+			sql.Append("(" + string.Join(",", sqlFields) + ")");
+			
+			return sql.ToString();
+		}
+		*/
 		
 		
 		/// <summary>
