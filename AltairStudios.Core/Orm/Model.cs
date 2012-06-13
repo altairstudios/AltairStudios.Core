@@ -28,6 +28,8 @@ namespace AltairStudios.Core.Orm {
 			PropertyInfo[] properties = this.GetType().GetProperties();
 			ModelList<PropertyInfo> parameters = new ModelList<PropertyInfo>();
 			List<string> fields = this.getFields(properties);
+			ModelList<PropertyInfo> primaryKeys = new ModelList<PropertyInfo>();
+			ModelList<PropertyInfo> indexes = new ModelList<PropertyInfo>();
 			
 			for(int i = 0; i < properties.Length; i++) {
 				if(properties[i].GetValue(this, null) != null && properties[i].PropertyType.ToString() == "System.String") {
@@ -35,6 +37,22 @@ namespace AltairStudios.Core.Orm {
 					if(attributes.Length > 0 && attributes[0].Templatize) {
 						parameters.Add(properties[i]);
 					}
+					
+					PrimaryKeyAttribute[] attributesPrimaryKey = (PrimaryKeyAttribute[])properties[i].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
+					if(attributesPrimaryKey.Length > 0) {
+						primaryKeys.Add(properties[i]);
+					}
+					
+					IndexAttribute[] attributesIndex = (IndexAttribute[])properties[i].GetCustomAttributes(typeof(IndexAttribute), true);
+					if(attributesPrimaryKey.Length > 0) {
+						indexes.Add(properties[i]);
+					}
+				}
+			}
+			
+			if(primaryKeys.Count > 0) {
+				for(int i = 0; i < primaryKeys.Count; i++) {
+					primaryKeys[0].PropertyType.
 				}
 			}
 			
@@ -75,6 +93,17 @@ namespace AltairStudios.Core.Orm {
 			command.Connection.Close();
 			
 			return models;
+		}
+		
+		
+		
+		public ModelList<T> getByPk<T>() {
+			
+		}
+		
+		
+		public ModelList<T> getByIndex<T>() {
+			
 		}
 		
 		
