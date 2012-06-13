@@ -56,7 +56,6 @@
   <ItemGroup>
     <Compile Include="Orm\Model.cs" />
     <Compile Include="Mvc\MvcApplication.cs" />
-    <Compile Include="Orm\Templatize.cs" />
     <Compile Include="Mvc\Model.cs" />
     <Compile Include="Mvc\Templatize.cs" />
     <Compile Include="Util\StringConverter.cs" />
@@ -88,6 +87,9 @@
     <Compile Include="Mvc\Controllers\InstallController.cs" />
     <Compile Include="I18n\Translate.cs" />
     <Compile Include="Orm\Models\I18n\TranslateItem.cs" />
+    <Compile Include="Orm\PrimaryKeyAttribute.cs" />
+    <Compile Include="Orm\TemplatizeAttribute.cs" />
+    <Compile Include="Orm\IndexAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web" />
@@ -98,12 +100,12 @@
       <HintPath>bin\mysql.data.dll</HintPath>
     </Reference>
     <Reference Include="System.Data" />
-    <Reference Include="System.Web.Mvc">
-      <HintPath>bin\System.Web.Mvc.dll</HintPath>
-    </Reference>
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Abstractions" />
-    <Reference Include="Newtonsoft.Json">
+    <Reference Include="System.Web.Mvc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>bin\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
       <HintPath>bin\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
