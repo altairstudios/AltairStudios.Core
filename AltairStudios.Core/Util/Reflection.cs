@@ -72,13 +72,28 @@ namespace AltairStudios.Core.Util {
 			for(int i = 0; i < assemblies.Length; i++) {
 				Type[] types = assemblies[i].GetTypes();
 				for(int j = 0; j < types.Length; j++) {
-					if(types[j].Namespace != null && (types[j].Namespace == "AltairStudios.Core.Orm.Models" || types[j].Namespace.EndsWith(".Model"))) {
+					//types[j].ba
+					if(types[j].IsGenericType == false && this.isChildOf(types[j], typeof(Orm.Model))) {
+					//if(types[j].GetNestedType("AltairStudios.Core.Orm.Model") != null) {
+					//if(types[j].Namespace != null && (types[j].Namespace == "AltairStudios.Core.Orm.Models" || types[j].Namespace.EndsWith(".Model"))) {
 						models.Add(auxModel.cast<Model>(Activator.CreateInstance(types[j])));
 					}
 				}
 			}
 			
 			return models;
+		}
+		
+		
+		
+		public bool isChildOf(Type objectType, Type baseType) {
+			if(objectType == baseType) {
+				return true;
+			} else if(objectType.BaseType == null) {
+				return false;
+			} else {
+				return this.isChildOf(objectType.BaseType, baseType);
+			}
 		}
 		
 		

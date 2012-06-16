@@ -52,7 +52,7 @@ namespace AltairStudios.Core.Orm {
 			
 			if(primaryKeys.Count > 0) {
 				for(int i = 0; i < primaryKeys.Count; i++) {
-					primaryKeys[0].PropertyType.
+					//primaryKeys[0].PropertyType.
 				}
 			}
 			
@@ -97,14 +97,14 @@ namespace AltairStudios.Core.Orm {
 		
 		
 		
-		public ModelList<T> getByPk<T>() {
+		/*public ModelList<T> getByPk<T>() {
 			
 		}
 		
 		
 		public ModelList<T> getByIndex<T>() {
 			
-		}
+		}*/
 		
 		
 		

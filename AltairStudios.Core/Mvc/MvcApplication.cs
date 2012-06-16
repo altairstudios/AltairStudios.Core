@@ -66,6 +66,11 @@ namespace AltairStudios.Core.Mvc {
 		/// </value>
 		public static string Path {
 			get {
+				if(MvcApplication.path == "") {
+					if(HttpContext.Current.Request.ApplicationPath != "/") {
+						MvcApplication.path = HttpContext.Current.Request.ApplicationPath;
+					}
+				}
 				return MvcApplication.path;
 			}
 		}
@@ -112,16 +117,17 @@ namespace AltairStudios.Core.Mvc {
 		protected void Application_Start() {
 			this.RegisterRoutes(RouteTable.Routes);
 			
-			AuthenticationSection authSection = (AuthenticationSection)WebConfigurationManager.GetSection("system.web/authentication");
+			Configuration config = WebConfigurationManager.OpenWebConfiguration("~");
+			AuthenticationSection authSection = (AuthenticationSection)config.GetSection("system.web/authentication");
 			authSection.Mode = AuthenticationMode.Forms;
 			authSection.Forms.LoginUrl = "~/Authorize/Login";
 			
 			System.Web.Hosting.HostingEnvironment.RegisterVirtualPathProvider(new VirtualProvider.AssemblyPathProvider());
 			
-			MvcApplication.diskPath = HttpContext.Current.Server.MapPath("~");
+			/*MvcApplication.diskPath = HttpContext.Current.Server.MapPath("~");
 			if(HttpContext.Current.Request.ApplicationPath != "/") {
 				MvcApplication.path = HttpContext.Current.Request.ApplicationPath;
-			}
+			}*/
 			
 			if(ConfigurationManager.ConnectionStrings["SqlServerConnection"] != null) {
 				MvcApplication.configurated = true;

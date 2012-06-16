@@ -122,61 +122,6 @@
             Loads the configuration.
             </summary>
         </member>
-        <member name="T:AltairStudios.Core.Orm.TemplatizeAttribute">
-            <summary>
-            Templatize attribute.
-            </summary>
-        </member>
-        <member name="M:AltairStudios.Core.Orm.TemplatizeAttribute.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:AltairStudios.Core.Orm.TemplatizeAttribute" /> class.
-            </summary>
-        </member>
-        <member name="M:AltairStudios.Core.Orm.TemplatizeAttribute.#ctor(System.Boolean)">
-            <summary>
-            Initializes a new instance of the <see cref="T:AltairStudios.Core.Orm.TemplatizeAttribute" /> class.
-            </summary>
-            <param name="isSubtable">
-            Is subtable.
-            </param>
-        </member>
-        <member name="M:AltairStudios.Core.Orm.TemplatizeAttribute.#ctor(System.Boolean,System.Boolean)">
-            <summary>
-            Initializes a new instance of the <see cref="T:AltairStudios.Core.Orm.TemplatizeAttribute" /> class.
-            </summary>
-            <param name="isSubtable">
-            Is subtable.
-            </param>
-            <param name="isList">
-            Is list.
-            </param>
-        </member>
-        <member name="F:AltairStudios.Core.Orm.TemplatizeAttribute.isSubtable">
-            <summary>
-            The is subtable.
-            </summary>
-        </member>
-        <member name="F:AltairStudios.Core.Orm.TemplatizeAttribute.isList">
-            <summary>
-            The is list.
-            </summary>
-        </member>
-        <member name="P:AltairStudios.Core.Orm.TemplatizeAttribute.IsList">
-            <summary>
-            Gets or sets a value indicating whether this instance is list.
-            </summary>
-            <value>
-                <c>true</c> if this instance is list; otherwise, <c>false</c>.
-            </value>
-        </member>
-        <member name="P:AltairStudios.Core.Orm.TemplatizeAttribute.IsSubtable">
-            <summary>
-            Gets or sets a value indicating whether this instance is subtable.
-            </summary>
-            <value>
-                <c>true</c> if this instance is subtable; otherwise, <c>false</c>.
-            </value>
-        </member>
         <member name="T:AltairStudios.Core.Mvc.Model">
             <summary>
             Model.
@@ -1918,6 +1863,102 @@
             <value>
             The domain.
             </value>
+        </member>
+        <member name="T:AltairStudios.Core.Orm.PrimaryKeyAttribute">
+            <summary>
+            Primary key attribute.
+            </summary>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.PrimaryKeyAttribute.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:AltairStudios.Core.Orm.PrimaryKeyAttribute" /> class.
+            </summary>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.PrimaryKeyAttribute.#ctor(System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AltairStudios.Core.Orm.PrimaryKeyAttribute" /> class.
+            </summary>
+            <param name="autoincrement">
+            Autoincrement.
+            </param>
+        </member>
+        <member name="T:AltairStudios.Core.Orm.TemplatizeAttribute">
+            <summary>
+            Templatize attribute.
+            </summary>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.TemplatizeAttribute.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:AltairStudios.Core.Orm.TemplatizeAttribute" /> class.
+            </summary>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.TemplatizeAttribute.#ctor(System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AltairStudios.Core.Orm.TemplatizeAttribute" /> class.
+            </summary>
+            <param name="isSubtable">
+            Is subtable.
+            </param>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.TemplatizeAttribute.#ctor(System.Boolean,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AltairStudios.Core.Orm.TemplatizeAttribute" /> class.
+            </summary>
+            <param name="isSubtable">
+            Is subtable.
+            </param>
+            <param name="isList">
+            Is list.
+            </param>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.TemplatizeAttribute.isSubtable">
+            <summary>
+            The is subtable.
+            </summary>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.TemplatizeAttribute.isList">
+            <summary>
+            The is list.
+            </summary>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.TemplatizeAttribute.IsList">
+            <summary>
+            Gets or sets a value indicating whether this instance is list.
+            </summary>
+            <value>
+                <c>true</c> if this instance is list; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.TemplatizeAttribute.IsSubtable">
+            <summary>
+            Gets or sets a value indicating whether this instance is subtable.
+            </summary>
+            <value>
+                <c>true</c> if this instance is subtable; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:AltairStudios.Core.Orm.IndexAttribute">
+            <summary>
+            Index attribute.
+            </summary>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.IndexAttribute.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:AltairStudios.Core.Orm.IndexAttribute" /> class.
+            </summary>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.IndexAttribute.#ctor(System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AltairStudios.Core.Orm.IndexAttribute" /> class.
+            </summary>
+            <param name="unique">
+            Unique.
+            </param>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.IndexAttribute.unique">
+            <summary>
+            The unique.
+            </summary>
         </member>
     </members>
 </doc>
