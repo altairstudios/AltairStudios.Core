@@ -108,11 +108,12 @@ namespace AltairStudios.Core.Orm {
 		
 		
 		
+		/// <summary>
+		/// Insert this model instance into database.
+		/// </summary>
 		public void insert() {
-			Type type = this.GetType();
 			PropertyInfo[] properties = this.GetType().GetProperties();
 			ModelList<PropertyInfo> parameters = new ModelList<PropertyInfo>();
-			List<string> fields = this.getFields(properties);
 			
 			for(int i = 0; i < properties.Length; i++) {
 				if(properties[i].GetValue(this, null) != null && (properties[i].PropertyType.ToString() == "System.String" || properties[i].PropertyType.ToString() == "System.Int32" || properties[i].PropertyType.ToString() == "System.Double" || properties[i].PropertyType.ToString() == "System.Decimal")) {

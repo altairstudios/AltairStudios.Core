@@ -156,6 +156,15 @@ namespace AltairStudios.Core.Orm.Providers {
 		
 		
 		
+		/// <summary>
+		/// Sqls the insert.
+		/// </summary>
+		/// <returns>
+		/// The insert.
+		/// </returns>
+		/// <param name='type'>
+		/// Type.
+		/// </param>
 		public string sqlInsert(Type type) {
 			StringBuilder sql = new StringBuilder();
 			PropertyInfo[] properties = type.GetProperties();

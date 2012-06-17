@@ -20,6 +20,11 @@
             The 1st type parameter.
             </typeparam>
         </member>
+        <member name="M:AltairStudios.Core.Orm.Model.insert">
+            <summary>
+            Insert this model instance into database.
+            </summary>
+        </member>
         <member name="M:AltairStudios.Core.Orm.Model.createTable">
             <summary>
             Save this instance.
@@ -766,6 +771,20 @@
             <returns>
             The templatize models.
             </returns>
+        </member>
+        <member name="M:AltairStudios.Core.Util.Reflection.isChildOf(System.Type,System.Type)">
+            <summary>
+            Ises the child of.
+            </summary>
+            <returns>
+            The child of.
+            </returns>
+            <param name="objectType">
+            If set to <c>true</c> object type.
+            </param>
+            <param name="baseType">
+            If set to <c>true</c> base type.
+            </param>
         </member>
         <member name="M:AltairStudios.Core.Util.Reflection.getModelFromString(System.String)">
             <summary>
@@ -1881,6 +1900,19 @@
             <param name="autoincrement">
             Autoincrement.
             </param>
+        </member>
+        <member name="F:AltairStudios.Core.Orm.PrimaryKeyAttribute.autoincrement">
+            <summary>
+            The autoincrement.
+            </summary>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.PrimaryKeyAttribute.AutoIncrement">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:AltairStudios.Core.Orm.PrimaryKeyAttribute" /> auto increment.
+            </summary>
+            <value>
+                <c>true</c> if auto increment; otherwise, <c>false</c>.
+            </value>
         </member>
         <member name="T:AltairStudios.Core.Orm.TemplatizeAttribute">
             <summary>

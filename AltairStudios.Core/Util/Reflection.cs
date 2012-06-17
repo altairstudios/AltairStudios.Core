@@ -86,6 +86,18 @@ namespace AltairStudios.Core.Util {
 		
 		
 		
+		/// <summary>
+		/// Ises the child of.
+		/// </summary>
+		/// <returns>
+		/// The child of.
+		/// </returns>
+		/// <param name='objectType'>
+		/// If set to <c>true</c> object type.
+		/// </param>
+		/// <param name='baseType'>
+		/// If set to <c>true</c> base type.
+		/// </param>
 		public bool isChildOf(Type objectType, Type baseType) {
 			if(objectType == baseType) {
 				return true;

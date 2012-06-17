@@ -7,12 +7,21 @@ namespace AltairStudios.Core.Orm {
 	/// </summary>
 	public class PrimaryKeyAttribute : AltairStudios.Core.Mvc.TemplatizeAttribute {
 		#region Fields
+		/// <summary>
+		/// The autoincrement.
+		/// </summary>
 		protected bool autoincrement = false;
 		#endregion
 		
 		
 		
 		#region Properties
+		/// <summary>
+		/// Gets or sets a value indicating whether this <see cref="AltairStudios.Core.Orm.PrimaryKeyAttribute"/> auto increment.
+		/// </summary>
+		/// <value>
+		/// <c>true</c> if auto increment; otherwise, <c>false</c>.
+		/// </value>
 		public bool AutoIncrement {
 			get {
 				return this.autoincrement;
