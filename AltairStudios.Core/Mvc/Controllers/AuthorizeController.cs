@@ -94,7 +94,7 @@ namespace AltairStudios.Core.Mvc.Controllers {
 				FormsAuthentication.Initialize();
 				FormsAuthenticationTicket fat = new FormsAuthenticationTicket(user.Email, user.Remember, 30);
 				Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, FormsAuthentication.Encrypt(fat)));
-				Session["admin_user"] = authUser;
+				Session["user"] = authUser;
 				return Content("{\"error\":false,\"url\":\"" + url + "\"}");
 			} else {
 				return Content("{\"error\":true}");
