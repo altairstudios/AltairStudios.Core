@@ -100,23 +100,55 @@ namespace AltairStudios.Core.Orm.Providers {
 			StringBuilder sql = new StringBuilder();
 			PropertyInfo[] properties = type.GetProperties();
 			ModelList<string> sqlFields = new ModelList<string>();
+			ModelList<string> primaryFields = new ModelList<string>();
+			ModelList<string> indexFields = new ModelList<string>();
+			ModelList<string> uniqueFields = new ModelList<string>();
+			ModelList<string> keys = new ModelList<string>();
 			
 			sql.Append("CREATE TABLE IF NOT EXISTS " + type.Name + " (");
 			
 			for(int i = 0; i < properties.Length; i++) {
 				TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
-				if(attributes.Length > 0 && attributes[0].Templatize) {
+				PrimaryKeyAttribute[] primaryKeys = (PrimaryKeyAttribute[])properties[i].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
+				IndexAttribute[] indexes = (IndexAttribute[])properties[i].GetCustomAttributes(typeof(IndexAttribute), true);
+				
+				if(primaryKeys.Length > 0) {
+					primaryFields.Add(properties[i].Name);
+				} else if(indexes.Length > 0 && indexes[0].Unique) {
+					uniqueFields.Add(properties[i].Name);
+				} else if(indexes.Length > 0) {
+					indexFields.Add(properties[i].Name);
+				}
+				
+				if((attributes.Length > 0 && attributes[0].Templatize) || (primaryKeys.Length > 0 && primaryKeys[0].Templatize) || (indexes.Length > 0 && indexes[0].Templatize)) {
 					string sqlType = "varchar(255)";
 					
 					switch(properties[i].PropertyType.ToString()) {
 						case "System.Int32": sqlType = "int(11)"; break;
 					}
 					
-					sqlFields.Add(properties[i].Name + " " + sqlType + " NOT NULL");
+					if(primaryKeys.Length > 0 && primaryKeys[0].AutoIncrement) {
+						sqlFields.Add(properties[i].Name + " " + sqlType + " NOT NULL AUTO_INCREMENT");
+					} else {
+						sqlFields.Add(properties[i].Name + " " + sqlType + " NOT NULL");
+					}
 				}
 			}
 			
+			if(primaryFields.Count > 0) {
+				sqlFields.Add("PRIMARY KEY (" + string.Join(",", primaryFields.ToArray()) + ")");
+			}
+			
+			if(uniqueFields.Count > 0) {
+				sqlFields.Add("UNIQUE KEY (" + string.Join(",", uniqueFields.ToArray()) + ")");
+			}
+			
+			if(indexFields.Count > 0) {
+				sqlFields.Add("KEY (" + string.Join(",", indexFields.ToArray()) + ")");
+			}
+			
 			sql.Append(string.Join(",", sqlFields.ToArray()));
+			
 			sql.Append(") ENGINE=InnoDB DEFAULT CHARSET=utf8");
 			
 			return sql.ToString();
@@ -134,7 +166,9 @@ namespace AltairStudios.Core.Orm.Providers {
 			
 			for(int i = 0; i < properties.Length; i++) {
 				TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
-				if(attributes.Length > 0 && attributes[0].Templatize) {
+				PrimaryKeyAttribute[] primaryKeys = (PrimaryKeyAttribute[])properties[i].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
+				
+				if((primaryKeys.Length > 0 && primaryKeys[0].AutoIncrement == false) || (attributes.Length > 0 && attributes[0].Templatize)) {
 					sqlNames.Add(properties[i].Name);
 					sqlFields.Add("@" + properties[i].Name);
 				}

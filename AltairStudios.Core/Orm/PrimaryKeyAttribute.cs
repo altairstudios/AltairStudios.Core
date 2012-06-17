@@ -12,6 +12,18 @@ namespace AltairStudios.Core.Orm {
 		
 		
 		
+		#region Properties
+		public bool AutoIncrement {
+			get {
+				return this.autoincrement;
+			} set {
+				this.autoincrement = value;
+			}
+		}
+		#endregion
+		
+		
+		
 		#region Contructors
 		/// <summary>
 		/// Initializes a new instance of the <see cref="AltairStudios.Core.Orm.PrimaryKeyAttribute"/> class.

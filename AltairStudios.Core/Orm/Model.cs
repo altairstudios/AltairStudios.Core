@@ -115,7 +115,7 @@ namespace AltairStudios.Core.Orm {
 			List<string> fields = this.getFields(properties);
 			
 			for(int i = 0; i < properties.Length; i++) {
-				if(properties[i].GetValue(this, null) != null && properties[i].PropertyType.ToString() == "System.String") {
+				if(properties[i].GetValue(this, null) != null && (properties[i].PropertyType.ToString() == "System.String" || properties[i].PropertyType.ToString() == "System.Int32" || properties[i].PropertyType.ToString() == "System.Double" || properties[i].PropertyType.ToString() == "System.Decimal")) {
 					TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
 					if(attributes.Length > 0 && attributes[0].Templatize) {
 						parameters.Add(properties[i]);
@@ -133,6 +133,8 @@ namespace AltairStudios.Core.Orm {
 				
 				command.Parameters.Add(parameter);
 			}
+			
+			command.ExecuteNonQuery();
 		}
 		
 		

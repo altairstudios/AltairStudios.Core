@@ -14,6 +14,25 @@ namespace AltairStudios.Core.Orm {
 		#endregion
 		
 		
+
+		#region Properties
+		/// <summary>
+		/// Gets or sets a value indicating whether this <see cref="AltairStudios.Core.Orm.IndexAttribute"/> is unique.
+		/// </summary>
+		/// <value>
+		/// <c>true</c> if unique; otherwise, <c>false</c>.
+		/// </value>
+		public bool Unique {
+			get {
+				return unique;
+			}
+			set {
+				unique = value;
+			}
+		}
+		#endregion
+		
+		
 		
 		#region Contructors
 		/// <summary>
