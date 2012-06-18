@@ -176,8 +176,9 @@ namespace AltairStudios.Core.Orm.Providers {
 			for(int i = 0; i < properties.Length; i++) {
 				TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
 				PrimaryKeyAttribute[] primaryKeys = (PrimaryKeyAttribute[])properties[i].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
+				IndexAttribute[] indexes = (IndexAttribute[])properties[i].GetCustomAttributes(typeof(IndexAttribute), true);
 				
-				if((primaryKeys.Length > 0 && primaryKeys[0].AutoIncrement == false) || (attributes.Length > 0 && attributes[0].Templatize)) {
+				if((primaryKeys.Length > 0 && primaryKeys[0].AutoIncrement == false) || (indexes.Length > 0) || (attributes.Length > 0 && attributes[0].Templatize)) {
 					sqlNames.Add(properties[i].Name);
 					sqlFields.Add("@" + properties[i].Name);
 				}

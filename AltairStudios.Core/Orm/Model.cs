@@ -32,7 +32,7 @@ namespace AltairStudios.Core.Orm {
 			ModelList<PropertyInfo> indexes = new ModelList<PropertyInfo>();
 			
 			for(int i = 0; i < properties.Length; i++) {
-				if(properties[i].GetValue(this, null) != null && properties[i].PropertyType.ToString() == "System.String") {
+				if(properties[i].GetValue(this, null) != null && (properties[i].PropertyType.ToString() == "System.String" || properties[i].PropertyType.ToString() == "System.Int32" || properties[i].PropertyType.ToString() == "System.Double" || properties[i].PropertyType.ToString() == "System.Decimal")) {
 					TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
 					if(attributes.Length > 0 && attributes[0].Templatize) {
 						parameters.Add(properties[i]);
@@ -40,12 +40,18 @@ namespace AltairStudios.Core.Orm {
 					
 					PrimaryKeyAttribute[] attributesPrimaryKey = (PrimaryKeyAttribute[])properties[i].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
 					if(attributesPrimaryKey.Length > 0) {
-						primaryKeys.Add(properties[i]);
+						if(attributesPrimaryKey[0].AutoIncrement) {
+							primaryKeys.Add(properties[i]);
+						} else {
+							primaryKeys.Add(properties[i]);
+							parameters.Add(properties[i]);
+						}
 					}
 					
 					IndexAttribute[] attributesIndex = (IndexAttribute[])properties[i].GetCustomAttributes(typeof(IndexAttribute), true);
 					if(attributesPrimaryKey.Length > 0) {
 						indexes.Add(properties[i]);
+						parameters.Add(properties[i]);
 					}
 				}
 			}
@@ -78,7 +84,10 @@ namespace AltairStudios.Core.Orm {
 				counter = 0;
 				for(int i = 0; i < properties.Length; i++) {	
 					TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
-					if(attributes.Length > 0 && attributes[0].Templatize) {
+					PrimaryKeyAttribute[] primaryAttributes = (PrimaryKeyAttribute[])properties[i].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
+					IndexAttribute[] indexAttributes = (IndexAttribute[])properties[i].GetCustomAttributes(typeof(IndexAttribute), true);
+					
+					if((attributes.Length > 0 && attributes[0].Templatize) || (primaryAttributes.Length > 0) || indexAttributes.Length > 0) {
 						if(reader[counter] != DBNull.Value) {
 							type.GetProperty(properties[i].Name).SetValue(instance, reader[counter], null);
 						}
@@ -118,7 +127,10 @@ namespace AltairStudios.Core.Orm {
 			for(int i = 0; i < properties.Length; i++) {
 				if(properties[i].GetValue(this, null) != null && (properties[i].PropertyType.ToString() == "System.String" || properties[i].PropertyType.ToString() == "System.Int32" || properties[i].PropertyType.ToString() == "System.Double" || properties[i].PropertyType.ToString() == "System.Decimal")) {
 					TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
-					if(attributes.Length > 0 && attributes[0].Templatize) {
+					PrimaryKeyAttribute[] primarys = (PrimaryKeyAttribute[])properties[i].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
+					IndexAttribute[] indexes = (IndexAttribute[])properties[i].GetCustomAttributes(typeof(IndexAttribute), true);
+					
+					if((attributes.Length > 0 && attributes[0].Templatize) || (primarys.Length > 0 && !primarys[0].AutoIncrement) || (indexes.Length > 0)) {
 						parameters.Add(properties[i]);
 					}
 				}

@@ -35,7 +35,7 @@ namespace AltairStudios.Core.Mvc.Controllers {
 			User user;
 			ModelList<Orm.Model> models = Reflection.Instance.getTemplatizeModels();
 			ModelList<Plugin.PluginBase> plugins = Reflection.Instance.getCorePlugins();
-			user = ((User)Session["admin_user"]);
+			user = ((User)Session["user"]);
 			
 			if(user == null) {
 				return RedirectToAction("Logout", "Authorize");
@@ -112,7 +112,7 @@ namespace AltairStudios.Core.Mvc.Controllers {
 		/// </returns>
 		[Authorize()]
 		public ActionResult GetUser() {
-			return Content(((User)Session["admin_user"]).ToJson());
+			return Content(((User)Session["user"]).ToJson());
 		}
 		
 		

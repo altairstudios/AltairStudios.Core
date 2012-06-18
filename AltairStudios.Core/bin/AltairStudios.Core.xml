@@ -1092,6 +1092,17 @@
             Type.
             </param>
         </member>
+        <member name="M:AltairStudios.Core.Orm.Providers.SqlProvider.sqlInsert(System.Type)">
+            <summary>
+            Sqls the insert.
+            </summary>
+            <returns>
+            The insert.
+            </returns>
+            <param name="type">
+            Type.
+            </param>
+        </member>
         <member name="M:AltairStudios.Core.Orm.Providers.SqlProvider.sqlString(AltairStudios.Core.Orm.Model,System.Type,System.Collections.Generic.List{System.String},System.Reflection.PropertyInfo[])">
             <summary>
             Sqls the string.
