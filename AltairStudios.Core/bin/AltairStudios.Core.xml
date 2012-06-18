@@ -1000,6 +1000,14 @@
             The parameter.
             </returns>
         </member>
+        <member name="M:AltairStudios.Core.Orm.Providers.MySqlProvider.getInsertedId">
+            <summary>
+            Gets the inserted identifier.
+            </summary>
+            <returns>
+            The inserted identifier.
+            </returns>
+        </member>
         <member name="T:AltairStudios.Core.Orm.Providers.SqlServerProvider">
             <summary>
             SqlServer provider.
@@ -1027,6 +1035,14 @@
             </summary>
             <returns>
             The parameter.
+            </returns>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.Providers.SqlServerProvider.getInsertedId">
+            <summary>
+            Gets the inserted identifier.
+            </summary>
+            <returns>
+            The inserted identifier.
             </returns>
         </member>
         <member name="T:AltairStudios.Core.Orm.Providers.SqlProvider">
@@ -1102,6 +1118,14 @@
             <param name="type">
             Type.
             </param>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.Providers.SqlProvider.getInsertedId">
+            <summary>
+            Gets the inserted identifier.
+            </summary>
+            <returns>
+            The inserted identifier.
+            </returns>
         </member>
         <member name="M:AltairStudios.Core.Orm.Providers.SqlProvider.sqlString(AltairStudios.Core.Orm.Model,System.Type,System.Collections.Generic.List{System.String},System.Reflection.PropertyInfo[])">
             <summary>

@@ -178,7 +178,7 @@ namespace AltairStudios.Core.Orm.Providers {
 				PrimaryKeyAttribute[] primaryKeys = (PrimaryKeyAttribute[])properties[i].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
 				IndexAttribute[] indexes = (IndexAttribute[])properties[i].GetCustomAttributes(typeof(IndexAttribute), true);
 				
-				if((primaryKeys.Length > 0 && primaryKeys[0].AutoIncrement == false) || (indexes.Length > 0) || (attributes.Length > 0 && attributes[0].Templatize)) {
+				if((primaryKeys.Length > 0 && primaryKeys[0].AutoIncrement == false) || (indexes.Length > 0) || (attributes.Length > 0 && attributes[0].Templatize && !attributes[0].IsSubtable)) {
 					sqlNames.Add(properties[i].Name);
 					sqlFields.Add("@" + properties[i].Name);
 				}
@@ -188,8 +188,26 @@ namespace AltairStudios.Core.Orm.Providers {
 			sql.Append(" VALUES ");
 			sql.Append("(" + string.Join(",", sqlFields.ToArray()) + ")");
 			
+			sql.Append(";");
+			
+			sql.Append(this.getInsertedId());
+			
 			return sql.ToString();
 		}
+		
+		
+		
+		/// <summary>
+		/// Gets the inserted identifier.
+		/// </summary>
+		/// <returns>
+		/// The inserted identifier.
+		/// </returns>
+		protected abstract string getInsertedId();
+		
+		
+		
+		
 		
 		/*
 		public string sqlUpdate(Type type) {

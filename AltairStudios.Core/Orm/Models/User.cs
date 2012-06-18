@@ -116,7 +116,7 @@ namespace AltairStudios.Core.Orm.Models {
 		/// <value>
 		/// The identifier.
 		/// </value>
-		[Templatize]
+		[PrimaryKey(true)]
 		public int Id {
 			get {
 				return this.id;

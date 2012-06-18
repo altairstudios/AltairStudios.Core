@@ -123,6 +123,7 @@ namespace AltairStudios.Core.Orm {
 		public void insert() {
 			PropertyInfo[] properties = this.GetType().GetProperties();
 			ModelList<PropertyInfo> parameters = new ModelList<PropertyInfo>();
+			ModelList<PropertyInfo> subparameters = new ModelList<PropertyInfo>();
 			
 			for(int i = 0; i < properties.Length; i++) {
 				if(properties[i].GetValue(this, null) != null && (properties[i].PropertyType.ToString() == "System.String" || properties[i].PropertyType.ToString() == "System.Int32" || properties[i].PropertyType.ToString() == "System.Double" || properties[i].PropertyType.ToString() == "System.Decimal")) {
@@ -130,8 +131,10 @@ namespace AltairStudios.Core.Orm {
 					PrimaryKeyAttribute[] primarys = (PrimaryKeyAttribute[])properties[i].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
 					IndexAttribute[] indexes = (IndexAttribute[])properties[i].GetCustomAttributes(typeof(IndexAttribute), true);
 					
-					if((attributes.Length > 0 && attributes[0].Templatize) || (primarys.Length > 0 && !primarys[0].AutoIncrement) || (indexes.Length > 0)) {
+					if((attributes.Length > 0 && attributes[0].Templatize && !attributes[0].IsSubtable) || (primarys.Length > 0 && !primarys[0].AutoIncrement) || (indexes.Length > 0)) {
 						parameters.Add(properties[i]);
+					} else if(attributes.Length > 0 && attributes[0].Templatize && attributes[0].IsSubtable) {
+						subparameters.Add(properties[i]);
 					}
 				}
 			}
@@ -147,8 +150,17 @@ namespace AltairStudios.Core.Orm {
 				command.Parameters.Add(parameter);
 			}
 			
-			command.ExecuteNonQuery();
+			int id = (int)command.ExecuteScalar();
+			
+			for(int i = 0; i < subparameters.Count; i++) {
+				/*((Model)subparameters[i]).
+				((Model)subparameters[i]).insert();*/
+			}
 		}
+		
+		
+		
+		
 		
 		
 		/*public void save() {

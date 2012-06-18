@@ -50,5 +50,17 @@ namespace AltairStudios.Core.Orm.Providers {
 
 			return parameter;
 		}
+		
+		
+		
+		/// <summary>
+		/// Gets the inserted identifier.
+		/// </summary>
+		/// <returns>
+		/// The inserted identifier.
+		/// </returns>
+		protected override string getInsertedId() {
+			return "SELECT SCOPE_IDENTITY();";
+		}
 	}
 }
