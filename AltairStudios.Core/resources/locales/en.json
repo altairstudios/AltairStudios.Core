@@ -12,5 +12,6 @@
 	{"Code":"install_configure_webconfig","Domain":"","Text":"Copy the next web.config lines in your web.config file to set the database conection and master user admin access","PluralText":""},
 	{"Code":"go_to_admin","Domain":"","Text":"Go to admin","PluralText":""},
 	{"Code":"access","Domain":"","Text":"Access","PluralText":""},
-	{"Code":"remember","Domain":"","Text":"Remember","PluralText":""}
+	{"Code":"remember","Domain":"","Text":"Remember","PluralText":""},
+	{"Code":"synchronize","Domain":"","Text":"Synchronize","PluralText":""}
 ]

@@ -12,5 +12,6 @@
 	{"Code":"install_configure_webconfig","Domain":"","Text":"Copia las siguientes lineas de web.config para establecer la conexión por defecto a la base de datos y el acceso del administrador maestro.","PluralText":""},
 	{"Code":"go_to_admin","Domain":"","Text":"Ir al administrador","PluralText":""},
 	{"Code":"access","Domain":"","Text":"Acceder","PluralText":""},
-	{"Code":"remember","Domain":"","Text":"Recordar","PluralText":""}
+	{"Code":"remember","Domain":"","Text":"Recordar","PluralText":""},
+	{"Code":"synchronize","Domain":"","Text":"Sincronizar","PluralText":""}
 ]
