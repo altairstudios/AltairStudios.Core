@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Reflection;
 using System.Text;
+using AltairStudios.Core.Util;
 
 
 namespace AltairStudios.Core.Orm.Providers {
@@ -103,7 +104,9 @@ namespace AltairStudios.Core.Orm.Providers {
 			ModelList<string> primaryFields = new ModelList<string>();
 			ModelList<string> indexFields = new ModelList<string>();
 			ModelList<string> uniqueFields = new ModelList<string>();
+			ModelList<string> foreignFields = new ModelList<string>();
 			ModelList<string> keys = new ModelList<string>();
+			ModelList<string> createdModelsName = new ModelList<string>();
 			
 			sql.Append("CREATE TABLE IF NOT EXISTS " + type.Name + " (");
 			
@@ -111,6 +114,7 @@ namespace AltairStudios.Core.Orm.Providers {
 				TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
 				PrimaryKeyAttribute[] primaryKeys = (PrimaryKeyAttribute[])properties[i].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
 				IndexAttribute[] indexes = (IndexAttribute[])properties[i].GetCustomAttributes(typeof(IndexAttribute), true);
+				ForeignKeyAttribute[] foreigns = (ForeignKeyAttribute[])properties[i].GetCustomAttributes(typeof(ForeignKeyAttribute), true);
 				
 				if(primaryKeys.Length > 0) {
 					primaryFields.Add(properties[i].Name);
@@ -120,7 +124,7 @@ namespace AltairStudios.Core.Orm.Providers {
 					indexFields.Add(properties[i].Name);
 				}
 				
-				if((attributes.Length > 0 && attributes[0].Templatize) || (primaryKeys.Length > 0 && primaryKeys[0].Templatize) || (indexes.Length > 0 && indexes[0].Templatize)) {
+				if(attributes.Length > 0) {
 					string sqlType = "varchar(255)";
 					
 					switch(properties[i].PropertyType.ToString()) {
@@ -130,7 +134,13 @@ namespace AltairStudios.Core.Orm.Providers {
 					if(primaryKeys.Length > 0 && primaryKeys[0].AutoIncrement) {
 						sqlFields.Add(properties[i].Name + " " + sqlType + " NOT NULL AUTO_INCREMENT");
 					} else {
-						sqlFields.Add(properties[i].Name + " " + sqlType + " NOT NULL");
+						if(Reflection.Instance.getModelFromString(properties[i].PropertyType.ToString()) != null && !createdModelsName.Contains(properties[i].PropertyType.ToString())) {
+							foreignFields.Add(this.sqlCreateTable(properties[i].PropertyType));
+							foreignFields.Add(this.sqlCreateForeignTable(type, properties[i].PropertyType));
+							createdModelsName.Add(properties[i].PropertyType.ToString());
+						} else {
+							sqlFields.Add(properties[i].Name + " " + sqlType + " NOT NULL");
+						}
 					}
 				}
 			}
@@ -148,6 +158,77 @@ namespace AltairStudios.Core.Orm.Providers {
 			}
 			
 			sql.Append(string.Join(",", sqlFields.ToArray()));
+			
+			sql.Append(") ENGINE=InnoDB DEFAULT CHARSET=utf8");
+			
+			if(foreignFields.Count > 0) {
+				sql.Append(";" + string.Join(";", foreignFields.ToArray()));
+			}
+			
+			return sql.ToString();
+		}
+		
+		
+		
+		/// <summary>
+		/// Sqls the create foreign table.
+		/// </summary>
+		/// <returns>
+		/// The create foreign table.
+		/// </returns>
+		/// <param name='type1'>
+		/// Type1.
+		/// </param>
+		/// <param name='type2'>
+		/// Type2.
+		/// </param>
+		public string sqlCreateForeignTable(Type type1, Type type2) {
+			StringBuilder sql = new StringBuilder();
+			PropertyInfo[] properties1 = type1.GetProperties();
+			PropertyInfo[] properties2 = type2.GetProperties();
+			ModelList<string> fields = new ModelList<string>();
+			ModelList<string> keys = new ModelList<string>();
+			
+			for(int i = 0; i < properties1.Length; i++) {
+				PrimaryKeyAttribute[] primaryKeys = (PrimaryKeyAttribute[])properties1[i].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
+				
+				if(primaryKeys.Length > 0) {
+					string sqlType = "varchar(255)";
+					string name = type1.Name + "_" + properties1[i].Name;
+					
+					switch(properties1[i].PropertyType.ToString()) {
+						case "System.Int32": sqlType = "int(11)"; break;
+					}
+					
+					fields.Add(name + " " + sqlType + " NOT NULL");
+					keys.Add(name);
+				}
+			}
+			
+			for(int i = 0; i < properties2.Length; i++) {
+				PrimaryKeyAttribute[] primaryKeys = (PrimaryKeyAttribute[])properties2[i].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
+				
+				if(primaryKeys.Length > 0) {
+					string sqlType = "varchar(255)";
+					string name = type2.Name + "_" + properties2[i].Name;
+					
+					switch(properties2[i].PropertyType.ToString()) {
+						case "System.Int32": sqlType = "int(11)"; break;
+					}
+					
+					fields.Add(name + " " + sqlType + " NOT NULL");
+					keys.Add(name);
+				}
+			}
+			
+			if(keys.Count > 0) {
+				fields.Add("PRIMARY KEY (" + string.Join(",", keys.ToArray()) + ")");
+			}
+			
+			sql.Append("CREATE TABLE IF NOT EXISTS " + type1.Name + "_" + type2.Name + " (");
+			sql.Append(string.Join(",", fields.ToArray()));
+			
+			
 			
 			sql.Append(") ENGINE=InnoDB DEFAULT CHARSET=utf8");
 			
@@ -178,9 +259,11 @@ namespace AltairStudios.Core.Orm.Providers {
 				PrimaryKeyAttribute[] primaryKeys = (PrimaryKeyAttribute[])properties[i].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
 				IndexAttribute[] indexes = (IndexAttribute[])properties[i].GetCustomAttributes(typeof(IndexAttribute), true);
 				
-				if((primaryKeys.Length > 0 && primaryKeys[0].AutoIncrement == false) || (indexes.Length > 0) || (attributes.Length > 0 && attributes[0].Templatize && !attributes[0].IsSubtable)) {
-					sqlNames.Add(properties[i].Name);
-					sqlFields.Add("@" + properties[i].Name);
+				if((primaryKeys.Length > 0 && primaryKeys[0].AutoIncrement == false) || (primaryKeys.Length == 0 && attributes.Length > 0)) {
+					if(!Reflection.Instance.isChildOf(properties[i].PropertyType, typeof(Model))) {
+						sqlNames.Add(properties[i].Name);
+						sqlFields.Add("@" + properties[i].Name);
+					}
 				}
 			}
 			
@@ -191,6 +274,40 @@ namespace AltairStudios.Core.Orm.Providers {
 			sql.Append(";");
 			
 			sql.Append(this.getInsertedId());
+			
+			return sql.ToString();
+		}
+		
+		
+		
+		public string sqlInsertForeign(Type type1, Type type2) {
+			StringBuilder sql = new StringBuilder();
+			PropertyInfo[] properties1 = type1.GetProperties();
+			PropertyInfo[] properties2 = type2.GetProperties();
+			ModelList<string> fields = new ModelList<string>();
+			ModelList<string> parameters = new ModelList<string>();
+			string name = type1.Name + "_" + type2.Name;
+			
+			for(int i = 0; i < properties1.Length; i++) {
+				PrimaryKeyAttribute[] primaryKeys = (PrimaryKeyAttribute[])properties1[i].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
+				
+				if(primaryKeys.Length > 0) {
+					fields.Add(type1.Name + "_" + properties1[i].Name);
+					parameters.Add("@" + type1.Name + "_" + properties1[i].Name);
+				}
+			}
+			
+			for(int i = 0; i < properties2.Length; i++) {
+				PrimaryKeyAttribute[] primaryKeys = (PrimaryKeyAttribute[])properties2[i].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
+				
+				if(primaryKeys.Length > 0) {
+					fields.Add(type2.Name + "_" + properties2[i].Name);
+					parameters.Add("@" + type2.Name + "_" + properties2[i].Name);
+				}
+			}
+			
+			sql.Append("INSERT INTO " + name);
+			sql.Append("(" + string.Join(",", fields.ToArray()) + ") VALUES (" + string.Join(",", parameters.ToArray()) + ")");
 			
 			return sql.ToString();
 		}

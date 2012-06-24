@@ -30,7 +30,7 @@ namespace AltairStudios.Core.Orm.Models.Admin {
 		/// <value>
 		/// The notice.
 		/// </value>
-		[Templatize(true)]
+		[Templatize]
 		public Notice Notice {
 			get {
 				return this.notice;
@@ -48,7 +48,7 @@ namespace AltairStudios.Core.Orm.Models.Admin {
 		/// <value>
 		/// The content.
 		/// </value>
-		[Templatize(true, true)]
+		[Templatize]
 		public T Content {
 			get {
 				return this.content;
@@ -66,7 +66,7 @@ namespace AltairStudios.Core.Orm.Models.Admin {
 		/// <value>
 		/// The sidebar.
 		/// </value>
-		[Templatize(true)]
+		[Templatize]
 		public Menu Sidebar {
 			get {
 				return this.sidebar;

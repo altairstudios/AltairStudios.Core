@@ -25,7 +25,7 @@ namespace AltairStudios.Core.Orm.Models.Admin {
 		/// <value>
 		/// The link.
 		/// </value>
-		[Templatize(true)]
+		[Templatize]
 		public Link Link {
 			get {
 				return this.link;
@@ -43,7 +43,7 @@ namespace AltairStudios.Core.Orm.Models.Admin {
 		/// <value>
 		/// The submenus.
 		/// </value>
-		[Templatize(true, true)]
+		[Templatize]
 		public ModelList<Menu> Submenus {
 			get {
 				return this.submenus;

@@ -33,7 +33,7 @@ namespace AltairStudios.Core.Orm.Models {
 		/// <value>
 		/// The country.
 		/// </value>
-		[Templatize(true)]
+		[Templatize]
 		public Country Country {
 			get {
 				return this.country;

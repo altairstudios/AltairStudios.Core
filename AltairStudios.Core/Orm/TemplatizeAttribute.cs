@@ -6,6 +6,7 @@ namespace AltairStudios.Core.Orm {
 	/// Templatize attribute.
 	/// </summary>
 	public class TemplatizeAttribute : AltairStudios.Core.Mvc.TemplatizeAttribute {
+		/*
 		/// <summary>
 		/// The is subtable.
 		/// </summary>
@@ -14,9 +15,9 @@ namespace AltairStudios.Core.Orm {
 		/// The is list.
 		/// </summary>
 		protected bool isList = false;
+		*/
 		
-		
-		
+		/*
 		/// <summary>
 		/// Gets or sets a value indicating whether this instance is list.
 		/// </summary>
@@ -48,7 +49,7 @@ namespace AltairStudios.Core.Orm {
 				isSubtable = value;
 			}
 		}
-		
+		*/
 		
 		
 		/// <summary>
@@ -59,7 +60,7 @@ namespace AltairStudios.Core.Orm {
 		}
 		
 		
-		
+		/*
 		/// <summary>
 		/// Initializes a new instance of the <see cref="AltairStudios.Core.Orm.TemplatizeAttribute"/> class.
 		/// </summary>
@@ -87,5 +88,6 @@ namespace AltairStudios.Core.Orm {
 			this.isSubtable = isSubtable;
 			this.isList = isList;
 		}
+		*/
 	}
 }

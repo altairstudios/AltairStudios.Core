@@ -5,7 +5,7 @@ namespace AltairStudios.Core.Orm {
 	/// <summary>
 	/// Primary key attribute.
 	/// </summary>
-	public class PrimaryKeyAttribute : AltairStudios.Core.Mvc.TemplatizeAttribute {
+	public class PrimaryKeyAttribute : TemplatizeAttribute {
 		#region Fields
 		/// <summary>
 		/// The autoincrement.

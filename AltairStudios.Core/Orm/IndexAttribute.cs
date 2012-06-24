@@ -5,7 +5,7 @@ namespace AltairStudios.Core.Orm {
 	/// <summary>
 	/// Index attribute.
 	/// </summary>
-	public class IndexAttribute : AltairStudios.Core.Mvc.TemplatizeAttribute {
+	public class IndexAttribute : TemplatizeAttribute {
 		#region Fields
 		/// <summary>
 		/// The unique.

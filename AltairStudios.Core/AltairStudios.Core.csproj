@@ -90,6 +90,9 @@
     <Compile Include="Orm\PrimaryKeyAttribute.cs" />
     <Compile Include="Orm\TemplatizeAttribute.cs" />
     <Compile Include="Orm\IndexAttribute.cs" />
+    <Compile Include="Orm\ForeignKeyAttribute.cs" />
+    <Compile Include="Orm\ForeignKeyTypes.cs" />
+    <Compile Include="Orm\ForeignKeyActions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web" />

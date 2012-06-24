@@ -120,21 +120,30 @@ namespace AltairStudios.Core.Orm {
 		/// <summary>
 		/// Insert this model instance into database.
 		/// </summary>
-		public void insert() {
+		public long insert() {
 			PropertyInfo[] properties = this.GetType().GetProperties();
 			ModelList<PropertyInfo> parameters = new ModelList<PropertyInfo>();
-			ModelList<PropertyInfo> subparameters = new ModelList<PropertyInfo>();
+			Dictionary<string, Dictionary<long, Model>> ids = new Dictionary<string, Dictionary<long, Model>>();
 			
 			for(int i = 0; i < properties.Length; i++) {
-				if(properties[i].GetValue(this, null) != null && (properties[i].PropertyType.ToString() == "System.String" || properties[i].PropertyType.ToString() == "System.Int32" || properties[i].PropertyType.ToString() == "System.Double" || properties[i].PropertyType.ToString() == "System.Decimal")) {
+				if(properties[i].GetValue(this, null) != null) {
 					TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
 					PrimaryKeyAttribute[] primarys = (PrimaryKeyAttribute[])properties[i].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
 					IndexAttribute[] indexes = (IndexAttribute[])properties[i].GetCustomAttributes(typeof(IndexAttribute), true);
 					
-					if((attributes.Length > 0 && attributes[0].Templatize && !attributes[0].IsSubtable) || (primarys.Length > 0 && !primarys[0].AutoIncrement) || (indexes.Length > 0)) {
-						parameters.Add(properties[i]);
-					} else if(attributes.Length > 0 && attributes[0].Templatize && attributes[0].IsSubtable) {
-						subparameters.Add(properties[i]);
+					if((primarys.Length > 0 && !primarys[0].AutoIncrement) || (primarys.Length == 0 && attributes.Length > 0)) {
+						if(Reflection.Instance.isChildOf(properties[i].PropertyType, typeof(Model))) {
+							long subId = ((Model)properties[i].GetValue(this, null)).insert();
+							string name = properties[i].PropertyType.ToString();
+							
+							if(!ids.ContainsKey(name)) {
+								ids.Add(name, new Dictionary<long, Model>());
+							}
+							
+							ids[name].Add(subId, ((Model)properties[i].GetValue(this, null)));
+						} else {
+							parameters.Add(properties[i]);
+						}
 					}
 				}
 			}
@@ -150,12 +159,35 @@ namespace AltairStudios.Core.Orm {
 				command.Parameters.Add(parameter);
 			}
 			
-			int id = (int)command.ExecuteScalar();
+			long id = (long)command.ExecuteScalar();
 			
-			for(int i = 0; i < subparameters.Count; i++) {
-				/*((Model)subparameters[i]).
-				((Model)subparameters[i]).insert();*/
+			foreach(string key in ids.Keys) {
+ 				foreach(long longId in ids[key].Keys) {
+					Dictionary<string, object> sqlParams = new Dictionary<string, object>();
+					PropertyInfo[] properties1 = this.GetType().GetProperties();
+					PropertyInfo[] properties2 = ids[key][longId].GetType().GetProperties();
+					
+					for(int i = 0; i < properties1.Length; i++) {
+						PrimaryKeyAttribute[] primaryKeys = (PrimaryKeyAttribute[])properties1[i].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
+						
+						if(primaryKeys.Length > 0) {
+							sqlParams.Add(this.GetType().Name + "_" + properties1[i].Name, id);
+						}
+					}
+					
+					for(int i = 0; i < properties2.Length; i++) {
+						PrimaryKeyAttribute[] primaryKeys = (PrimaryKeyAttribute[])properties2[i].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
+						
+						if(primaryKeys.Length > 0) {
+							sqlParams.Add(ids[key][longId].GetType().Name + "_" + properties2[i].Name, longId);
+						}
+					}
+					
+					this.query(SqlProvider.getProvider().sqlInsertForeign(this.GetType(), ids[key][longId].GetType()), sqlParams);
+				}
 			}
+			
+			return id;
 		}
 		
 		
@@ -218,15 +250,31 @@ namespace AltairStudios.Core.Orm {
 		
 		
 		
+		public List<Dictionary<string, string>> query(string sql) {
+			return this.query(sql, null);
+		}
+		
+		
 		/// <summary>
 		/// Query the specified sql.
 		/// </summary>
 		/// <param name='sql'>
 		/// Sql.
 		/// </param>
-		public List<Dictionary<string, string>> query(string sql) {
+		public List<Dictionary<string, string>> query(string sql, Dictionary<string, object> parameters) {
 			IDbCommand command = SqlProvider.getProvider().createCommand();
 			command.CommandText = sql;
+			
+			if(parameters != null) {
+				foreach(string key in parameters.Keys) {
+					IDbDataParameter parameter = SqlProvider.getProvider().createParameter();
+					parameter.ParameterName = "@" + key;
+					parameter.Value = parameters[key];
+				
+					command.Parameters.Add(parameter);
+				}
+			}
+			
 			IDataReader reader = command.ExecuteReader();
 			
 			List<Dictionary<string, string>> result = new List<Dictionary<string, string>>();
@@ -245,43 +293,6 @@ namespace AltairStudios.Core.Orm {
 			command.Connection.Close();
 			
 			return result;
-		}
-		
-		
-		
-		/// <summary>
-		///  Tos the json. 
-		/// </summary>
-		/// <returns>
-		///  The json. 
-		/// </returns>
-		public override string ToJson() {
-			PropertyInfo[] properties = this.GetType().GetProperties();
-			StringBuilder json = new StringBuilder();
-			ModelList<string> jsonProperties = new ModelList<string>();
-			StringConverter converter = new StringConverter();
-			
-			json.Append("{");
-			
-			for(int i = 0; i < properties.Length; i++) {
-				if(properties[i].GetValue(this, null) != null) {
-					TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
-					if(attributes.Length > 0 && attributes[0].Templatize) {
-						if(attributes[0].IsSubtable && attributes[0].IsList) {
-							jsonProperties.Add("\"" + properties[i].Name + "\"" + ":" + (this.castList<Model>(properties[i].GetValue(this, null))).ToJson());
-						} else if(attributes[0].IsSubtable && !attributes[0].IsList) {
-							jsonProperties.Add("\"" + properties[i].Name + "\"" + ":" + this.cast<Model>(properties[i].GetValue(this, null)).ToJson());
-						} else {
-							jsonProperties.Add("\"" + properties[i].Name + "\"" + ":" + converter.convert(properties[i].GetValue(this, null), properties[i].PropertyType));						
-						}
-					}
-				}
-			}
-			
-			json.Append(string.Join(",", jsonProperties.ToArray()));
-			json.Append("}");
-			
-			return json.ToString();
 		}
 	}
 }

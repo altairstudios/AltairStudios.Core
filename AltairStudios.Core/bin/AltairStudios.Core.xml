@@ -36,7 +36,7 @@
             The table.
             </returns>
         </member>
-        <member name="M:AltairStudios.Core.Orm.Model.query(System.String)">
+        <member name="M:AltairStudios.Core.Orm.Model.query(System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
             <summary>
             Query the specified sql.
             </summary>
@@ -1108,6 +1108,20 @@
             Type.
             </param>
         </member>
+        <member name="M:AltairStudios.Core.Orm.Providers.SqlProvider.sqlCreateForeignTable(System.Type,System.Type)">
+            <summary>
+            Sqls the create foreign table.
+            </summary>
+            <returns>
+            The create foreign table.
+            </returns>
+            <param name="type1">
+            Type1.
+            </param>
+            <param name="type2">
+            Type2.
+            </param>
+        </member>
         <member name="M:AltairStudios.Core.Orm.Providers.SqlProvider.sqlInsert(System.Type)">
             <summary>
             Sqls the insert.
@@ -1959,51 +1973,6 @@
             Initializes a new instance of the <see cref="T:AltairStudios.Core.Orm.TemplatizeAttribute" /> class.
             </summary>
         </member>
-        <member name="M:AltairStudios.Core.Orm.TemplatizeAttribute.#ctor(System.Boolean)">
-            <summary>
-            Initializes a new instance of the <see cref="T:AltairStudios.Core.Orm.TemplatizeAttribute" /> class.
-            </summary>
-            <param name="isSubtable">
-            Is subtable.
-            </param>
-        </member>
-        <member name="M:AltairStudios.Core.Orm.TemplatizeAttribute.#ctor(System.Boolean,System.Boolean)">
-            <summary>
-            Initializes a new instance of the <see cref="T:AltairStudios.Core.Orm.TemplatizeAttribute" /> class.
-            </summary>
-            <param name="isSubtable">
-            Is subtable.
-            </param>
-            <param name="isList">
-            Is list.
-            </param>
-        </member>
-        <member name="F:AltairStudios.Core.Orm.TemplatizeAttribute.isSubtable">
-            <summary>
-            The is subtable.
-            </summary>
-        </member>
-        <member name="F:AltairStudios.Core.Orm.TemplatizeAttribute.isList">
-            <summary>
-            The is list.
-            </summary>
-        </member>
-        <member name="P:AltairStudios.Core.Orm.TemplatizeAttribute.IsList">
-            <summary>
-            Gets or sets a value indicating whether this instance is list.
-            </summary>
-            <value>
-                <c>true</c> if this instance is list; otherwise, <c>false</c>.
-            </value>
-        </member>
-        <member name="P:AltairStudios.Core.Orm.TemplatizeAttribute.IsSubtable">
-            <summary>
-            Gets or sets a value indicating whether this instance is subtable.
-            </summary>
-            <value>
-                <c>true</c> if this instance is subtable; otherwise, <c>false</c>.
-            </value>
-        </member>
         <member name="T:AltairStudios.Core.Orm.IndexAttribute">
             <summary>
             Index attribute.
@@ -2034,6 +2003,11 @@
             <value>
                 <c>true</c> if unique; otherwise, <c>false</c>.
             </value>
+        </member>
+        <member name="T:AltairStudios.Core.Orm.ForeignKeyAttribute">
+            <summary>
+            Index attribute.
+            </summary>
         </member>
     </members>
 </doc>

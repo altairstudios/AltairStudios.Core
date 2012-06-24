@@ -31,7 +31,7 @@ namespace AltairStudios.Core.Orm.Models.Admin {
 		/// <value>
 		/// The link.
 		/// </value>
-		[Templatize(true)]
+		[Templatize]
 		public Link Link {
 			get {
 				return this.link;

@@ -69,7 +69,7 @@ namespace AltairStudios.Core.Orm.Models {
 		/// <value>
 		/// The province.
 		/// </value>
-		[Templatize(true)]
+		[Templatize]
 		public Province Province {
 			get {
 				return this.province;

@@ -75,7 +75,7 @@ namespace AltairStudios.Core.Orm.Models {
 		/// <value>
 		/// The city.
 		/// </value>
-		[Templatize(true)]
+		[Templatize]
 		public City City {
 			get {
 				return this.city;

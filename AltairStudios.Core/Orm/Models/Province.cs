@@ -69,7 +69,7 @@ namespace AltairStudios.Core.Orm.Models {
 		/// <value>
 		/// The region.
 		/// </value>
-		[Templatize(true)]
+		[Templatize]
 		public Region Region {
 			get {
 				return this.region;
