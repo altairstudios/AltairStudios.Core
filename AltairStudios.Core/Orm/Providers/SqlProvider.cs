@@ -326,30 +326,58 @@ namespace AltairStudios.Core.Orm.Providers {
 		
 		
 		
-		/*
+		
 		public string sqlUpdate(Type type) {
 			StringBuilder sql = new StringBuilder();
 			PropertyInfo[] properties = type.GetProperties();
 			ModelList<string> sqlFields = new ModelList<string>();
 			ModelList<string> sqlNames = new ModelList<string>();
+			ModelList<string> whereFields = new ModelList<string>();
 			
 			sql.Append("UPDATE " + type.Name);
 			
 			for(int i = 0; i < properties.Length; i++) {
 				TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
-				if(attributes.Length > 0 && attributes[0].Templatize) {
+				PrimaryKeyAttribute[] primaryKeys = (PrimaryKeyAttribute[])properties[i].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
+				
+				if(attributes.Length > 0 && attributes[0].Templatize && primaryKeys.Length == 0 && !Reflection.Instance.isChildOf(properties[i].PropertyType, typeof(Model))) {
 					sqlNames.Add(properties[i].Name);
 					sqlFields.Add(properties[i].Name + " = @" + properties[i].Name);
+				} else if(primaryKeys.Length > 0 && !Reflection.Instance.isChildOf(properties[i].PropertyType, typeof(Model))) {
+					whereFields.Add(properties[i].Name + " = @" + properties[i].Name);
 				}
 			}
 			
-			sql.Append("SET " + string.Join(",", sqlFields) + "");
+			sql.Append(" SET " + string.Join(",", sqlFields.ToArray()) + "");
 			sql.Append(" WHERE ");
-			sql.Append("(" + string.Join(",", sqlFields) + ")");
+			sql.Append("(" + string.Join(",", whereFields.ToArray()) + ")");
 			
 			return sql.ToString();
 		}
-		*/
+		
+		
+		
+		public string sqlDelete(Type type) {
+			StringBuilder sql = new StringBuilder();
+			PropertyInfo[] properties = type.GetProperties();
+			ModelList<string> whereFields = new ModelList<string>();
+			
+			sql.Append("DELETE FROM " + type.Name);
+			
+			for(int i = 0; i < properties.Length; i++) {
+				PrimaryKeyAttribute[] primaryKeys = (PrimaryKeyAttribute[])properties[i].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
+				
+				if(primaryKeys.Length > 0 && !Reflection.Instance.isChildOf(properties[i].PropertyType, typeof(Model))) {
+					whereFields.Add(properties[i].Name + " = @" + properties[i].Name);
+				}
+			}
+			
+			sql.Append(" WHERE ");
+			sql.Append("(" + string.Join(",", whereFields.ToArray()) + ")");
+			
+			return sql.ToString();
+		}
+		
 		
 		
 		/// <summary>

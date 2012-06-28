@@ -27,9 +27,6 @@
         </member>
         <member name="M:AltairStudios.Core.Orm.Model.createTable">
             <summary>
-            Save this instance.
-            </summary>
-            <summary>
             Creates the table.
             </summary>
             <returns>

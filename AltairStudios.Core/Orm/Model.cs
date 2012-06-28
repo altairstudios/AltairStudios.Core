@@ -32,11 +32,17 @@ namespace AltairStudios.Core.Orm {
 			List<string> indexFields = new ModelList<string>();
 			ModelList<PropertyInfo> primaryKeys = new ModelList<PropertyInfo>();
 			ModelList<PropertyInfo> indexes = new ModelList<PropertyInfo>();
+			ModelList<PropertyInfo> fieldParams = new ModelList<PropertyInfo>();
 			
 			for(int i = 0; i < properties.Length; i++) {
+				TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
+				
+				if(attributes.Length > 0 && !Reflection.Instance.isChildOf(properties[i].PropertyType, typeof(Model))) {
+					fieldParams.Add(properties[i]);
+				}
+				
 				if(properties[i].GetValue(this, null) != null) {
-					TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
-					if(attributes.Length > 0 && attributes[0].Templatize && !Reflection.Instance.isChildOf(properties[i].PropertyType, typeof(Model))) {
+					if(attributes.Length > 0 && !Reflection.Instance.isChildOf(properties[i].PropertyType, typeof(Model))) {
 						parameters.Add(properties[i]);
 					}
 					
@@ -96,14 +102,14 @@ namespace AltairStudios.Core.Orm {
 			while(reader.Read()) {
 				object instance = constructor.Invoke(new Object[0]);
 				
-				for(int i = 0; i < parameters.Count; i++) {	
-					if(reader[parameters[i].Name] != DBNull.Value) {
-						PropertyInfo property = type.GetProperty(parameters[i].Name);
+				for(int i = 0; i < fieldParams.Count; i++) {	
+					if(reader[fieldParams[i].Name] != DBNull.Value) {
+						PropertyInfo property = type.GetProperty(fieldParams[i].Name);
 						
-						if(parameters[i].GetValue(this, null).GetType() == typeof(double)) {
-							property.SetValue(instance, double.Parse(reader[parameters[i].Name].ToString()), null);
+						if(fieldParams[i].GetValue(this, null) != null && fieldParams[i].GetValue(this, null).GetType() == typeof(double)) {
+							property.SetValue(instance, double.Parse(reader[fieldParams[i].Name].ToString()), null);
 						} else {
-							property.SetValue(instance, reader[parameters[i].Name], null);
+							property.SetValue(instance, reader[fieldParams[i].Name], null);
 						}
 					}
 				
@@ -209,46 +215,77 @@ namespace AltairStudios.Core.Orm {
 		
 		
 		
-		/*public void save() {
-			Type type = this.GetType();
+		public void update() {
 			PropertyInfo[] properties = this.GetType().GetProperties();
-		}*/
-		
-		
-		
-		/// <summary>
-		/// Save this instance.
-		/// </summary>
-		/*public string save() {
-			Type type = this.GetType();
-			PropertyInfo[] properties = this.GetType().GetProperties();
-			StringBuilder sql = new StringBuilder();
 			ModelList<PropertyInfo> parameters = new ModelList<PropertyInfo>();
-			
-			sql.Append("UPDATE " + type.Name + " SET ");
+			ModelList<PropertyInfo> primaryKeys = new ModelList<PropertyInfo>();
 			
 			for(int i = 0; i < properties.Length; i++) {
-				if(properties[i].PropertyType.ToString() == "System.String") {					
-					TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);					
-					if(attributes.Length > 0 && attributes[0].Templatize) {
-						sql.Append(properties[i].Name + " = @" + properties[i].Name + ", " );
-						parameters.Add(properties[i]);
+				//if(properties[i].GetValue(this, null) != null) {
+					TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
+					PrimaryKeyAttribute[] primarys = (PrimaryKeyAttribute[])properties[i].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
+					
+					if(primarys.Length > 0) {
+						primaryKeys.Add(properties[i]);
 					}
+					
+					
+					if(attributes.Length > 0) {
+						if(!Reflection.Instance.isChildOf(properties[i].PropertyType, typeof(Model))) {
+							parameters.Add(properties[i]);
+						}
+					}
+				//}
+			}
+			
+			IDbCommand command = SqlProvider.getProvider().createCommand();
+			command.CommandText = SqlProvider.getProvider().sqlUpdate(this.GetType());
+			
+			for(int i = 0; i < parameters.Count; i++) {
+				IDbDataParameter parameter = SqlProvider.getProvider().createParameter();
+				parameter.ParameterName = parameters[i].Name;
+				parameter.Value = parameters[i].GetValue(this, null);
+				
+				command.Parameters.Add(parameter);
+			}
+			
+			command.ExecuteNonQuery();
+			
+			return;
+		}
+		
+		
+		
+		
+		
+		public void delete() {
+			PropertyInfo[] properties = this.GetType().GetProperties();
+			ModelList<PropertyInfo> primaryKeys = new ModelList<PropertyInfo>();
+			
+			for(int i = 0; i < properties.Length; i++) {
+				PrimaryKeyAttribute[] primarys = (PrimaryKeyAttribute[])properties[i].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
+				
+				if(primarys.Length > 0) {
+					primaryKeys.Add(properties[i]);
 				}
 			}
 			
-			sql.Append("1 = 1");
-			sql.Append(" WHERE id = @Id");
+			IDbCommand command = SqlProvider.getProvider().createCommand();
+			command.CommandText = SqlProvider.getProvider().sqlDelete(this.GetType());
 			
-			MySqlCommand command = ConnectionFactory.createCommand();
-			command.CommandText = sql.ToString();
-			
-			for(int i = 0; i < parameters.Count; i++) {
-				command.Parameters.Add(parameters[i].Name, ConnectionFactory.resolveType(properties[i].PropertyType)).Value = parameters[i].GetValue(this, null);
+			for(int i = 0; i < primaryKeys.Count; i++) {
+				IDbDataParameter parameter = SqlProvider.getProvider().createParameter();
+				parameter.ParameterName = primaryKeys[i].Name;
+				parameter.Value = primaryKeys[i].GetValue(this, null);
+				
+				command.Parameters.Add(parameter);
 			}
 			
-			return sql.ToString();
-		}*/
+			command.ExecuteNonQuery();
+			
+			return;
+		}
+		
 		
 		
 		
