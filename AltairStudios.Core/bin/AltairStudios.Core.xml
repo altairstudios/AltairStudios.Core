@@ -44,14 +44,6 @@
             Sql.
             </param>
         </member>
-        <member name="M:AltairStudios.Core.Orm.Model.ToJson">
-            <summary>
-            Tos the json.
-            </summary>
-            <returns>
-            The json.
-            </returns>
-        </member>
         <member name="T:AltairStudios.Core.Mvc.MvcApplication">
             <summary>
             Mvc application.

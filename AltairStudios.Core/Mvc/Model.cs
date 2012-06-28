@@ -21,12 +21,18 @@ namespace AltairStudios.Core.Mvc {
 		/// <param name='properties'>
 		/// Properties.
 		/// </param>
-		protected List<string> getFields(PropertyInfo[] properties) {
+		protected ModelList<string> getFields(PropertyInfo[] properties) {
+			return this.getFields(properties, true);
+		}
+		
+		
+		
+		protected ModelList<string> getFields(PropertyInfo[] properties, bool ownFields) {
 			ModelList<string> fields = new ModelList<string>();
 			
 			for(int i = 0; i < properties.Length; i++) {	
 				TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
-				if(attributes.Length > 0 && attributes[0].Templatize) {
+				if(attributes.Length > 0 && !Reflection.Instance.isChildOf(properties[i].PropertyType, typeof(Model))) {
 					fields.Add(properties[i].Name);
 				}
 			}

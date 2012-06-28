@@ -378,9 +378,9 @@ namespace AltairStudios.Core.Orm.Providers {
 			sql.Append("SELECT " + string.Join(",", fields.ToArray()) + " FROM " + type.Name + " WHERE ");
 			
 			for(int i = 0; i < properties.Length; i++) {
-				if(properties[i].GetValue(model, null) != null && properties[i].PropertyType.ToString() == "System.String") {					
+				if(properties[i].GetValue(model, null) != null) {					
 					TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
-					if(attributes.Length > 0 && attributes[0].Templatize) {
+					if(attributes.Length > 0 && !Reflection.Instance.isChildOf(properties[i].PropertyType, typeof(Model))) {
 						sql.Append(properties[i].Name + " = @" + properties[i].Name + " AND " );
 						parameters.Add(properties[i]);
 					}

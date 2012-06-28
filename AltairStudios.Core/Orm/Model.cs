@@ -28,49 +28,64 @@ namespace AltairStudios.Core.Orm {
 			PropertyInfo[] properties = this.GetType().GetProperties();
 			ModelList<PropertyInfo> parameters = new ModelList<PropertyInfo>();
 			List<string> fields = this.getFields(properties);
+			List<string> primaryFields = new ModelList<string>();
+			List<string> indexFields = new ModelList<string>();
 			ModelList<PropertyInfo> primaryKeys = new ModelList<PropertyInfo>();
 			ModelList<PropertyInfo> indexes = new ModelList<PropertyInfo>();
 			
 			for(int i = 0; i < properties.Length; i++) {
-				if(properties[i].GetValue(this, null) != null && (properties[i].PropertyType.ToString() == "System.String" || properties[i].PropertyType.ToString() == "System.Int32" || properties[i].PropertyType.ToString() == "System.Double" || properties[i].PropertyType.ToString() == "System.Decimal")) {
+				if(properties[i].GetValue(this, null) != null) {
 					TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
-					if(attributes.Length > 0 && attributes[0].Templatize) {
+					if(attributes.Length > 0 && attributes[0].Templatize && !Reflection.Instance.isChildOf(properties[i].PropertyType, typeof(Model))) {
 						parameters.Add(properties[i]);
 					}
 					
 					PrimaryKeyAttribute[] attributesPrimaryKey = (PrimaryKeyAttribute[])properties[i].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
-					if(attributesPrimaryKey.Length > 0) {
-						if(attributesPrimaryKey[0].AutoIncrement) {
-							primaryKeys.Add(properties[i]);
-						} else {
-							primaryKeys.Add(properties[i]);
-							parameters.Add(properties[i]);
-						}
+					if(attributesPrimaryKey.Length > 0 && ((attributesPrimaryKey[0].AutoIncrement && (int)properties[i].GetValue(this, null) != 0) || (attributesPrimaryKey[0].AutoIncrement == false && properties[i].GetValue(this, null) != ""))) {
+						primaryKeys.Add(properties[i]);
+						primaryFields.Add(properties[i].Name);
 					}
 					
 					IndexAttribute[] attributesIndex = (IndexAttribute[])properties[i].GetCustomAttributes(typeof(IndexAttribute), true);
-					if(attributesPrimaryKey.Length > 0) {
+					if(attributesIndex.Length > 0 && properties[i].GetValue(this, null) != "") {
 						indexes.Add(properties[i]);
-						parameters.Add(properties[i]);
+						indexFields.Add(properties[i].Name);
 					}
-				}
-			}
-			
-			if(primaryKeys.Count > 0) {
-				for(int i = 0; i < primaryKeys.Count; i++) {
-					//primaryKeys[0].PropertyType.
 				}
 			}
 			
 			IDbCommand command = SqlProvider.getProvider().createCommand();
-			command.CommandText = SqlProvider.getProvider().sqlString(this, type, fields, properties);
 			
-			for(int i = 0; i < parameters.Count; i++) {
-				IDbDataParameter parameter = SqlProvider.getProvider().createParameter();
-				parameter.ParameterName = parameters[i].Name;
-				parameter.Value = parameters[i].GetValue(this, null);
-				
-				command.Parameters.Add(parameter);
+			if(primaryKeys.Count > 0) {
+				command.CommandText = SqlProvider.getProvider().sqlString(this, type, fields, primaryKeys.ToArray());
+			
+				for(int i = 0; i < primaryKeys.Count; i++) {
+					IDbDataParameter parameter = SqlProvider.getProvider().createParameter();
+					parameter.ParameterName = parameters[i].Name;
+					parameter.Value = parameters[i].GetValue(this, null);
+					
+					command.Parameters.Add(parameter);
+				}
+			} else if(indexes.Count > 0) {
+				command.CommandText = SqlProvider.getProvider().sqlString(this, type, fields, indexes.ToArray());
+			
+				for(int i = 0; i < indexes.Count; i++) {
+					IDbDataParameter parameter = SqlProvider.getProvider().createParameter();
+					parameter.ParameterName = parameters[i].Name;
+					parameter.Value = parameters[i].GetValue(this, null);
+					
+					command.Parameters.Add(parameter);
+				}
+			} else {
+				command.CommandText = SqlProvider.getProvider().sqlString(this, type, fields, parameters.ToArray());
+			
+				for(int i = 0; i < parameters.Count; i++) {
+					IDbDataParameter parameter = SqlProvider.getProvider().createParameter();
+					parameter.ParameterName = parameters[i].Name;
+					parameter.Value = parameters[i].GetValue(this, null);
+					
+					command.Parameters.Add(parameter);
+				}
 			}
 			
 			IDataReader reader = command.ExecuteReader();
@@ -81,18 +96,17 @@ namespace AltairStudios.Core.Orm {
 			while(reader.Read()) {
 				object instance = constructor.Invoke(new Object[0]);
 				
-				counter = 0;
-				for(int i = 0; i < properties.Length; i++) {	
-					TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
-					PrimaryKeyAttribute[] primaryAttributes = (PrimaryKeyAttribute[])properties[i].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
-					IndexAttribute[] indexAttributes = (IndexAttribute[])properties[i].GetCustomAttributes(typeof(IndexAttribute), true);
-					
-					if((attributes.Length > 0 && attributes[0].Templatize) || (primaryAttributes.Length > 0) || indexAttributes.Length > 0) {
-						if(reader[counter] != DBNull.Value) {
-							type.GetProperty(properties[i].Name).SetValue(instance, reader[counter], null);
+				for(int i = 0; i < parameters.Count; i++) {	
+					if(reader[parameters[i].Name] != DBNull.Value) {
+						PropertyInfo property = type.GetProperty(parameters[i].Name);
+						
+						if(parameters[i].GetValue(this, null).GetType() == typeof(double)) {
+							property.SetValue(instance, double.Parse(reader[parameters[i].Name].ToString()), null);
+						} else {
+							property.SetValue(instance, reader[parameters[i].Name], null);
 						}
-						counter++;
 					}
+				
 				}
 				
 				models.Add(this.cast<T>(instance));
@@ -106,14 +120,14 @@ namespace AltairStudios.Core.Orm {
 		
 		
 		
-		/*public ModelList<T> getByPk<T>() {
-			
+		public ModelList<T> getByPk<T>() {
+			return null;
 		}
 		
 		
 		public ModelList<T> getByIndex<T>() {
-			
-		}*/
+			return null;
+		}
 		
 		
 		
@@ -294,5 +308,42 @@ namespace AltairStudios.Core.Orm {
 			
 			return result;
 		}
+		
+		
+		
+		/// <summary>
+		///  Tos the json. 
+		/// </summary>
+		/// <returns>
+		///  The json. 
+		/// </returns>
+		/*public override string ToJson() {
+			PropertyInfo[] properties = this.GetType().GetProperties();
+			StringBuilder json = new StringBuilder();
+			ModelList<string> jsonProperties = new ModelList<string>();
+			StringConverter converter = new StringConverter();
+			
+			json.Append("{");
+			
+			for(int i = 0; i < properties.Length; i++) {
+				if(properties[i].GetValue(this, null) != null) {
+					TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
+					if(attributes.Length > 0 && attributes[0].Templatize) {*/
+						/*if(attributes[0].IsSubtable) {
+							jsonProperties.Add("\"" + properties[i].Name + "\"" + ":" + (this.castList<Model>(properties[i].GetValue(this, null))).ToJson());
+						} else if(attributes[0].IsSubtable) {
+							jsonProperties.Add("\"" + properties[i].Name + "\"" + ":" + this.cast<Model>(properties[i].GetValue(this, null)).ToJson());
+						} else {
+							jsonProperties.Add("\"" + properties[i].Name + "\"" + ":" + converter.convert(properties[i].GetValue(this, null), properties[i].PropertyType));						
+						}*/
+					/*}
+				}
+			}
+			
+			json.Append(string.Join(",", jsonProperties.ToArray()));
+			json.Append("}");
+			
+			return json.ToString();
+		}*/
 	}
 }
