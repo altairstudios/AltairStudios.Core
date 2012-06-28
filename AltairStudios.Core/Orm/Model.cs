@@ -126,17 +126,6 @@ namespace AltairStudios.Core.Orm {
 		
 		
 		
-		public ModelList<T> getByPk<T>() {
-			return null;
-		}
-		
-		
-		public ModelList<T> getByIndex<T>() {
-			return null;
-		}
-		
-		
-		
 		/// <summary>
 		/// Insert this model instance into database.
 		/// </summary>
@@ -212,9 +201,9 @@ namespace AltairStudios.Core.Orm {
 		
 		
 		
-		
-		
-		
+		/// <summary>
+		/// Update this instance.
+		/// </summary>
 		public void update() {
 			PropertyInfo[] properties = this.GetType().GetProperties();
 			ModelList<PropertyInfo> parameters = new ModelList<PropertyInfo>();
@@ -256,8 +245,9 @@ namespace AltairStudios.Core.Orm {
 		
 		
 		
-		
-		
+		/// <summary>
+		/// Delete this instance.
+		/// </summary>
 		public void delete() {
 			PropertyInfo[] properties = this.GetType().GetProperties();
 			ModelList<PropertyInfo> primaryKeys = new ModelList<PropertyInfo>();
@@ -301,9 +291,16 @@ namespace AltairStudios.Core.Orm {
 		
 		
 		
+		/// <summary>
+		/// Query the specified sql.
+		/// </summary>
+		/// <param name='sql'>
+		/// Sql.
+		/// </param>
 		public List<Dictionary<string, string>> query(string sql) {
 			return this.query(sql, null);
 		}
+		
 		
 		
 		/// <summary>
@@ -345,42 +342,5 @@ namespace AltairStudios.Core.Orm {
 			
 			return result;
 		}
-		
-		
-		
-		/// <summary>
-		///  Tos the json. 
-		/// </summary>
-		/// <returns>
-		///  The json. 
-		/// </returns>
-		/*public override string ToJson() {
-			PropertyInfo[] properties = this.GetType().GetProperties();
-			StringBuilder json = new StringBuilder();
-			ModelList<string> jsonProperties = new ModelList<string>();
-			StringConverter converter = new StringConverter();
-			
-			json.Append("{");
-			
-			for(int i = 0; i < properties.Length; i++) {
-				if(properties[i].GetValue(this, null) != null) {
-					TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
-					if(attributes.Length > 0 && attributes[0].Templatize) {*/
-						/*if(attributes[0].IsSubtable) {
-							jsonProperties.Add("\"" + properties[i].Name + "\"" + ":" + (this.castList<Model>(properties[i].GetValue(this, null))).ToJson());
-						} else if(attributes[0].IsSubtable) {
-							jsonProperties.Add("\"" + properties[i].Name + "\"" + ":" + this.cast<Model>(properties[i].GetValue(this, null)).ToJson());
-						} else {
-							jsonProperties.Add("\"" + properties[i].Name + "\"" + ":" + converter.convert(properties[i].GetValue(this, null), properties[i].PropertyType));						
-						}*/
-					/*}
-				}
-			}
-			
-			json.Append(string.Join(",", jsonProperties.ToArray()));
-			json.Append("}");
-			
-			return json.ToString();
-		}*/
 	}
 }

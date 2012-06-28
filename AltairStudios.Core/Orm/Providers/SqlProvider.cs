@@ -324,9 +324,15 @@ namespace AltairStudios.Core.Orm.Providers {
 		
 		
 		
-		
-		
-		
+		/// <summary>
+		/// Sqls the update.
+		/// </summary>
+		/// <returns>
+		/// The update.
+		/// </returns>
+		/// <param name='type'>
+		/// Type.
+		/// </param>
 		public string sqlUpdate(Type type) {
 			StringBuilder sql = new StringBuilder();
 			PropertyInfo[] properties = type.GetProperties();
@@ -357,6 +363,15 @@ namespace AltairStudios.Core.Orm.Providers {
 		
 		
 		
+		/// <summary>
+		/// Sqls the delete.
+		/// </summary>
+		/// <returns>
+		/// The delete.
+		/// </returns>
+		/// <param name='type'>
+		/// Type.
+		/// </param>
 		public string sqlDelete(Type type) {
 			StringBuilder sql = new StringBuilder();
 			PropertyInfo[] properties = type.GetProperties();
