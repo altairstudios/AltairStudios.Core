@@ -67,8 +67,8 @@ namespace AltairStudios.Core.Orm {
 			
 				for(int i = 0; i < primaryKeys.Count; i++) {
 					IDbDataParameter parameter = SqlProvider.getProvider().createParameter();
-					parameter.ParameterName = parameters[i].Name;
-					parameter.Value = parameters[i].GetValue(this, null);
+					parameter.ParameterName = primaryKeys[i].Name;
+					parameter.Value = primaryKeys[i].GetValue(this, null);
 					
 					command.Parameters.Add(parameter);
 				}
@@ -77,8 +77,8 @@ namespace AltairStudios.Core.Orm {
 			
 				for(int i = 0; i < indexes.Count; i++) {
 					IDbDataParameter parameter = SqlProvider.getProvider().createParameter();
-					parameter.ParameterName = parameters[i].Name;
-					parameter.Value = parameters[i].GetValue(this, null);
+					parameter.ParameterName = indexes[i].Name;
+					parameter.Value = indexes[i].GetValue(this, null);
 					
 					command.Parameters.Add(parameter);
 				}

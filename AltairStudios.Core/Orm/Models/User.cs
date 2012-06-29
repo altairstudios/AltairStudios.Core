@@ -98,7 +98,7 @@ namespace AltairStudios.Core.Orm.Models {
 		/// <value>
 		/// The email.
 		/// </value>
-		[Templatize]
+		[Index]
 		public string Email {
 			get {
 				return this.email;
@@ -134,7 +134,7 @@ namespace AltairStudios.Core.Orm.Models {
 		/// <value>
 		/// The password.
 		/// </value>
-		[Templatize]
+		[Index]
 		public string Password {
 			get {
 				return this.password;
