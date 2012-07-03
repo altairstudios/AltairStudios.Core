@@ -11,7 +11,7 @@ namespace AltairStudios.Core.Orm.Models {
 		/// <summary>
 		/// The identifier.
 		/// </summary>
-		protected int id;
+		protected int? id;
 		/// <summary>
 		/// The prefix.
 		/// </summary>
@@ -56,7 +56,7 @@ namespace AltairStudios.Core.Orm.Models {
 		/// The identifier.
 		/// </value>
 		[PrimaryKey(true)]
-		public int Id {
+		public int? Id {
 			get {
 				return this.id;
 			}

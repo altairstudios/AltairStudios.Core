@@ -99,10 +99,7 @@ namespace AltairStudios.Core.Mvc {
 				if(properties[i].GetValue(this, null) != null) {
 					TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
 					if(attributes.Length > 0) {
-					
-						//jsonProperties.Add("\"" + properties[i].Name + "\"" + ":" + this.cast<Model>(properties[i].GetValue(this, null)).ToJson());
-						
-						jsonProperties.Add("\"" + properties[i].Name + "\"" + ":" + converter.convert(properties[i].GetValue(this, null), properties[i].PropertyType));
+						jsonProperties.Add("\"" + properties[i].Name + "\"" + ":" + converter.convert(this.getPropertyValue(properties[i]), properties[i].PropertyType));
 					}
 				}
 			}
@@ -111,6 +108,25 @@ namespace AltairStudios.Core.Mvc {
 			json.Append("}");
 			
 			return json.ToString();
+		}
+		
+		
+		
+		protected object getPropertyValue(PropertyInfo property) {
+			Type te;
+			if(Reflection.Instance.isChildOf(property.PropertyType, typeof(Nullable))) {
+				/*property.GetValue(this, null).GetType().GetProperty("HasValue").GetValue();
+				if(((Nullable<>)property).HasValue) {
+					return ((Nullable<object>)property).Value;
+				} else {
+					return null;
+				}*/
+				
+				object obj = property.GetValue(this, null);
+				return obj;
+			} else {
+				return property.GetValue(this, null);
+			}
 		}
 	}
 }

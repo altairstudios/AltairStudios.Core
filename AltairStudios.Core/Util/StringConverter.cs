@@ -27,6 +27,7 @@ namespace AltairStudios.Core.Util {
 		/// </param>
 		public string convert(object val, Type type) {
 			string converted = "";
+			
 			switch(type.Name) {
 				case "Int32": converted = this.convert((int)val); break;
 				case "String": converted = "\"" + this.convert((string)val) + "\""; break;
@@ -35,6 +36,7 @@ namespace AltairStudios.Core.Util {
 				case "Boolean": converted = this.convert((bool)val); break;
 				case "Model": converted = this.convert((Model)val); break;
 				case "ModelList": converted = this.convert((ModelList<Model>)val); break;
+				case "Nullable`1": converted = this.convert(Convert.ChangeType(val, Nullable.GetUnderlyingType(type)), Nullable.GetUnderlyingType(type)); break;
 				default: converted = "\"\""; break;
 			}
 			

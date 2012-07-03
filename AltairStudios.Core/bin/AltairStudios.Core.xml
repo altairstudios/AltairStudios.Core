@@ -25,6 +25,16 @@
             Insert this model instance into database.
             </summary>
         </member>
+        <member name="M:AltairStudios.Core.Orm.Model.update">
+            <summary>
+            Update this instance.
+            </summary>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.Model.delete">
+            <summary>
+            Delete this instance.
+            </summary>
+        </member>
         <member name="M:AltairStudios.Core.Orm.Model.createTable">
             <summary>
             Creates the table.
@@ -32,6 +42,14 @@
             <returns>
             The table.
             </returns>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.Model.query(System.String)">
+            <summary>
+            Query the specified sql.
+            </summary>
+            <param name="sql">
+            Sql.
+            </param>
         </member>
         <member name="M:AltairStudios.Core.Orm.Model.query(System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
             <summary>
@@ -415,6 +433,14 @@
             The surname.
             </summary>
         </member>
+        <member name="P:AltairStudios.Core.Orm.Models.User.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
         <member name="P:AltairStudios.Core.Orm.Models.User.Name">
             <summary>
             Gets or sets the name.
@@ -445,14 +471,6 @@
             </summary>
             <value>
             The email.
-            </value>
-        </member>
-        <member name="P:AltairStudios.Core.Orm.Models.User.Id">
-            <summary>
-            Gets or sets the identifier.
-            </summary>
-            <value>
-            The identifier.
             </value>
         </member>
         <member name="P:AltairStudios.Core.Orm.Models.User.Password">
@@ -1129,6 +1147,28 @@
             <returns>
             The inserted identifier.
             </returns>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.Providers.SqlProvider.sqlUpdate(System.Type)">
+            <summary>
+            Sqls the update.
+            </summary>
+            <returns>
+            The update.
+            </returns>
+            <param name="type">
+            Type.
+            </param>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.Providers.SqlProvider.sqlDelete(System.Type)">
+            <summary>
+            Sqls the delete.
+            </summary>
+            <returns>
+            The delete.
+            </returns>
+            <param name="type">
+            Type.
+            </param>
         </member>
         <member name="M:AltairStudios.Core.Orm.Providers.SqlProvider.sqlString(AltairStudios.Core.Orm.Model,System.Type,System.Collections.Generic.List{System.String},System.Reflection.PropertyInfo[])">
             <summary>

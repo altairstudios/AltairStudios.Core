@@ -11,11 +11,11 @@ namespace AltairStudios.Core.Orm.Models {
 		/// <summary>
 		/// The identifier.
 		/// </summary>
-		protected int id;
+		protected int? id;
 		/// <summary>
 		/// The type.
 		/// </summary>
-		protected int type;
+		protected int? type;
 		/// <summary>
 		/// The street.
 		/// </summary>

@@ -11,7 +11,7 @@ namespace AltairStudios.Core.Orm.Models {
 		/// <summary>
 		/// The identifier.
 		/// </summary>
-		protected int id;
+		protected int? id;
 		/// <summary>
 		/// The email.
 		/// </summary>
@@ -39,6 +39,24 @@ namespace AltairStudios.Core.Orm.Models {
 		
 		
 		#region Properties
+		/// <summary>
+		/// Gets or sets the identifier.
+		/// </summary>
+		/// <value>
+		/// The identifier.
+		/// </value>
+		[PrimaryKey(true)]
+		public int? Id {
+			get {
+				return this.id;
+			}
+			set {
+				id = value;
+			}
+		}
+		
+		
+		
 		/// <summary>
 		/// Gets or sets the name.
 		/// </summary>
@@ -111,30 +129,11 @@ namespace AltairStudios.Core.Orm.Models {
 		
 		
 		/// <summary>
-		/// Gets or sets the identifier.
-		/// </summary>
-		/// <value>
-		/// The identifier.
-		/// </value>
-		[PrimaryKey(true)]
-		public int Id {
-			get {
-				return this.id;
-			}
-			set {
-				id = value;
-			}
-		}
-		
-		
-		
-		/// <summary>
 		/// Gets or sets the password.
 		/// </summary>
 		/// <value>
 		/// The password.
 		/// </value>
-		[Index]
 		public string Password {
 			get {
 				return this.password;
