@@ -112,7 +112,7 @@ namespace AltairStudios.Core.Orm.Models {
 		/// The identifier.
 		/// </value>
 		[PrimaryKey(true)]
-		public int Id {
+		public int? Id {
 			get {
 				return this.id;
 			}
@@ -184,7 +184,7 @@ namespace AltairStudios.Core.Orm.Models {
 		/// The type.
 		/// </value>
 		[Templatize]
-		public int Type {
+		public int? Type {
 			get {
 				return this.type;
 			}
