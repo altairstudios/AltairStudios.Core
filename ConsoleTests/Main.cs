@@ -21,6 +21,7 @@ namespace AltairStudios.Core.ConsoleTests {
 			string option = Console.ReadLine();
 			
 			if(option == "1") {
+				Tests.Test01.run();
 			}
 		}
 	}

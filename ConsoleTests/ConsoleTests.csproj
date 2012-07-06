@@ -42,4 +42,10 @@
   <ItemGroup>
     <Folder Include="Tests\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AltairStudios.Core\AltairStudios.Core.csproj">
+      <Project>{C3553C85-5BC6-4014-BFA0-EDF72A2EBA59}</Project>
+      <Name>AltairStudios.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

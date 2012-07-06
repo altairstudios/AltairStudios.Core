@@ -62,7 +62,8 @@ namespace AltairStudios.Core.ConsoleTests.Tests {
 		/// </returns>
 		public static string getTests() {
 			StringBuilder text = new StringBuilder();
-			text.Append("1.  - Dummy");
+			text.Append("1.  - Simple serialization\n");
+			text.Append("2.  - Simple serialization with basic data\n");
 			
 			return text.ToString();
 		}
@@ -79,10 +80,60 @@ namespace AltairStudios.Core.ConsoleTests.Tests {
 		/// Test.
 		/// </param>
 		public static string executeTest(int test) {
-			return "";
+			string output = "";
+			
+			if(test == 1) {
+				output = test01();	
+			} else if(test == 2) {
+				output = test02();	
+			}
+			
+			return output;
 		}
 		
 		
-		//protected static string run
+		
+		/// <summary>
+		/// Run this instance.
+		/// </summary>
+		public static void run() {
+			Console.WriteLine(getTests());
+			string option = Console.ReadLine();
+			
+			string output = executeTest(int.Parse(option));
+			
+			Console.WriteLine(output);
+		}
+		
+		
+		
+		/// <summary>
+		/// Test01 test simple json serialization.
+		/// </summary>
+		protected static string test01() {
+			AltairStudios.Core.Orm.Models.Address address = new AltairStudios.Core.Orm.Models.Address();
+			
+			return address.ToJson();
+		}
+		
+		
+		
+		/// <summary>
+		/// Test02 test simple json serialization with basic data.
+		/// </summary>
+		protected static string test02() {
+			AltairStudios.Core.Orm.Models.Address address = new AltairStudios.Core.Orm.Models.Address();
+			
+			address.Block = "1a";
+			address.Floor = "6";
+			address.Id = 1111;
+			address.Number = "37";
+			address.Stair = "left";
+			address.Street = "Sessame street";
+			address.Zip = "28723";
+			address.Type = null;
+			
+			return address.ToJson();
+		}
 	}
 }
