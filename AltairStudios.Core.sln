@@ -5,12 +5,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AltairStudios.Core", "Altai
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{D395CFF1-5F52-45BB-9A31-40E2065838C5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTests", "ConsoleTests\ConsoleTests.csproj", "{AE074C71-EB2C-456D-A0E8-B9861F0167DB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AE074C71-EB2C-456D-A0E8-B9861F0167DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE074C71-EB2C-456D-A0E8-B9861F0167DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE074C71-EB2C-456D-A0E8-B9861F0167DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE074C71-EB2C-456D-A0E8-B9861F0167DB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C3553C85-5BC6-4014-BFA0-EDF72A2EBA59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C3553C85-5BC6-4014-BFA0-EDF72A2EBA59}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3553C85-5BC6-4014-BFA0-EDF72A2EBA59}.Release|Any CPU.ActiveCfg = Release|Any CPU
