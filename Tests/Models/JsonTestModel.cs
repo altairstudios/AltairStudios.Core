@@ -1,5 +1,5 @@
 using System;
-using AltairStudios.Core.Mvc;
+using AltairStudios.Core.Orm;
 
 
 namespace AltairStudios.Core.Tests.Web.Models {
@@ -10,7 +10,7 @@ namespace AltairStudios.Core.Tests.Web.Models {
 		protected bool ignore;
 		protected bool has;
 		
-		[Templatize()]
+		[PrimaryKey(true)]
 		public int Id {
 			get {
 				return this.id;
