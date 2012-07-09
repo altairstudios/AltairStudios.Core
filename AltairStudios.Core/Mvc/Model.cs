@@ -11,7 +11,7 @@ namespace AltairStudios.Core.Mvc {
 	/// <summary>
 	/// Model.
 	/// </summary>
-	public class Model {
+	public class Model : IModelizable {
 		/// <summary>
 		/// Gets the fields.
 		/// </summary>
@@ -27,6 +27,18 @@ namespace AltairStudios.Core.Mvc {
 		
 		
 		
+		/// <summary>
+		/// Gets the fields.
+		/// </summary>
+		/// <returns>
+		/// The fields.
+		/// </returns>
+		/// <param name='properties'>
+		/// Properties.
+		/// </param>
+		/// <param name='ownFields'>
+		/// Own fields.
+		/// </param>
 		protected ModelList<string> getFields(PropertyInfo[] properties, bool ownFields) {
 			ModelList<string> fields = new ModelList<string>();
 			
@@ -99,7 +111,21 @@ namespace AltairStudios.Core.Mvc {
 				if(properties[i].GetValue(this, null) != null) {
 					TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
 					if(attributes.Length > 0) {
-						jsonProperties.Add("\"" + properties[i].Name + "\"" + ":" + converter.convert(this.getPropertyValue(properties[i]), properties[i].PropertyType));
+						if(properties[i].PropertyType.GetInterface("IModelizable") != null) {
+							jsonProperties.Add("\"" + properties[i].Name + "\"" + ":" + ((IModelizable)this.getPropertyValue(properties[i])).ToJson());
+						} else {
+							jsonProperties.Add("\"" + properties[i].Name + "\"" + ":" + converter.convert(this.getPropertyValue(properties[i]), properties[i].PropertyType));
+						}
+						
+						
+						/*//properties[i].PropertyType.GetInterface("")
+						if(Reflection.Instance.isChildOf(properties[i].PropertyType, typeof(Model))) {
+							jsonProperties.Add("\"" + properties[i].Name + "\"" + ":" + ((Model)this.getPropertyValue(properties[i])).ToJson());
+						} else if(Reflection.Instance.isChildOf(properties[i].PropertyType, typeof(ModelList<>))) {
+							jsonProperties.Add("\"" + properties[i].Name + "\"" + ":" + ((ModelList<object>)this.getPropertyValue(properties[i])).ToJson());
+						} else {
+							jsonProperties.Add("\"" + properties[i].Name + "\"" + ":" + converter.convert(this.getPropertyValue(properties[i]), properties[i].PropertyType));
+						}*/
 					}
 				}
 			}
@@ -112,16 +138,17 @@ namespace AltairStudios.Core.Mvc {
 		
 		
 		
+		/// <summary>
+		/// Gets the property value.
+		/// </summary>
+		/// <returns>
+		/// The property value.
+		/// </returns>
+		/// <param name='property'>
+		/// Property.
+		/// </param>
 		protected object getPropertyValue(PropertyInfo property) {
-			Type te;
 			if(Reflection.Instance.isChildOf(property.PropertyType, typeof(Nullable))) {
-				/*property.GetValue(this, null).GetType().GetProperty("HasValue").GetValue();
-				if(((Nullable<>)property).HasValue) {
-					return ((Nullable<object>)property).Value;
-				} else {
-					return null;
-				}*/
-				
 				object obj = property.GetValue(this, null);
 				return obj;
 			} else {

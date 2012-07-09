@@ -53,10 +53,13 @@
         </member>
         <member name="M:AltairStudios.Core.Orm.Model.query(System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
             <summary>
-            Query the specified sql.
+            Query the specified sql and parameters.
             </summary>
             <param name="sql">
             Sql.
+            </param>
+            <param name="parameters">
+            Parameters.
             </param>
         </member>
         <member name="T:AltairStudios.Core.Mvc.MvcApplication">
@@ -150,6 +153,20 @@
             Properties.
             </param>
         </member>
+        <member name="M:AltairStudios.Core.Mvc.Model.getFields(System.Reflection.PropertyInfo[],System.Boolean)">
+            <summary>
+            Gets the fields.
+            </summary>
+            <returns>
+            The fields.
+            </returns>
+            <param name="properties">
+            Properties.
+            </param>
+            <param name="ownFields">
+            Own fields.
+            </param>
+        </member>
         <member name="M:AltairStudios.Core.Mvc.Model.cast``1(System.Object)">
             <summary>
             Cast the specified o.
@@ -182,6 +199,17 @@
             <returns>
             The json.
             </returns>
+        </member>
+        <member name="M:AltairStudios.Core.Mvc.Model.getPropertyValue(System.Reflection.PropertyInfo)">
+            <summary>
+            Gets the property value.
+            </summary>
+            <returns>
+            The property value.
+            </returns>
+            <param name="property">
+            Property.
+            </param>
         </member>
         <member name="T:AltairStudios.Core.Mvc.TemplatizeAttribute">
             <summary>
@@ -1140,6 +1168,20 @@
             Type.
             </param>
         </member>
+        <member name="M:AltairStudios.Core.Orm.Providers.SqlProvider.sqlInsertForeign(System.Type,System.Type)">
+            <summary>
+            Sqls the insert foreign.
+            </summary>
+            <returns>
+            The insert foreign.
+            </returns>
+            <param name="type1">
+            Type1.
+            </param>
+            <param name="type2">
+            Type2.
+            </param>
+        </member>
         <member name="M:AltairStudios.Core.Orm.Providers.SqlProvider.getInsertedId">
             <summary>
             Gets the inserted identifier.
@@ -2037,6 +2079,19 @@
             <summary>
             Index attribute.
             </summary>
+        </member>
+        <member name="T:AltairStudios.Core.Mvc.IModelizable">
+            <summary>
+            IModelizable interface to implement in Model classes.
+            </summary>
+        </member>
+        <member name="M:AltairStudios.Core.Mvc.IModelizable.ToJson">
+            <summary>
+            Serialize model to json.
+            </summary>
+            <returns>
+            The json.
+            </returns>
         </member>
     </members>
 </doc>

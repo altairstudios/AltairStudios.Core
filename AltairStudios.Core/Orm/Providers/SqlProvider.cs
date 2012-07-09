@@ -105,7 +105,7 @@ namespace AltairStudios.Core.Orm.Providers {
 			ModelList<string> indexFields = new ModelList<string>();
 			ModelList<string> uniqueFields = new ModelList<string>();
 			ModelList<string> foreignFields = new ModelList<string>();
-			ModelList<string> keys = new ModelList<string>();
+			//ModelList<string> keys = new ModelList<string>();
 			ModelList<string> createdModelsName = new ModelList<string>();
 			
 			sql.Append("CREATE TABLE IF NOT EXISTS " + type.Name + " (");
@@ -114,7 +114,7 @@ namespace AltairStudios.Core.Orm.Providers {
 				TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
 				PrimaryKeyAttribute[] primaryKeys = (PrimaryKeyAttribute[])properties[i].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
 				IndexAttribute[] indexes = (IndexAttribute[])properties[i].GetCustomAttributes(typeof(IndexAttribute), true);
-				ForeignKeyAttribute[] foreigns = (ForeignKeyAttribute[])properties[i].GetCustomAttributes(typeof(ForeignKeyAttribute), true);
+				//ForeignKeyAttribute[] foreigns = (ForeignKeyAttribute[])properties[i].GetCustomAttributes(typeof(ForeignKeyAttribute), true);
 				
 				if(primaryKeys.Length > 0) {
 					primaryFields.Add(properties[i].Name);
@@ -257,7 +257,7 @@ namespace AltairStudios.Core.Orm.Providers {
 			for(int i = 0; i < properties.Length; i++) {
 				TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
 				PrimaryKeyAttribute[] primaryKeys = (PrimaryKeyAttribute[])properties[i].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
-				IndexAttribute[] indexes = (IndexAttribute[])properties[i].GetCustomAttributes(typeof(IndexAttribute), true);
+				//IndexAttribute[] indexes = (IndexAttribute[])properties[i].GetCustomAttributes(typeof(IndexAttribute), true);
 				
 				if((primaryKeys.Length > 0 && primaryKeys[0].AutoIncrement == false) || (primaryKeys.Length == 0 && attributes.Length > 0)) {
 					if(!Reflection.Instance.isChildOf(properties[i].PropertyType, typeof(Model))) {
@@ -280,6 +280,18 @@ namespace AltairStudios.Core.Orm.Providers {
 		
 		
 		
+		/// <summary>
+		/// Sqls the insert foreign.
+		/// </summary>
+		/// <returns>
+		/// The insert foreign.
+		/// </returns>
+		/// <param name='type1'>
+		/// Type1.
+		/// </param>
+		/// <param name='type2'>
+		/// Type2.
+		/// </param>
 		public string sqlInsertForeign(Type type1, Type type2) {
 			StringBuilder sql = new StringBuilder();
 			PropertyInfo[] properties1 = type1.GetProperties();
