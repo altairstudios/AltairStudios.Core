@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>/home/juan/Sites/AltairStudios.Core/AltairStudios.Core/bin/AltairStudios.Core</name>
+        <name>/Users/juan/Sites/altairstudios-core/AltairStudios.Core/bin/AltairStudios.Core</name>
     </assembly>
     <members>
         <member name="T:AltairStudios.Core.Orm.Model">

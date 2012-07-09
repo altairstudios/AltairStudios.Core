@@ -104,6 +104,7 @@ namespace AltairStudios.Core.Mvc {
 			routes.IgnoreRoute ("{resource}.axd/{*pathInfo}");
 
 			routes.MapRoute("Install", "Admin/Install/{action}", new { controller = "Install", action = "Index", id = "" });
+			routes.MapRoute("Plugin", "Admin/PluginConfig/{action}/{id}", new { controller = "PluginConfig", action = "Index", id = "plugin" });
 			routes.MapRoute("Admin", "Admin/{action}", new { controller = "Admin", action = "Index", id = "" });
 			routes.MapRoute("Resource", "Resource/{action}/{resource}", new { controller = "Resource", action = "Index", resource = "" });
 			routes.MapRoute("Default", "{controller}/{action}/{id}", new { controller = "Home", action = "Index", id = "" });
