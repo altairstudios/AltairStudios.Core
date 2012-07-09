@@ -90,6 +90,14 @@ namespace AltairStudios.Core.ConsoleTests.Tests {
 				output = test01();	
 			} else if(test == 2) {
 				output = test02();	
+			} else if(test == 3) {
+				output = test03();	
+			} else if(test == 4) {
+				output = test04();	
+			} else if(test == 5) {
+				output = test05();	
+			} else if(test == 6) {
+				output = test06();	
 			}
 			
 			return output;
@@ -143,7 +151,22 @@ namespace AltairStudios.Core.ConsoleTests.Tests {
 		
 		
 		protected static string test03() {
-			return "";
+			AltairStudios.Core.Orm.Models.Address address = new AltairStudios.Core.Orm.Models.Address();
+			
+			address.Block = "1a";
+			address.Floor = "6";
+			address.Id = 1111;
+			address.Number = "37";
+			address.Stair = "left";
+			address.Street = "Sessame street";
+			address.Zip = "28723";
+			address.Type = null;
+			
+			address.City = new AltairStudios.Core.Orm.Models.City();
+			address.City.Id = 5;
+			address.City.Name = "Madrid";
+			
+			return address.ToJson();
 		}
 		
 		
