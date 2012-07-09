@@ -45,7 +45,7 @@
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="AltairStudios.Core">
+    <Reference Include="AltairStudios.Core, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\AltairStudios.Core\bin\AltairStudios.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
@@ -76,6 +76,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />
   <ProjectExtensions>
     <MonoDevelop>
       <Properties VerifyCodeBehindFields="true" VerifyCodeBehindEvents="true">

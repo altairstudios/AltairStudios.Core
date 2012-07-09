@@ -97,7 +97,7 @@ namespace AltairStudios.Core.Orm {
 			IDataReader reader = command.ExecuteReader();
 			ModelList<T> models = new ModelList<T>();
 			ConstructorInfo constructor = type.GetConstructor(new Type[0]);
-			int counter = 0;
+			//int counter = 0;
 			
 			while(reader.Read()) {
 				object instance = constructor.Invoke(new Object[0]);
@@ -138,7 +138,7 @@ namespace AltairStudios.Core.Orm {
 				if(properties[i].GetValue(this, null) != null) {
 					TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
 					PrimaryKeyAttribute[] primarys = (PrimaryKeyAttribute[])properties[i].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
-					IndexAttribute[] indexes = (IndexAttribute[])properties[i].GetCustomAttributes(typeof(IndexAttribute), true);
+					//IndexAttribute[] indexes = (IndexAttribute[])properties[i].GetCustomAttributes(typeof(IndexAttribute), true);
 					
 					if((primarys.Length > 0 && !primarys[0].AutoIncrement) || (primarys.Length == 0 && attributes.Length > 0)) {
 						if(Reflection.Instance.isChildOf(properties[i].PropertyType, typeof(Model))) {
@@ -304,10 +304,13 @@ namespace AltairStudios.Core.Orm {
 		
 		
 		/// <summary>
-		/// Query the specified sql.
+		/// Query the specified sql and parameters.
 		/// </summary>
 		/// <param name='sql'>
 		/// Sql.
+		/// </param>
+		/// <param name='parameters'>
+		/// Parameters.
 		/// </param>
 		public List<Dictionary<string, string>> query(string sql, Dictionary<string, object> parameters) {
 			IDbCommand command = SqlProvider.getProvider().createCommand();

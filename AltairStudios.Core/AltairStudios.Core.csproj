@@ -93,6 +93,7 @@
     <Compile Include="Orm\ForeignKeyAttribute.cs" />
     <Compile Include="Orm\ForeignKeyTypes.cs" />
     <Compile Include="Orm\ForeignKeyActions.cs" />
+    <Compile Include="Mvc\IModelizable.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web" />

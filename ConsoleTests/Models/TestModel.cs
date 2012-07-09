@@ -1,16 +1,17 @@
 using System;
+using AltairStudios.Core.Mvc;
 using AltairStudios.Core.Orm;
 using AltairStudios.Core.Orm.Models;
 
 
 namespace AltairStudios.Core.ConsoleTests.Models {
-	public class TestModel : Model {
-		protected int id;
-		protected ModelList<int> intList;
-		protected ModelList<User> userList;
+	public class TestModel : Orm.Model {
+		protected int? id;
+		protected Orm.ModelList<int> intList;
+		protected Orm.ModelList<User> userList;
 		
-		
-		public int Id {
+		[Templatize]
+		public int? Id {
 			get {
 				return this.id;
 			}
@@ -18,8 +19,9 @@ namespace AltairStudios.Core.ConsoleTests.Models {
 				id = value;
 			}
 		}
-
-		public ModelList<int> IntList {
+		
+		[Templatize]
+		public Orm.ModelList<int> IntList {
 			get {
 				return this.intList;
 			}
@@ -27,8 +29,9 @@ namespace AltairStudios.Core.ConsoleTests.Models {
 				intList = value;
 			}
 		}
-
-		public ModelList<User> UserList {
+		
+		[Templatize]
+		public Orm.ModelList<User> UserList {
 			get {
 				return this.userList;
 			}
