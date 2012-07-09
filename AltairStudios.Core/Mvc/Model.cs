@@ -99,7 +99,13 @@ namespace AltairStudios.Core.Mvc {
 				if(properties[i].GetValue(this, null) != null) {
 					TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
 					if(attributes.Length > 0) {
-						jsonProperties.Add("\"" + properties[i].Name + "\"" + ":" + converter.convert(this.getPropertyValue(properties[i]), properties[i].PropertyType));
+						if(Reflection.Instance.isChildOf(properties[i].PropertyType, typeof(Model))) {
+							jsonProperties.Add("\"" + properties[i].Name + "\"" + ":" + ((Model)this.getPropertyValue(properties[i])).ToJson());
+						} else if(Reflection.Instance.isChildOf(properties[i].PropertyType, typeof(ModelList<>))) {
+							jsonProperties.Add("\"" + properties[i].Name + "\"" + ":" + ((ModelList<object>)this.getPropertyValue(properties[i])).ToJson());
+						} else {
+							jsonProperties.Add("\"" + properties[i].Name + "\"" + ":" + converter.convert(this.getPropertyValue(properties[i]), properties[i].PropertyType));
+						}
 					}
 				}
 			}
