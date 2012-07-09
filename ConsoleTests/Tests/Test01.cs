@@ -172,19 +172,50 @@ namespace AltairStudios.Core.ConsoleTests.Tests {
 		
 		
 		protected static string test04() {
-			return "";
+			Models.TestModel test = new Models.TestModel();
+			
+			return test.ToJson();
 		}
 		
 		
 		
 		protected static string test05() {
-			return "";
+			Models.TestModel test = new Models.TestModel();
+			
+			test.Id = 5;
+			
+			test.IntList = new AltairStudios.Core.Orm.ModelList<int>();
+			test.IntList.Add(5);
+			test.IntList.Add(7);
+			test.IntList.Add(8);
+			test.IntList.Add(3);
+			
+			return test.ToJson();
 		}
 		
 		
 		
 		protected static string test06() {
-			return "";
+			Models.TestModel test = new Models.TestModel();
+			
+			test.Id = 5;
+			
+			test.IntList = new AltairStudios.Core.Orm.ModelList<int>();
+			test.IntList.Add(5);
+			test.IntList.Add(7);
+			test.IntList.Add(8);
+			test.IntList.Add(3);
+			
+			test.UserList = new AltairStudios.Core.Orm.ModelList<AltairStudios.Core.Orm.Models.User>();
+			
+			AltairStudios.Core.Orm.Models.User userA = new AltairStudios.Core.Orm.Models.User();
+			userA.Name = "Test";
+			userA.Surname = "Test";
+			userA.Email = "test@test.lol";
+			userA.Password = "my_secret";
+			test.UserList.Add(userA);
+			
+			return test.ToJson();
 		}
 	}
 }
