@@ -64,6 +64,10 @@ namespace AltairStudios.Core.ConsoleTests.Tests {
 			StringBuilder text = new StringBuilder();
 			text.Append("1.  - Simple serialization\n");
 			text.Append("2.  - Simple serialization with basic data\n");
+			text.Append("3.  - Simple serialization with inner data\n");
+			text.Append("4.  - TestModel blank serialization\n");
+			text.Append("5.  - TestModel simple data serialization\n");
+			text.Append("6.  - TestModel all data serialization\n");
 			
 			return text.ToString();
 		}
@@ -134,6 +138,30 @@ namespace AltairStudios.Core.ConsoleTests.Tests {
 			address.Type = null;
 			
 			return address.ToJson();
+		}
+		
+		
+		
+		protected static string test03() {
+			return "";
+		}
+		
+		
+		
+		protected static string test04() {
+			return "";
+		}
+		
+		
+		
+		protected static string test05() {
+			return "";
+		}
+		
+		
+		
+		protected static string test06() {
+			return "";
 		}
 	}
 }
