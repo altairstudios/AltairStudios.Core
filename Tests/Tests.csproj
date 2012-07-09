@@ -10,6 +10,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>AltairStudios.Core.Tests.Web</RootNamespace>
     <AssemblyName>Tests</AssemblyName>
+    <ReleaseVersion>0.3</ReleaseVersion>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <ReleaseVersion>0.3</ReleaseVersion>
   </PropertyGroup>
@@ -44,11 +45,15 @@
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="AltairStudios.Core">
+      <HintPath>..\AltairStudios.Core\bin\AltairStudios.Core.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\" />
     <Folder Include="Models\" />
     <Folder Include="Scripts\" />
+    <Folder Include="Models\Plugin\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
@@ -58,6 +63,10 @@
     <Compile Include="Controllers\SerializerController.cs" />
     <Compile Include="Models\TestModel.cs" />
     <Compile Include="Models\JsonTestModel.cs" />
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\Cart.cs" />
+    <Compile Include="Models\Plugin\Hello.cs" />
+    <Compile Include="Models\Business.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
@@ -66,7 +75,7 @@
     <Content Include="Global.asax" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <ProjectExtensions>
     <MonoDevelop>
       <Properties VerifyCodeBehindFields="true" VerifyCodeBehindEvents="true">
@@ -74,12 +83,6 @@
       </Properties>
     </MonoDevelop>
   </ProjectExtensions>
-  <ItemGroup>
-    <ProjectReference Include="..\AltairStudios.Core\AltairStudios.Core.csproj">
-      <Project>{C3553C85-5BC6-4014-BFA0-EDF72A2EBA59}</Project>
-      <Name>AltairStudios.Core</Name>
-    </ProjectReference>
-  </ItemGroup>
   <ItemGroup>
     <None Include=".htaccess" />
     <None Include="mono-admin-server\.htaccess" />
