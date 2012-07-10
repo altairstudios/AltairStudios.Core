@@ -9,6 +9,8 @@ namespace AltairStudios.Core.ConsoleTests.Models {
 		protected int? id;
 		protected Orm.ModelList<int> intList;
 		protected Orm.ModelList<User> userList;
+		protected string passwordMd5;
+		protected string passwordSha1;
 		
 		[Templatize]
 		public int? Id {
@@ -39,5 +41,27 @@ namespace AltairStudios.Core.ConsoleTests.Models {
 				userList = value;
 			}
 		}
+		
+		[Encrypted(EncryptationType.MD5)]
+		public string PasswordMd5 {
+			get {
+				return passwordMd5;
+			}
+			set {
+				passwordMd5 = value;
+			}
+		}
+		
+		[Encrypted(EncryptationType.SHA1)]
+		public string PasswordSha1 {
+			get {
+				return passwordSha1;
+			}
+			set {
+				passwordSha1 = value;
+			}
+		}
+
+
 	}
 }

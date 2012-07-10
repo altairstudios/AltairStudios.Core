@@ -199,6 +199,8 @@ namespace AltairStudios.Core.ConsoleTests.Tests {
 			Models.TestModel test = new Models.TestModel();
 			
 			test.Id = 5;
+			test.PasswordMd5 = "1234";
+			test.PasswordSha1 = "1234";
 			
 			test.IntList = new AltairStudios.Core.Orm.ModelList<int>();
 			test.IntList.Add(5);

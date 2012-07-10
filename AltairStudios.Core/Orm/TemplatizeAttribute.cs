@@ -58,36 +58,5 @@ namespace AltairStudios.Core.Orm {
 		public TemplatizeAttribute() {
 			this.templatize = true;
 		}
-		
-		
-		/*
-		/// <summary>
-		/// Initializes a new instance of the <see cref="AltairStudios.Core.Orm.TemplatizeAttribute"/> class.
-		/// </summary>
-		/// <param name='isSubtable'>
-		/// Is subtable.
-		/// </param>
-		public TemplatizeAttribute(bool isSubtable) {
-			this.templatize = true;
-			this.isSubtable = isSubtable;
-		}
-		
-		
-		
-		/// <summary>
-		/// Initializes a new instance of the <see cref="AltairStudios.Core.Orm.TemplatizeAttribute"/> class.
-		/// </summary>
-		/// <param name='isSubtable'>
-		/// Is subtable.
-		/// </param>
-		/// <param name='isList'>
-		/// Is list.
-		/// </param>
-		public TemplatizeAttribute(bool isSubtable, bool isList) {
-			this.templatize = true;
-			this.isSubtable = isSubtable;
-			this.isList = isList;
-		}
-		*/
 	}
 }

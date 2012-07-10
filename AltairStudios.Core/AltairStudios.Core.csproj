@@ -95,6 +95,8 @@
     <Compile Include="Orm\ForeignKeyActions.cs" />
     <Compile Include="Mvc\Controllers\PluginConfigController.cs" />
     <Compile Include="Mvc\IModelizable.cs" />
+    <Compile Include="Orm\EncryptedAttribute.cs" />
+    <Compile Include="Orm\EncryptationType.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web" />

@@ -35,7 +35,6 @@ namespace AltairStudios.Core.Util {
 				case "Decimal": converted = this.convert((decimal)val); break;
 				case "Boolean": converted = this.convert((bool)val); break;
 				case "Model": converted = this.convert((Model)val); break;
-				case "ModelList": converted = this.convert((ModelList<Model>)val); break;
 				case "Nullable`1": converted = this.convert(Convert.ChangeType(val, Nullable.GetUnderlyingType(type)), Nullable.GetUnderlyingType(type)); break;
 				default: converted = "\"\""; break;
 			}

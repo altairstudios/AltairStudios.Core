@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Security.Cryptography;
 using System.Text;
 using AltairStudios.Core.Orm;
 using AltairStudios.Core.Orm.Models;
@@ -114,7 +115,26 @@ namespace AltairStudios.Core.Mvc {
 						if(properties[i].PropertyType.GetInterface("IModelizable") != null) {
 							jsonProperties.Add("\"" + properties[i].Name + "\"" + ":" + ((IModelizable)this.getPropertyValue(properties[i])).ToJson());
 						} else {
-							jsonProperties.Add("\"" + properties[i].Name + "\"" + ":" + converter.convert(this.getPropertyValue(properties[i]), properties[i].PropertyType));
+							EncryptedAttribute[] encrypted = (EncryptedAttribute[])properties[i].GetCustomAttributes(typeof(EncryptedAttribute), true);
+							if(encrypted.Length > 0) {
+								string encodeResult;
+								Byte[] encodedBytes;
+								Byte[] originalBytes = ASCIIEncoding.Default.GetBytes(this.getPropertyValue(properties[i]).ToString());
+
+								if(encrypted[0].Method == EncryptationType.SHA1) {
+									SHA1 sha1 = SHA1.Create();
+									encodedBytes = sha1.ComputeHash(originalBytes);
+								} else {
+									MD5 md5 = MD5.Create();
+									encodedBytes = md5.ComputeHash(originalBytes);
+								}
+								
+								encodeResult = BitConverter.ToString(encodedBytes).Replace("-", "");
+							
+								jsonProperties.Add("\"" + properties[i].Name + "\"" + ":\"" + converter.convert(encodeResult) + "\"");
+							} else {
+								jsonProperties.Add("\"" + properties[i].Name + "\"" + ":" + converter.convert(this.getPropertyValue(properties[i]), properties[i].PropertyType));
+							}
 						}
 						
 						
