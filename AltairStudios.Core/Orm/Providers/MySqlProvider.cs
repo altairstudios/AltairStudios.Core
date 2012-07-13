@@ -74,6 +74,7 @@ namespace AltairStudios.Core.Orm.Providers {
 		/// Field.
 		/// </param>
 		protected override string sqlEscapeField(string field) {
+			field = field.Replace("`", "");
 			return "`" + field + "`";
 		}
 		
@@ -89,6 +90,7 @@ namespace AltairStudios.Core.Orm.Providers {
 		///  Table. 
 		/// </param>
 		protected virtual string sqlEscapeTable(string table) {
+			table = table.Replace("`", "");
 			return "`" + table + "`";
 		}
 	}

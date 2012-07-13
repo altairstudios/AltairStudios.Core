@@ -134,6 +134,7 @@ namespace AltairStudios.Core.Orm.Models {
 		/// <value>
 		/// The password.
 		/// </value>
+		[Encrypted]
 		public string Password {
 			get {
 				return this.password;

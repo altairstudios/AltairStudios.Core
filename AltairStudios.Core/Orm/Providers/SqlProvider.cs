@@ -192,7 +192,7 @@ namespace AltairStudios.Core.Orm.Providers {
 					string sqlType = this.convertTypeToSql(properties1[i].PropertyType);
 					string name = this.sqlEscapeField(type1.Name + "_" + properties1[i].Name);
 					
-					fields.Add(this.sqlEscapeField(name) + " " + sqlType + " NOT NULL");
+					fields.Add(name + " " + sqlType + " NOT NULL");
 					keys.Add(name);
 				}
 			}
@@ -204,7 +204,7 @@ namespace AltairStudios.Core.Orm.Providers {
 					string sqlType = this.convertTypeToSql(properties1[i].PropertyType);
 					string name = this.sqlEscapeField(type2.Name + "_" + properties2[i].Name);
 					
-					fields.Add(this.sqlEscapeField(name) + " " + sqlType + " NOT NULL");
+					fields.Add(name + " " + sqlType + " NOT NULL");
 					keys.Add(name);
 				}
 			}
