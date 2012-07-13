@@ -1043,6 +1043,28 @@
             The inserted identifier.
             </returns>
         </member>
+        <member name="M:AltairStudios.Core.Orm.Providers.MySqlProvider.sqlEscapeField(System.String)">
+            <summary>
+            Sqls the escape field.
+            </summary>
+            <returns>
+            The escape field.
+            </returns>
+            <param name="field">
+            Field.
+            </param>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.Providers.MySqlProvider.sqlEscapeTable(System.String)">
+            <summary>
+            Sqls the escape table.
+            </summary>
+            <returns>
+            The escape table.
+            </returns>
+            <param name="table">
+            Table.
+            </param>
+        </member>
         <member name="T:AltairStudios.Core.Orm.Providers.SqlServerProvider">
             <summary>
             SqlServer provider.
@@ -1230,6 +1252,28 @@
             </param>
             <param name="properties">
             Properties.
+            </param>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.Providers.SqlProvider.sqlEscapeField(System.String)">
+            <summary>
+            Sqls the escape field.
+            </summary>
+            <returns>
+            The escape field.
+            </returns>
+            <param name="field">
+            Field.
+            </param>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.Providers.SqlProvider.sqlEscapeTable(System.String)">
+            <summary>
+            Sqls the escape table.
+            </summary>
+            <returns>
+            The escape table.
+            </returns>
+            <param name="table">
+            Table.
             </param>
         </member>
         <member name="T:AltairStudios.Core.Plugin.iPlugin">

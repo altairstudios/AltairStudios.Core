@@ -108,7 +108,7 @@ namespace AltairStudios.Core.Orm.Providers {
 			//ModelList<string> keys = new ModelList<string>();
 			ModelList<string> createdModelsName = new ModelList<string>();
 			
-			sql.Append("CREATE TABLE IF NOT EXISTS " + type.Name + " (");
+			sql.Append("CREATE TABLE IF NOT EXISTS " + this.sqlEscapeTable(type.Name) + " (");
 			
 			for(int i = 0; i < properties.Length; i++) {
 				TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
@@ -117,29 +117,25 @@ namespace AltairStudios.Core.Orm.Providers {
 				//ForeignKeyAttribute[] foreigns = (ForeignKeyAttribute[])properties[i].GetCustomAttributes(typeof(ForeignKeyAttribute), true);
 				
 				if(primaryKeys.Length > 0) {
-					primaryFields.Add(properties[i].Name);
+					primaryFields.Add(this.sqlEscapeField(properties[i].Name));
 				} else if(indexes.Length > 0 && indexes[0].Unique) {
-					uniqueFields.Add(properties[i].Name);
+					uniqueFields.Add(this.sqlEscapeField(properties[i].Name));
 				} else if(indexes.Length > 0) {
-					indexFields.Add(properties[i].Name);
+					indexFields.Add(this.sqlEscapeField(properties[i].Name));
 				}
 				
 				if(attributes.Length > 0) {
-					string sqlType = "varchar(255)";
-					
-					switch(properties[i].PropertyType.ToString()) {
-						case "System.Int32": sqlType = "int(11)"; break;
-					}
+					string sqlType = this.convertTypeToSql(properties[i].PropertyType);
 					
 					if(primaryKeys.Length > 0 && primaryKeys[0].AutoIncrement) {
-						sqlFields.Add(properties[i].Name + " " + sqlType + " NOT NULL AUTO_INCREMENT");
+						sqlFields.Add(this.sqlEscapeField(properties[i].Name) + " " + sqlType + " NOT NULL AUTO_INCREMENT");
 					} else {
 						if(Reflection.Instance.getModelFromString(properties[i].PropertyType.ToString()) != null && !createdModelsName.Contains(properties[i].PropertyType.ToString())) {
 							foreignFields.Add(this.sqlCreateTable(properties[i].PropertyType));
 							foreignFields.Add(this.sqlCreateForeignTable(type, properties[i].PropertyType));
 							createdModelsName.Add(properties[i].PropertyType.ToString());
 						} else {
-							sqlFields.Add(properties[i].Name + " " + sqlType + " NOT NULL");
+							sqlFields.Add(this.sqlEscapeField(properties[i].Name) + " " + sqlType + " NOT NULL");
 						}
 					}
 				}
@@ -193,14 +189,10 @@ namespace AltairStudios.Core.Orm.Providers {
 				PrimaryKeyAttribute[] primaryKeys = (PrimaryKeyAttribute[])properties1[i].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
 				
 				if(primaryKeys.Length > 0) {
-					string sqlType = "varchar(255)";
-					string name = type1.Name + "_" + properties1[i].Name;
+					string sqlType = this.convertTypeToSql(properties1[i].PropertyType);
+					string name = this.sqlEscapeField(type1.Name + "_" + properties1[i].Name);
 					
-					switch(properties1[i].PropertyType.ToString()) {
-						case "System.Int32": sqlType = "int(11)"; break;
-					}
-					
-					fields.Add(name + " " + sqlType + " NOT NULL");
+					fields.Add(this.sqlEscapeField(name) + " " + sqlType + " NOT NULL");
 					keys.Add(name);
 				}
 			}
@@ -209,14 +201,10 @@ namespace AltairStudios.Core.Orm.Providers {
 				PrimaryKeyAttribute[] primaryKeys = (PrimaryKeyAttribute[])properties2[i].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
 				
 				if(primaryKeys.Length > 0) {
-					string sqlType = "varchar(255)";
-					string name = type2.Name + "_" + properties2[i].Name;
+					string sqlType = this.convertTypeToSql(properties1[i].PropertyType);
+					string name = this.sqlEscapeField(type2.Name + "_" + properties2[i].Name);
 					
-					switch(properties2[i].PropertyType.ToString()) {
-						case "System.Int32": sqlType = "int(11)"; break;
-					}
-					
-					fields.Add(name + " " + sqlType + " NOT NULL");
+					fields.Add(this.sqlEscapeField(name) + " " + sqlType + " NOT NULL");
 					keys.Add(name);
 				}
 			}
@@ -225,7 +213,7 @@ namespace AltairStudios.Core.Orm.Providers {
 				fields.Add("PRIMARY KEY (" + string.Join(",", keys.ToArray()) + ")");
 			}
 			
-			sql.Append("CREATE TABLE IF NOT EXISTS " + type1.Name + "_" + type2.Name + " (");
+			sql.Append("CREATE TABLE IF NOT EXISTS " + this.sqlEscapeTable(type1.Name + "_" + type2.Name) + " (");
 			sql.Append(string.Join(",", fields.ToArray()));
 			
 			
@@ -252,7 +240,7 @@ namespace AltairStudios.Core.Orm.Providers {
 			ModelList<string> sqlFields = new ModelList<string>();
 			ModelList<string> sqlNames = new ModelList<string>();
 			
-			sql.Append("INSERT INTO " + type.Name);
+			sql.Append("INSERT INTO " + this.sqlEscapeTable(type.Name));
 			
 			for(int i = 0; i < properties.Length; i++) {
 				TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
@@ -261,7 +249,7 @@ namespace AltairStudios.Core.Orm.Providers {
 				
 				if((primaryKeys.Length > 0 && primaryKeys[0].AutoIncrement == false) || (primaryKeys.Length == 0 && attributes.Length > 0)) {
 					if(!Reflection.Instance.isChildOf(properties[i].PropertyType, typeof(Model))) {
-						sqlNames.Add(properties[i].Name);
+						sqlNames.Add(this.sqlEscapeField(properties[i].Name));
 						sqlFields.Add("@" + properties[i].Name);
 					}
 				}
@@ -304,7 +292,7 @@ namespace AltairStudios.Core.Orm.Providers {
 				PrimaryKeyAttribute[] primaryKeys = (PrimaryKeyAttribute[])properties1[i].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
 				
 				if(primaryKeys.Length > 0) {
-					fields.Add(type1.Name + "_" + properties1[i].Name);
+					fields.Add(this.sqlEscapeField(type1.Name + "_" + properties1[i].Name));
 					parameters.Add("@" + type1.Name + "_" + properties1[i].Name);
 				}
 			}
@@ -313,12 +301,12 @@ namespace AltairStudios.Core.Orm.Providers {
 				PrimaryKeyAttribute[] primaryKeys = (PrimaryKeyAttribute[])properties2[i].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
 				
 				if(primaryKeys.Length > 0) {
-					fields.Add(type2.Name + "_" + properties2[i].Name);
+					fields.Add(this.sqlEscapeField(type2.Name + "_" + properties2[i].Name));
 					parameters.Add("@" + type2.Name + "_" + properties2[i].Name);
 				}
 			}
 			
-			sql.Append("INSERT INTO " + name);
+			sql.Append("INSERT INTO " + this.sqlEscapeTable(name));
 			sql.Append("(" + string.Join(",", fields.ToArray()) + ") VALUES (" + string.Join(",", parameters.ToArray()) + ")");
 			
 			return sql.ToString();
@@ -352,7 +340,7 @@ namespace AltairStudios.Core.Orm.Providers {
 			ModelList<string> sqlNames = new ModelList<string>();
 			ModelList<string> whereFields = new ModelList<string>();
 			
-			sql.Append("UPDATE " + type.Name);
+			sql.Append("UPDATE " + this.sqlEscapeTable(type.Name));
 			
 			for(int i = 0; i < properties.Length; i++) {
 				TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
@@ -360,9 +348,9 @@ namespace AltairStudios.Core.Orm.Providers {
 				
 				if(attributes.Length > 0 && attributes[0].Templatize && primaryKeys.Length == 0 && !Reflection.Instance.isChildOf(properties[i].PropertyType, typeof(Model))) {
 					sqlNames.Add(properties[i].Name);
-					sqlFields.Add(properties[i].Name + " = @" + properties[i].Name);
+					sqlFields.Add(this.sqlEscapeField(properties[i].Name) + " = @" + properties[i].Name);
 				} else if(primaryKeys.Length > 0 && !Reflection.Instance.isChildOf(properties[i].PropertyType, typeof(Model))) {
-					whereFields.Add(properties[i].Name + " = @" + properties[i].Name);
+					whereFields.Add(this.sqlEscapeField(properties[i].Name) + " = @" + properties[i].Name);
 				}
 			}
 			
@@ -389,13 +377,13 @@ namespace AltairStudios.Core.Orm.Providers {
 			PropertyInfo[] properties = type.GetProperties();
 			ModelList<string> whereFields = new ModelList<string>();
 			
-			sql.Append("DELETE FROM " + type.Name);
+			sql.Append("DELETE FROM " + this.sqlEscapeTable(type.Name));
 			
 			for(int i = 0; i < properties.Length; i++) {
 				PrimaryKeyAttribute[] primaryKeys = (PrimaryKeyAttribute[])properties[i].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
 				
 				if(primaryKeys.Length > 0 && !Reflection.Instance.isChildOf(properties[i].PropertyType, typeof(Model))) {
-					whereFields.Add(properties[i].Name + " = @" + properties[i].Name);
+					whereFields.Add(this.sqlEscapeField(properties[i].Name) + " = @" + properties[i].Name);
 				}
 			}
 			
@@ -429,14 +417,17 @@ namespace AltairStudios.Core.Orm.Providers {
 			StringBuilder sql = new StringBuilder();
 			ModelList<PropertyInfo> parameters = new ModelList<PropertyInfo>();
 			
+			for(int i = 0; i < fields.Count; i++) {
+				fields[i] = this.sqlEscapeField(fields[i]);
+			}
 			
-			sql.Append("SELECT " + string.Join(",", fields.ToArray()) + " FROM " + type.Name + " WHERE ");
+			sql.Append("SELECT " + string.Join(",", fields.ToArray()) + " FROM " + this.sqlEscapeTable(type.Name) + " WHERE ");
 			
 			for(int i = 0; i < properties.Length; i++) {
 				if(properties[i].GetValue(model, null) != null) {					
 					TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
 					if(attributes.Length > 0 && !Reflection.Instance.isChildOf(properties[i].PropertyType, typeof(Model))) {
-						sql.Append(properties[i].Name + " = @" + properties[i].Name + " AND " );
+						sql.Append(this.sqlEscapeField(properties[i].Name) + " = @" + properties[i].Name + " AND " );
 						parameters.Add(properties[i]);
 					}
 				}
@@ -445,6 +436,52 @@ namespace AltairStudios.Core.Orm.Providers {
 			sql.Append("1 = 1");
 			
 			return sql.ToString();
+		}
+		
+		
+		
+		/// <summary>
+		/// Sqls the escape field.
+		/// </summary>
+		/// <returns>
+		/// The escape field.
+		/// </returns>
+		/// <param name='field'>
+		/// Field.
+		/// </param>
+		protected virtual string sqlEscapeField(string field) {
+			return field;
+		}
+		
+		
+		
+		/// <summary>
+		/// Sqls the escape table.
+		/// </summary>
+		/// <returns>
+		/// The escape table.
+		/// </returns>
+		/// <param name='table'>
+		/// Table.
+		/// </param>
+		protected virtual string sqlEscapeTable(string table) {
+			return table;
+		}
+		
+		
+		
+		protected virtual string convertTypeToSql(Type type) {
+			string sqlType = "varchar(255)";
+			
+			if(type == typeof(int) || type == typeof(int?)) {
+				sqlType = "int(11)";
+			} else if(type == typeof(double)) {
+				sqlType = "double(11)";
+			} else if(type == typeof(decimal)) {
+				sqlType = "decimal(10,2)";
+			}
+			
+			return sqlType;
 		}
 	}
 }
