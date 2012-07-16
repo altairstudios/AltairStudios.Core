@@ -155,7 +155,7 @@ namespace AltairStudios.Core.Orm {
 										ids[name].Add(subId, iterModel);
 									}
 								} else {
-									string name = properties[i].PropertyType.ToString();
+									string name = properties[i].PropertyType.Name;
 									
 									if(!basicIds.ContainsKey(name)) {
 										basicIds.Add(name, new List<object>());
@@ -239,7 +239,6 @@ namespace AltairStudios.Core.Orm {
  				for(int i = 0; i < basicIds[key].Count; i++) {
 					Dictionary<string, object> sqlParams = new Dictionary<string, object>();
 					PropertyInfo[] properties1 = this.GetType().GetProperties();
-					PropertyInfo[] properties2 = ids[key][i].GetType().GetProperties();
 					
 					for(int j = 0; j < properties1.Length; j++) {
 						PrimaryKeyAttribute[] primaryKeys = (PrimaryKeyAttribute[])properties1[j].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
@@ -249,10 +248,9 @@ namespace AltairStudios.Core.Orm {
 						}
 					}
 					
-					sqlParams.Add(basicIds[key][i].GetType().Name, basicIds[key][i]);
+					sqlParams.Add(key, basicIds[key][i]);
 					
-					
-					this.query(SqlProvider.getProvider().sqlInsertForeign(this.GetType(), basicIds[key][i].GetType()), sqlParams);
+					this.query(SqlProvider.getProvider().sqlInsertBasicForeign(this.GetType(), key, basicIds[key][i].GetType()), sqlParams);
 				}
 			}
 			

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>/Users/juan/Sites/altairstudios-core/AltairStudios.Core/bin/AltairStudios.Core</name>
+        <name>/home/juan/Sites/AltairStudios.Core/AltairStudios.Core/bin/AltairStudios.Core</name>
     </assembly>
     <members>
         <member name="T:AltairStudios.Core.Orm.Model">
@@ -1179,7 +1179,7 @@
             Type2.
             </param>
         </member>
-        <member name="M:AltairStudios.Core.Orm.Providers.SqlProvider.sqlCreateForeignBasicTable(System.Type,System.Type)">
+        <member name="M:AltairStudios.Core.Orm.Providers.SqlProvider.sqlCreateForeignBasicTable(System.Type,System.String,System.Type)">
             <summary>
             Sqls the create foreign basic table.
             </summary>

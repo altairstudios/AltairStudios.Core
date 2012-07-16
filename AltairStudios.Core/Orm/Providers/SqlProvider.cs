@@ -143,7 +143,7 @@ namespace AltairStudios.Core.Orm.Providers {
 									foreignFields.Add(this.sqlCreateTable(properties[i].PropertyType.GetGenericArguments()[0]));
 									foreignFields.Add(this.sqlCreateForeignTable(type, properties[i].PropertyType.GetGenericArguments()[0]));
 								} else {
-									foreignFields.Add(this.sqlCreateForeignBasicTable(type, properties[i].PropertyType.GetGenericArguments()[0]));
+									foreignFields.Add(this.sqlCreateForeignBasicTable(type, properties[i].PropertyType.Name, properties[i].PropertyType.GetGenericArguments()[0]));
 								}
 							} else {
 								foreignFields.Add(this.sqlCreateTable(properties[i].PropertyType));
@@ -254,7 +254,7 @@ namespace AltairStudios.Core.Orm.Providers {
 		/// <param name='type2'>
 		/// Type2.
 		/// </param>
-		public string sqlCreateForeignBasicTable(Type type1, Type type2) {
+		public string sqlCreateForeignBasicTable(Type type1, string basicName, Type type2) {
 			StringBuilder sql = new StringBuilder();
 			PropertyInfo[] properties1 = type1.GetProperties();
 			ModelList<string> fields = new ModelList<string>();
@@ -273,7 +273,7 @@ namespace AltairStudios.Core.Orm.Providers {
 			}
 			
 			string sqlBasicType = this.convertTypeToSql(type2);
-			string basicName = this.sqlEscapeField(type2.Name);
+			basicName = this.sqlEscapeField(basicName);
 					
 			fields.Add(basicName + " " + sqlBasicType + " NOT NULL");
 			
@@ -412,7 +412,7 @@ namespace AltairStudios.Core.Orm.Providers {
 		
 		
 		
-		public string sqlInsertBasicForeign(Type type1, Type type2) {
+		public string sqlInsertBasicForeign(Type type1, string basicName, Type type2) {
 			StringBuilder sql = new StringBuilder();
 			PropertyInfo[] properties1 = type1.GetProperties();
 			PropertyInfo[] properties2 = type2.GetProperties();
@@ -429,8 +429,8 @@ namespace AltairStudios.Core.Orm.Providers {
 				}
 			}
 			
-			fields.Add(this.sqlEscapeField(type2.Name));
-			parameters.Add("@" + type2.Name);
+			fields.Add(this.sqlEscapeField(basicName));
+			parameters.Add("@" + basicName);
 			
 			sql.Append("INSERT INTO " + this.sqlEscapeTable(name));
 			sql.Append("(" + string.Join(",", fields.ToArray()) + ") VALUES (" + string.Join(",", parameters.ToArray()) + ")");
