@@ -9,10 +9,11 @@ namespace AltairStudios.Core.ConsoleTests.Models {
 		protected string name;
 		protected Orm.ModelList<int> intList;
 		protected Orm.ModelList<User> userList;
+		protected Address address;
 		protected string passwordMd5;
 		protected string passwordSha1;
 		
-		[PrimaryKey]
+		[PrimaryKey(true)]
 		public int? Id {
 			get {
 				return this.id;
@@ -22,6 +23,7 @@ namespace AltairStudios.Core.ConsoleTests.Models {
 			}
 		}
 
+		[Templatize]
 		public string Name {
 			get {
 				return name;
@@ -48,6 +50,16 @@ namespace AltairStudios.Core.ConsoleTests.Models {
 			}
 			set {
 				userList = value;
+			}
+		}
+
+		[Templatize]
+		public Address Address {
+			get {
+				return address;
+			}
+			set {
+				address = value;
 			}
 		}
 		

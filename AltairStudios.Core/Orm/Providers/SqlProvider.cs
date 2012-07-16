@@ -138,7 +138,6 @@ namespace AltairStudios.Core.Orm.Providers {
 						sqlFields.Add(this.sqlEscapeField(properties[i].Name) + " " + sqlType + " NOT NULL AUTO_INCREMENT");
 					} else {
 						if(properties[i].PropertyType.GetInterface("IModelizable") != null && !createdModelsName.Contains(properties[i].PropertyType.ToString())) {
-							//Console.WriteLine("####"  + properties[i].PropertyType.ToString());
 							if(properties[i].PropertyType.GetInterface("IList") != null) {
 								if(properties[i].PropertyType.GetGenericArguments()[0].GetInterface("IModelizable") != null) {
 									foreignFields.Add(this.sqlCreateTable(properties[i].PropertyType.GetGenericArguments()[0]));
@@ -313,12 +312,43 @@ namespace AltairStudios.Core.Orm.Providers {
 			for(int i = 0; i < properties.Length; i++) {
 				TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
 				PrimaryKeyAttribute[] primaryKeys = (PrimaryKeyAttribute[])properties[i].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
-				//IndexAttribute[] indexes = (IndexAttribute[])properties[i].GetCustomAttributes(typeof(IndexAttribute), true);
 				
 				if((primaryKeys.Length > 0 && primaryKeys[0].AutoIncrement == false) || (primaryKeys.Length == 0 && attributes.Length > 0)) {
-					if(!Reflection.Instance.isChildOf(properties[i].PropertyType, typeof(Model))) {
+					if(properties[i].PropertyType.GetInterface("IModelizable") == null) {
 						sqlNames.Add(this.sqlEscapeField(properties[i].Name));
 						sqlFields.Add("@" + properties[i].Name);
+					}
+				}
+			}
+			
+			sql.Append("(" + string.Join(",", sqlNames.ToArray()) + ")");
+			sql.Append(" VALUES ");
+			sql.Append("(" + string.Join(",", sqlFields.ToArray()) + ")");
+			
+			sql.Append(";");
+			
+			sql.Append(this.getInsertedId());
+			
+			return sql.ToString();
+		}
+		
+		
+		
+		public string sqlInsert(Type type, ModelList<PropertyInfo> parameters) {
+			StringBuilder sql = new StringBuilder();
+			ModelList<string> sqlFields = new ModelList<string>();
+			ModelList<string> sqlNames = new ModelList<string>();
+			
+			sql.Append("INSERT INTO " + this.sqlEscapeTable(type.Name));
+			
+			for(int i = 0; i < parameters.Count; i++) {
+				TemplatizeAttribute[] attributes = (TemplatizeAttribute[])parameters[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
+				PrimaryKeyAttribute[] primaryKeys = (PrimaryKeyAttribute[])parameters[i].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
+				
+				if((primaryKeys.Length > 0 && primaryKeys[0].AutoIncrement == false) || (primaryKeys.Length == 0 && attributes.Length > 0)) {
+					if(parameters[i].PropertyType.GetInterface("IModelizable") == null) {
+						sqlNames.Add(this.sqlEscapeField(parameters[i].Name));
+						sqlFields.Add("@" + parameters[i].Name);
 					}
 				}
 			}
@@ -382,6 +412,34 @@ namespace AltairStudios.Core.Orm.Providers {
 		
 		
 		
+		public string sqlInsertBasicForeign(Type type1, Type type2) {
+			StringBuilder sql = new StringBuilder();
+			PropertyInfo[] properties1 = type1.GetProperties();
+			PropertyInfo[] properties2 = type2.GetProperties();
+			ModelList<string> fields = new ModelList<string>();
+			ModelList<string> parameters = new ModelList<string>();
+			string name = type1.Name + "_" + type2.Name;
+			
+			for(int i = 0; i < properties1.Length; i++) {
+				PrimaryKeyAttribute[] primaryKeys = (PrimaryKeyAttribute[])properties1[i].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
+				
+				if(primaryKeys.Length > 0) {
+					fields.Add(this.sqlEscapeField(type1.Name + "_" + properties1[i].Name));
+					parameters.Add("@" + type1.Name + "_" + properties1[i].Name);
+				}
+			}
+			
+			fields.Add(this.sqlEscapeField(type2.Name));
+			parameters.Add("@" + type2.Name);
+			
+			sql.Append("INSERT INTO " + this.sqlEscapeTable(name));
+			sql.Append("(" + string.Join(",", fields.ToArray()) + ") VALUES (" + string.Join(",", parameters.ToArray()) + ")");
+			
+			return sql.ToString();
+		}
+		
+		
+		
 		/// <summary>
 		/// Gets the inserted identifier.
 		/// </summary>
@@ -414,10 +472,10 @@ namespace AltairStudios.Core.Orm.Providers {
 				TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
 				PrimaryKeyAttribute[] primaryKeys = (PrimaryKeyAttribute[])properties[i].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
 				
-				if(attributes.Length > 0 && attributes[0].Templatize && primaryKeys.Length == 0 && !Reflection.Instance.isChildOf(properties[i].PropertyType, typeof(Model))) {
+				if(attributes.Length > 0 && attributes[0].Templatize && primaryKeys.Length == 0 && properties[i].PropertyType.GetInterface("IModelizable") == null) {
 					sqlNames.Add(properties[i].Name);
 					sqlFields.Add(this.sqlEscapeField(properties[i].Name) + " = @" + properties[i].Name);
-				} else if(primaryKeys.Length > 0 && !Reflection.Instance.isChildOf(properties[i].PropertyType, typeof(Model))) {
+				} else if(primaryKeys.Length > 0 && properties[i].PropertyType.GetInterface("IModelizable") == null) {
 					whereFields.Add(this.sqlEscapeField(properties[i].Name) + " = @" + properties[i].Name);
 				}
 			}
@@ -450,7 +508,7 @@ namespace AltairStudios.Core.Orm.Providers {
 			for(int i = 0; i < properties.Length; i++) {
 				PrimaryKeyAttribute[] primaryKeys = (PrimaryKeyAttribute[])properties[i].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
 				
-				if(primaryKeys.Length > 0 && !Reflection.Instance.isChildOf(properties[i].PropertyType, typeof(Model))) {
+				if(primaryKeys.Length > 0 && properties[i].PropertyType.GetInterface("IModelizable") == null) {
 					whereFields.Add(this.sqlEscapeField(properties[i].Name) + " = @" + properties[i].Name);
 				}
 			}
@@ -494,7 +552,7 @@ namespace AltairStudios.Core.Orm.Providers {
 			for(int i = 0; i < properties.Length; i++) {
 				if(properties[i].GetValue(model, null) != null) {					
 					TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
-					if(attributes.Length > 0 && !Reflection.Instance.isChildOf(properties[i].PropertyType, typeof(Model))) {
+					if(attributes.Length > 0 && properties[i].PropertyType.GetInterface("IModelizable") == null) {
 						sql.Append(this.sqlEscapeField(properties[i].Name) + " = @" + properties[i].Name + " AND " );
 						parameters.Add(properties[i]);
 					}

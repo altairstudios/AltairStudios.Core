@@ -37,12 +37,12 @@ namespace AltairStudios.Core.Orm {
 			for(int i = 0; i < properties.Length; i++) {
 				TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
 				
-				if(attributes.Length > 0 && !Reflection.Instance.isChildOf(properties[i].PropertyType, typeof(Model))) {
+				if(attributes.Length > 0 && properties[i].PropertyType.GetInterface("IModelizable") == null && properties[i].PropertyType.GetInterface("IList") == null) {
 					fieldParams.Add(properties[i]);
 				}
 				
 				if(properties[i].GetValue(this, null) != null) {
-					if(attributes.Length > 0 && !Reflection.Instance.isChildOf(properties[i].PropertyType, typeof(Model))) {
+					if(attributes.Length > 0 && properties[i].PropertyType.GetInterface("IModelizable") == null && properties[i].PropertyType.GetInterface("IList") == null) {
 						parameters.Add(properties[i]);
 					}
 					
@@ -133,14 +133,52 @@ namespace AltairStudios.Core.Orm {
 			PropertyInfo[] properties = this.GetType().GetProperties();
 			ModelList<PropertyInfo> parameters = new ModelList<PropertyInfo>();
 			Dictionary<string, Dictionary<long, Model>> ids = new Dictionary<string, Dictionary<long, Model>>();
+			Dictionary<string, List<object>> basicIds = new Dictionary<string, List<object>>();
 			
 			for(int i = 0; i < properties.Length; i++) {
 				if(properties[i].GetValue(this, null) != null) {
 					TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
 					PrimaryKeyAttribute[] primarys = (PrimaryKeyAttribute[])properties[i].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
-					//IndexAttribute[] indexes = (IndexAttribute[])properties[i].GetCustomAttributes(typeof(IndexAttribute), true);
 					
 					if((primarys.Length > 0 && !primarys[0].AutoIncrement) || (primarys.Length == 0 && attributes.Length > 0)) {
+						if(properties[i].PropertyType.GetInterface("IModelizable") != null) {
+							if(properties[i].PropertyType.GetInterface("IList") != null) {
+								if(properties[i].PropertyType.GetGenericArguments()[0].GetInterface("IModelizable") != null) {
+									foreach(Model iterModel in (IEnumerable<Model>)properties[i].GetValue(this, null)) {
+										long subId = iterModel.insert();
+										string name = properties[i].PropertyType.ToString();
+										
+										if(!ids.ContainsKey(name)) {
+											ids.Add(name, new Dictionary<long, Model>());
+										}
+										
+										ids[name].Add(subId, iterModel);
+									}
+								} else {
+									string name = properties[i].PropertyType.ToString();
+									
+									if(!basicIds.ContainsKey(name)) {
+										basicIds.Add(name, new List<object>());
+									}
+									
+									basicIds[name].Add(properties[i].GetValue(this, null));
+								}
+							} else {
+								long subId = ((Model)properties[i].GetValue(this, null)).insert();
+								string name = properties[i].PropertyType.ToString();
+								
+								if(!ids.ContainsKey(name)) {
+									ids.Add(name, new Dictionary<long, Model>());
+								}
+								
+								ids[name].Add(subId, ((Model)properties[i].GetValue(this, null)));
+							}
+						} else {
+							parameters.Add(properties[i]);
+						}
+					
+					
+						/*
 						if(Reflection.Instance.isChildOf(properties[i].PropertyType, typeof(Model))) {
 							long subId = ((Model)properties[i].GetValue(this, null)).insert();
 							string name = properties[i].PropertyType.ToString();
@@ -152,13 +190,13 @@ namespace AltairStudios.Core.Orm {
 							ids[name].Add(subId, ((Model)properties[i].GetValue(this, null)));
 						} else {
 							parameters.Add(properties[i]);
-						}
+						}*/
 					}
 				}
 			}
 			
 			IDbCommand command = SqlProvider.getProvider().createCommand();
-			command.CommandText = SqlProvider.getProvider().sqlInsert(this.GetType());
+			command.CommandText = SqlProvider.getProvider().sqlInsert(this.GetType(), parameters);
 			
 			for(int i = 0; i < parameters.Count; i++) {
 				IDbDataParameter parameter = SqlProvider.getProvider().createParameter();
@@ -193,6 +231,28 @@ namespace AltairStudios.Core.Orm {
 					}
 					
 					this.query(SqlProvider.getProvider().sqlInsertForeign(this.GetType(), ids[key][longId].GetType()), sqlParams);
+				}
+			}
+			
+			
+			foreach(string key in basicIds.Keys) {
+ 				for(int i = 0; i < basicIds[key].Count; i++) {
+					Dictionary<string, object> sqlParams = new Dictionary<string, object>();
+					PropertyInfo[] properties1 = this.GetType().GetProperties();
+					PropertyInfo[] properties2 = ids[key][i].GetType().GetProperties();
+					
+					for(int j = 0; j < properties1.Length; j++) {
+						PrimaryKeyAttribute[] primaryKeys = (PrimaryKeyAttribute[])properties1[j].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
+						
+						if(primaryKeys.Length > 0) {
+							sqlParams.Add(this.GetType().Name + "_" + properties1[j].Name, id);
+						}
+					}
+					
+					sqlParams.Add(basicIds[key][i].GetType().Name, basicIds[key][i]);
+					
+					
+					this.query(SqlProvider.getProvider().sqlInsertForeign(this.GetType(), basicIds[key][i].GetType()), sqlParams);
 				}
 			}
 			

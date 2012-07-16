@@ -45,7 +45,7 @@ namespace AltairStudios.Core.Mvc {
 			
 			for(int i = 0; i < properties.Length; i++) {	
 				TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
-				if(attributes.Length > 0 && !Reflection.Instance.isChildOf(properties[i].PropertyType, typeof(Model))) {
+				if(attributes.Length > 0 && properties[i].PropertyType.GetInterface("IModelizable") == null && properties[i].PropertyType.GetInterface("IList") == null) {
 					fields.Add(properties[i].Name);
 				}
 			}

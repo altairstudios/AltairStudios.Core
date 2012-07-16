@@ -90,6 +90,8 @@ namespace AltairStudios.Core.ConsoleTests.Tests {
 				output = test02();
 			} else if(test == 3) {
 				output = test03();
+			} else if(test == 4) {
+				output = test04();
 			}
 			
 			return output;
@@ -165,6 +167,9 @@ namespace AltairStudios.Core.ConsoleTests.Tests {
 			user.Name = "test";
 			user.Surname = "surtest";
 			test.UserList.Add(user);
+			
+			test.Address = new AltairStudios.Core.Orm.Models.Address();
+			test.Address.Street = "Sesame street";
 			
 			return AltairStudios.Core.Orm.Providers.SqlProvider.getProvider("MySql.Data.MySqlClient").sqlInsert(test.GetType());
 		}
