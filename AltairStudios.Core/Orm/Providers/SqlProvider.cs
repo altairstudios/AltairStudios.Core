@@ -30,7 +30,9 @@ namespace AltairStudios.Core.Orm.Providers {
 		/// Initializes a new instance of the <see cref="AltairStudios.Core.Orm.Providers.SqlProvider"/> class.
 		/// </summary>
 		protected SqlProvider() {
-			this.connectionString = ConfigurationManager.ConnectionStrings["SqlServerConnection"].ConnectionString;
+			if(ConfigurationManager.ConnectionStrings["SqlServerConnection"] != null) {
+				this.connectionString = ConfigurationManager.ConnectionStrings["SqlServerConnection"].ConnectionString;
+			}
 		}
 		
 		
@@ -41,12 +43,10 @@ namespace AltairStudios.Core.Orm.Providers {
 		/// <returns>
 		/// The provider.
 		/// </returns>
-		public static SqlProvider getProvider() {
+		public static SqlProvider getProvider(string providerName) {
 			if(provider != null) {
 				return provider;
 			}
-			
-			string providerName = ConfigurationManager.ConnectionStrings["SqlServerConnection"].ProviderName;
 			
 			switch(providerName) {
 				case "MySql.Data.MySqlClient": provider = new MySqlProvider(); break;
@@ -54,6 +54,13 @@ namespace AltairStudios.Core.Orm.Providers {
 			}
 			
 			return provider;
+		}
+		
+		
+		
+		public static SqlProvider getProvider() {
+			string providerName = ConfigurationManager.ConnectionStrings["SqlServerConnection"].ProviderName;
+			return getProvider(providerName);
 		}
 		
 		
@@ -130,9 +137,20 @@ namespace AltairStudios.Core.Orm.Providers {
 					if(primaryKeys.Length > 0 && primaryKeys[0].AutoIncrement) {
 						sqlFields.Add(this.sqlEscapeField(properties[i].Name) + " " + sqlType + " NOT NULL AUTO_INCREMENT");
 					} else {
-						if(Reflection.Instance.getModelFromString(properties[i].PropertyType.ToString()) != null && !createdModelsName.Contains(properties[i].PropertyType.ToString())) {
-							foreignFields.Add(this.sqlCreateTable(properties[i].PropertyType));
-							foreignFields.Add(this.sqlCreateForeignTable(type, properties[i].PropertyType));
+						if(properties[i].PropertyType.GetInterface("IModelizable") != null && !createdModelsName.Contains(properties[i].PropertyType.ToString())) {
+							//Console.WriteLine("####"  + properties[i].PropertyType.ToString());
+							if(properties[i].PropertyType.GetInterface("IList") != null) {
+								if(properties[i].PropertyType.GetGenericArguments()[0].GetInterface("IModelizable") != null) {
+									foreignFields.Add(this.sqlCreateTable(properties[i].PropertyType.GetGenericArguments()[0]));
+									foreignFields.Add(this.sqlCreateForeignTable(type, properties[i].PropertyType.GetGenericArguments()[0]));
+								} else {
+									foreignFields.Add(this.sqlCreateForeignBasicTable(type, properties[i].PropertyType.GetGenericArguments()[0]));
+								}
+							} else {
+								foreignFields.Add(this.sqlCreateTable(properties[i].PropertyType));
+								foreignFields.Add(this.sqlCreateForeignTable(type, properties[i].PropertyType));
+							}
+							
 							createdModelsName.Add(properties[i].PropertyType.ToString());
 						} else {
 							sqlFields.Add(this.sqlEscapeField(properties[i].Name) + " " + sqlType + " NOT NULL");
@@ -217,6 +235,56 @@ namespace AltairStudios.Core.Orm.Providers {
 			sql.Append(string.Join(",", fields.ToArray()));
 			
 			
+			
+			sql.Append(") ENGINE=InnoDB DEFAULT CHARSET=utf8");
+			
+			return sql.ToString();
+		}
+		
+		
+		
+		/// <summary>
+		/// Sqls the create foreign basic table.
+		/// </summary>
+		/// <returns>
+		/// The create foreign basic table.
+		/// </returns>
+		/// <param name='type1'>
+		/// Type1.
+		/// </param>
+		/// <param name='type2'>
+		/// Type2.
+		/// </param>
+		public string sqlCreateForeignBasicTable(Type type1, Type type2) {
+			StringBuilder sql = new StringBuilder();
+			PropertyInfo[] properties1 = type1.GetProperties();
+			ModelList<string> fields = new ModelList<string>();
+			ModelList<string> keys = new ModelList<string>();
+			
+			for(int i = 0; i < properties1.Length; i++) {
+				PrimaryKeyAttribute[] primaryKeys = (PrimaryKeyAttribute[])properties1[i].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
+				
+				if(primaryKeys.Length > 0) {
+					string sqlType = this.convertTypeToSql(properties1[i].PropertyType);
+					string name = this.sqlEscapeField(type1.Name + "_" + properties1[i].Name);
+					
+					fields.Add(name + " " + sqlType + " NOT NULL");
+					keys.Add(name);
+				}
+			}
+			
+			string sqlBasicType = this.convertTypeToSql(type2);
+			string basicName = this.sqlEscapeField(type2.Name);
+					
+			fields.Add(basicName + " " + sqlBasicType + " NOT NULL");
+			
+			
+			if(keys.Count > 0) {
+				fields.Add("PRIMARY KEY (" + string.Join(",", keys.ToArray()) + ")");
+			}
+			
+			sql.Append("CREATE TABLE IF NOT EXISTS " + this.sqlEscapeTable(type1.Name + "_" + type2.Name) + " (");
+			sql.Append(string.Join(",", fields.ToArray()));
 			
 			sql.Append(") ENGINE=InnoDB DEFAULT CHARSET=utf8");
 			

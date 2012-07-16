@@ -1122,7 +1122,7 @@
             The connection string.
             </summary>
         </member>
-        <member name="M:AltairStudios.Core.Orm.Providers.SqlProvider.getProvider">
+        <member name="M:AltairStudios.Core.Orm.Providers.SqlProvider.getProvider(System.String)">
             <summary>
             Gets the provider.
             </summary>
@@ -1171,6 +1171,20 @@
             </summary>
             <returns>
             The create foreign table.
+            </returns>
+            <param name="type1">
+            Type1.
+            </param>
+            <param name="type2">
+            Type2.
+            </param>
+        </member>
+        <member name="M:AltairStudios.Core.Orm.Providers.SqlProvider.sqlCreateForeignBasicTable(System.Type,System.Type)">
+            <summary>
+            Sqls the create foreign basic table.
+            </summary>
+            <returns>
+            The create foreign basic table.
             </returns>
             <param name="type1">
             Type1.

@@ -42,17 +42,22 @@ namespace AltairStudios.Core.ConsoleTests {
 			
 			Console.ForegroundColor = ConsoleColor.White;
 			Console.WriteLine("  1. " + Tests.Test01.Name + ": " + Tests.Test01.Description);
+			Console.WriteLine("  2. " + Tests.Test02.Name + ": " + Tests.Test02.Description);
 			Console.WriteLine("  q. Exit");
 			
 			string option = Console.ReadLine();
 			
 			if(option == "1") {
 				Tests.Test01.run();
+			} else if (option == "2") {
+				Tests.Test02.run();
 			} else if(option == "q") {
 				return;
-			} else {
-				testSelection();	
 			}
+			
+			Console.WriteLine("Press any key to continue");
+			Console.Read();
+			testSelection();
 		}
 	}
 }

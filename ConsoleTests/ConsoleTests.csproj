@@ -10,7 +10,6 @@
     <RootNamespace>AltairStudios.Core.ConsoleTests</RootNamespace>
     <AssemblyName>ConsoleTests</AssemblyName>
     <ReleaseVersion>0.3</ReleaseVersion>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,6 +37,7 @@
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Tests\Test01.cs" />
     <Compile Include="Models\TestModel.cs" />
+    <Compile Include="Tests\Test02.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -1,5 +1,4 @@
 using System;
-using AltairStudios.Core.Mvc;
 using AltairStudios.Core.Orm;
 using AltairStudios.Core.Orm.Models;
 
@@ -7,18 +6,28 @@ using AltairStudios.Core.Orm.Models;
 namespace AltairStudios.Core.ConsoleTests.Models {
 	public class TestModel : Orm.Model {
 		protected int? id;
+		protected string name;
 		protected Orm.ModelList<int> intList;
 		protected Orm.ModelList<User> userList;
 		protected string passwordMd5;
 		protected string passwordSha1;
 		
-		[Templatize]
+		[PrimaryKey]
 		public int? Id {
 			get {
 				return this.id;
 			}
 			set {
 				id = value;
+			}
+		}
+
+		public string Name {
+			get {
+				return name;
+			}
+			set {
+				name = value;
 			}
 		}
 		
@@ -61,7 +70,5 @@ namespace AltairStudios.Core.ConsoleTests.Models {
 				passwordSha1 = value;
 			}
 		}
-
-
 	}
 }
