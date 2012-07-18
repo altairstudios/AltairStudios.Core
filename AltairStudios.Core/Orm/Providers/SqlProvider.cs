@@ -218,7 +218,7 @@ namespace AltairStudios.Core.Orm.Providers {
 				PrimaryKeyAttribute[] primaryKeys = (PrimaryKeyAttribute[])properties2[i].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
 				
 				if(primaryKeys.Length > 0) {
-					string sqlType = this.convertTypeToSql(properties1[i].PropertyType);
+					string sqlType = this.convertTypeToSql(properties2[i].PropertyType);
 					string name = this.sqlEscapeField(type2.Name + "_" + properties2[i].Name);
 					
 					fields.Add(name + " " + sqlType + " NOT NULL");
