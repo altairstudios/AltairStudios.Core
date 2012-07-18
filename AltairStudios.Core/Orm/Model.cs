@@ -181,6 +181,7 @@ namespace AltairStudios.Core.Orm {
 			}
 			
 			reader.Close();
+			command.Connection.Close();
 			
 			return result;
 		}
@@ -294,6 +295,7 @@ namespace AltairStudios.Core.Orm {
 			}
 			
 			reader.Close();
+			command.Connection.Close();
 			
 			return result;
 		}
@@ -428,6 +430,8 @@ namespace AltairStudios.Core.Orm {
 				}
 			}
 			
+			command.Connection.Close();
+			
 			return id;
 		}
 		
@@ -472,6 +476,8 @@ namespace AltairStudios.Core.Orm {
 			
 			command.ExecuteNonQuery();
 			
+			command.Connection.Close();
+			
 			return;
 		}
 		
@@ -504,6 +510,8 @@ namespace AltairStudios.Core.Orm {
 			}
 			
 			command.ExecuteNonQuery();
+			
+			command.Connection.Close();
 			
 			return;
 		}

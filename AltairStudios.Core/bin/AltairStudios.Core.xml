@@ -1633,20 +1633,20 @@
             The extension.
             </summary>
         </member>
-        <member name="P:AltairStudios.Core.Orm.Models.Phone.Extension">
-            <summary>
-            Gets or sets the extension.
-            </summary>
-            <value>
-            The extension.
-            </value>
-        </member>
         <member name="P:AltairStudios.Core.Orm.Models.Phone.Id">
             <summary>
             Gets or sets the identifier.
             </summary>
             <value>
             The identifier.
+            </value>
+        </member>
+        <member name="P:AltairStudios.Core.Orm.Models.Phone.Extension">
+            <summary>
+            Gets or sets the extension.
+            </summary>
+            <value>
+            The extension.
             </value>
         </member>
         <member name="P:AltairStudios.Core.Orm.Models.Phone.Number">

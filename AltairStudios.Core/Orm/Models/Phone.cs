@@ -32,24 +32,6 @@ namespace AltairStudios.Core.Orm.Models {
 		
 		#region Properties
 		/// <summary>
-		/// Gets or sets the extension.
-		/// </summary>
-		/// <value>
-		/// The extension.
-		/// </value>
-		[Templatize]
-		public string Extension {
-			get {
-				return this.extension;
-			}
-			set {
-				extension = value;
-			}
-		}
-		
-		
-		
-		/// <summary>
 		/// Gets or sets the identifier.
 		/// </summary>
 		/// <value>
@@ -62,6 +44,24 @@ namespace AltairStudios.Core.Orm.Models {
 			}
 			set {
 				id = value;
+			}
+		}
+		
+		
+		
+		/// <summary>
+		/// Gets or sets the extension.
+		/// </summary>
+		/// <value>
+		/// The extension.
+		/// </value>
+		[Templatize]
+		public string Extension {
+			get {
+				return this.extension;
+			}
+			set {
+				extension = value;
 			}
 		}
 		
