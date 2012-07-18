@@ -14,16 +14,13 @@ namespace AltairStudios.Core.Orm {
 	/// Model.
 	/// </summary>
 	public class Model : AltairStudios.Core.Mvc.Model {
-		/// <summary>
-		/// Gets the by.
-		/// </summary>
-		/// <returns>
-		/// The by.
-		/// </returns>
-		/// <typeparam name='T'>
-		/// The 1st type parameter.
-		/// </typeparam>
+		
 		public ModelList<T> getBy<T>() {
+			return this.getBy<T>(false);
+		}
+		
+		
+		public ModelList<T> getBy<T>(bool subqueries) {
 			Type type = this.GetType();
 			PropertyInfo[] properties = this.GetType().GetProperties();
 			ModelList<PropertyInfo> parameters = new ModelList<PropertyInfo>();
@@ -33,12 +30,15 @@ namespace AltairStudios.Core.Orm {
 			ModelList<PropertyInfo> primaryKeys = new ModelList<PropertyInfo>();
 			ModelList<PropertyInfo> indexes = new ModelList<PropertyInfo>();
 			ModelList<PropertyInfo> fieldParams = new ModelList<PropertyInfo>();
+			ModelList<PropertyInfo> sublistParams = new ModelList<PropertyInfo>();
 			
 			for(int i = 0; i < properties.Length; i++) {
 				TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
 				
 				if(attributes.Length > 0 && properties[i].PropertyType.GetInterface("IModelizable") == null && properties[i].PropertyType.GetInterface("IList") == null) {
 					fieldParams.Add(properties[i]);
+				} else {
+					sublistParams.Add(properties[i]);
 				}
 				
 				if(properties[i].GetValue(this, null) != null) {
@@ -97,7 +97,6 @@ namespace AltairStudios.Core.Orm {
 			IDataReader reader = command.ExecuteReader();
 			ModelList<T> models = new ModelList<T>();
 			ConstructorInfo constructor = type.GetConstructor(new Type[0]);
-			//int counter = 0;
 			
 			while(reader.Read()) {
 				object instance = constructor.Invoke(new Object[0]);
@@ -119,9 +118,184 @@ namespace AltairStudios.Core.Orm {
 			}
 			
 			reader.Close();
+			
+			if(subqueries) {
+				for(int i = 0; i < models.Count; i++) {
+					for(int j = 0; j < sublistParams.Count; j++) {
+						if(sublistParams[j].PropertyType.GetInterface("IModelizable") != null && sublistParams[j].PropertyType.GetInterface("IList") == null) {
+							//Modelo simple
+							//models[i].GetType().GetProperty(sublistParams[j].Name).SetValue(models[i], this.getByForeignModel<IModelizable>(primaryKeys[0], sublistParams[j])[0], null);
+							models[i].GetType().GetProperty(sublistParams[j].Name).SetValue(models[i], this.GetType().GetMethod("getByForeignModel").MakeGenericMethod(sublistParams[j].PropertyType).Invoke(this, new object[]{primaryKeys[0], sublistParams[j]}), null);
+						} else if(sublistParams[j].PropertyType.GetInterface("IModelizable") != null && sublistParams[j].PropertyType.GetInterface("IList") != null && sublistParams[j].PropertyType.GetGenericArguments()[0].GetInterface("IModelizable") != null) {
+							//Model list
+							//models[i].GetType().GetProperty(sublistParams[j].Name).SetValue(models[i], this.getByForeignModel<IModelizable>(primaryKeys[0], sublistParams[j]), null);
+							models[i].GetType().GetProperty(sublistParams[j].Name).SetValue(models[i], this.GetType().GetMethod("getByForeignModels").MakeGenericMethod(sublistParams[j].PropertyType.GetGenericArguments()[0]).Invoke(this, new object[]{primaryKeys[0], sublistParams[j]}), null);
+						} else if(sublistParams[j].PropertyType.GetInterface("IModelizable") != null && sublistParams[j].PropertyType.GetInterface("IList") != null && sublistParams[j].PropertyType.GetGenericArguments()[0].GetInterface("IModelizable") == null) {
+							models[i].GetType().GetProperty(sublistParams[j].Name).SetValue(models[i], this.GetType().GetMethod("getByForeignSimple").MakeGenericMethod(sublistParams[j].PropertyType.GetGenericArguments()[0]).Invoke(this, new object[]{primaryKeys[0], sublistParams[j]}), null);
+						} else {
+							//Lista simple
+							/*Type ctype = this.GetType();
+							MethodInfo meth = ctype.GetMethod("getByForeignSimple");
+							MethodInfo meth2 = meth.MakeGenericMethod(sublistParams[j].PropertyType.GetGenericArguments()[0]);
+							
+							object res = meth2.Invoke(this, new object[]{primaryKeys[0], sublistParams[j]});
+							
+							PropertyInfo prop = models[i].GetType().GetProperty(sublistParams[j].Name);
+							prop.SetValue(models[i], res, null);
+							*/
+							models[i].GetType().GetProperty(sublistParams[j].Name).SetValue(models[i], this.GetType().GetMethod("getByForeignSimple").MakeGenericMethod(sublistParams[j].PropertyType.GetGenericArguments()[0]).Invoke(this, new object[]{primaryKeys[0], sublistParams[j]}), null);
+						}
+					}
+				}
+			}
+			
 			command.Connection.Close();
 			
 			return models;
+		}
+		
+		
+		
+		public ModelList<T> getByForeignSimple<T>(PropertyInfo primary, PropertyInfo type) {
+			ModelList<T> result = new ModelList<T>();
+			List<string> fields = new List<string>();
+			fields.Add(type.Name);
+			
+			List<string> conditions = new List<string>();
+			conditions.Add(this.GetType().Name + "_" + primary.Name);
+			
+			
+			IDbCommand command = SqlProvider.getProvider().createCommand();
+			command.CommandText = SqlProvider.getProvider().sqlString(fields, this.GetType().Name + "_" + type.Name, conditions);
+			
+			IDbDataParameter parameter = SqlProvider.getProvider().createParameter();
+			parameter.ParameterName = this.GetType().Name + "_" + primary.Name;
+			parameter.Value = primary.GetValue(this, null);
+				
+			command.Parameters.Add(parameter);
+			
+			IDataReader reader = command.ExecuteReader();
+			
+			while(reader.Read()) {
+				result.Add((T)reader[0]);
+			}
+			
+			reader.Close();
+			
+			return result;
+		}
+		
+		
+		public T getByForeignModel<T>(PropertyInfo primary, PropertyInfo type) {
+			T result = default(T);
+			ModelList<T> results = this.getByForeignModels<T>(primary, type);
+			
+			if(results.Count > 0) {
+				result = results[0];
+			}
+			
+			return result;
+		}
+		
+		
+		public ModelList<T> getByForeignModels<T>(PropertyInfo primary, PropertyInfo type) {
+			ModelList<T> result = new ModelList<T>();
+			List<string> fields = new List<string>();
+			//fields.Add(type.Name);
+			PropertyInfo[] properties = null;
+			PropertyInfo subPrimary = null;
+			Type subType = null;
+			
+			if(type.PropertyType.IsGenericType) {
+				properties = type.PropertyType.GetGenericArguments()[0].GetProperties();
+				subType = type.PropertyType.GetGenericArguments()[0];
+			} else {
+				properties = type.PropertyType.GetProperties();
+				subType = type.PropertyType;
+			}
+			
+			for(int i = 0; i < properties.Length; i++) {
+				PrimaryKeyAttribute[] primarys = (PrimaryKeyAttribute[])properties[i].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
+				if(primarys.Length > 0) {
+					subPrimary = properties[i];
+					i = properties.Length;
+				}
+				/*if(type.PropertyType.IsGenericType) {
+					PropertyInfo[] subProperties = properties[i].PropertyType.GetGenericArguments()[0].GetProperties();
+					for(int j = 0; j < subProperties.Length; j++) {
+						PrimaryKeyAttribute[] primarys = (PrimaryKeyAttribute[])subProperties[j].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
+						if(primarys.Length > 0) {
+							subPrimary = subProperties[j].PropertyType.GetGenericArguments()[0];
+							j = subProperties.Length;
+							i = properties.Length;
+						}
+					}
+				} else {
+					PrimaryKeyAttribute[] primarys = (PrimaryKeyAttribute[])properties[i].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
+					if(primarys.Length > 0) {
+						subPrimary = properties[i].PropertyType;
+						i = properties.Length;
+					}
+				}*/
+			}
+			
+			fields.Add(subType.Name + "_" + subPrimary.Name);
+			
+			List<string> conditions = new List<string>();
+			conditions.Add(this.GetType().Name + "_" + primary.Name);
+			
+			IDbCommand command = SqlProvider.getProvider().createCommand();
+			
+			string table = this.GetType().Name + "_";
+			if(type.PropertyType.IsGenericType) {
+				table += type.PropertyType.GetGenericArguments()[0].Name;
+			} else {
+				table += type.PropertyType.Name;
+			}
+			
+			command.CommandText = SqlProvider.getProvider().sqlString(fields, table, conditions);
+			
+			IDbDataParameter parameter = SqlProvider.getProvider().createParameter();
+			parameter.ParameterName = this.GetType().Name + "_" + primary.Name;
+			parameter.Value = primary.GetValue(this, null);
+				
+			command.Parameters.Add(parameter);
+			
+			IDataReader reader = command.ExecuteReader();
+			
+			while(reader.Read()) {
+				//object key = reader[type.PropertyType.Name + "_" + subPrimary.Name];
+				object key = reader[0];
+				object instance;
+				
+				if(type.PropertyType.IsGenericType) {
+					ConstructorInfo constructor = type.PropertyType.GetGenericArguments()[0].GetConstructor(new Type[0]);
+					instance = constructor.Invoke(new Object[0]);
+					instance.GetType().GetProperty(subPrimary.Name).SetValue(instance, key, null);
+				} else {
+					ConstructorInfo constructor = type.PropertyType.GetConstructor(new Type[0]);
+					instance = constructor.Invoke(new Object[0]);
+					/*instance.GetType().GetProperty(subPrimary.Name).SetValue(instance, key, null);
+					result.Add(this.cast<T>(instance));*/
+				}
+				
+				 
+				if(instance.GetType().GetInterface("IModelizable") != null && instance.GetType().GetInterface("IList") == null) {
+					instance = ((Model)instance).getBy<T>()[0];
+				}
+				
+				result.Add(this.cast<T>(instance));
+				
+				/*
+				instance.GetType().GetProperty(subPrimary.Name).SetValue(instance, key, null);
+			
+				result.Add(this.cast<T>(instance));
+				*/
+			}
+			
+			reader.Close();
+			
+			return result;
 		}
 		
 		

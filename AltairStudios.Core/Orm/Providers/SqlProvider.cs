@@ -143,7 +143,7 @@ namespace AltairStudios.Core.Orm.Providers {
 									foreignFields.Add(this.sqlCreateTable(properties[i].PropertyType.GetGenericArguments()[0]));
 									foreignFields.Add(this.sqlCreateForeignTable(type, properties[i].PropertyType.GetGenericArguments()[0]));
 								} else {
-									foreignFields.Add(this.sqlCreateForeignBasicTable(type, properties[i].PropertyType.Name, properties[i].PropertyType.GetGenericArguments()[0]));
+									foreignFields.Add(this.sqlCreateForeignBasicTable(type, properties[i].Name, properties[i].PropertyType.GetGenericArguments()[0]));
 								}
 							} else {
 								foreignFields.Add(this.sqlCreateTable(properties[i].PropertyType));
@@ -273,16 +273,16 @@ namespace AltairStudios.Core.Orm.Providers {
 			}
 			
 			string sqlBasicType = this.convertTypeToSql(type2);
-			basicName = this.sqlEscapeField(basicName);
+			//basicName = this.sqlEscapeField(basicName);
 					
-			fields.Add(basicName + " " + sqlBasicType + " NOT NULL");
+			fields.Add(this.sqlEscapeField(basicName) + " " + sqlBasicType + " NOT NULL");
 			
 			
 			if(keys.Count > 0) {
-				fields.Add("PRIMARY KEY (" + string.Join(",", keys.ToArray()) + ")");
+				fields.Add("KEY (" + string.Join(",", keys.ToArray()) + ")");
 			}
 			
-			sql.Append("CREATE TABLE IF NOT EXISTS " + this.sqlEscapeTable(type1.Name + "_" + type2.Name) + " (");
+			sql.Append("CREATE TABLE IF NOT EXISTS " + this.sqlEscapeTable(type1.Name + "_" + basicName) + " (");
 			sql.Append(string.Join(",", fields.ToArray()));
 			
 			sql.Append(") ENGINE=InnoDB DEFAULT CHARSET=utf8");
@@ -560,6 +560,27 @@ namespace AltairStudios.Core.Orm.Providers {
 			}
 			
 			sql.Append("1 = 1");
+			
+			return sql.ToString();
+		}
+		
+		
+		
+		public string sqlString(List<string> fields, string table, List<string> conditions) {
+			StringBuilder sql = new StringBuilder();
+			
+			for(int i = 0; i < fields.Count; i++) {
+				fields[i] = this.sqlEscapeField(fields[i]);
+			}
+			
+			for(int i = 0; i < conditions.Count; i++) {
+				conditions[i] = this.sqlEscapeField(conditions[i]) + " = @" + conditions[i];
+			}
+			
+			sql.Append("SELECT " + string.Join(",", fields.ToArray()) + " FROM " + this.sqlEscapeTable(table));
+			if(conditions.Count > 0) {
+				sql.Append(" WHERE " + string.Join(" AND ", conditions.ToArray()));
+			}
 			
 			return sql.ToString();
 		}

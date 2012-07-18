@@ -1,24 +1,13 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>/home/juan/Sites/AltairStudios.Core/AltairStudios.Core/bin/AltairStudios.Core</name>
+        <name>/Users/juan/Sites/altairstudios-core/AltairStudios.Core/bin/AltairStudios.Core</name>
     </assembly>
     <members>
         <member name="T:AltairStudios.Core.Orm.Model">
             <summary>
             Model.
             </summary>
-        </member>
-        <member name="M:AltairStudios.Core.Orm.Model.getBy``1">
-            <summary>
-            Gets the by.
-            </summary>
-            <returns>
-            The by.
-            </returns>
-            <typeparam name="T">
-            The 1st type parameter.
-            </typeparam>
         </member>
         <member name="M:AltairStudios.Core.Orm.Model.insert">
             <summary>
