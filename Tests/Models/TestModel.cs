@@ -1,28 +1,29 @@
 using System;
 using AltairStudios.Core.Orm;
+using AltairStudios.Core.Orm.Models;
 
 
 namespace AltairStudios.Core.Tests.Web.Models {
-	public class TestModel : Model {
-		protected int id;
+	public class TestModel : Orm.Model {
+		protected int? id;
 		protected string name;
-		protected double price;
-		protected JsonTestModel mol;
-		protected JsonTestModel mol2;
-		protected JsonTestModel mol3;
-		protected JsonTestModel mol4;
-
+		protected Orm.ModelList<int> intList;
+		protected Orm.ModelList<User> userList;
+		protected Address address;
+		protected string passwordMd5;
+		protected string passwordSha1;
+		
 		[PrimaryKey(true)]
-		public int Id {
+		public int? Id {
 			get {
-				return id;
+				return this.id;
 			}
 			set {
 				id = value;
 			}
 		}
-		
-		[Templatize()]
+
+		[Templatize]
 		public string Name {
 			get {
 				return name;
@@ -31,58 +32,55 @@ namespace AltairStudios.Core.Tests.Web.Models {
 				name = value;
 			}
 		}
-
-		[Templatize()]
-		public double Price {
+		
+		[Templatize]
+		public Orm.ModelList<int> IntList {
 			get {
-				return price;
+				return this.intList;
 			}
 			set {
-				price = value;
-			}
-		}
-
-		[Templatize()]
-		public JsonTestModel Mol {
-			get {
-				return mol;
-			}
-			set {
-				mol = value;
-			}
-		}
-		/*[ForeignKey()]
-		public JsonTestModel Mol2 {
-			get {
-				return mol;
-			}
-			set {
-				mol = value;
-			}
-		}
-		[ForeignKey()]
-		public JsonTestModel Mol3 {
-			get {
-				return mol;
-			}
-			set {
-				mol = value;
-			}
-		}
-		[ForeignKey()]
-		public JsonTestModel Mol4 {
-			get {
-				return mol;
-			}
-			set {
-				mol = value;
+				intList = value;
 			}
 		}
 		
-		public TestModel() {
-			this.id = 1;
-			this.name = "Test name";
-			this.price = 4.3;
-		}*/
+		[Templatize]
+		public Orm.ModelList<User> UserList {
+			get {
+				return this.userList;
+			}
+			set {
+				userList = value;
+			}
+		}
+
+		[Templatize]
+		public Address Address {
+			get {
+				return address;
+			}
+			set {
+				address = value;
+			}
+		}
+		
+		[Encrypted(EncryptationType.MD5)]
+		public string PasswordMd5 {
+			get {
+				return passwordMd5;
+			}
+			set {
+				passwordMd5 = value;
+			}
+		}
+		
+		[Encrypted(EncryptationType.SHA1)]
+		public string PasswordSha1 {
+			get {
+				return passwordSha1;
+			}
+			set {
+				passwordSha1 = value;
+			}
+		}
 	}
 }
