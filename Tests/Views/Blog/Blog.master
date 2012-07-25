@@ -1,5 +1,10 @@
 <%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
-<%@ Import Namespace="AltairStudios.Core.Mvc" %>
+<%@ Import Namespace="AltairStudios.Core.Orm" %>
+<%@ Import Namespace="AltairStudios.Core.Tests.Web.Models.Blog" %>
+<%
+	ModelList<Category> categories = (ModelList<Category>)ViewData["categories"];
+	ModelList<Tag> tags = (ModelList<Tag>)ViewData["tags"];
+%>
 <!DOCTYPE html>
 <html lang="es">
 	<head>
@@ -9,8 +14,8 @@
 		<meta name="description" content="AltairStudios.Core - Administration module" />
 		<meta name="author" content="Altair Studios" />
 
-		<link rel="stylesheet" type="text/css" href="<%=MvcApplication.Path%>/Resource/load/AltairStudios.Core.resources.css.bootstrap.css" />
-		<link rel="stylesheet" type="text/css" href="<%=MvcApplication.Path%>/Resource/load/AltairStudios.Core.resources.css.bootstrap-responsive.css" />
+		<link rel="stylesheet" type="text/css" href="<%=Url.Content("~/Resource/load/AltairStudios.Core.resources.css.bootstrap.css")%>" />
+		<link rel="stylesheet" type="text/css" href="<%=Url.Content("~/Resource/load/AltairStudios.Core.resources.css.bootstrap-responsive.css")%>" />
 
 		<style type="text/css">
 			body {
@@ -43,17 +48,17 @@
 							<li id="user-menu" class="dropdown">
 								<a href="#" class="dropdown-toggle <%if(ViewData["menu"] == "categories") {%>active<%}%>" data-toggle="dropdown">Categories <b class="caret"></b></a>
 								<ul class="dropdown-menu">
-									<li><a href="#">Category 1</a></li>
-									<li><a href="#">Category 2</a></li>
-									<li><a href="#">Category 3</a></li>
+									<% for(int i = 0; i < categories.Count; i++) { %>
+										<li><a href="#"><%=categories[i].Name%></a></li>
+									<% } %>
 								</ul>
 							</li>
 							<li id="user-menu" class="dropdown">
 								<a href="#" class="dropdown-toggle <%if(ViewData["menu"] == "tags") {%>active<%}%>" data-toggle="dropdown">Tags <b class="caret"></b></a>
 								<ul class="dropdown-menu">
-									<li><a href="#">Tag 1</a></li>
-									<li><a href="#">Tag 2</a></li>
-									<li><a href="#">Tag 3</a></li>
+									<% for(int i = 0; i < tags.Count; i++) { %>
+										<li><a href="#"><%=tags[i].Name%></a></li>
+									<% } %>
 								</ul>
 							</li>
 						</ul>
@@ -61,21 +66,54 @@
 	        	</div>
 			</div>
 		</div>
-
 		<div class="container-fluid">
-			<asp:ContentPlaceHolder ID="mainContent" runat="server" />
+			<div class="row-fluid">
+				<section class="span9">
+					<asp:ContentPlaceHolder ID="mainContent" runat="server" />
+				</section>
+				<section class="span3">
+					
+					<% if(categories != null) { %>
+					<article>
+						<header>
+							<h3>Categories</h3>
+						</header>
+						<section>
+							<ul>
+							<% for(int i = 0; i < categories.Count; i++) { %>
+								<li><%=categories[i].Name%></li>
+							<% } %>
+							</ul>
+						</section>
+					</article>
+					<%
+						}
+						if(tags != null) {
+					%>
+					<article>
+						<header>
+							<h3>Tags</h3>
+						</header>
+						<section>
+							<ul>
+							<% for(int i = 0; i < tags.Count; i++) { %>
+								<li><%=tags[i].Name%></li>
+							<% } %>
+							</ul>
+						</section>
+					</article>
+					<% } %>
+				</section>
+			</div>
 		</div>
-
-		
-
 		<footer>
 			<div class="container-fluid">
 				<div class="row-fluid" id="content"><hr /><p>© Altair Studios 2012</p></div>
 			</div>
 		</footer>
-		<script type="text/javascript" src="<%=MvcApplication.Path%>/Resource/load/AltairStudios.Core.resources.js.jquery.js"> </script>
-		<script type="text/javascript" src="<%=MvcApplication.Path%>/Resource/load/AltairStudios.Core.resources.js.bootstrap.js"> </script>
-		<script type="text/javascript" src="<%=MvcApplication.Path%>/Resource/load/AltairStudios.Core.resources.js.bootstrap-dropdown.js"></script>
+		<script type="text/javascript" src="<%=Url.Content("~/Resource/load/AltairStudios.Core.resources.js.jquery.js")%>"> </script>
+		<script type="text/javascript" src="<%=Url.Content("~/Resource/load/AltairStudios.Core.resources.js.bootstrap.js")%>"> </script>
+		<script type="text/javascript" src="<%=Url.Content("~/Resource/load/AltairStudios.Core.resources.js.bootstrap-dropdown.js")%>"></script>
 		<asp:ContentPlaceHolder ID="jsIncludesContent" runat="server" />
 		<script type="text/javascript">
 			$(document).ready(function() {
