@@ -1,0 +1,87 @@
+<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
+<%@ Import Namespace="AltairStudios.Core.Mvc" %>
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<title>Blog test</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="description" content="AltairStudios.Core - Administration module" />
+		<meta name="author" content="Altair Studios" />
+
+		<link rel="stylesheet" type="text/css" href="<%=MvcApplication.Path%>/Resource/load/AltairStudios.Core.resources.css.bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="<%=MvcApplication.Path%>/Resource/load/AltairStudios.Core.resources.css.bootstrap-responsive.css" />
+
+		<style type="text/css">
+			body {
+				padding-top: 60px;
+				padding-bottom: 40px;
+			}
+			.sidebar-nav {
+			 	padding: 9px 0;
+			}
+			.well-compact {
+				padding: 8px 0;
+			}
+		</style>
+	</head>
+	<body>	
+		<div id="navbar" class="navbar navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container-fluid">
+					<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</a>
+					<a class="brand" href="<%=this.Url.Action("Index", "Blog")%>">Blog</a>
+					<div class="nav-collapse">
+						<ul class="nav">
+							<li <%if(ViewData["menu"] == "index") {%>class="active"<%}%>>
+								<a href="<%=this.Url.Action("Index", "Blog")%>">Home</a>
+							</li>
+							<li id="user-menu" class="dropdown">
+								<a href="#" class="dropdown-toggle <%if(ViewData["menu"] == "categories") {%>active<%}%>" data-toggle="dropdown">Categories <b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li><a href="#">Category 1</a></li>
+									<li><a href="#">Category 2</a></li>
+									<li><a href="#">Category 3</a></li>
+								</ul>
+							</li>
+							<li id="user-menu" class="dropdown">
+								<a href="#" class="dropdown-toggle <%if(ViewData["menu"] == "tags") {%>active<%}%>" data-toggle="dropdown">Tags <b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li><a href="#">Tag 1</a></li>
+									<li><a href="#">Tag 2</a></li>
+									<li><a href="#">Tag 3</a></li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+	        	</div>
+			</div>
+		</div>
+
+		<div class="container-fluid">
+			<asp:ContentPlaceHolder ID="mainContent" runat="server" />
+		</div>
+
+		
+
+		<footer>
+			<div class="container-fluid">
+				<div class="row-fluid" id="content"><hr /><p>© Altair Studios 2012</p></div>
+			</div>
+		</footer>
+		<script type="text/javascript" src="<%=MvcApplication.Path%>/Resource/load/AltairStudios.Core.resources.js.jquery.js"> </script>
+		<script type="text/javascript" src="<%=MvcApplication.Path%>/Resource/load/AltairStudios.Core.resources.js.bootstrap.js"> </script>
+		<script type="text/javascript" src="<%=MvcApplication.Path%>/Resource/load/AltairStudios.Core.resources.js.bootstrap-dropdown.js"></script>
+		<asp:ContentPlaceHolder ID="jsIncludesContent" runat="server" />
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('.dropdown-toggle').dropdown();
+				<asp:ContentPlaceHolder ID="jsContent" runat="server" />
+			});
+		</script>
+	</body>
+</html>

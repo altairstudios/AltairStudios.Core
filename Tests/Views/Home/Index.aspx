@@ -35,7 +35,7 @@
 						<div class="span4">
 							<img class="bs-icon" src="<%=MvcApplication.Path%>/Resource/load/AltairStudios.Core.resources.img.glyphicons.png.glyphicons_330_blog.png" />
 							<h2>Blog sample</h2>
-							<p>A simple blog sample to see AltairStudios.Core powerfull. You can <a href="#">test it</a>.</p>
+							<p>A simple blog sample to see AltairStudios.Core powerfull. You can <a href="<%=Url.Action("Index", "Blog")%>">test it</a>.</p>
 						</div>
 					</div>
 				</div>
@@ -44,8 +44,6 @@
 				</footer>
 			</div>
 		</div>
-		<script type="text/javascript">var coreProcess = null;var AltairStudios = { Core: { Admin: { Plugins: {} } } }; var path = "<%=MvcApplication.Path%>";</script>
-
 		<script type="text/javascript" src="<%=MvcApplication.Path%>/Resource/load/AltairStudios.Core.resources.js.jquery.js"> </script>
 		<script type="text/javascript" src="<%=MvcApplication.Path%>/Resource/load/AltairStudios.Core.resources.js.bootstrap.js"> </script>
 		
