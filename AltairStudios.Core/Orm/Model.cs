@@ -31,9 +31,15 @@ namespace AltairStudios.Core.Orm {
 			ModelList<PropertyInfo> indexes = new ModelList<PropertyInfo>();
 			ModelList<PropertyInfo> fieldParams = new ModelList<PropertyInfo>();
 			ModelList<PropertyInfo> sublistParams = new ModelList<PropertyInfo>();
+			ModelList<PropertyInfo> subPrimaryKeys = new ModelList<PropertyInfo>();
 			
 			for(int i = 0; i < properties.Length; i++) {
 				TemplatizeAttribute[] attributes = (TemplatizeAttribute[])properties[i].GetCustomAttributes(typeof(TemplatizeAttribute), true);
+				PrimaryKeyAttribute[] attributesPrimaryKey = (PrimaryKeyAttribute[])properties[i].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
+				
+				if(attributesPrimaryKey.Length > 0) {
+					subPrimaryKeys.Add(properties[i]);
+				}
 				
 				if(attributes.Length > 0 && properties[i].PropertyType.GetInterface("IModelizable") == null && properties[i].PropertyType.GetInterface("IList") == null) {
 					fieldParams.Add(properties[i]);
@@ -46,7 +52,7 @@ namespace AltairStudios.Core.Orm {
 						parameters.Add(properties[i]);
 					}
 					
-					PrimaryKeyAttribute[] attributesPrimaryKey = (PrimaryKeyAttribute[])properties[i].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
+					//PrimaryKeyAttribute[] attributesPrimaryKey = (PrimaryKeyAttribute[])properties[i].GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
 					if(attributesPrimaryKey.Length > 0 && ((attributesPrimaryKey[0].AutoIncrement && (int)properties[i].GetValue(this, null) != 0) || (attributesPrimaryKey[0].AutoIncrement == false && properties[i].GetValue(this, null) != ""))) {
 						primaryKeys.Add(properties[i]);
 						primaryFields.Add(properties[i].Name);
@@ -123,27 +129,13 @@ namespace AltairStudios.Core.Orm {
 				for(int i = 0; i < models.Count; i++) {
 					for(int j = 0; j < sublistParams.Count; j++) {
 						if(sublistParams[j].PropertyType.GetInterface("IModelizable") != null && sublistParams[j].PropertyType.GetInterface("IList") == null) {
-							//Modelo simple
-							//models[i].GetType().GetProperty(sublistParams[j].Name).SetValue(models[i], this.getByForeignModel<IModelizable>(primaryKeys[0], sublistParams[j])[0], null);
-							models[i].GetType().GetProperty(sublistParams[j].Name).SetValue(models[i], this.GetType().GetMethod("getByForeignModel").MakeGenericMethod(sublistParams[j].PropertyType).Invoke(this, new object[]{primaryKeys[0], sublistParams[j]}), null);
+							models[i].GetType().GetProperty(sublistParams[j].Name).SetValue(models[i], this.GetType().GetMethod("getByForeignModel").MakeGenericMethod(sublistParams[j].PropertyType).Invoke(this, new object[]{subPrimaryKeys[0], sublistParams[j]}), null);
 						} else if(sublistParams[j].PropertyType.GetInterface("IModelizable") != null && sublistParams[j].PropertyType.GetInterface("IList") != null && sublistParams[j].PropertyType.GetGenericArguments()[0].GetInterface("IModelizable") != null) {
-							//Model list
-							//models[i].GetType().GetProperty(sublistParams[j].Name).SetValue(models[i], this.getByForeignModel<IModelizable>(primaryKeys[0], sublistParams[j]), null);
-							models[i].GetType().GetProperty(sublistParams[j].Name).SetValue(models[i], this.GetType().GetMethod("getByForeignModels").MakeGenericMethod(sublistParams[j].PropertyType.GetGenericArguments()[0]).Invoke(this, new object[]{primaryKeys[0], sublistParams[j]}), null);
+							models[i].GetType().GetProperty(sublistParams[j].Name).SetValue(models[i], this.GetType().GetMethod("getByForeignModels").MakeGenericMethod(sublistParams[j].PropertyType.GetGenericArguments()[0]).Invoke(this, new object[]{subPrimaryKeys[0], sublistParams[j]}), null);
 						} else if(sublistParams[j].PropertyType.GetInterface("IModelizable") != null && sublistParams[j].PropertyType.GetInterface("IList") != null && sublistParams[j].PropertyType.GetGenericArguments()[0].GetInterface("IModelizable") == null) {
-							models[i].GetType().GetProperty(sublistParams[j].Name).SetValue(models[i], this.GetType().GetMethod("getByForeignSimple").MakeGenericMethod(sublistParams[j].PropertyType.GetGenericArguments()[0]).Invoke(this, new object[]{primaryKeys[0], sublistParams[j]}), null);
+							models[i].GetType().GetProperty(sublistParams[j].Name).SetValue(models[i], this.GetType().GetMethod("getByForeignSimple").MakeGenericMethod(sublistParams[j].PropertyType.GetGenericArguments()[0]).Invoke(this, new object[]{subPrimaryKeys[0], sublistParams[j]}), null);
 						} else {
-							//Lista simple
-							/*Type ctype = this.GetType();
-							MethodInfo meth = ctype.GetMethod("getByForeignSimple");
-							MethodInfo meth2 = meth.MakeGenericMethod(sublistParams[j].PropertyType.GetGenericArguments()[0]);
-							
-							object res = meth2.Invoke(this, new object[]{primaryKeys[0], sublistParams[j]});
-							
-							PropertyInfo prop = models[i].GetType().GetProperty(sublistParams[j].Name);
-							prop.SetValue(models[i], res, null);
-							*/
-							models[i].GetType().GetProperty(sublistParams[j].Name).SetValue(models[i], this.GetType().GetMethod("getByForeignSimple").MakeGenericMethod(sublistParams[j].PropertyType.GetGenericArguments()[0]).Invoke(this, new object[]{primaryKeys[0], sublistParams[j]}), null);
+							models[i].GetType().GetProperty(sublistParams[j].Name).SetValue(models[i], this.GetType().GetMethod("getByForeignSimple").MakeGenericMethod(sublistParams[j].PropertyType.GetGenericArguments()[0]).Invoke(this, new object[]{subPrimaryKeys[0], sublistParams[j]}), null);
 						}
 					}
 				}
