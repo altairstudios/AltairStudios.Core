@@ -86,10 +86,12 @@
     <Content Include="Content\css\docs.css" />
     <Content Include="Views\Blog\Blog.master" />
     <Content Include="Views\Blog\Index.aspx" />
+    <Content Include="Views\Blog\Post.aspx" />
+    <Content Include="Views\Blog\Tag.aspx" />
+    <Content Include="Views\Blog\Category.aspx" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
-  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />
   <ProjectExtensions>
     <MonoDevelop>
       <Properties VerifyCodeBehindFields="true" VerifyCodeBehindEvents="true">
