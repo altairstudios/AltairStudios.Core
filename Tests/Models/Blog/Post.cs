@@ -10,6 +10,7 @@ namespace AltairStudios.Core.Tests.Web.Models.Blog {
 		protected string content;
 		protected ModelList<Category> categories;
 		protected ModelList<Tag> tags;
+		protected string url;
 		
 		[PrimaryKey(true)]
 		public int? Id {
@@ -70,5 +71,16 @@ namespace AltairStudios.Core.Tests.Web.Models.Blog {
 				tags = value;
 			}
 		}
+		
+		[Index(true)]
+		public string Url {
+			get {
+				return url;
+			}
+			set {
+				url = value;
+			}
+		}
+
 	}
 }
